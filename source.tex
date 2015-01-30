@@ -2,10 +2,30 @@
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[margin=1in]{geometry}
 \usepackage[colorinlistoftodos]{todonotes}
+
+\lstset{
+	backgroundcolor=\color{white},
+	tabsize=3,
+	language=C++,
+	basicstyle=\footnotesize\ttfamily,
+	frame=lines,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	keywordstyle=\color[rgb]{0, 0, 1},
+	commentstyle=\color[rgb]{0, 0.5, 0},
+	stringstyle=\color{red}	
+}
 
 \title{Team Code Reference}
 \author{
@@ -14,4 +34,92 @@
 
 \begin{document}
 	\maketitle
+	\tableofcontents
+	\clearpage
+	
+	\section{Template}
+	
+	\begin{lstlisting}[language=C++]
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <set>
+#include <map>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <string>
+#include <math.h>
+
+using namespace std;
+
+typedef pair<int, int> ii;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<ii> vii;
+typedef vector<vii> vvii;
+typedef long long ll;
+
+int main(){
+	int T;
+	scanf("%d", &T);
+	
+	for(int t = 1; t <= T; ++t){
+		// solve
+	}
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\section{Data Structures}
+	
+	\subsection{Union Find}
+	
+	\begin{lstlisting}
+vii pset;
+int psets;
+
+class UnionFind {
+private:
+	vi parent, rank, setSize;
+	int setCount;
+public:
+	UnionFind(int N) {
+		setSize.assign(N, 1);
+		setCount = N;
+		rank.assign(N, 0);
+		parent.assign(N, 0);
+		
+		for (int i = 0; i < N; ++i) parent[i] = i;
+	}
+	
+	int findSet(int i) {
+		return (parent[i] == i) ? i : (parent[i] = findSet(parent[i]));
+	}
+	
+	bool areSameSet(int i, int j) {
+		return (findSet(i) == findSet(j));
+	}
+	
+	void unionSet(int i, int j) {
+		if (areSameSet(i, j)) return;
+		setCount--;
+		int pi = findSet(i), pj = findSet(j);
+		if (rank[pi] > rank[pj]) {
+			parent[pj] = pi;
+			setSize[pi] += setSize[pj];
+		} else {
+			parent[pi] = pj;
+			setSize[pj] += setSize[pi];
+			if (rank[pi] == rank[pj])) rank[pj]++;
+		}
+	}
+}
+	\end{lstlisting}
+	\section{Graph Algorithms}
+	\section{Computational Geometry}
+	\section{Mathematics}
+	\section{Helpers}
 \end{document}
