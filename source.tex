@@ -118,8 +118,100 @@ public:
 	}
 }
 	\end{lstlisting}
-	\section{Graph Algorithms}
-	\section{Computational Geometry}
+	
+	\subsection{Sparse table}
+	\subsection{Segment tree}
+	\subsection{Suffix tree}
+	\section{Graph algorithms}
+	\subsection{DFS}
+	\subsection{BFS}
+	\subsection{Edge classification}
+	\subsection{Topological sort}
+	\subsection{Floodfill}
+	\subsection{Kruskal's algorithm}
+	\subsection{Biconnected components}
+	\subsection{Strongly connected components}
+	\subsection{Dijkstra's algorithm}
+	\subsection{Bellmann-Ford algorithm}
+	\subsection{Floyd-Warshall algorithm}
+	\subsection{Edmonds-Karp algorithm}
+	\subsection{Fleury's algorithm}
+	\subsection{Hopcroft-Karp algorithm}
+	\subsection{Hungarian algorithm}
+	\section{Computational geometry}
+	\subsection{Essentials}
+	\subsection{Polygons}
+	\subsection{Convex Hull}
+	\subsection{Halfspace intersections}
 	\section{Mathematics}
+	\subsection{Primes}
+	\subsection{Modular arithmetic}
+	\subsection{Diophantine equations}
+	\subsection{BigInteger}
+	\subsection{Fast matric multiplication}
+	\section{Strings}
+	\subsection{KMP string matching}
 	\section{Helpers}
+	\subsection{Golden section search}
+	\begin{lstlisting}
+#define RES_PHI (2 - ((1.0 + sqrt(5)) / 2.0))
+#define EPSILON 1e-7
+
+double gss(double (*f)(double), double leftbound, double rightbound) {
+	double lb = leftbound, rb = rightbound, mlb = lb + RES_PHI * (rb - lb), mrb = rb + RES_PHI * (lb - rb);
+	double lbv = f(lb), rbv = f(rb), mlbv = f(mlb), mrbv = f(mrb);
+	
+	while (rb - lb >= EPSILON) { // || abs(rbv - lbv) >= EPSILON) {
+		if (mlbv < mrbv) { // > to maximize
+			rb  = mrb;  rbv  = mrbv;
+			mrb = mlb;  mrbv = mlbv;
+			mlb = lb + RES_PHI * (rb - lb);
+			mlbv = f(mlb);
+		} else {
+			lb  = mlb;  lbv  = mlbv;
+			mlb = mrb;  mlbv = mrbv;
+			mrb = rb + RES_PHI * (lb - rb);
+			mrbv = f(mrb);
+		}
+	}
+	return mlb; // any bound should do
+}
+	\end{lstlisting}
+	\subsection{Integer ternary search}
+	\subsection{Bitmasking}
+	
+	\begin{lstlisting}
+#ifdef _MSC_VER
+#define popcount(x) __popcnt(x)
+#else
+#define popcount(x) __builtin_popcount(x)
+#endif
+
+bool bitSet(int mask, int pos) {
+	return ((mask & (1 << pos)) != 0);
+}
+
+// Iterate over all subsets of a set of size N
+for (int mask = 0; mask < (1 << N); ++mask) {
+	// Decode mask here
+}
+
+// Iterate over all k-subsets of a set of size N
+int mask = (1 << k) - 1;
+while (!(mask & 1 << N)) {
+	// Decode mask here
+	int lo = mask & ~(mask - 1);
+	int lz = (mask + lo) & ~mask;
+	mask |= lz;
+	mask &= ~(lz - 1);
+	mask |= (lz / lo / 2) - 1;
+}
+
+// Iterate over all subsets of a subset
+int mask = givenMask;
+do {
+	// Decode mask here
+	mask = (mask - 1) & givenMask;
+} while (mask != givenMask);
+	\end{lstlisting}
 \end{document}
