@@ -8,15 +8,18 @@ struct point {
     point() {}
     point(ctype x, ctype y) : x(x), y(y)   {}
     point(const point &p) : x(p.x), y(p.y) {}
-    point operator+(const point &p) const { return point(x + p.x, y + p.y); }
-    point operator-(const point &p) const { return point(x - p.x, y - p.y); }
-    point operator*(ctype c)        const { return point(x * c,   y * c  ); }
-    point operator/(ctype c)        const { return point(x / c,   y / c  ); }
+    point operator+ (const point &p) const { return point(x + p.x, y + p.y); }
+    point operator- (const point &p) const { return point(x - p.x, y - p.y); }
+    point operator* (ctype c)        const { return point(x * c,   y * c  ); }
+    point operator/ (ctype c)        const { return point(x / c,   y / c  ); }
+    bool  operator< (const point &r) const { return (y != r.y ? (y < r.y) : (x > r.x)); }
+    bool  operator==(const point &r) const { return (y == r.y && x == r.x); }
 };
-struct line    { point p1, p2; };
+struct line { point p1, p2; };
 enum LineType { LINE, RAY, SEGMENT };
 
 ctype dot(point p1, point p2) { return p1.x * p2.x + p1.y * p2.y; }
+ctype lensq(point p1, point p2) { return (p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y); }
 
 ctype det(ctype x1, ctype y1, ctype x2, ctype y2) { return x1 * y2 - x2 * y1; }
 ctype det(point p1, point p2) { return p1.x * p2.y - p1.y * p2.x; }
@@ -50,7 +53,7 @@ point project(line l, point p, LineType type) {
     return l.p1 + (l.p2 - l.p1) * lambda;
 }
 
-bool intersectLines(line l1, line l2, double* lambda, LineType type) {
+bool intersect_lines(line l1, line l2, double* lambda, LineType type) {
     // Intersection point can be reconstructed as l1.p1 + lambda * (l1.p2 - l1.p1).
     // Returns false if the lines are parallel, handle coincidence in advance.
     ctype s1x, s1y, s2x, s2y;

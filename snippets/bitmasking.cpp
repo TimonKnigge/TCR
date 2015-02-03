@@ -4,7 +4,7 @@
 #define popcount(x) __builtin_popcount(x)
 #endif
 
-bool bitSet(int mask, int pos) {
+bool bit_set(int mask, int pos) {
     return ((mask & (1 << pos)) != 0);
 }
 

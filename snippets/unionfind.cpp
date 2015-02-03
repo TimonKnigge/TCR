@@ -15,18 +15,18 @@ public:
         for (int i = 0; i < N; ++i) parent[i] = i;
     }
     
-    int findSet(int i) {
-        return (parent[i] == i) ? i : (parent[i] = findSet(parent[i]));
+    int find_set(int i) {
+        return (parent[i] == i) ? i : (parent[i] = find_set(parent[i]));
     }
     
-    bool areSameSet(int i, int j) {
-        return (findSet(i) == findSet(j));
+    bool are_same_set(int i, int j) {
+        return (find_set(i) == find_set(j));
     }
     
-    void unionSet(int i, int j) {
-        if (areSameSet(i, j)) return;
+    void union_set(int i, int j) {
+        if (are_same_set(i, j)) return;
         setCount--;
-        int pi = findSet(i), pj = findSet(j);
+        int pi = find_set(i), pj = find_set(j);
         if (rank[pi] > rank[pj]) {
             parent[pj] = pi;
             setSize[pi] += setSize[pj];
