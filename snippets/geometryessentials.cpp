@@ -3,8 +3,20 @@
 // Coordinate type, change to long long or double when necessary
 typedef int ctype;
 
-struct point   { ctype x, y; };
+struct point { 
+    ctype x, y;
+    point() {}
+    point(ctype x, ctype y) : x(x), y(y)   {}
+    point(const point &p) : x(p.x), y(p.y) {}
+    point operator+(const point &p) const { return point(x + p.x, y + p.y); }
+    point operator-(const point &p) const { return point(x - p.x, y - p.y); }
+    point operator*(ctype c)        const { return point(x * c,   y * c  ); }
+    point operator/(ctype c)        const { return point(x / c,   y / c  ); }
+};
 struct line    { point p1, p2; };
+enum LineType { LINE, RAY, SEGMENT };
+
+ctype dot(point p1, point p2) { return p1.x * p2.x + p1.y * p2.y; }
 
 ctype det(ctype x1, ctype y1, ctype x2, ctype y2) { return x1 * y2 - x2 * y1; }
 ctype det(point p1, point p2) { return p1.x * p2.y - p1.y * p2.x; }
@@ -28,7 +40,16 @@ int seq(point p1, point p2, point p3) {
                      0);    // Points are colinear
 }
 
-enum LineType { LINE, RAY, SEGMENT };
+point project(line l, point p, LineType type) {
+    double lambda = dot(p - l.p1, l.p2 - l.p1)/((double)dot(l.p2 - l.p1, l.p2 - l.p1));
+    switch(type){
+        case LineType.SEGMENT: lambda = min(1.0, lambda);
+        case LineType.RAY:     lambda = max(0.0, lambda);
+        default: break;
+    }
+    return l.p1 + (l.p2 - l.p1) * lambda;
+}
+
 bool intersectLines(line l1, line l2, double* lambda, LineType type) {
     // Intersection point can be reconstructed as l1.p1 + lambda * (l1.p2 - l1.p1).
     // Returns false if the lines are parallel, handle coincidence in advance.
