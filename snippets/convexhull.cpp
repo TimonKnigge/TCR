@@ -30,6 +30,7 @@ vector<point> graham_scan(vector<point> pts) {
             i++;
         } else S.pop();
     }
+    
     vector<point> ch_pts;
     while(!S.empty()) ch_pts.push_back(S.top()); S.pop();
     ch_pts.pop_back();
