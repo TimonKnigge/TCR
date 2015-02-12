@@ -10,6 +10,11 @@
 \usepackage{color}
 \usepackage[margin=1in]{geometry}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage[toc]{multitoc}
+\usepackage{ifthen}
+
+\renewcommand*{\multicolumntoc}{2}
+\setlength{\columnseprule}{0.5pt}
 
 \lstset{
     backgroundcolor=\color{white},
@@ -27,13 +32,29 @@
     stringstyle=\color{red}    
 }
 
+\definecolor{usertype}{RGB}{43,145,175}
+\definecolor{macro}{RGB}{111,0,138}
+\lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
+                 stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
+                 coord,point,line,LineType,bitset},
+        emphstyle=[1]{\color{usertype}},
+        emph=[2]{INF,EPSILON,RES\_PHI,\_MSC\_VER,popcount},
+        emphstyle=[2]{\color{macro}}}
+
 \title{Team Code Reference}
 \author{
     Timon Knigge
 }
 
-\newcommand{\includesnippet}[2]{
-\lstinputlisting[language=#2]{#1}
+% \entry{name}{description}{snippet location}{complexity}{dependencies}
+\newcommand{\entry}[5]{
+    \subsection{#1}
+    #2
+    
+    \ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
+    
+    \ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
+    \lstinputlisting[language=C++]{#3}
 }
 
 \begin{document}
@@ -42,44 +63,56 @@
   \clearpage
     
   \section{Template}
-    \includesnippet{snippets/header.h}{C++}
+    \entry{C++ Template}{}{snippets/header.h}{}{}
+    \todo{Fix includes}
+    \subsection{Java Template}
     
   \section{Data Structures}
     
-    \subsection{Union Find}
-    \includesnippet{snippets/unionfind.cpp}{C++}
+    %\subsection{Union Find}
+    %\includesnippet{snippets/unionfind.cpp}{C++}
+    \entry{Union Find}{}{snippets/datastructures/unionfind.cpp}{}{}
+    \todo{Revise UF, compare with existing implementations.}
     
     \subsection{Sparse table}
     
+    \subsection{Fenwick Tree}
+    
+    \subsection{Range Minimum Query}
+    
     \subsection{Segment tree}
+    
+    \subsection{Prefix Trie}
     
     \subsection{Suffix array}
     
   \section{Graph algorithms}
-  
-    \subsection{DFS}
+     
+    \entry{Edge Classification}{}{snippets/graphs/edgeclassification.cpp}{$O(V + E)$}{}
     
-    \subsection{BFS}
+    \subsection{Articulation points and bridges}
     
-    \subsection{Edge classification}
-    
-    \subsection{Topological sort}
-    
+    \entry{Topological sort}{}{snippets/graphs/toposort.cpp}{$O(V + E)$}{}
+        
     \subsection{Floodfill}
     
-    \subsection{Kruskal's algorithm}
+    \entry{Kruskal's algorithm}{}{snippets/graphs/kruskal.cpp}{$O(E \log_2 V)$}{Union Find}
     
     \subsection{Biconnected components}
     
     \subsection{Strongly connected components}
     
-    \subsection{Dijkstra's algorithm}
+    \entry{Dijkstra's algorithm}{}{snippets/graphs/dijkstra.cpp}{$O((V + E) \log_2 V)$}{}
     
-    \subsection{Bellmann-Ford algorithm}
+    \entry{Bellmann-Ford algorithm}{There exists a negative cycle if for any vertex $v$, $d(v, v) < 0$.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
     
-    \subsection{Floyd-Warshall algorithm}
+    \entry{Floyd-Warshall algorithm}{}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
     
     \subsection{Edmonds-Karp algorithm}
+    
+    \subsection{Dinic's algorithm}
+    
+    \subsection{Push-relabel algorithm}
     
     \subsection{Fleury's algorithm}
     
@@ -95,36 +128,34 @@
     
   \section{Computational geometry}
     
-    \subsection{Essentials}
-    \includesnippet{snippets/geometryessentials.cpp}{C++}
+    \entry{Essentials}{}{snippets/geometry/geometryessentials.cpp}{}{}
+    \todo{Add numerically stable line intersection check.}
     
-    \subsection{Convex Hull}
-    \includesnippet{snippets/convexhull.cpp}{C++}
+    \entry{Convex Hull}{}{snippets/geometry/convexhull.cpp}{$O(n \log_2 n)$}{Geometry Essentials}
+    \todo{Revise, consider existing implementations}
     
     \subsection{Halfspace intersections}
     
   \section{Mathematics}
     
-    \subsection{Primes}
-    \includesnippet{snippets/primes.cpp}{C++}
+    \entry{Primes}{}{snippets/mathematics/primes.cpp}{}{}
+    \todo{Rewrite Totient function}
     
-    \subsection{Number theoretic algorithms}
-    \includesnippet{snippets/numbertheory.cpp}{C++}
+    \entry{Number theoretic algorithms}{}{snippets/mathematics/numbertheory.cpp}{}{}
     
     \subsection{BigInteger}
         
   \section{Strings}
   
-    \subsection{KMP string matching}
+    \entry{Knuth Morris Pratt}{}{snippets/strings/knuthmorrispratt.cpp}{$O(n + m)$}{}
     
   \section{Helpers}
   
-    \subsection{Golden section search}
-    \includesnippet{snippets/goldensectionsearch.cpp}{C++}
+    \entry{Golden Section Search}{}{snippets/helpers/goldensectionsearch.cpp}{$O(\log_2 {1 / \epsilon})$}{}
+    \todo{Write integer search}
     
-    \subsection{Integer ternary search}
+    \subsection{Binary search}
     
-    \subsection{Bitmasking}
-    \includesnippet{snippets/bitmasking.cpp}{C++}
+    \entry{Bitmasking}{}{snippets/helpers/bitmasking.cpp}{}{}
     
 \end{document}
