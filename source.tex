@@ -36,10 +36,12 @@
 \definecolor{macro}{RGB}{111,0,138}
 \lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
                  stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
-                 coord,point,line,LineType,bitset},
+                 coord,point,line,LineType,bitset,size\_t},
         emphstyle=[1]{\color{usertype}},
         emph=[2]{INF,EPSILON,RES\_PHI,\_MSC\_VER,popcount},
-        emphstyle=[2]{\color{macro}}}
+        emphstyle=[2]{\color{macro}},
+        emph=[3]{nullptr},
+        emphstyle=[3]{\color{blue}}}
 
 \title{Team Code Reference}
 \author{
@@ -69,10 +71,10 @@
     
   \section{Data Structures}
     
-    %\subsection{Union Find}
-    %\includesnippet{snippets/unionfind.cpp}{C++}
     \entry{Union Find}{}{snippets/datastructures/unionfind.cpp}{}{}
     \todo{Revise UF, compare with existing implementations.}
+    
+    \entry{Max Queue}{\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, etc.}{snippets/datastructures/maxqueue.cpp}{}{}
     
     \subsection{Sparse table}
     
