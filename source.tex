@@ -67,7 +67,7 @@
   \section{Template}
     \entry{C++ Template}{}{snippets/header.h}{}{}
     \todo{Fix includes}
-    \subsection{Java Template}
+    \subsection{Java Template*}
     
   \section{Data Structures}
     
@@ -76,57 +76,73 @@
     
     \entry{Max Queue}{\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, etc.}{snippets/datastructures/maxqueue.cpp}{}{}
     
-    \subsection{Sparse table}
+    \subsection{Fenwick Tree*}
     
-    \subsection{Fenwick Tree}
+    \subsection{Sparse table*}    
     
-    \subsection{Range Minimum Query}
+    \subsection{Range Minimum Query*}
     
-    \subsection{Segment tree}
+    \subsection{Segment tree*}
     
-    \subsection{Prefix Trie}
+    \subsection{Prefix Trie*}
     
-    \subsection{Suffix array}
+    \subsection{Suffix array*}
+    
+    \subsection{Heavy-Light decomposition*}
     
   \section{Graph algorithms}
      
     \entry{Edge Classification}{}{snippets/graphs/edgeclassification.cpp}{$O(V + E)$}{}
     
-    \subsection{Articulation points and bridges}
+    \subsection{Articulation points and bridges*}
     
     \entry{Topological sort}{}{snippets/graphs/toposort.cpp}{$O(V + E)$}{}
         
-    \subsection{Floodfill}
+    \subsection{Floodfill*}
     
     \entry{Kruskal's algorithm}{}{snippets/graphs/kruskal.cpp}{$O(E \log_2 V)$}{Union Find}
     
-    \subsection{Biconnected components}
+    \subsection{Biconnected components*}
     
-    \subsection{Strongly connected components}
+    \subsection{Strongly connected components*}
+    
+    \subsection{Kosaraju's algorithm*}
     
     \entry{Dijkstra's algorithm}{}{snippets/graphs/dijkstra.cpp}{$O((V + E) \log_2 V)$}{}
     
-    \entry{Bellmann-Ford algorithm}{There exists a negative cycle if for any vertex $v$, $d(v, v) < 0$.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
+    \entry{Bellmann-Ford algorithm}{There exists a negative cycle if we can relax a weight in a $V$'th iteration.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
     
-    \entry{Floyd-Warshall algorithm}{}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
+    \entry{Floyd-Warshall algorithm}{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
     
-    \subsection{Edmonds-Karp algorithm}
+    \subsection{Edmonds-Karp algorithm*}
     
-    \subsection{Dinic's algorithm}
+    \subsection{Dinic's algorithm*}
     
-    \subsection{Push-relabel algorithm}
+    \subsection{Push-relabel algorithm*}
     
-    \subsection{Fleury's algorithm}
+    \subsection{Fleury's algorithm*}
+    
+    \subsection{Dilworth's theorem, Mirsky's theorem}
+    \begin{description}
+    \item[Dilworth's theorem]: The minimum number of disjoint chains into which S can be decomposed equals the length of a longest antichain of S.
+    
+    Compute by defining a bipartite graph with a source $u_x$ and sink $v_y$ for each vertex $x$, and adding an edge $(u_x, v_y)$ if $x \leq y, x \neq y$. Let $m$ denote the size of the maximum matching, then the number of disjoint chains is $|S| - m$ (the collection of unmatched endpoints).
+    
+    \item[Mirsky's theorem]: The minimum number of disjoint antichains into which S can be decomposed equals the length of a longest chain of S.
+    
+    Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute the $L_u$ for all $u \in S$.
+    \end{description}
+    \todo{Implement Mirsky's. Maybe Dilworth's too?}
     
   \section{Combinatorics \& Probability}
   
-    \subsection{Essentials}
+    \subsection{Essentials*}
   
-    \subsection{Hopcroft-Karp algorithm}
+    \subsection{Hopcroft-Karp algorithm*}
     
-    \subsection{Hungarian algorithm}
+    \subsection{Hungarian algorithm*}
     
-    \subsection{Meet-in-the-middle}
+    \subsection{Meet-in-the-middle*}
     
   \section{Computational geometry}
     
@@ -136,7 +152,7 @@
     \entry{Convex Hull}{}{snippets/geometry/convexhull.cpp}{$O(n \log_2 n)$}{Geometry Essentials}
     \todo{Revise, consider existing implementations}
     
-    \subsection{Halfspace intersections}
+    \subsection{Halfspace intersections*}
     
   \section{Mathematics}
     
@@ -145,7 +161,7 @@
     
     \entry{Number theoretic algorithms}{}{snippets/mathematics/numbertheory.cpp}{}{}
     
-    \subsection{BigInteger}
+    \subsection{BigInteger*}
         
   \section{Strings}
   
@@ -156,7 +172,7 @@
     \entry{Golden Section Search}{}{snippets/helpers/goldensectionsearch.cpp}{$O(\log_2 {1 / \epsilon})$}{}
     \todo{Write integer search}
     
-    \subsection{Binary search}
+    \subsection{Binary search*}
     
     \entry{Bitmasking}{}{snippets/helpers/bitmasking.cpp}{}{}
     
