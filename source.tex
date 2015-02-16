@@ -126,11 +126,11 @@
     \begin{description}
     \item[Dilworth's theorem]: The minimum number of disjoint chains into which S can be decomposed equals the length of a longest antichain of S.
     
-    Compute by defining a bipartite graph with a source $u_x$ and sink $v_y$ for each vertex $x$, and adding an edge $(u_x, v_y)$ if $x \leq y, x \neq y$. Let $m$ denote the size of the maximum matching, then the number of disjoint chains is $|S| - m$ (the collection of unmatched endpoints).
+    Compute by defining a bipartite graph with a source $u_x$ and sink $v_x$ for each vertex $x$, and adding an edge $(u_x, v_y)$ if $x \leq y, x \neq y$. Let $m$ denote the size of the maximum matching, then the number of disjoint chains is $|S| - m$ (the collection of unmatched endpoints).
     
     \item[Mirsky's theorem]: The minimum number of disjoint antichains into which S can be decomposed equals the length of a longest chain of S.
     
-    Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute the $L_u$ for all $u \in S$.
+    Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute $L_u$ for all $u \in S$.
     \end{description}
     \todo{Implement Mirsky's. Maybe Dilworth's too?}
     

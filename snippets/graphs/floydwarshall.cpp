@@ -1,4 +1,4 @@
-// adj should be a V*V error s.t. adj[i][j] contains the weight of
+// adj should be a V*V array s.t. adj[i][j] contains the weight of
 // the edge from i to j, INF if it does not exist.
 int adj[100][100];
 void floyd_warshall(int V) {
