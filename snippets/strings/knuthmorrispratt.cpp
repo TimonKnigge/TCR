@@ -8,7 +8,7 @@ void compute_prefix_function(string& word, vi& pi) {
             pi[i] = k + 1;
             i++; k++;
         }
-        else if (k > 0)    k = pi[k];
+        else if (k > 0) k = pi[k];
         else { pi[i] = 0; i++; }
     }
 }
