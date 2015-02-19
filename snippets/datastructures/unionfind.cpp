@@ -24,16 +24,15 @@ public:
     }
     
     void union_set(int i, int j) {
-        if (are_same_set(i, j)) return;
+        if ((i = find_set(i)) == (j = find_set(j))) return;
         setCount--;
-        int pi = find_set(i), pj = find_set(j);
-        if (rank[pi] > rank[pj]) {
-            parent[pj] = pi;
-            setSize[pi] += setSize[pj];
+        if (rank[i] > rank[j]) {
+            parent[j] = i;
+            setSize[i] += setSize[j];
         } else {
-            parent[pi] = pj;
-            setSize[pj] += setSize[pi];
-            if (rank[pi] == rank[pj]) rank[pj]++;
+            parent[i] = j;
+            setSize[i] += setSize[i];
+            if (rank[i] == rank[j]) rank[j]++;
         }
     }
 };
