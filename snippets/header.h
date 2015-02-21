@@ -12,6 +12,7 @@
 #include <math.h>
 
 #define INF 2000000000
+#define LLINF 9000000000000000000LL
 
 using namespace std;
 
