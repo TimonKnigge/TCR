@@ -14,7 +14,7 @@ ll meet_in_the_middle(int n) {
                 if (v == m) continue;
                 if (bit_set(mask, p++)) leftroute[l++] = v;
                 else                    rightroute[r++] = v; }
-				
+                
             ll lmin = LLINF, rmin = LLINF;
             do{ ll routelength = d[0][leftroute.empty() ? m : leftroute[0]];
                 for (int i = 1; i < half; ++i)
@@ -23,7 +23,7 @@ ll meet_in_the_middle(int n) {
                     routelength += d[leftroute[half - 1]][m];
                 lmin = min(lmin, routelength);
             } while (next_permutation(leftroute.begin(), leftroute.end()));
-			
+            
             do{ ll routelength = d[m][rightroute.empty() ? 0 : rightroute[0]];
                 for (int i = 1; i < otherhalf; ++i)
                     routelength += d[rightroute[i - 1]][rightroute[i]];
@@ -31,9 +31,9 @@ ll meet_in_the_middle(int n) {
                     routelength += d[rightroute[otherhalf - 1]][0];
                 rmin = min(rmin, routelength);
             } while (next_permutation(rightroute.begin(), rightroute.end()));
-			
+            
             shortest = min(shortest, lmin + rmin);
-			
+            
             if ((mask != 0)) {
                 int lo = mask & ~(mask - 1);
                 int lz = (mask + lo) & ~mask;

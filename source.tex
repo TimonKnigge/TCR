@@ -135,7 +135,7 @@
         
         Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute $L_u$ for all $u \in S$.
         
-        \item[Kirchhoff's theorem]: Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals $\det(M_{ii})$ for any $i$.
+        \item[Kirchhoff's theorem]: Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals any minor of $M$.
     \end{description}
         
   \section{Combinatorics \& Probability}

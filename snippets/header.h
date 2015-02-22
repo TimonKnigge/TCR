@@ -26,12 +26,10 @@ typedef long long ll;
 typedef long double ld;
 
 int main(){
-    int T;
-    scanf("%d", &T);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    for(int t = 1; t <= T; ++t){
-        // solve
-    }
+    // Solve
     
     return 0;
 }

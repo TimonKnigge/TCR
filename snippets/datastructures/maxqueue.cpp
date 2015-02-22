@@ -27,9 +27,8 @@ public:
 	bool empty() { return outbox.empty() && inbox.empty(); }
 	size_t size() { return outbox.size() + inbox.size(); }
 	T get_max() {
-		if (!outbox.empty() && !inbox.empty())
-			return max(outbox.top().second, inbox.top().second);
 		if (outbox.empty()) return inbox.top().second;
-		return outbox.top().second;
+		if (inbox.empty()) return outbox.top().second;
+		return max(outbox.top().second, inbox.top().second);
 	}
 };
