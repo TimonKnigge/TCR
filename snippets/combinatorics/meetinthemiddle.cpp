@@ -2,7 +2,7 @@
 ll d[MAX_N][MAX_N];
 
 ll meet_in_the_middle(int n) {
-    int half = (n - 1) / 2, otherhalf = n - 2 - half;
+    int half = (n - 2) / 2, otherhalf = n - 2 - half;
     vi leftroute(half, 0), rightroute(otherhalf, 0);    
     ll shortest = LLINF;
     

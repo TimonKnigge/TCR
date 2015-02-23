@@ -15,8 +15,4 @@ void dijkstra(vvii edges, int source) {
                 if (dist[u] + d_uv < dist[v]) {
                     dist[v] = dist[u] + d_uv;
                     pq.push(ii(dist[v], v));
-                }
-            }
-        }
-    }
-}
+}   }   }   }   }
