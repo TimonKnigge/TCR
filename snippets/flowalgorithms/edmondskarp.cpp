@@ -12,9 +12,9 @@ ll FlowNetwork::edmonds_karp(int s, int t) {
         }   }   }
         if (p[t] == -1) break;
         ll df = INF; i = p[t];
-        for (i = p[t]; i != -2; i = p[e[i ^ 2].v])
+        for (i = p[t]; i != -2; i = p[e[i ^ 1].v])
             df = min(df, e[i].cap - e[i].flo);
-        for (i = p[t]; i != -2; i = p[e[i ^ 2].v]) {
+        for (i = p[t]; i != -2; i = p[e[i ^ 1].v]) {
             e[i].flo += df; e[i ^ 1].flo -= df;
         }
         f += df;
