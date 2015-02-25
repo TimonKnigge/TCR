@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <vector>
+#include <vector>           
 #include <stack>
 #include <queue>
 #include <set>
@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <functional>
 #include <string>
+#include <cstring>  // Include for memset!
 #include <math.h>
 
 #define INF 2000000000

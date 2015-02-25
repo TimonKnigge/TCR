@@ -36,9 +36,10 @@
 \definecolor{macro}{RGB}{111,0,138}
 \lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
                  stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
-                 coord,point,line,LineType,bitset,size\_t},
+                 coord,point,line,LineType,bitset,size\_t,
+                 FlowNetwork,edge},
         emphstyle=[1]{\color{usertype}},
-        emph=[2]{INF,EPSILON,RES\_PHI,\_MSC\_VER,popcount},
+        emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,popcount,MAXV},
         emphstyle=[2]{\color{macro}},
         emph=[3]{nullptr},
         emphstyle=[3]{\color{blue}}}
@@ -93,7 +94,7 @@
     
     \subsection{Pareto Front*}
     
-  \section{Graph algorithms}
+  \section{Basic Graph algorithms}
      
     \entry{Edge Classification}{}{snippets/graphs/edgeclassification.cpp}{$O(V + E)$}{}
     
@@ -116,13 +117,7 @@
     \entry{Bellmann-Ford algorithm}{There exists a negative cycle if we can relax a weight in a $V$'th iteration.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
     
     \entry{Floyd-Warshall algorithm}{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
-    
-    \subsection{Edmonds-Karp algorithm*}
-    
-    \subsection{Dinic's algorithm*}
-    
-    \subsection{Push-relabel algorithm*}
-    
+        
     \subsection{Fleury's algorithm*}
     
     \subsection{Theorems in Graph Theory}
@@ -137,6 +132,16 @@
         
         \item[Kirchhoff's theorem]: Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals any minor of $M$.
     \end{description}
+    
+  \section{Flow Algorithms}
+  
+    \entry{Flow Network}{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}{snippets/flowalgorithms/flownetwork.cpp}{}{}
+  
+    \entry{Edmonds-Karp algorithm}{}{snippets/flowalgorithms/edmondskarp.cpp}{$O(VE^2)$}{Flow Network}
+  
+    \subsection{Dinic's algorithm*}
+  
+    \subsection{Push-relabel algorithm*}
         
   \section{Combinatorics \& Probability}
   
