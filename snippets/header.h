@@ -10,7 +10,7 @@
 #include <functional>
 #include <string>
 #include <cstring>  // Include for memset!
-#include <math.h>
+#include <cmath>
 
 #define INF 2000000000
 #define LLINF 9000000000000000000LL

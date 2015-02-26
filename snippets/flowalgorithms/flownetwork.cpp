@@ -14,7 +14,10 @@ struct FlowNetwork {
         e.push_back(edge(u, vu_cap, h[v])); h[v] = edge_count++;
     }
     void cleanup() { delete[] h; }
+    // Only copy what is needed:
     ll edmonds_karp(int s, int t);
     ll dinic(int s, int t);
     ll push_relabel(int s, int t);
+    ll infer_mincut(int s);
+    void infer_mincut_dfs(int u, vb& vs);
 };
