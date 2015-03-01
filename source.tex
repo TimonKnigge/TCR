@@ -37,7 +37,7 @@
 \lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
                  stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
                  coord,point,line,LineType,bitset,size\_t,
-                 FlowNetwork,edge},
+                 FlowNetwork,edge,string,FenwickTree,FenwickTree2D,MaxQueue},
         emphstyle=[1]{\color{usertype}},
         emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,popcount,MAXV},
         emphstyle=[2]{\color{macro}},
@@ -179,6 +179,8 @@
   \section{Strings}
   
     \entry{Knuth Morris Pratt}{}{snippets/strings/knuthmorrispratt.cpp}{$O(n + m)$}{}
+    
+    \entry{Z-algorithm}{To match pattern $P$ on string $S$: pick $\Phi$ s.t. $\Phi \notin P$, find $Z$ of $P{\Phi}S$.}{snippets/strings/zalgorithm.cpp}{$O(n)$}{}
     
   \section{Helpers}
   
