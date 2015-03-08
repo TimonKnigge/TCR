@@ -155,6 +155,8 @@
     
     \subsection{Hungarian algorithm*}
     
+    \entry{Stable Marriage Problem}{If $m = 2$ the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th men. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}{snippets/combinatorics/stablemarriage.cpp}{$O(mw)$}{}
+    
 	\entry{Meet in the Middle}{Sufficient for $2 \leq n \leq 14$.}{snippets/combinatorics/meetinthemiddle.cpp}{$O(n^2\binom{n}{n/2}\big(\frac{n}{2}\big)!)$}{}
     
     \subsection{2-SAT*}
