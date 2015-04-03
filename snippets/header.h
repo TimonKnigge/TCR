@@ -10,9 +10,10 @@
 #include <functional>
 #include <string>
 #include <cstring>  // Include for memset!
-#include <cmath>
 #include <complex>
 #include <random>
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 #define INF 2000000000              // 9
 #define LLINF 9000000000000000000LL // 18

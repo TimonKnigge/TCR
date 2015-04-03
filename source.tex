@@ -37,9 +37,9 @@
 \lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
                  stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
                  coord,point,line,LineType,bitset,size\_t,
-                 FlowNetwork,edge},
+                 FlowNetwork,edge,cmpx},
         emphstyle=[1]{\color{usertype}},
-        emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,popcount,MAXV},
+        emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,popcount,MAXV,M\_PI},
         emphstyle=[2]{\color{macro}},
         emph=[3]{nullptr},
         emphstyle=[3]{\color{blue}}}
@@ -105,6 +105,8 @@
     \entry{Topological sort}{}{snippets/graphs/toposort.cpp}{$O(V + E)$}{}
     
     \entry{Kruskal's algorithm}{}{snippets/graphs/kruskal.cpp}{$O(E \log_2 V)$}{Union Find}
+    
+    \entry{Prim's algorithm}{}{snippets/graphs/prim.cpp}{$O(E \log_2 V)$}{}
     
     \subsection{Biconnected components*}
     
@@ -173,6 +175,8 @@
     \todo{Rewrite Totient function}
     
     \entry{Number theoretic algorithms}{}{snippets/mathematics/numbertheory.cpp}{}{}
+    
+    \entry{Fast Fourier Transform}{Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}{snippets/mathematics/fft.cpp}{$O(n \log_2 n)$}{Bitmasking}
     
     \subsection{BigInteger*}
         

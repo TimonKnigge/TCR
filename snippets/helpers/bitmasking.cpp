@@ -30,3 +30,19 @@ do {
     // Decode mask here
     mask = (mask - 1) & givenMask;
 } while (mask != givenMask);
+
+// The two functions below are used in the FFT:
+inline int next_power_of_2(int x) {
+    x--; x |= x >> 1;
+    x |= x >> 2; x |= x >> 4;
+    x |= x >> 8; x |= x >> 16;
+    x++; return x;
+}
+
+inline int nbit_reverse(int x, int n) {
+    for (int i = 0, d = n - 1; i < n / 2; ++i, d -= 2) {
+        int l = (x & (1 << i)), r = (x & (1 << (n - 1 - i)));
+        x ^= (l << d ^ r) | (r >> d ^ l);
+    }
+    return x;
+}
