@@ -11,9 +11,12 @@
 #include <string>
 #include <cstring>  // Include for memset!
 #include <cmath>
+#include <complex>
+#include <random>
 
-#define INF 2000000000
-#define LLINF 9000000000000000000LL
+#define INF 2000000000              // 9
+#define LLINF 9000000000000000000LL // 18
+#define LDINF 1e200
 
 using namespace std;
 
