@@ -37,9 +37,12 @@
 \lstset{emph=[1]{pair,vector,map,queue,priority\_queue,greater,
                  stack,ii,vi,vvi,vii,vvii,vb,ll,ld,UnionFind,
                  coord,point,line,LineType,bitset,size\_t,
-                 FlowNetwork,edge,cmpx},
+                 FlowNetwork,edge,string,FenwickTree,
+                 FenwickTree2D,MaxQueue,Matrix,cmpx,complex},
         emphstyle=[1]{\color{usertype}},
-        emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,popcount,MAXV,M\_PI},
+        emph=[2]{INF,LLINF,EPSILON,RES\_PHI,\_MSC\_VER,
+		        popcount,MAXV,ITERATE\_MATRIX,M\_PI,
+                \_USE\_MATH\_DEFINES,LDINF},
         emphstyle=[2]{\color{macro}},
         emph=[3]{nullptr},
         emphstyle=[3]{\color{blue}}}
@@ -133,6 +136,8 @@
         Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute $L_u$ for all $u \in S$.
         
         \item[Kirchhoff's theorem]: Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals any minor of $M$.
+        
+        \item[Acyclicity]: A directed graph is acyclic if and only if a depth-first search yields no back edges.
     \end{description}
     
   \section{Flow Algorithms}
@@ -154,6 +159,8 @@
     \subsection{Hopcroft-Karp algorithm*}
     
     \subsection{Hungarian algorithm*}
+    
+    \entry{Stable Marriage Problem}{If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}{snippets/combinatorics/stablemarriage.cpp}{$O(mw)$}{}
     
 	\entry{Meet in the Middle}{Sufficient for $2 \leq n \leq 14$.}{snippets/combinatorics/meetinthemiddle.cpp}{$O(n^2\binom{n}{n/2}\big(\frac{n}{2}\big)!)$}{}
     
@@ -179,10 +186,14 @@
     \entry{Fast Fourier Transform}{Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}{snippets/mathematics/fft.cpp}{$O(n \log_2 n)$}{Bitmasking}
     
     \subsection{BigInteger*}
+    
+    \entry{Matrix Exponentation}{Matrix exponentation in logarithmic time.}{snippets/mathematics/matrixexponentation.cpp}{}{}
         
   \section{Strings}
   
     \entry{Knuth Morris Pratt}{}{snippets/strings/knuthmorrispratt.cpp}{$O(n + m)$}{}
+    
+    \entry{Z-algorithm}{To match pattern $P$ on string $S$: pick $\Phi$ s.t. $\Phi \notin P$, find $Z$ of $P{\Phi}S$.}{snippets/strings/zalgorithm.cpp}{$O(n)$}{}
     
   \section{Helpers}
   
