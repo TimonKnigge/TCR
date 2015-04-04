@@ -163,6 +163,8 @@
     \entry{Stable Marriage Problem}{If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}{snippets/combinatorics/stablemarriage.cpp}{$O(mw)$}{}
     
 	\entry{Meet in the Middle}{Sufficient for $2 \leq n \leq 14$.}{snippets/combinatorics/meetinthemiddle.cpp}{$O(n^2\binom{n}{n/2}\big(\frac{n}{2}\big)!)$}{}
+	
+	\entry{KP procedure}{Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}{snippets/combinatorics/twovariablesilp.cpp}{$O(d^2 log_2(d)log_2(log_2(d)))$}{}
     
     \subsection{2-SAT*}
     
