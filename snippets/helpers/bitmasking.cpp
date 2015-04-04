@@ -39,10 +39,17 @@ inline int next_power_of_2(int x) {
     x++; return x;
 }
 
-inline int nbit_reverse(int x, int n) {
-    for (int i = 0, d = n - 1; i < n / 2; ++i, d -= 2) {
-        int l = (x & (1 << i)), r = (x & (1 << (n - 1 - i)));
-        x ^= (l << d ^ r) | (r >> d ^ l);
+inline int brinc(int x, int k) {
+    int I = k - 1, s = 1 << I;
+    x ^= s;
+    if ((x & s) != s) {
+        I--; s >>= 1;
+        while (I >= 0 && ((x & s) == s)) {
+            x = x &~ s;
+            I--;
+            s >>= 1;
+        }
+        if (I >= 0) x |= s;
     }
     return x;
 }
