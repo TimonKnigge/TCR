@@ -33,10 +33,10 @@ do {
 
 // The two functions below are used in the FFT:
 inline int next_power_of_2(int x) {
-    x--; x |= x >> 1;
+    x = (x - 1) | ((x - 1) >> 1);
     x |= x >> 2; x |= x >> 4;
     x |= x >> 8; x |= x >> 16;
-    x++; return x;
+    return x + 1;
 }
 
 inline int brinc(int x, int k) {

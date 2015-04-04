@@ -18,6 +18,7 @@
 #define INF 2000000000              // 9
 #define LLINF 9000000000000000000LL // 18
 #define LDINF 1e200
+#define MY_PI 3.14159265358979323846
 
 using namespace std;
 
