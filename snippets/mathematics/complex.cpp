@@ -12,7 +12,7 @@ cmpx cmul(cmpx lhs, cmpx rhs) {
 cmpx cdiv(cmpx lhs, cmpx rhs) {
     ld a = lhs.first, b = lhs.second,
        c = rhs.first, d = rhs.second;
-    return cmpx((a * c - b * d) / (c * c + d * d),
+    return cmpx((a * c + b * d) / (c * c + d * d),
                 (b * c - a * d) / (c * c + d * d));
 }
 cmpx cexp(complex<ld> e) {
