@@ -2,7 +2,7 @@
 
 // A.size() = N = 2^p
 void fft(vector<cmpx>& A, int N, int p, bool inv = false) {
-    for(int i = 0, r = 0; i < N; ++i, r = nbit_reverse(i, p))
+    for(int i = 0, r = 0; i < N; ++i, r = brinc(r, p))
         if (i < r) swap(A[i], A[r]);
     for (int m = 2; m <= N; m <<= 1) {
         cmpx w_m = cexp(complex<ld>(0, 2 * MY_PI / m * (inv ? -1 : 1))), w;
