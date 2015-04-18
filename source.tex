@@ -119,7 +119,7 @@
     
     \entry{Dijkstra's algorithm}{}{snippets/graphs/dijkstra.cpp}{$O((V + E) \log_2 V)$}{}
     
-    \entry{Bellmann-Ford algorithm}{There exists a negative cycle if we can relax a weight in a $V$'th iteration.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
+    \entry{Bellmann-Ford algorithm}{Returns \texttt{true} if the graph has no negative cycles.}{snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
     
     \entry{Floyd-Warshall algorithm}{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
         
