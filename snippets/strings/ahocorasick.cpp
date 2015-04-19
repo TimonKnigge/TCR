@@ -19,13 +19,13 @@ public:
                 }
                 n = a[n].child[mp(words[w][i])];
             }
-			a[n].match.push_back(w);
+            a[n].match.push_back(w);
         }
 
         queue<int> q;
         for (int k = 0; k < ALPHABET_SIZE; ++k) {
             if (a[0].child[k] == -1) a[0].child[k] = 0;
-			else if (a[0].child[k] > 0) {
+            else if (a[0].child[k] > 0) {
                 a[a[0].child[k]].failure = 0;
                 q.push(a[0].child[k]);
             }
