@@ -8,33 +8,24 @@ class AC_FSM {
         }
     };
     vector <Node> a;
-    int words = 0;
-    vector<int> word_lengths;
 public:
     AC_FSM() { a.push_back(Node()); }
-    void insert_word(string& word, int id) {
-        int n = 0;
-        words++;
-        word_lengths.push_back(word.length());
-        for (int w = 0; w < word.size(); ++w) {
-            if (a[n].child[mp(word[w])] == -1) {
-                a[n].child[mp(word[w])] = a.size();
-                a.push_back(Node());
+    void construct_automaton(vector<string>& words) {
+        for (int w = 0, n = 0; w < words.size(); ++w, n = 0) {
+            for (int i = 0; i < words[w].size(); ++i) {
+                if (a[n].child[mp(words[w][i])] == -1) {
+                    a[n].child[mp(words[w][i])] = a.size();
+                    a.push_back(Node());
+                }
+                n = a[n].child[mp(words[w][i])];
             }
-            n = a[n].child[mp(word[w])];
-            if (w == word.length() - 1)
-                a[n].match.push_back(id);
-        }
-    }
-    void construct_automaton() {
-        for (int i = 0; i < ALPHABET_SIZE; ++i) {
-            if (a[0].child[i] == -1)
-                a[0].child[i] = 0;
+			a[n].match.push_back(w);
         }
 
         queue<int> q;
         for (int k = 0; k < ALPHABET_SIZE; ++k) {
-            if (a[0].child[k] != 0) {
+            if (a[0].child[k] == -1) a[0].child[k] = 0;
+			else if (a[0].child[k] > 0) {
                 a[a[0].child[k]].failure = 0;
                 q.push(a[0].child[k]);
             }
@@ -53,17 +44,16 @@ public:
             }
         }
     }
-    void aho_corasick(string& sentence, vector< vector<int> >& matches) {
-        matches.assign(words, vector<int>());
-        int state = 0;
-        for (int i = 0; i < sentence.length(); ++i) {
-            while (a[state].child[mp(sentence[i])] == -1)
-                state = a[state].failure;
-            state = a[state].child[mp(sentence[i])];
-            if (!a[state].match.empty()) {
-                for (int w : a[state].match)
-                    matches[w].push_back(i - word_lengths[w] + 1);
-            }
+
+    void aho_corasick(string& sentence, vector<string>& words, vector< vector<int> >& matches) {
+        matches.assign(words.size(), vector<int>());
+        int state = 0, ss = 0;
+        for (int i = 0; i < sentence.length(); ++i, ss = state) {
+            while (a[ss].child[mp(sentence[i])] == -1)
+                ss = a[ss].failure;
+            state = a[state].child[mp(sentence[i])] = a[ss].child[mp(sentence[i])];
+            for (int w : a[state].match)
+                matches[w].push_back(i - words[w].length() + 1);            
         }
     }
 };
