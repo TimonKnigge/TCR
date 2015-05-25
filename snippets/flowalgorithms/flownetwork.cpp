@@ -17,7 +17,7 @@ struct FlowNetwork {
     // Only copy what is needed:
     ll edmonds_karp(int s, int t);
     ll dinic(int s, int t);
-	ll dinic_augment(int s, int t, int* d, ll cap);
+    ll dinic_augment(int s, int t, int* d, ll cap);
     ll push_relabel(int s, int t);
     ll infer_mincut(int s);
     void infer_mincut_dfs(int u, vb& vs);
