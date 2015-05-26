@@ -123,7 +123,7 @@
     
     \entry{Floyd-Warshall algorithm}{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}{snippets/graphs/floydwarshall.cpp}{$O(V^3)$}{}
         
-    \subsection{Fleury's algorithm*}
+    \entry{Hierholzer's algorithm}{Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}{snippets/graphs/euleriancircuits.cpp}{$O(V + E)$}{}
     
     \subsection{Theorems in Graph Theory}
     \begin{description}
@@ -138,6 +138,8 @@
         \item[Kirchhoff's theorem]: Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals any minor of $M$.
         
         \item[Acyclicity]: A directed graph is acyclic if and only if a depth-first search yields no back edges.
+        
+        \item[Euler Circuits and Trails]: In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and only if all vertices have even degree, and all vertices of nonzero degree belong to a single connected component. In an \textit{undirected graph}, an \textit{Eulerian Trail} exists if and only if at most two vertices have odd degree, and all of its vertices of nonzero degree belong to a single connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit} exists if and only if every vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component. In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only at most one vertex has $outdegree - indegree = 1$, at most one vertex has $indegree - outdegree = 1$, every other vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component \textit{in the underlying undirected graph}.
     \end{description}
     
   \section{Flow Algorithms}
