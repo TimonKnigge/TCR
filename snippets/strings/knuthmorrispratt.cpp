@@ -1,6 +1,6 @@
 void compute_prefix_function(string& word, vi& pi) {
-    pi = vector<int>(word.length());
-    pi[0] = -1; pi[1] = 0;
+    pi.assign(word.length(), 0);
+    pi[0] = -1;
     int i = 2, k = 0;
 
     while (i < pi.size()) {
