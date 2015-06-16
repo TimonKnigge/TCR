@@ -25,8 +25,8 @@ void convolution(vector<cmpx>& A, vector<cmpx>& B, vector<cmpx>& C) {
     /// Pad with zeroes
     int N = 2 * max(next_power_of_2(A.size()), next_power_of_2(B.size()));
     A.reserve(N); B.reserve(N); C.reserve(N);
-    for (int i = A.size(); i < N; ++i) A.push_back(0);
-    for (int i = B.size(); i < N; ++i) B.push_back(0);
+    for (int i = A.size(); i < N; ++i) A.push_back({0, 0});
+    for (int i = B.size(); i < N; ++i) B.push_back({0, 0});
     int p = (int)round(log2(N));
     // Transform A and B
     fft(A, N, p, false);

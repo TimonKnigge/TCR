@@ -7,7 +7,7 @@ cmpx csub(cmpx lhs, cmpx rhs) {
 }
 cmpx cmul(cmpx lhs, cmpx rhs) {
     return cmpx(lhs.first * rhs.first - lhs.second * rhs.second,
-                lhs.first * rhs.second + lhs.second * lhs.first);
+                lhs.first * rhs.second + lhs.second * rhs.first);
 }
 cmpx cdiv(cmpx lhs, cmpx rhs) {
     ld a = lhs.first, b = lhs.second,
