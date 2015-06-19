@@ -3,7 +3,7 @@
 
 class Dinic{
 public:
-	Graph g; int V,s,t;
+	Graph& g; int V,s,t;
 	vi l; vector<size_t> its; // levels and iterators at each level
 
 	Dinic(Graph& g, int s, int t) : 

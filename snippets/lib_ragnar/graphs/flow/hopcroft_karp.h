@@ -1,14 +1,13 @@
 #include "header.h"
-#include "../adjacency_list.h"
+#include "flowgraph.h"
 
-template<class T=Void,bool directed = true>
 class Hopcroft_Karp{
 public:
 	int V1; // vertices in the first part
-	AdjacencyListGraph<T,directed>& g;
+	Graph& g;
 	vi d, p; // distance (size V1), paired vertex init to INF and -1
 
-	Hopcroft_Karp(AdjacencyListGraph<T,directed>& g, int V1, int V2) : V1(V1), g(g){
+	Hopcroft_Karp(Graph& g, int V1, int V2) : V1(V1), g(g){
 		// initialize all members
 		p.assign(V1+V2,-1);
 		d.resize(V1); // d is assigned during bfs
@@ -29,13 +28,13 @@ public:
 			int u = q.front(); q.pop();
 			if(d[u]==maxdepth)
 				return true; // paths found
-			ITER(v,g.edges(u)){
-				if(p[v]==-1) // free vertex in V2
+			for(auto&& e : g[u]){
+				if(p[e.v]==-1) // free vertex in V2
 					maxdepth = d[u]+1;
 				else {
-					if(d[p[v]] < INF) continue;
-					d[p[v]] = d[u]+1;
-					q.push(p[v]);
+					if(d[p[e.v]] < INF) continue;
+					d[p[e.v]] = d[u]+1;
+					q.push(p[e.v]);
 				}
 			}
 		}
@@ -44,10 +43,10 @@ public:
 
 	// returns true when an augmenting path is found.
 	bool dfs(int u){
-		ITER(v,g.edges(u))
-			if(p[v] < 0 || d[p[v]]==d[u]+1)
-				if(p[v] < 0 || dfs(p[v])){
-					p[u]=v; p[v]=u;
+		for(auto&& e : g[u])
+			if(p[e.v] < 0 || d[p[e.v]]==d[u]+1)
+				if(p[e.v] < 0 || dfs(p[e.v])){
+					p[u]=e.v; p[e.v]=u;
 					return true;
 				}
 		d[u]=INF; // so we don't try to reuse this vertex
