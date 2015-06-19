@@ -1,5 +1,4 @@
-\documentclass[a4paper]{article}
-
+\documentclass[a4paper,landscape,twocolumn]{article}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
@@ -8,13 +7,13 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{color}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=1cm]{geometry}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[toc]{multitoc}
 \usepackage{ifthen}
 
 \renewcommand*{\multicolumntoc}{2}
-\setlength{\columnseprule}{0.5pt}
+\setlength{\columnseprule}{0pt}
 
 \lstset{
     backgroundcolor=\color{white},
@@ -65,8 +64,9 @@
 
 \begin{document}
   \maketitle
+  \newpage
   \tableofcontents
-  \clearpage
+  \newpage
     
   \section{Template}
     \entry{C++ Template}{}{snippets/header.h}{}{}
