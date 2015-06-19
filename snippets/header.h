@@ -15,8 +15,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-const int INF = 2000000000                      // 9
-const long long LLINF = 9000000000000000000LL   // 18
+const int INF = 2000000000;                     // 9
+const long long LLINF = 9000000000000000000LL;  // 18
 const long double LDINF = 1e300;
 
 using namespace std;
