@@ -17,7 +17,8 @@ public:
 			if (e.cap > e.f && l[u] < l[e.v]) {
 				int d = augment(e.v, min(c, e.cap - e.f));
 				if (d > 0) {
-					e.f += d, g[e.v][e.r].f -= d;
+					e.f += d;
+					g[e.v][e.r].f -= d;
 					return d;
 				}
 			}	
