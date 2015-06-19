@@ -1,18 +1,15 @@
 #include "../smart_edge_list.h"
+#include "flowgraph.h"
 
-
-// Base class to use for edges
-template <class E>
 class Push_Relabel {
 public:
-	typedef SmartEdgeListGraph<E,true> G;
-	typedef typename G::iterator iterator;
-	G& g; // directed
-	vi h, hc, e, qc; // height, height count, excess, queuecount
-	int V, s,t; // Vertices, souce and sink
+	Graph& g; // directed
+	int V, s, t; // Vertices, souce and sink
+	vi h, hc, qc; // height, height count, queuecount
+	vector<ll> x; // excess
 
-	Push_Relabel(G& g, int V, int s, int t) :
-	   	g(g), h(V,0), hc(2*V,0), e(V,0), qc(V,0), V(V), s(s), t(t){
+	Push_Relabel(Graph& g, int s, int t) :
+	   	g(g), V(g.size()), s(s), t(t), h(V,0), hc(2*V,0), qc(V,0), x(V,0){
 		hc[0] = V;
 	}
 
@@ -21,59 +18,59 @@ public:
 		queue<int> q; q.push(t); 
 		while(!q.empty()){
 			int u = q.front(); q.pop();
-			ITER(v,g.edges(u))
-				if(h[v] == 0 && v != t)
-					hc[0]--,h[v] = h[u]+1,hc[h[v]]++, q.push(v);
+			for(auto && x : g[u])
+				if(h[x.v] == 0 && x.v != t)
+					hc[0]--,h[x.v] = h[u]+1,hc[h[x.v]]++, q.push(x.v);
 		}
 		
 		// now set height of `s`
 		hc[h[s]]--; h[s]=V; hc[V]++;
 
 		// and push initial flows
-		for(auto it = g.begin(s); it != g.end(s); it++){
-			int flow = it->c;
-			it->c = 0;
-			it.reverse()->c += flow;
-			e[it] += flow; // += for multiple edges to it
-			e[s]  -= flow;
+		for(auto&& e : g[s]){
+			int flow = e.cap;
+			e.f = flow;
+			g[e.v][e.r].f -=flow;
+			x[e.v] += flow; // += for multiple edges to it
+			x[s]  -= flow;
 		}
 		// keep a queue of overflowing vertices
 		// (FIFO heuristic -> V^3)
 		q = queue<int>();
-		ITER(it, g.edges(s))
-			if(it!=t && qc[it] == 0)
-				q.push(it), qc[it]=1;
+		for(auto&& e : g[s])
+			if(e.v!=t && qc[e.v] == 0)
+				q.push(e.v), qc[e.v]=1;
 		while(!q.empty()){
 			int u = q.front(), m = INF;
-			for(auto it = g.begin(u); it != g.end(u) && e[u] > 0; it++)
-				if(it->c > 0){
-					if(h[u] > h[it]){
-						// PUSH flow from `u` to `it`
-						int flow = min(e[u], it->c);
-						it->c -= flow;
-						it.reverse()->c += flow;
-						e[u] -= flow;
-						e[it] += flow;
+			for(auto&& e : g[u]) if( e.cap > e.f){
+				if(h[u] > h[e.v]){
+					// push flow from `u` to `v`
+					int flow = min(x[u], e.cap - e.f);
+					e.f += flow;
+					g[e.v][e.r].f -= flow;
+					x[u] -= flow;
+					x[e.v] += flow;
 
-						// push overflowing `it` on queue
-						if(qc[it] == 0 && it != s && it != t)
-							qc[it]=1, q.push(it);
-					} else 
-						m = min(m, h[it]);
-				}
-			if(e[u]!=0){
+					// push overflowing `v` on queue
+					if(qc[e.v] == 0 && e.v != s && e.v != t)
+						qc[e.v]=1, q.push(e.v);
+
+					if(x[u] == 0) break; // stop when done
+				} else 
+					m = min(m, h[e.v]);
+			}
+			if(x[u]!=0){
 				if(m!=INF){
 					hc[h[u]]--;
 					// apply gap heuristic
-					if(hc[h[u]] == 0)
-						// raise everything between h[u] and V to V+1
-						REP(i,V) if(h[i] > h[u] && h[i] < V)
-							hc[h[i]]--, h[i]=V+1, hc[h[i]]++;
+					if(hc[h[u]] == 0) // raise h[u] to V to V+1
+						for(auto&& ht : h) if(ht > h[u] && ht < V)
+							hc[ht]--, ht=V+1, hc[ht]++;
 					h[u] = m+1;
 					hc[h[u]]++;
 				}
 			} else qc[u]=0, q.pop();
 		}
-		return e[t]; // this is just the total flow
+		return x[t]; // this is just the total flow
 	}
 };
