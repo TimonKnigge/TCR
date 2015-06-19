@@ -1,4 +1,17 @@
-\documentclass[a4paper,landscape,twocolumn]{article}
+\documentclass[
+	a4paper,
+	landscape
+	twocolumn
+]{article}
+\usepackage[
+	a4paper,
+	landscape,
+	twocolumn,
+	left=0.8cm,
+	right=0.5cm,
+	vmargin=0.5cm,
+	columnsep=1cm
+]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
@@ -7,14 +20,25 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{color}
-\usepackage[margin=1cm]{geometry}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[toc]{multitoc}
 \usepackage{ifthen}
 
 \renewcommand*{\multicolumntoc}{2}
-\setlength{\columnseprule}{0pt}
+\setlength{\columnseprule}{0.1pt}
+\newcommand{\latexcolumnseprulecolor}{\color{red}}
 
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\@outputdblcol{% find
+  \normalcolor\vrule
+}{% and replace by
+  \latexcolumnseprulecolor\vrule
+}{% success
+}{% failure
+  \@latex@warning{Patching \string\@outputdblcol\space failed}%
+}
+\makeatother
 \lstset{
     backgroundcolor=\color{white},
     tabsize=3,
@@ -63,8 +87,7 @@
 }
 
 \begin{document}
-  \maketitle
-  \newpage
+{\Large Team Code Reference}
   \tableofcontents
   \newpage
     
