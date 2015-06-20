@@ -1,38 +1,27 @@
-vii pset;
-int psets;
-
 class UnionFind {
 private:
-    vi parent, rank, setSize;
-    int setCount;
+    vi par, ran, siz;
+    int c;
 public:
-    UnionFind(int N) {
-        setSize.assign(N, 1);
-        setCount = N;
-        rank.assign(N, 0);
-        parent.assign(N, 0);
-        
-        for (int i = 0; i < N; ++i) parent[i] = i;
+    UnionFind(int n) {
+        siz.assign(n, 1);
+        c = n;
+        ran.assign(n, 0);
+        par.assign(n, 0);
+        for (int i = 0; i < n; ++i) par[i] = i;
     }
     
-    int find_set(int i) {
-        return (parent[i] == i) ? i : (parent[i] = find_set(parent[i]));
-    }
-    
-    bool are_same_set(int i, int j) {
-        return (find_set(i) == find_set(j));
-    }
+    int find(int i) { return (par[i] == i ? i : (par[i] = find(par[i]))); }    
+    bool same(int i, int j) { return (find(i) == find(j)); }
+    int count() { return c; }
+    int size(int i) { return size[find(i)]; }
     
     void union_set(int i, int j) {
-        if ((i = find_set(i)) == (j = find_set(j))) return;
-        setCount--;
-        if (rank[i] > rank[j]) {
-            parent[j] = i;
-            setSize[i] += setSize[j];
-        } else {
-            parent[i] = j;
-            setSize[i] += setSize[i];
-            if (rank[i] == rank[j]) rank[j]++;
-        }
+        if ((i = find(i)) == (j = find(j))) return;
+        c--;
+        if (ran[i] > ran[j]) swap(i, j);
+        par[i] = j;
+        size[j] += size[i];
+        if (ran[i] == ran[j]) ran[j]++;
     }
 };
