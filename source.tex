@@ -76,7 +76,6 @@
   \section{Data Structures}
     
     \entry{Union Find}{}{snippets/datastructures/unionfind.cpp}{}{}
-    \todo{Revise UF, compare with existing implementations.}
     
     \entry{Max Queue}{\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, set union/intersection (use bitmasks), etc.}{snippets/datastructures/maxqueue.cpp}{}{}
     
@@ -93,11 +92,17 @@
     
 	\entry{Prefix Trie}{}{snippets/datastructures/trie.cpp}{}{}
     
-    \subsection{Suffix array*}
+    \subsection{Suffix Array*}
+    
+    \subsection{Suffix Tree*}
+    
+    \subsection{Ropes*}
+    
+    \subsection{Implicit Cartesian Tree*}
     
     \subsection{Heavy-Light decomposition*}
     
-    \subsection{Pareto Front*}
+    \subsection{Dancing Links*}
     
   \section{Basic Graph algorithms}
      
@@ -105,13 +110,15 @@
     
     \subsection{Articulation points and bridges*}
     
+    \subsection{Biconnected components*}
+    
+    \subsection{Triconnected components*}
+    
     \entry{Topological sort}{}{snippets/graphs/toposort.cpp}{$O(V + E)$}{}
     
     \entry{Kruskal's algorithm}{}{snippets/graphs/kruskal.cpp}{$O(E \log_2 V)$}{Union Find}
     
     \entry{Prim's algorithm}{}{snippets/graphs/prim.cpp}{$O(E \log_2 V)$}{}
-    
-    \subsection{Biconnected components*}
     
     \subsection{Strongly connected components*}
     
@@ -142,7 +149,7 @@
         \item[Euler Circuits and Trails]: In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and only if all vertices have even degree, and all vertices of nonzero degree belong to a single connected component. In an \textit{undirected graph}, an \textit{Eulerian Trail} exists if and only if at most two vertices have odd degree, and all of its vertices of nonzero degree belong to a single connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit} exists if and only if every vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component. In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only at most one vertex has $outdegree - indegree = 1$, at most one vertex has $indegree - outdegree = 1$, every other vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component \textit{in the underlying undirected graph}.
     \end{description}
     
-  \section{Flow Algorithms}
+  \section{Flow and Matching Algorithms}
   
     \entry{Flow Network}{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}{snippets/flowalgorithms/flownetwork.cpp}{}{}
   
@@ -153,13 +160,15 @@
     \subsection{Push-relabel algorithm*}
     
     \entry{Minimum Cut Inference}{The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}{snippets/flowalgorithms/infermincut.cpp}{$O(V + E)$}{Flow Network}
+    
+    \subsection{Circulation Reductions*}
+    
+    \subsection{Hopcorft-Karp algorithm*}
+    
+    \subsection{Edmond's Blossom algorithm*}
         
   \section{Combinatorics \& Probability}
-  
-    \subsection{Essentials*}
-  
-    \subsection{Hopcroft-Karp algorithm*}
-    
+      
     \subsection{Hungarian algorithm*}
     
     \entry{Stable Marriage Problem}{If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}{snippets/combinatorics/stablemarriage.cpp}{$O(mw)$}{}
