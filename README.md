@@ -1,6 +1,6 @@
 # Team Code Reference
 
-A Team Code Reference for competitive programming contests.
+A Team Code Reference for competitive programming contests. A somewhat up-to-date pdf version may be found [here](http://www.timonknigge.com/competitive-programming/source.pdf).
 
 ## TODO
 
@@ -54,4 +54,4 @@ A Team Code Reference for competitive programming contests.
 #### Java    
 - [ ] Template    
 - [ ] Investigate BigNum/BigDecimal    
-- [ ] Investigate `java.awt.geom (esp. Area class) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file10))
+- [ ] Investigate `java.awt.geom` (esp. Area class) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file10))
