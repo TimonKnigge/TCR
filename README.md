@@ -39,6 +39,7 @@ A Team Code Reference for competitive programming contests.
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
 - [ ] nCk % p using Lucas' Theorem
+- [ ] Burnside's lemma?
 
 #### Geometry
 - [ ] Intersecting Halfspaces
