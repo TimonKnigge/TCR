@@ -8,10 +8,10 @@ A Team Code Reference for competitive programming contests.
 - [ ] Segment Tree with lazy propagation
 - [ ] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
 - [ ] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
-- [ ] Suffix Array ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5)) or Suffix Tree.
+- [ ] Suffix Array or Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
 - [ ] Ropes
-- [ ] Implicit Cartesian Tree
-- [ ] Dancing Links
+- [ ] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
+- [ ] Dancing Links (+ Algo X)
 - [ ] Palindromic Tree (Eertree)
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp))
 
@@ -20,10 +20,10 @@ A Team Code Reference for competitive programming contests.
 - [ ] Biconnected Components
 - [ ] Triconnected Components
 - [ ] Strongly Connected Components
-- [ ] Heavy Light Decomposition and Centroid Decomposition
+- [ ] Heavy Light Decomposition and Centroid Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
 
 #### Flow & Matching
-- [ ] Push Relabel ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2) )
+- [ ] Push Relabel ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
 - [ ] Min Cost Max Flow
 - [ ] Investigate how to adapt one of the algorithms to support minimum capacity edges
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows)
@@ -33,24 +33,23 @@ A Team Code Reference for competitive programming contests.
 - [ ] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
-- [ ] 2-SAT
+- [ ] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
 - [ ] Review the code related to primes, add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
 - [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
 - [ ] nCk % p using Lucas' Theorem
-- [ ] Burnside's lemma?
 
 #### Geometry
-- [ ] Intersecting Halfspaces
+- [ ] Intersecting Halfspaces ([1](http://acm.math.spbu.ru/~kunyavskiy/notebook/))
 - [ ] Review 'basic' geometry code (line intersection checks etc.)
 - [ ] Rewrite the convex hull code
 
 #### Misc.
 - [ ] Paragraph/writeup about SQRT Decompositions
 - [ ] O(n lg n) Longest Increasing Subsequence ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file27))
-- [ ] Game Theory: Nim & Variations, Grundy ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/algorithm-games/))
-- [ ] DP Optimizations: Convex Hull, Quadrangle ([1](https://github.com/niklasb/contest-algos/tree/master/convex_hull))
+- [ ] Game Theory: Nim & Variations, Grundy ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/algorithm-games/), [2](https://github.com/niklasb/tcr/blob/master/tcr.pdf) (8.3))
+- [ ] DP Optimizations: Convex Hull, Quadrangle ([1](https://github.com/niklasb/contest-algos/tree/master/convex_hull), [2](http://wcipeg.com/wiki/Convex_hull_optimization), [3](http://codeforces.com/blog/entry/8219))
 
 #### Java    
 - [ ] Template    
