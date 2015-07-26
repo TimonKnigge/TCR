@@ -55,8 +55,6 @@
     
   \section{Template}
     \entry{C++ Template}{}{snippets/header.h}{}{}
-    \todo{Fix includes}
-    \subsection{Java Template*}
     
   \section{Data Structures}
     
@@ -65,49 +63,22 @@
     \entry{Max Queue}{\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, set union/intersection (use bitmasks), etc.}{snippets/datastructures/maxqueue.cpp}{}{}
     
     \entry{Fenwick Tree}{The tree is 1-based! Use indices $1..n$.}{snippets/datastructures/fenwick.cpp}{}{}
-    \todo{Add inverse Fenwick Tree}
     
     \entry{2D Fenwick Tree}{Can easily be extended to any dimension.}{snippets/datastructures/fenwick2d.cpp}{}{}
     
-    \subsection{Sparse table*}    
-    
-    \subsection{Range Minimum Query*}
-    
     \entry{Segment Tree}{The range should be of the form $2^p$.}{snippets/datastructures/segmenttree.cpp}{}{}
     
-	\entry{Prefix Trie}{}{snippets/datastructures/trie.cpp}{}{}
-    
-    \subsection{Suffix Array*}
-    
-    \subsection{Suffix Tree*}
-    
-    \subsection{Ropes*}
-    
-    \subsection{Implicit Cartesian Tree*}
-    
-    \subsection{Heavy-Light decomposition*}
-    
-    \subsection{Dancing Links*}
+    \entry{Prefix Trie}{}{snippets/datastructures/trie.cpp}{}{}
     
   \section{Basic Graph algorithms}
      
     \entry{Edge Classification}{}{snippets/graphs/edgeclassification.cpp}{$O(V + E)$}{}
-    
-    \subsection{Articulation points and bridges*}
-    
-    \subsection{Biconnected components*}
-    
-    \subsection{Triconnected components*}
     
     \entry{Topological sort}{}{snippets/graphs/toposort.cpp}{$O(V + E)$}{}
     
     \entry{Kruskal's algorithm}{}{snippets/graphs/kruskal.cpp}{$O(E \log_2 V)$}{Union Find}
     
     \entry{Prim's algorithm}{}{snippets/graphs/prim.cpp}{$O(E \log_2 V)$}{}
-    
-    \subsection{Strongly connected components*}
-    
-    \subsection{Kosaraju's algorithm*}
     
     \entry{Dijkstra's algorithm}{}{snippets/graphs/dijkstra.cpp}{$O((V + E) \log_2 V)$}{}
     
@@ -142,53 +113,31 @@
   
     \entry{Dinic's algorithm}{}{snippets/flowalgorithms/dinic.cpp}{$O(V^2E)$}{Flow Network}
   
-    \subsection{Push-relabel algorithm*}
-    
     \entry{Minimum Cut Inference}{The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}{snippets/flowalgorithms/infermincut.cpp}{$O(V + E)$}{Flow Network}
     
-    \subsection{Circulation Reductions*}
-    
-    \subsection{Hopcorft-Karp algorithm*}
-    
-    \subsection{Edmond's Blossom algorithm*}
-        
   \section{Combinatorics \& Probability}
       
-    \subsection{Hungarian algorithm*}
-    
     \entry{Stable Marriage Problem}{If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}{snippets/combinatorics/stablemarriage.cpp}{$O(mw)$}{}
     
-	\entry{Meet in the Middle}{Sufficient for $2 \leq n \leq 14$.}{snippets/combinatorics/meetinthemiddle.cpp}{$O(n^2\binom{n}{n/2}\big(\frac{n}{2}\big)!)$}{}
+    \entry{Meet in the Middle}{Sufficient for $2 \leq n \leq 14$.}{snippets/combinatorics/meetinthemiddle.cpp}{$O(n^2\binom{n}{n/2}\big(\frac{n}{2}\big)!)$}{}
 	
-	\entry{KP procedure}{Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}{snippets/combinatorics/twovariablesilp.cpp}{$O(d^2 log_2(d)log_2(log_2(d)))$}{}
-    
-    \subsection{2-SAT*}
+    \entry{KP procedure}{Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}{snippets/combinatorics/twovariablesilp.cpp}{$O(d^2 log_2(d)log_2(log_2(d)))$}{}
     
   \section{Computational geometry}
     
     \entry{Essentials}{}{snippets/geometry/geometryessentials.cpp}{}{}
-    \todo{Add numerically stable line intersection check.}
     
     \entry{Convex Hull}{}{snippets/geometry/convexhull.cpp}{$O(n \log_2 n)$}{Geometry Essentials}
-    \todo{Revise, consider existing implementations}
-    
-    \subsection{Halfspace intersections*}
-    
-    \todo{Consider Java built-in geometry (Area etc.)}
-    \todo{Maybe add some formulas for volumes, area etc.}
     
   \section{Mathematics}
     
     \entry{Primes}{}{snippets/mathematics/primes.cpp}{}{}
-    \todo{Rewrite Totient function}
     
     \entry{Number theoretic algorithms}{}{snippets/mathematics/numbertheory.cpp}{}{}
     
     \entry{Complex Numbers}{Faster-than-built-in complex numbers}{snippets/mathematics/complex.cpp}{}{}
     
     \entry{Fast Fourier Transform}{Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}{snippets/mathematics/fft.cpp}{$O(n \log_2 n)$}{Bitmasking, Complex Numbers}
-    
-    \subsection{BigInteger*}
     
     \entry{Matrix Exponentation}{Matrix exponentation in logarithmic time.}{snippets/mathematics/matrixexponentation.cpp}{}{}
         
@@ -203,7 +152,6 @@
   \section{Helpers}
   
     \entry{Golden Section Search}{For a discrete search: use binary search on the difference of successive elements, see the section on Binary Search.}{snippets/helpers/goldensectionsearch.cpp}{$O(\log_2 {1 / \epsilon})$}{}
-    \todo{Write integer search}
     
     \entry{Binary Search}{}{snippets/helpers/binarysearch.cpp}{$O(\log_2 n), O(\log_2 {1 / \epsilon})$}{}
     
