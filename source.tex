@@ -151,7 +151,7 @@
    
   \section{Miscellaneous}
  
-    \entry{Longest Increasing Subsequence}{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$}{snippets/misc/lis.cpp}{$O(n \log_2 n)$}{}
+    \entry{Longest Increasing Subsequence}{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log_2 n)$ factor.}{snippets/misc/lis.cpp}{$O(n \log_2 n)$}{}
  
   \section{Helpers}
   
