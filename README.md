@@ -47,7 +47,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 #### Misc.
 - [ ] Paragraph/writeup about SQRT Decompositions
-- [ ] O(n lg n) Longest Increasing Subsequence ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file27))
+- [X] O(n lg n) Longest Increasing Subsequence ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file27))
 - [ ] Game Theory: Nim & Variations, Grundy ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/algorithm-games/), [2](https://github.com/niklasb/tcr/blob/master/tcr.pdf) (8.3))
 - [ ] DP Optimizations: Convex Hull, Quadrangle ([1](https://github.com/niklasb/contest-algos/tree/master/convex_hull), [2](http://wcipeg.com/wiki/Convex_hull_optimization), [3](http://codeforces.com/blog/entry/8219))
 

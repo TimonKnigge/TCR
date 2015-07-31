@@ -148,7 +148,11 @@
     \entry{Z-algorithm}{To match pattern $P$ on string $S$: pick $\Phi$ s.t. $\Phi \notin P$, find $Z$ of $P{\Phi}S$.}{snippets/strings/zalgorithm.cpp}{$O(n)$}{}
     
     \entry{Aho-Corasick}{Constructs a Finite State Automaton that can match $k$ patterns of total length $m$ on a string of size $n$.}{snippets/strings/ahocorasick.cpp}{$O(n + m + k)$}{}
-    
+   
+  \section{Miscellaneous}
+ 
+    \entry{Longest Increasing Subsequence}{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$}{snippets/misc/lis.cpp}{$O(n \log_2 n)$}{}
+ 
   \section{Helpers}
   
     \entry{Golden Section Search}{For a discrete search: use binary search on the difference of successive elements, see the section on Binary Search.}{snippets/helpers/goldensectionsearch.cpp}{$O(\log_2 {1 / \epsilon})$}{}
@@ -157,6 +161,6 @@
     
     \entry{Bitmasking}{}{snippets/helpers/bitmasking.cpp}{}{}
     
-	\entry{QuickSelect}{Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log_2 n)$.}{snippets/helpers/quickselect.cpp}{$O(n)$}{}
+    \entry{QuickSelect}{Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log_2 n)$.}{snippets/helpers/quickselect.cpp}{$O(n)$}{}
     
 \end{document}
