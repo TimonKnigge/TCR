@@ -26,7 +26,7 @@ using vv = vector<vector<T>>;
 
 typedef long long ll;
 
-#define REP(i,n)	for(decltype(n) i = 0; i<(n); i++)
+#define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
 #define REPI(i,a,b)	for(int i = (a); i<(b); i++)
 #define REPR(i,n)	for(int i = (n)-1; i>=0; i--)
 #define REPRI(i,a,b)for(int i = (a)-1; i>=(b);i--)
