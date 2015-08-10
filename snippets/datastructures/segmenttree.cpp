@@ -1,6 +1,6 @@
-#define LC(n) (2 * (n))
-#define RC(n) (2 * (n) + 1)
-#define PA(n) ((n) / 2)
+inline int LC(int n) { return 2 * n; }
+inline int RC(int n) { return 2 * n + 1; }
+inline int PA(int n) { return n / 2; }
 template <class T, T(*op)(T, T), T ident>
 class SegmentTree {
 	struct Node {
