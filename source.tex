@@ -64,9 +64,9 @@
 \newcommand{\entry}[5]{
     \subsection{#1}
     #2
-    
+
     \ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
-    
+
     \ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
     \lstinputlisting[language=C++]{#3}
 }

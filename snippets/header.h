@@ -1,23 +1,32 @@
 #include <iostream>
+#include <sstream>
 #include <iomanip>
-#include <vector>           
+
+#include <vector>
 #include <stack>
 #include <queue>
 #include <set>
+#include <unordered_set>
 #include <map>
+#include <unordered_map>
+#include <list>
 #include <bitset>
+#include <tuple>
+
 #include <algorithm>
 #include <functional>
-#include <string>
-#include <string.h>  // Include for memset!
-#include <complex>
-#include <random>
-#define _USE_MATH_DEFINES
-#include <math.h>
 
-const int INF = 2000000000;                     // 9
-const long long LLINF = 9000000000000000000LL;  // 18
-const long double LDINF = 1e300;
+#include <string>
+#include <random>	//c++11
+
+#include <cstring>  // Include for memset!
+#include <cmath>
+#include <cassert>
+#include <chrono>
+
+const int INF = 2e9+1;			// 9
+const long long LLINF = 9e18+1;	// 18
+const long double LDINF = 1e300+1;
 
 using namespace std;
 
@@ -30,11 +39,14 @@ typedef vector<bool> vb;
 typedef long long ll;
 typedef long double ld;
 
+constexpr bool LOG = true;
+void Log() { if(LOG) cerr << "\n"; }
+template<class T, class... S> void Log(T t, S... s){
+	if(LOG) cerr << t << "\t", Log(s...);
+}
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    // Solve
-    
-    return 0;
+	return 0;
 }
