@@ -39,7 +39,10 @@ typedef vector<bool> vb;
 typedef long long ll;
 typedef long double ld;
 
-constexpr bool LOG = true;
+#define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
+#define F(v)		begin(v), end(v)
+
+constexpr bool LOG = false;
 void Log() { if(LOG) cerr << "\n"; }
 template<class T, class... S> void Log(T t, S... s){
 	if(LOG) cerr << t << "\t", Log(s...);
