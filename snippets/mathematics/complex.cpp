@@ -10,5 +10,6 @@ struct Complex {
 		auto norm = r.u*r.u+r.v*r.v;
 		return {(u * r.u + v * r.v) / norm, (v * r.u - u * r.v) / norm};
 	}
-	Complex cexp(complex<ld> c){ c = exp(c); return {c.real(), c.imag()}; }
+	static
+	Complex exp(complex<ld> c){ c = std::exp(c); return {c.real(), c.imag()}; }
 };
