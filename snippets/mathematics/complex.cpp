@@ -1,21 +1,14 @@
-typedef pair<ld, ld> cmpx;
-cmpx cadd(cmpx lhs, cmpx rhs) {
-    return cmpx(lhs.first + rhs.first, lhs.second + rhs.second);
-}
-cmpx csub(cmpx lhs, cmpx rhs) {
-    return cmpx(lhs.first - rhs.first, lhs.second - rhs.second);
-}
-cmpx cmul(cmpx lhs, cmpx rhs) {
-    return cmpx(lhs.first * rhs.first - lhs.second * rhs.second,
-                lhs.first * rhs.second + lhs.second * rhs.first);
-}
-cmpx cdiv(cmpx lhs, cmpx rhs) {
-    ld a = lhs.first, b = lhs.second,
-       c = rhs.first, d = rhs.second;
-    return cmpx((a * c + b * d) / (c * c + d * d),
-                (b * c - a * d) / (c * c + d * d));
-}
-cmpx cexp(complex<ld> e) {
-    e = exp(e);
-    return cmpx(real(e), imag(e));
-}
+#include "../header.h"
+struct Complex {
+	long double u,v;
+	Complex operator+(Complex r) const { return {u+r.u, v+r.v}; }
+	Complex operator-(Complex r) const { return {u-r.u, v-r.v}; }
+	Complex operator*(Complex r) const {
+		return {u * r.u - v * r.v, u * r.v + v * r.u};
+	}
+	Complex operator/(Complex r) {
+		auto norm = r.u*r.u+r.v*r.v;
+		return {(u * r.u + v * r.v) / norm, (v * r.u - u * r.v) / norm};
+	}
+	Complex cexp(complex<ld> c){ c = exp(c); return {c.real(), c.imag()}; }
+};

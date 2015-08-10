@@ -1,11 +1,7 @@
 #include "../header.h"
-
-// An implementation of a trie using a constant size array
-
 struct Void{};
 template <int ALPHABET = 26, class T = Void>
-class Trie{
-public:
+struct Trie{
 	struct Node : T{ 
 		bool leaf;
 		array<int,ALPHABET> child;
@@ -47,7 +43,7 @@ public:
 
 	int find(const string& s){
 		n = root;
-		ITER(c,s){
+		for(auto&& c : s){
 			n = data[n][c]; // add -'a' for normal chars
 			if(n<0) return -1;
 		}

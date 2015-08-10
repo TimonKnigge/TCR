@@ -18,6 +18,7 @@
 
 #include <string>
 #include <random>	//c++11
+#include <complex>
 
 #include <cstring>  // Include for memset!
 #include <cmath>
