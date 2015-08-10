@@ -1,20 +1,20 @@
-vi sorted;
-vb visited;
-int s_ix = 0;
-vvi edges;
+#include "../header.h"
+struct Toposort {
+	vector<vi>& edges;
+	int V, s_ix; // sorted-index
+	vi sorted, visited;
 
-void visit(int u) {
-    visited[u] = true;
-    for (int v : edges[u])
-        if (!visited[v]) visit(v);
-    sorted[s_ix--] = u;
-}
+	Toposort(vector<vi>& edges) : 
+		edges(edges), V(edges.size()), s_ix(0),
+		sorted(V,-1), visited(V,false) {}
 
-void topo_sort() {
-    s_ix = edges.size() - 1;
-    sorted = vi(edges.size());
-    visited = vb(edges.size(), false);
-    for (int i = 0; i < edges.size(); ++i) {
-        if (!visited[i]) visit(i);
-    }
-}
+	void visit(int u) {
+		visited[u] = true;
+		for (int v : edges[u])
+			if (!visited[v]) visit(v);
+		sorted[s_ix--] = u;
+	}
+	void topo_sort() {
+		REP(i,V) if (!visited[i]) visit(i);
+	}
+};
