@@ -1,12 +1,12 @@
 class UnionFind {
 private:
-    vi par, ran, siz;
+    vi par, rank, size;
     int c;
 public:
     UnionFind(int n) {
-        siz.assign(n, 1);
+        size.assign(n, 1);
         c = n;
-        ran.assign(n, 0);
+        rank.assign(n, 0);
         par.assign(n, 0);
         for (int i = 0; i < n; ++i) par[i] = i;
     }
@@ -19,9 +19,9 @@ public:
     void union_set(int i, int j) {
         if ((i = find(i)) == (j = find(j))) return;
         c--;
-        if (ran[i] > ran[j]) swap(i, j);
+        if (rank[i] > rank[j]) swap(i, j);
         par[i] = j;
         size[j] += size[i];
-        if (ran[i] == ran[j]) ran[j]++;
+        if (rank[i] == rank[j]) rank[j]++;
     }
 };
