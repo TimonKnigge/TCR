@@ -1,0 +1,28 @@
+Tabs (4 spaces)
+
+Als het kan dingen (datastructuren) in een class stoppen
+
+Naamgeving (Grafen)
+
+	huidige knoop:		u
+	buur van u:			v
+	edge:				e
+	edge (iterator):	it
+	alle edge:			vector<vector<int>> edges;
+	adjacency matrix:	array<array<bool,N>,N> adj;
+
+Algemeen:
+	array<type,size> ipv type[size]
+
+	Altijd als (const) reference argumenten doorgeven als het kan
+	(voor types > 64 bits)
+
+	global consts met hoofdletters (en constexpr)
+
+	gebruik std functies
+	vector.assign
+	vector.resize
+
+	gebruik liever geen pointers (kan vaak met iterators)!
+
+
