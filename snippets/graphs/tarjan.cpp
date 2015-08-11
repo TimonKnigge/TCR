@@ -1,3 +1,4 @@
+#include "../header.h"
 struct Tarjan {
 	vvi &edges;
 	int V, counter = 0, C = 0;
@@ -18,14 +19,14 @@ struct Tarjan {
 		if (l[u] == n[u]) {
 			while (true) {
 				int v = st.top(); st.pop();
-				com[v] = C;
+				com[v] = C;		//<== ACT HERE
 				if (u == v) break;
 			}
 			C++;
 		}
 	}
 
-	int find_sccs(vi &com) {
+	int find_sccs(vi &com) { // component indices will be stored in 'com'
 		com.assign(V, -1);
 		C = 0;
 		for (int u = 0; u < V; ++u)
@@ -36,15 +37,16 @@ struct Tarjan {
 	// scc is a map of the original vertices of the graph
 	// to the vertices of the SCC graph, scc_graph is its
 	// adjacency list.
+	// Scc indices and edges are stored in 'scc' and 'scc_graph'.
 	void scc_collapse(vi &scc, vvi &scc_graph) {
 		find_sccs(scc);
-		sec_graph.assign(C, vi());
+		scc_graph.assign(C,vi());
 		set<ii> rec; // recorded edges
 		for (int u = 0; u < V; ++u) {
 			assert(scc[u] != -1);
 			for (int v : edges[u]) {
-				if (rec.find({scc[u], scc[v]}) != rec.end()
-					|| scc[u] == scc[v]) continue;
+				if (scc[v] == scc[u] ||
+					rec.find({scc[u], scc[v]}) != rec.end()) continue;
 				scc_graph[scc[u]].push_back(scc[v]);
 				rec.insert({scc[u], scc[v]});
 			}
