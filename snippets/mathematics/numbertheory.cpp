@@ -1,5 +1,6 @@
+#include "../header.h"
 int gcd(int a, int b) { while (b) { a %= b; swap(a, b); } return a; }
-int lcm(int a, int b) { return (a / gcd(a, b) * b);                 }
+int lcm(int a, int b) { return (a / gcd(a, b)) * b;                 }
 int mod(int a, int b) { return ((a % b) + b) % b;                   }
 
 // Finds x, y s.t. ax + by = d = gcd(a, b).
@@ -19,15 +20,16 @@ void extended_euclid(int a, int b, int &x, int &y, int &d) {
 int mod_inverse(int a, int n) { 
     int x, y, d;
     extended_euclid(a, n, x, y, d);
-    return (d > 1 ? -1 : mod(x, n);
+    return (d > 1 ? -1 : mod(x, n));
 }
 
-// Finds a^n % b in O(lg n) time, ensure that a < b to avoid overflow!
+// Finds a^n % m in O(lg n) time, ensure that a < b to avoid overflow!
 int modpow(int a, int n, int b) {
 	if (n == 0) return 1;
 	if (n == 1) return a;
-	if (n % 2 == 0) return modpow(a * a, n / 2, b);
-	return (a * modpow(a * a, (n - 1) / 2)) % b;
+	int aa = (a*a)%b;
+	if (n % 2 == 0) return modpow(aa, n / 2, b);
+	return (a * modpow(aa, (n - 1) / 2, b)) % b;
 }
 
 // Solve ax + by = c, returns false on failure.
