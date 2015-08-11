@@ -70,14 +70,27 @@
     \ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
     \lstinputlisting[language=C++]{#3}
 }
+\newcommand{\vimentry}[5]{
+    \subsection{#1}
+    #2
+
+    \ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
+
+    \ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
+    \lstinputlisting[language=]{#3}
+}
 
 \begin{document}
 {\Large Team Code Reference}
   \tableofcontents
   \newpage
 
+  \section{Vimrc}
+  % Can't use the \entry command, because filetype is tex
+  \vimentry{Vimrc}{}{./snippets/vimrc}{}{}
+
   \section{Template}
-    \entry{C++ Template}{}{snippets/header.h}{}{}
+  \entry{C++ Template}{}{snippets/header.h}{}{}
 
   \section{Data Structures}
 
