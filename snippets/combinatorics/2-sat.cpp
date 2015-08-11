@@ -16,17 +16,17 @@ struct TwoSAT {
 		add_implies(c1, v1, c2, v2);
 		add_implies(c2, v2, c1, v1);
 	}
-	void add_or(int c1, int v1, int c2, bool v2) {
+	void add_or(int c1, bool v1, int c2, bool v2) {
 		add_implies(c1, !v1, c2, v2);
 	}
-	void add_and(int c1, int v1, int c2, int v2) {
+	void add_and(int c1, bool v1, int c2, bool v2) {
 		add_true(c1, v1); add_true(c2, v2);
 	}
-	void add_xor(int c1, int v1, int c2, int v2) {
+	void add_xor(int c1, bool v1, int c2, bool v2) {
 		add_or(c1, v1, c2, v2);
 		add_or(c1, !v1, c2, !v2);
 	}
-	void add_true(int c1, int v1) {
+	void add_true(int c1, bool v1) {
 		add_implies(c1, !v1, c1, v1);
 	}
 
