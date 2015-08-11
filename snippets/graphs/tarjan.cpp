@@ -5,7 +5,7 @@ struct Tarjan {
 	vb vs;
 	stack<int> st;
 
-	Tarjan(vi &e) : edges(e), V(e.size()),
+	Tarjan(vvi &e) : edges(e), V(e.size()),
 		n(V, -1), l(V, -1), vs(V, false) { }
 
 	void visit(int u, vi &com) {
