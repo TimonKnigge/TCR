@@ -1,38 +1,62 @@
-ll _sieve_size;
-bitset<10000010> bs;
-vi primes;
+#include "../header.h"
+constexpr ll SIZE = 1e6+10;
+bitset<SIZE> bs;
+vector<ll> primes;
 
-void sieve(ll upperbound) {
-    _sieve_size = upperbound + 1;
-    bs.reset(); bs.flip();
-    bs.set(0, false); bs.set(1, false);
-    for (ll i = 2; i <= _sieve_size; ++i) {
-        for (ll j = i * i; j <= _sieve_size; j += i) bs.set((size_t)j, false);
-        primes.push_back((int)i);
-    }
+void sieve() { // call at start in main!
+	bs.set();
+	bs[0] = bs[1] = 0;
+	for (ll i = 2; i <= SIZE; i++) if (bs[i]) {
+		for (ll j = i * i; j <= SIZE; j += i) bs[j] = 0;
+		primes.push_back(i);
+	}
 }
 
-bool is_prime(ll N) {    // Only works for N <= primes.last^2
-    if (N < _sieve_size) return bs.test(N);
-    for (int i = 0; i < primes.size(); ++i) if (N % primes[i] == 0) return false;
-    return true;
+bool is_prime(ll n) { // for N <= SIZE^2
+	if (n <= SIZE) return bs[n];                   
+	for(const auto& prime : primes)
+	   	if (n % prime == 0) return false;
+	return true;            
 }
 
-vi prime_factors(int N) {
-    int PFD_idx = 0, PF = primes[PF_idx]; vi factors;
-    while (N != 1 && PF * PF <= N) {
-        while (N % PF == 0) { N /= PF; factors.push_back(PF); }
-        PF = primes[++PF_idx];
-    }
-    if (N != 1) factors.push_back(N);
-    return factors;
+struct Factor{ll prime; ll exp;};
+vector<Factor> factor(ll n) {
+	vector<Factor> factors;
+	for(const auto& prime : primes){
+		if(n==1 || prime*prime > n) break;
+		ll exp=0;
+		while(n % prime == 0)
+		   	n/=prime, exp++;
+		if(exp>0)
+			factors.push_back({prime,exp});
+	}
+	if (n != 1) factors.push_back({n,1});
+	return factors;
 }
 
-ll totient(ll N) {
-    vi factors = prime_factors(N);
-    vi::iterator new_end = unique(factors.begin(), factors.end());
-    ll result = N;
-    for (vi::iterator i = factors.begin(); i != new_end; ++i) 
-        result = result - result / (*i);
-    return result;
+
+ll numDiv(ll n) {
+	ll divisors = 1;
+	for(auto&& p : factor(n))
+		divisors *= p.exp + 1;
+	return divisors;
+}
+
+ll bin_pow(ll b, ll e){
+	ll p = e==0 ? 1 : pow(b*b,e>>1);
+	return p * p * (e&1 ? b : 1);
+}
+
+ll sumDiv(ll n) {
+	ll sum = 1;
+	for(const auto& p : factor(n))
+		sum *= (pow(p.prime, p.exp+1) - 1) / (p.prime - 1);
+	return sum;
+}
+
+ll EulerPhi(ll n) {
+	ll ans = n;
+	for(const auto& p : factor(n))
+		ans -= ans / p.prime;
+	return ans;
 }
