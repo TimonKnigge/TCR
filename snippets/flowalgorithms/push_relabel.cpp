@@ -1,14 +1,13 @@
-#include "../smart_edge_list.h"
-#include "flowgraph.h"
+#include "flowgraph.cpp"
 
 class Push_Relabel {
 public:
-	Graph& g; // directed
+	FlowGraph& g; // directed
 	int V, s, t; // Vertices, souce and sink
 	vi h, hc, qc; // height, height count, queuecount
 	vector<ll> x; // excess
 
-	Push_Relabel(Graph& g, int s, int t) :
+	Push_Relabel(FlowGraph& g, int s, int t) :
 	   	g(g), V(g.size()), s(s), t(t), h(V,0), hc(2*V,0), qc(V,0), x(V,0){
 		hc[0] = V;
 	}

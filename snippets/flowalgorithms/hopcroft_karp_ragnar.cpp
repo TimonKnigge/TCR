@@ -1,5 +1,4 @@
-#include "header.h"
-#include "flowgraph.h"
+#include "flowgraph.cpp"
 
 class Hopcroft_Karp{
 public:

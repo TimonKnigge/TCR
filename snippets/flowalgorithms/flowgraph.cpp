@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../header.h"
 
 struct S{
 	int v;			// neighbour
@@ -7,5 +7,5 @@ struct S{
 	const ll cap;	// capacity
 	const ll cost;	// unit cost
 };
-using Graph = vector<vector<S>>;
+using FlowGraph = vector<vector<S>>;
 
