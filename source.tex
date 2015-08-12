@@ -23,7 +23,9 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[toc]{multitoc}
 \usepackage{ifthen}
+\usepackage{hyperref} % for clickable toc and index
 
+% two page landscape layout settings
 \renewcommand*{\multicolumntoc}{2}
 \setlength{\columnseprule}{0.1pt}
 \newcommand{\latexcolumnseprulecolor}{\color{red}}
@@ -55,10 +57,10 @@
 	stringstyle=\color{red}
 }
 
-\title{Team Code Reference}
-\author{
-	Timon Knigge
-}
+% alle the \vspace are for reducing the vertical spacing
+\title{\vspace{-40pt}Team Code Reference\vspace{-0.5em}}
+\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
+\date{ \vspace{-0.5em} \today \vspace{-2em} }
 
 % \entry{name}{description}{snippet location}{complexity}{dependencies}
 \newcommand{\entry}[5]{
@@ -70,25 +72,22 @@
 	\ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
 	\lstinputlisting[language=C++]{#3}
 }
-\newcommand{\vimentry}[5]{
+\newcommand{\vimentry}[3]{
 	\subsection{#1}
 	#2
-
-	\ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
-
-	\ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
 	\lstinputlisting[language=]{#3}
 }
 
 \begin{document}
-{\Large Team Code Reference}
+% Title without the newpage, see http://tex.stackexchange.com/questions/86249/maketitle-text-before-title
+{\let\newpage\relax\maketitle}
 \tableofcontents
 \newpage
 
 \section{Vimrc}
 % Can't use the \entry command, because filetype is tex
 \vimentry{Vimrc}{}
-{./snippets/vimrc}{}{}
+{./snippets/vimrc}
 
 \section{Template}
 \entry{C++ Template}{}
@@ -213,7 +212,37 @@
 {$O(V + E)$}
 {Flow Network}
 
-\section{Combinatorics \& Probability}
+\entry{Flow Graph}
+{Structure used by the following flow algorithms.}
+{./snippets/flowalgorithms/flowgraph.cpp}{}{}
+
+\entry{Dinic Ragnar}{}
+{./snippets/flowalgorithms/dinic_ragnar.cpp}
+{$O(V^2E)$}
+{Flow Graph}
+
+\entry{Edmonds Karp Ragnar}{}
+{./snippets/flowalgorithms/edmondskarp_ragnar.cpp}
+{$O(VE^2)$}
+{Flow Graph}
+
+\entry{Edmonds Karp using Dijkstra Ragnar}{}
+{./snippets/flowalgorithms/edmonds_karp_dijkstra_ragnar.cpp}
+{}
+{Flow Graph}
+
+\entry{Push Relabel Ragnar}{}
+{./snippets/flowalgorithms/push_relabel.cpp}
+{}
+{Flow Graph}
+
+\entry{Hopcroft Karp Ragnar}{}
+{./snippets/flowalgorithms/hopcroft_karp_ragnar.cpp}
+{}
+{Flow Graph}
+
+% \& crashes pdf-viewer index generator. Something due to hyperref
+\section{Combinatorics and Probability}
 
 \entry{Stable Marriage Problem}
 {If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}
@@ -242,9 +271,17 @@
 \entry{Essentials}{}
 {snippets/geometry/geometryessentials.cpp}{}{}
 
+\entry{Essentials, Ragnar}{}
+{./snippets/geometry/basics_ragnar.cpp}{}
+{}
+
 \entry{Convex Hull}{}
 {snippets/geometry/convexhull.cpp}
 {$O(n \log_2 n)$}
+{Geometry Essentials}
+
+\entry{Polygon}{}
+{./snippets/geometry/polygon.cpp}{}
 {Geometry Essentials}
 
 \section{Mathematics}
