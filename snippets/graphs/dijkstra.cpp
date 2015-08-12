@@ -1,18 +1,17 @@
-// Input is an edge list with a vector for each vertex,
-// containing a list of (endpoint, weight) edges (ii's).
-void dijkstra(vvii edges, int source) {
-    vi dist(edges.size(), INF);
-    priority_queue<ii, vector<ii>, greater<ii>> pq;
-    dist[source] = 0; pq.push(ii(0, source));
-
-    while (!pq.empty()) {
-        ii top = pq.top(); pq.pop();
-        int u = top.second, d = top.first;
-        // <= Goal check on u here.
-        if (d == dist[u]) {
-            for (ii it : edges[u]) {
-                int v = it.first, d_uv = it.second;
-                if (dist[u] + d_uv < dist[v]) {
-                    dist[v] = dist[u] + d_uv;
-                    pq.push(ii(dist[v], v));
-}   }   }   }   }
+#include "../header.h"
+struct PQ{ int d, v; };			// distance and target
+struct Edge{ int v, weight; };	// input edges
+int dijkstra(vector<vector<Edge>>& edges, int s, int t) {
+	vi dist(edges.size(),INF);
+	priority_queue<PQ,vector<PQ>,greater<PQ>> pq;
+	dist[s] = 0; pq.push({0, s});
+	while (!pq.empty()) { 
+		auto& top = pq.top(); pq.pop();
+		auto d = top.d, u = top.v;
+		if(u==t) break;			// target reached
+		if (d == dist[u])
+			for(auto& e : edges[u]) if (dist[e.v] > d + e.weight)
+				pq.push({dist[e.v] = d + e.weight, e.v});
+	}
+	return dist[t];
+}
