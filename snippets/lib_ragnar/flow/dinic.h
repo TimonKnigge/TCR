@@ -1,4 +1,3 @@
-#include "../smart_edge_list.h"
 #include "flowgraph.h"
 
 class Dinic{
@@ -20,9 +19,7 @@ public:
 					e.f += d;
 					g[e.v][e.r].f -= d;
 					return d;
-				}
-			}	
-		}
+		}	}	}
 		return 0;
 	}
 	int run() {
