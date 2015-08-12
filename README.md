@@ -16,10 +16,10 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp))
 
 #### Graphs and Trees
-- [ ] Articulation Points/Bridges
+- [x] Articulation Points/Bridges
 - [ ] Biconnected Components
 - [ ] Triconnected Components
-- [ ] Strongly Connected Components
+- [x] Strongly Connected Components
 - [ ] Heavy Light Decomposition and Centroid Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
 
 #### Flow & Matching
@@ -33,8 +33,9 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
-- [ ] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
-- [ ] Review the code related to primes, add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
+- [x] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
+- [x] Review the code related to primes;
+- [ ] add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
 - [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
