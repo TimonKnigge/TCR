@@ -138,6 +138,8 @@
         \item[Euler Circuits and Trails]: In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and only if all vertices have even degree, and all vertices of nonzero degree belong to a single connected component. In an \textit{undirected graph}, an \textit{Eulerian Trail} exists if and only if at most two vertices have odd degree, and all of its vertices of nonzero degree belong to a single connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit} exists if and only if every vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component. In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only at most one vertex has $outdegree - indegree = 1$, at most one vertex has $indegree - outdegree = 1$, every other vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component \textit{in the underlying undirected graph}.
     \end{description}
 
+    \entry{Centroid Decomposition}{Finds the centroid decomposition of a tree. In case it's necessary to work with the subtrees directly, consider timestamping them.}{snippets/graphs/centroid.cpp}{$O(n \log_2 n)$}{}
+
   \section{Flow and Matching Algorithms}
 
     \entry{Flow Network}{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}{snippets/flowalgorithms/flownetwork.cpp}{}{}
