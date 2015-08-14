@@ -1,3 +1,5 @@
+#include "../header.h"
+#include "../graphs/tarjan.cpp"
 struct TwoSAT {
 	int n;
 	vvi imp; // implication graph
@@ -39,14 +41,14 @@ struct TwoSAT {
 			if (com[2 * i] == com[2 * i + 1])
 				return false;
 		
-		a.assign(n, false);
-		vvi bycom(com.size(), vi());
+		vvi bycom(com.size());
 		for (int i = 0; i < 2 * n; ++i)
 			bycom[com[i]].push_back(i);
 		
+		a.assign(n, false);
 		vb vis(n, false);
-		for (int c = 0; c < bycom.size(); ++c) {
-			for (int u : bycom[c]) {
+		for(auto&& component : bycom){
+			for (int u : component) {
 				if (vis[u / 2]) continue;
 				vis[u / 2] = true;
 				a[u / 2] = (u % 2 == 1);

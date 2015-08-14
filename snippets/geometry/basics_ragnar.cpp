@@ -1,22 +1,7 @@
 #include "../header.h"
-#include "geometry_basics.h"
+struct point { int x, y; };
+struct line { point p1, p2; };
 
-int traingle_area(point a, point b, point c) {
-	return a.x * b.y - a.y * b.x + b.x * c.y - b.y * c.x + c.x * a.y - c.y * a.x;
-}
-
-// are p, q and r in counter-clockwise order?
-int ccw(point p, point q, point r) {
-	int result = (r.x - q.x) * (p.y - q.y) - (r.y - q.y) * (p.x - q.x);
-	if (result < 0) return -1; // P->Q->R is a right turn
-	if (result > 0) return 1; // P->Q->R is a left turn
-	return 0; // straight line
-}
-
-int distance(point a, point b) {
-	int dx = a.x - b.x, dy = a.y - b.y;
-	return dx * dx + dy * dy;
-}
 
 int intersects(line line1, line line2) {
 	return
