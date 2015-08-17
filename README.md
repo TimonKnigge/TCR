@@ -20,7 +20,8 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Biconnected Components
 - [ ] Triconnected Components
 - [x] Strongly Connected Components
-- [ ] Heavy Light Decomposition and Centroid Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
+- [ ] Heavy Light Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
+- [x] Centroid Decomposition
 
 #### Flow & Matching
 - [ ] Push Relabel ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
