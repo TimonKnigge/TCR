@@ -4,7 +4,7 @@ struct CentroidDecomposition {
 	vi size, p;
 	int root;	// The decomposition
 	vvi cd;
-	CentriodDecomposition(vvi &tree) : e(tree) {
+	CentroidDecomposition(vvi &tree) : e(tree) {
 		int V = e.size();
 		tocheck.assign(V, true);
 		cd.assign(V, vi());
