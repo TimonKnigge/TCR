@@ -1,11 +1,12 @@
+#include "../header.h"
 struct CentroidDecomposition {
-	vvi &e; 	// The original tree
+	vvi &e;			// The original tree
 	vb tocheck; 	// Used during decomposition
 	vi size, p;
-	int root;	// The decomposition
+	int root;		// The decomposition
 	vvi cd;
-	CentriodDecomposition(vvi &tree) : e(tree) {
-		int V = e.size();
+	CentroidDecomposition(vvi &tree) : e(tree) {
+		int V = e.size();			// create initializer list?
 		tocheck.assign(V, true);
 		cd.assign(V, vi());
 		p.assign(V, -1);
