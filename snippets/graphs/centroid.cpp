@@ -47,7 +47,7 @@ struct CentroidDecomposition {
 			if (!tocheck[v]) continue;
 			int V2 = 1 + size[v];
 			if (v == p[u]) V2 = V - 1 - size[u];
-			cd[u].push_bak(decompose(v, V2));
+			cd[u].push_back(decompose(v, V2));
 		}
 		return u;
 	}
