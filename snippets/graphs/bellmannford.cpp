@@ -8,6 +8,6 @@ bool bellmann_ford(vvii edges, int source, vi &dist) {
     for (int u = 0; u < edges.size(); ++u)
         for (auto& e : edges[u])
             if (dist[e.first] > dist[u] + e.second)
-                return false;	// negative cycle
-    return true;				// no negative cycle
+                return false;
+    return true;
 }
