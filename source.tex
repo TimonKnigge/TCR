@@ -158,6 +158,11 @@
 {snippets/graphs/bellmannford.cpp}
 {$O(VE)$}{}
 
+\entry{Bellmann-Ford extended algorithm}
+{An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
+{snippets/graphs/bellmannford-extended.cpp}
+{$O(VE)$}{}
+
 \entry{Floyd-Warshall algorithm}
 {Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}
 {snippets/graphs/floydwarshall.cpp}
