@@ -32,14 +32,14 @@ const long double LDINF = 1e300+1;
 
 using namespace std;
 
+typedef long long ll;
+typedef long double ld;
 typedef pair<int, int> ii;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
 typedef vector<ii> vii;
 typedef vector<vii> vvii;
 typedef vector<bool> vb;
-typedef long long ll;
-typedef long double ld;
 
 #define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
 #define F(v)		begin(v), end(v)
