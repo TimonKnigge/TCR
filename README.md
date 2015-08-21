@@ -14,6 +14,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Dancing Links (+ Algo X)
 - [ ] Palindromic Tree (Eertree)
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp))
+- [x] GCC built-in tree (documentation: [1](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures_design.html#container.tree.interface))
 
 #### Graphs and Trees
 - [x] Articulation Points/Bridges
