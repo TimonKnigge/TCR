@@ -1,13 +1,15 @@
 // Minimum Heap
 #include <queue>
-typedef priority_queue<T, vector<T>, greater<T>> min_queue;
+using min_queue = priority_queue<T, vector<T>, greater<T>>;
 
 // Order Statistics Tree
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
+using order_tree =
 typedef tree<
-	TIn, TOut, less<TIn>, rb_tree_tag, 
-	tree_order_statistics_node_update> map_os;
+	TIn, TOut, less<TIn>, // key, value types. TOut can be null_type
+	rb_tree_tag, tree_order_statistics_node_update>;
 // find_by_order(int r) (0-based)
 // order_of_key(TIn v)
+// use key pair<Tin,int> {value, counter} for multiset/multimap

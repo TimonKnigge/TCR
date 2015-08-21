@@ -1,4 +1,4 @@
-#include "flowgraph.h"
+#include "flowgraph.cpp"
 
 // Note: Edges should be added in a single direction only
 // That is: g.add_edge(u,v,{C,W},{0,-W})
@@ -8,11 +8,11 @@
 // negative edges in the residual graph
 class Edmonds_Karp_Dijkstra{
 public:
-	Graph& g; // directed
+	FlowGraph& g; // directed
 	int V,s,t;
 	vector<ll> pot; // potential (distance to s)
 
-	Edmonds_Karp_Dijkstra(Graph& g, int s, int t) :
+	Edmonds_Karp_Dijkstra(FlowGraph& g, int s, int t) :
 		g(g), V(g.size()), s(s), t(t), pot(V)
 	{}
 

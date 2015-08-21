@@ -23,6 +23,7 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[toc]{multitoc}
 \usepackage{ifthen}
+\usepackage{nicefrac}
 \usepackage{hyperref} % for clickable toc and index
 
 % two page landscape layout settings
@@ -172,6 +173,12 @@
 {Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}
 {snippets/graphs/euleriancircuits.cpp}
 {$O(V + E)$}{}
+
+\entry{Bron-Kerbosch}
+{Count the number of maximal cliques in a graph with up to a few hundred nodes.}
+{./snippets/graphs/bronkerbosch.cpp}
+{$O(3^{\nicefrac n3})$}{}
+
 
 \subsection{Theorems in Graph Theory}
 \begin{description}
