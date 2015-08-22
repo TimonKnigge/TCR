@@ -12,7 +12,7 @@ struct KMP{
 			i++; j++; jt[i] = j;
 		}
 	}
-	void match(string T){
+	void match(string& T){
 		int i=0, j=0, n = T.size();
 		while (i < n) {
 			while (j >= 0 && T[i] != P[j]) j = jt[j];
