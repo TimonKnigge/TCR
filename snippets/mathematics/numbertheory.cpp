@@ -48,13 +48,13 @@ bool linear_diophantine(int a, int b, int c, int &x, int &y) {
 // unique modulo M = lcm(xi). Returns (z, M), m = -1 on failure.
 ii crm(int x1, int a1, int x2, int a2) {
     int s, t, d;
-    extended_euclid(x, y, s, t, d);
-    if (a % d != b % d) return ii(0, -1);
+    extended_euclid(x1, x2, s, t, d);
+    if (a1 % d != a2 % d) return ii(0, -1);
     return ii(mod(s * a2 * x1 + t * a1 * x2, x1 * x2) / d, x1 * x2 / d);
 }
 ii crm(vi &x, vi &a){
     ii ret = ii(a[0], x[0]);
-    for (int i = 1; i < x.size(); ++i) {
+    for (size_t i = 1; i < x.size(); ++i) {
         ret = crm(ret.second, ret.first, x[i], a[i]);
         if (ret.second == -1) break;
     }
