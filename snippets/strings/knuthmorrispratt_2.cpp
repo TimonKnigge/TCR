@@ -13,8 +13,8 @@ struct KMP{
 		}
 	}
 	void match(string& T){
-		int i=0, j=0, n = T.size();
-		while (i < n) {
+		int i=0, j=0;
+		while (i < int(T.size())) {
 			while (j >= 0 && T[i] != P[j]) j = jt[j];
 			i++; j++;
 			if (j == m) j = jt[j]; // match [i-m, i)
