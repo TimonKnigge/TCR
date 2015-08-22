@@ -17,7 +17,7 @@ struct KMP{
 		while (i < n) {
 			while (j >= 0 && T[i] != P[j]) j = jt[j];
 			i++; j++;
-			if (j == m) j = jt[j]; // match [i-P.size, i)
+			if (j == m) j = jt[j]; // match [i-m, i)
 		}
 	}
 };
