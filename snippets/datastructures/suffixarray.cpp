@@ -28,7 +28,7 @@ struct SuffixArray {
 	}
 	vi &get_array() { return P.back(); }
 	int lcp(int x, int y) {
-		int k, ret = 0;
+		int ret = 0;
 		if (x == y) return n - x;
 		for (int k = P.size() - 1; k >= 0 && x < n && y < n; --k)
 			if (P[k][x] == P[k][y]) {
