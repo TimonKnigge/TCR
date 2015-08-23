@@ -23,7 +23,7 @@ int mod_inverse(int a, int n) {
     return (d > 1 ? -1 : mod(x, n));
 }
 
-// Finds a^n % m in O(lg n) time, ensure that a < b to avoid overflow!
+// Finds a^n % b in O(lg n) time, ensure that a < b to avoid overflow!
 int modpow(int a, int n, int b) {
 	if (n == 0) return 1;
 	if (n == 1) return a;
