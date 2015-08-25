@@ -1,6 +1,7 @@
 #include "../header.h"
-struct PQ{ int d, v; };			// distance and target
 struct Edge{ int v, weight; };	// input edges
+struct PQ{ int d, v; };			// distance and target
+bool operator>(const PQ &l, const PQ &r){ return l.d > r.d; }
 int dijkstra(vector<vector<Edge>>& edges, int s, int t) {
 	vi dist(edges.size(),INF);
 	priority_queue<PQ,vector<PQ>,greater<PQ>> pq;
