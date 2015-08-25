@@ -1,7 +1,7 @@
 #include "../header.h"
 
 template<int N>
-array<double,N> GaussianElimination(array<array<double,N+1>,N>& M) {
+array<double,N> GaussianElimination(array<array<double,N+1>,N> &M) {
 	// input: N, Mmented Matrix M, output: Column vector X, the answer
 	int i, j, k, l; double t;
 

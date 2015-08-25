@@ -4,19 +4,19 @@ struct edge {
     edge(int _v) : v(_v) {};
 };
 
-void add_edge(vector< list<edge> >& adj, int u, int v) {
+void add_edge(vector< list<edge> > &adj, int u, int v) {
     adj[u].push_front(edge(v));
     adj[v].push_front(edge(u));
     adj[u].begin()->rev = adj[v].begin();
     adj[v].begin()->rev = adj[u].begin();
 }
 
-void remove_edge(vector< list<edge> >& adj, int s, list<edge>::iterator e) {
+void remove_edge(vector< list<edge> > &adj, int s, list<edge>::iterator e) {
     adj[e->v].erase(e->rev);
     adj[s].erase(e);
 }
 
-eulerian_circuit(vector< list<edge> >& adj, vi &c, int start = 0) {
+eulerian_circuit(vector< list<edge> > &adj, vi &c, int start = 0) {
     stack<int> st;
     st.push(start);
     

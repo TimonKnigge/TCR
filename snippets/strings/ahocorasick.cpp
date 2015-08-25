@@ -10,7 +10,7 @@ class AC_FSM {
     vector <Node> a;
 public:
     AC_FSM() { a.push_back(Node()); }
-    void construct_automaton(vector<string>& words) {
+    void construct_automaton(vector<string> &words) {
         for (int w = 0, n = 0; w < words.size(); ++w, n = 0) {
             for (int i = 0; i < words[w].size(); ++i) {
                 if (a[n].child[mp(words[w][i])] == -1) {
@@ -45,7 +45,7 @@ public:
         }
     }
 
-    void aho_corasick(string &sentence, vector<string>& words, vector< vector<int> >& matches) {
+    void aho_corasick(string &sentence, vector<string> &words, vector< vector<int> > &matches) {
         matches.assign(words.size(), vector<int>());
         int state = 0, ss = 0;
         for (int i = 0; i < sentence.length(); ++i, ss = state) {

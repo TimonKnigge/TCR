@@ -1,7 +1,7 @@
 #include "../header.h"
 struct Edge_Classification {
-	vector<vi>& edges; int V; vi color, parent;
-	Edge_Classification(vector<vi>& edges) : 
+	vector<vi> &edges; int V; vi color, parent;
+	Edge_Classification(vector<vi> &edges) : 
 		edges(edges), V(edges.size()),
 		color(V,-1), parent(V, -1) {}
 

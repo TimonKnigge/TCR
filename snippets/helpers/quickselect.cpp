@@ -1,5 +1,5 @@
 template<class T> 
-T quickselect(vector<T>& v, int l, int r, int k) {
+T quickselect(vector<T> &v, int l, int r, int k) {
     int p = l + (rand() % (r - l));
     swap(v[l], v[p]); 
     bool alt = false; p = l + 1;

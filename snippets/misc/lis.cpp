@@ -1,6 +1,6 @@
 // Length only
 template<class T>
-int longest_increasing_subsequence(vector<T>& a) {
+int longest_increasing_subsequence(vector<T> &a) {
     set<T> st; 
     typename set<T>::iterator it;
     for (int i = 0; i < a.size(); ++i) {
@@ -13,7 +13,7 @@ int longest_increasing_subsequence(vector<T>& a) {
 
 // Entire sequence (indices)
 template<class T>
-int longest_increasing_subsequence(vector<T>& a, vector<int>& seq) {
+int longest_increasing_subsequence(vector<T> &a, vector<int> &seq) {
     vector<int> lis(a.size(), 0), pre(a.size(), -1);
     int L = 0;
     for (int i = 0; i < a.size(); ++i) {

@@ -3,7 +3,7 @@ struct AdjEdge { int v; ll weight; };	// adjacency list edge
 struct Edge { int u, v; };			// edge u->v for output
 struct PQ { ll weight; Edge e; };	// PQ element
 bool operator>(const PQ &l, const PQ &r) { return l.weight > r.weight; }
-ll prim(vector<vector<AdjEdge>>& adj, vector<Edge>& tree) {
+ll prim(vector<vector<AdjEdge>> &adj, vector<Edge> &tree) {
 	ll tc = 0; vb intree(adj.size(), false);
 	priority_queue<PQ, vector<PQ>, greater<PQ> > pq;
 	intree[0] = true;
