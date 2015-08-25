@@ -16,7 +16,7 @@ void remove_edge(vector< list<edge> >& adj, int s, list<edge>::iterator e) {
     adj[s].erase(e);
 }
 
-eulerian_circuit(vector< list<edge> >& adj, vi& c, int start = 0) {
+eulerian_circuit(vector< list<edge> >& adj, vi &c, int start = 0) {
     stack<int> st;
     st.push(start);
     

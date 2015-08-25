@@ -4,7 +4,7 @@ template <class T, int N>
 struct Matrix {
     T m[N][N];
     Matrix() { ITERATE_MATRIX(N) m[c][r] = 0; }
-    Matrix(Matrix& o) { ITERATE_MATRIX(N) m[c][r] = o.m[c][r]; }
+    Matrix(Matrix &o) { ITERATE_MATRIX(N) m[c][r] = o.m[c][r]; }
     static Matrix<T, N> identity() {
         Matrix<T, N> I;
         for (int i = 0; i < N; ++i) I.m[i][i] = 1;

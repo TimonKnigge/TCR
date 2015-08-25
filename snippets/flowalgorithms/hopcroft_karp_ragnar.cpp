@@ -3,10 +3,10 @@
 class Hopcroft_Karp{
 public:
 	int V1; // vertices in the first part
-	Graph& g;
+	Graph &g;
 	vi d, p; // distance (size V1), paired vertex init to INF and -1
 
-	Hopcroft_Karp(Graph& g, int V1, int V2) : V1(V1), g(g){
+	Hopcroft_Karp(Graph &g, int V1, int V2) : V1(V1), g(g){
 		// initialize all members
 		p.assign(V1+V2,-1);
 		d.resize(V1); // d is assigned during bfs

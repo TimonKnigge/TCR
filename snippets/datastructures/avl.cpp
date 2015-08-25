@@ -5,14 +5,14 @@ public:
 		T val;
 		AVL_Node *p, *l, *r;
 		int size, height;
-		AVL_Node(T& _val, AVL_Node *_p = NULL)
+		AVL_Node(T &_val, AVL_Node *_p = NULL)
 		 : val(_val), p(_p), l(NULL), r(NULL), size(1), height(0) { }
 	};
 	AVL_Node *root;
 	AVL_Tree() : root(NULL) { }
 	
 	// Querying
-	AVL_Node *find(T& key) { // O(lg n)
+	AVL_Node *find(T &key) { // O(lg n)
 		AVL_Node *c = root;
 		while (c != NULL && c->val != key) {
 			if (c->val < key) c = c->r;
@@ -33,7 +33,7 @@ public:
 	}
 
 	// Modification
-	AVL_Node *insert(T& nval) { // O(lg n)
+	AVL_Node *insert(T &nval) { // O(lg n)
 		AVL_Node *p = NULL, *c = root;
 		while (c != NULL) { 
 			p = c;

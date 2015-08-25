@@ -45,7 +45,7 @@ public:
         }
     }
 
-    void aho_corasick(string& sentence, vector<string>& words, vector< vector<int> >& matches) {
+    void aho_corasick(string &sentence, vector<string>& words, vector< vector<int> >& matches) {
         matches.assign(words.size(), vector<int>());
         int state = 0, ss = 0;
         for (int i = 0; i < sentence.length(); ++i, ss = state) {

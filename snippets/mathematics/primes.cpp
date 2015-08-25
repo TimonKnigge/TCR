@@ -15,7 +15,7 @@ void sieve() { // call at start in main!
 
 bool is_prime(ll n) { // for N <= SIZE^2
 	if (n <= SIZE) return bs[n];                   
-	for(const auto& prime : primes)
+	for(const auto &prime : primes)
 	   	if (n % prime == 0) return false;
 	return true;            
 }
@@ -23,7 +23,7 @@ bool is_prime(ll n) { // for N <= SIZE^2
 struct Factor{ll prime; ll exp;};
 vector<Factor> factor(ll n) {
 	vector<Factor> factors;
-	for(const auto& prime : primes){
+	for(const auto &prime : primes){
 		if(n==1 || prime*prime > n) break;
 		ll exp=0;
 		while(n % prime == 0)
@@ -50,14 +50,14 @@ ll bin_pow(ll b, ll e){
 
 ll sumDiv(ll n) {
 	ll sum = 1;
-	for(const auto& p : factor(n))
+	for(const auto &p : factor(n))
 		sum *= (pow(p.prime, p.exp+1) - 1) / (p.prime - 1);
 	return sum;
 }
 
 ll EulerPhi(ll n) {
 	ll ans = n;
-	for(const auto& p : factor(n))
+	for(const auto &p : factor(n))
 		ans -= ans / p.prime;
 	return ans;
 }

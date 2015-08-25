@@ -8,7 +8,7 @@ struct Node {
         for(int i = 0; i < ALPHABET_SIZE; ++i) ch[i] = nullptr;
     }
     
-    void insert(string& s, int i = 0) {
+    void insert(string &s, int i = 0) {
         if (i == s.length()) isleaf = true;
         else {
             int v = mp(s[i]);
@@ -18,7 +18,7 @@ struct Node {
         }
     }
     
-    bool contains(string& s, int i = 0) {
+    bool contains(string &s, int i = 0) {
         if (i == s.length()) return isleaf;
         else {
             int v = mp(s[i]);

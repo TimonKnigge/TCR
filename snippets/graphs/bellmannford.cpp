@@ -4,13 +4,13 @@ bool bellmann_ford(vvii edges, int source, vi &dist) {
 	for (int iter = 0; iter < edges.size() - 1; ++iter)
 		for (int u = 0; u < edges.size(); ++u) {
 			if (dist[u] == INF) continue;
-			for (auto& e : edges[u])
+			for (auto &e : edges[u])
 				dist[e.first] = min(dist[e.first], 
 					dist[u] + e.second);
 		}
 	for (int u = 0; u < edges.size(); ++u) {
 		if (dist[u] == INF) continue;
-		for (auto& e : edges[u])
+		for (auto &e : edges[u])
 			if (dist[e.first] > dist[u] + e.second)
 				return false;
 	}

@@ -1,13 +1,13 @@
 #include "../header.h"
 struct BCC{		// find AVs and bridges in an undirected graph
-	vvi& edges;
+	vvi &edges;
 	int V, counter = 0, root, rcs;		// root and # children of root
 	vi n,l;								// nodes,low
 	stack<int> s;
-	BCC(vvi& e) : edges(e), V(e.size()), n(V,-1), l(V,-1) {}
+	BCC(vvi &e) : edges(e), V(e.size()), n(V,-1), l(V,-1) {}
 	void visit(int u, int p) {			// also pass the parent
 		l[u] = n[u] = counter++; s.push(u);
-		for(auto& v : edges[u]){
+		for(auto &v : edges[u]){
 			if (n[v] == -1) {
 				if (u == root) rcs++; visit(v,u);
 				if (l[v] >= n[u]) {}	// u is an articulation point

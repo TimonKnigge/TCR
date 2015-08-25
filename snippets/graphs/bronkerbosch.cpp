@@ -1,7 +1,7 @@
 #include "../header.h"
 constexpr size_t M = 128; using S = bitset<M>;
 // count maximal cliques. Call with R=0, X=0, P[u]=1 forall u
-int BronKerbosch(const vector<S>& edges, S& R, S&& P, S&& X){
+int BronKerbosch(const vector<S>& edges, S &R, S&& P, S&& X){
 	if(P.count() == 0 && X.count() == 0) return 1;
 	auto PX = P | X; int p=-1;	// the last true bit is the pivot
 	for(int i = M-1; i>=0; i--) if(PX[i]){ p = i; break; }

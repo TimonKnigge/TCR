@@ -10,7 +10,7 @@ int dijkstra(vector<vector<Edge>>& edges, int s, int t) {
 		auto d = pq.top().d, u = pq.top().v; pq.pop();
 		if(u==t) break;			// target reached
 		if (d == dist[u])
-			for(auto& e : edges[u]) if (dist[e.v] > d + e.weight)
+			for(auto &e : edges[u]) if (dist[e.v] > d + e.weight)
 				pq.push({dist[e.v] = d + e.weight, e.v});
 	}
 	return dist[t];

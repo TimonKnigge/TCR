@@ -7,7 +7,7 @@ int kruskal(vector<E> &edges, int V) {
 	sort(edges.begin(), edges.end());
 	int cost = 0, count = 0;
 	UnionFind uf(V);
-	for (auto& e : edges) {
+	for (auto &e : edges) {
 		if (!uf.same(e.u, e.v)) {
 			// (w, (u, v)) is part of the MST
 			cost += e.weight;

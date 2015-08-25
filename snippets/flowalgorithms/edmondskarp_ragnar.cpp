@@ -1,7 +1,7 @@
 #include "flowgraph.cpp"
 struct Edmonds_Karp{
-	FlowGraph& edges; int V,s,t; // directed graph
-	Edmonds_Karp(FlowGraph& edges, int V, int s, int t) :
+	FlowGraph &edges; int V,s,t; // directed graph
+	Edmonds_Karp(FlowGraph &edges, int V, int s, int t) :
 		edges(edges), V(V), s(s), t(t) {}
 	int run() {
 		int maxflow = 0;
@@ -13,7 +13,7 @@ struct Edmonds_Karp{
 			q.push({s, INF}); // s must have edges
 			flowfound = false;
 			while(!q.empty() && !flowfound){
-				auto& f = q.front(); ll u = f.u, flow = f.c; q.pop();
+				auto &f = q.front(); ll u = f.u, flow = f.c; q.pop();
 				for(auto it = edges[u].begin(); it != edges[u].end(); it++)
 					if(it->cap - it->f > 0 && p[it->v]==-1 && it->v != s){
 						if(it->v==t){

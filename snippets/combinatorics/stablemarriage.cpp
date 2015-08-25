@@ -1,4 +1,4 @@
-vi stable_marriage(int M, int W, vvi& mpref, vvi& wpref) {
+vi stable_marriage(int M, int W, vvi &mpref, vvi &wpref) {
     stack<int> st;
     for (int m = 0; m < M; ++m) st.push(m);
     vi mnext(M, 0), mmatch(M, -1), wmatch(W, -1);

@@ -8,11 +8,11 @@
 // negative edges in the residual graph
 class Edmonds_Karp_Dijkstra{
 public:
-	FlowGraph& g; // directed
+	FlowGraph &g; // directed
 	int V,s,t;
 	vector<ll> pot; // potential (distance to s)
 
-	Edmonds_Karp_Dijkstra(FlowGraph& g, int s, int t) :
+	Edmonds_Karp_Dijkstra(FlowGraph &g, int s, int t) :
 		g(g), V(g.size()), s(s), t(t), pot(V)
 	{}
 
@@ -40,7 +40,7 @@ public:
 			q.push({s, INF, 0}); dist[s]=0;
 			ll flow;
 			while(!q.empty()){
-				auto& qt = q.top();
+				auto &qt = q.top();
 				int u = qt.u, w = qt.w,d; flow = qt.c;
 				cerr << "--- u,c,w: "<<u<<","<<w<<","<<flow<<"\n";
 				q.pop();

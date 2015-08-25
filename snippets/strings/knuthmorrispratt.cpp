@@ -1,4 +1,4 @@
-void compute_prefix_function(string& w, vi& pi) {
+void compute_prefix_function(string &w, vi &pi) {
 	pi.assign(w.length(), 0);
 	int k = pi[0] = -1;
 	
@@ -10,7 +10,7 @@ void compute_prefix_function(string& w, vi& pi) {
 	}
 }
 
-void knuth_morris_pratt(string& s, string& w) {
+void knuth_morris_pratt(string &s, string &w) {
 	int q = -1; vi pi;
 	compute_prefix_function(w, pi);
 	for (int i = 0; i < s.length(); ++i) {

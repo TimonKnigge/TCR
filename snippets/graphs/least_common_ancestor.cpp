@@ -9,7 +9,7 @@ void dfs(int cur, int depth) {
 	H[cur] = idx;
 	E[idx] = cur;
 	L[idx++] = depth;
-	for(auto& child : children[cur]){
+	for(auto &child : children[cur]){
 		dfs(child, depth+1);
 		E[idx] = cur; // backtrack to current node
 		L[idx++] = depth;

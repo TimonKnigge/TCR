@@ -10,7 +10,7 @@ struct Trie{
 		Node(int c, int p) : leaf(false),parent(p), c(c){
 			child.fill(-1);
 		}
-		int& operator[](int i){return child[i];}
+		int &operator[](int i){return child[i];}
 	};
 
 	vector<Node> data;
@@ -23,11 +23,11 @@ struct Trie{
 		data.push_back(Node());
 	} // and init vector
 
-	Node& insert(string::iterator it, const string::iterator end){
+	Node &insert(string::iterator it, const string::iterator end){
 		int n = root;
 		for(;it!=end;it++){
 			char c = *it; // add -'a' for normal chars
-			int& next = data[n][c];
+			int &next = data[n][c];
 			if(next>=0) n = next;
 			// if using vector, use push_back
 			else 
@@ -37,11 +37,11 @@ struct Trie{
 		return data[n];
 	}
 
-	Node& insert(string s){return insert(s.begin(), s.end());}
+	Node &insert(string s){return insert(s.begin(), s.end());}
 
-	Node& operator[](int n){return data[n];}
+	Node &operator[](int n){return data[n];}
 
-	int find(const string& s){
+	int find(const string &s){
 		n = root;
 		for(auto&& c : s){
 			n = data[n][c]; // add -'a' for normal chars
