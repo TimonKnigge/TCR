@@ -43,7 +43,7 @@ struct Trie{
 
 	int find(const string &s){
 		n = root;
-		for(auto&& c : s){
+		for(auto &&c : s){
 			n = data[n][c]; // add -'a' for normal chars
 			if(n<0) return -1;
 		}

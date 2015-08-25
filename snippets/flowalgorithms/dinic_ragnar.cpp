@@ -22,7 +22,7 @@ struct Dinic{
 			queue<int> q; q.push(s);
 			while(!q.empty()){
 				auto u = q.front(); q.pop();
-				for(auto&& e : edges[u]) if(e.cap > e.f && l[e.v]<0)
+				for(auto &&e : edges[u]) if(e.cap > e.f && l[e.v]<0)
 					l[e.v] = l[u]+1, q.push(e.v);
 			}
 			if (l[t] < 0) return flow;

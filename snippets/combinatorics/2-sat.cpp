@@ -47,7 +47,7 @@ struct TwoSAT {
 		
 		a.assign(n, false);
 		vb vis(n, false);
-		for(auto&& component : bycom){
+		for(auto &&component : bycom){
 			for (int u : component) {
 				if (vis[u / 2]) continue;
 				vis[u / 2] = true;

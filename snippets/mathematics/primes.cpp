@@ -38,7 +38,7 @@ vector<Factor> factor(ll n) {
 
 ll numDiv(ll n) {
 	ll divisors = 1;
-	for(auto&& p : factor(n))
+	for(auto &&p : factor(n))
 		divisors *= p.exp + 1;
 	return divisors;
 }

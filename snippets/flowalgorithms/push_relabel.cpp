@@ -26,7 +26,7 @@ public:
 		hc[h[s]]--; h[s]=V; hc[V]++;
 
 		// and push initial flows
-		for(auto&& e : g[s]){
+		for(auto &&e : g[s]){
 			int flow = e.cap;
 			e.f = flow;
 			g[e.v][e.r].f -=flow;
@@ -36,12 +36,12 @@ public:
 		// keep a queue of overflowing vertices
 		// (FIFO heuristic -> V^3)
 		q = queue<int>();
-		for(auto&& e : g[s])
+		for(auto &&e : g[s])
 			if(e.v!=t && qc[e.v] == 0)
 				q.push(e.v), qc[e.v]=1;
 		while(!q.empty()){
 			int u = q.front(), m = INF;
-			for(auto&& e : g[u]) if( e.cap > e.f){
+			for(auto &&e : g[u]) if( e.cap > e.f){
 				if(h[u] > h[e.v]){
 					// push flow from `u` to `v`
 					int flow = min(x[u], e.cap - e.f);
@@ -63,7 +63,7 @@ public:
 					hc[h[u]]--;
 					// apply gap heuristic
 					if(hc[h[u]] == 0) // raise h[u] to V to V+1
-						for(auto&& ht : h) if(ht > h[u] && ht < V)
+						for(auto &&ht : h) if(ht > h[u] && ht < V)
 							hc[ht]--, ht=V+1, hc[ht]++;
 					h[u] = m+1;
 					hc[h[u]]++;

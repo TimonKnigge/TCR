@@ -22,7 +22,7 @@ public:
 		// start by running Bellman-Ford to calculate potentials
 		fill(F(pot), INF); pot[s]=0;
 		REP(i,V-1) REP(u,V)
-			for(auto&& e : g[u])
+			for(auto &&e : g[u])
 				if(e.cap>e.f) pot[e.v] = min(pot[e.v], pot[u] + e.cost);
 
 		REP(i,V) cout << "dist["<<i<<"]="<<pot[i]<<"\n";
@@ -47,7 +47,7 @@ public:
 				if(w!=dist[u]) continue;
 				// we visit all nodes to calculate pot
 				if(u==t) break;
-				for(auto&& it = g[u].begin(); it!=g[u].end(); it++){
+				for(auto &&it = g[u].begin(); it!=g[u].end(); it++){
 					auto e = *it;
 					d =  w + e.cost + pot[u] - pot[e.v];
 					if(e.cap>e.f && d < dist[e.v]){

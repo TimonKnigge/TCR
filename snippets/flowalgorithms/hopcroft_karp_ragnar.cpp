@@ -27,7 +27,7 @@ public:
 			int u = q.front(); q.pop();
 			if(d[u]==maxdepth)
 				return true; // paths found
-			for(auto&& e : g[u]){
+			for(auto &&e : g[u]){
 				if(p[e.v]==-1) // free vertex in V2
 					maxdepth = d[u]+1;
 				else {
@@ -42,7 +42,7 @@ public:
 
 	// returns true when an augmenting path is found.
 	bool dfs(int u){
-		for(auto&& e : g[u])
+		for(auto &&e : g[u])
 			if(p[e.v] < 0 || d[p[e.v]]==d[u]+1)
 				if(p[e.v] < 0 || dfs(p[e.v])){
 					p[u]=e.v; p[e.v]=u;
