@@ -2,7 +2,7 @@
 struct Void{};
 template <int ALPHABET = 26, class T = Void>
 struct Trie{
-	struct Node : T{ 
+	struct Node : T{
 		bool leaf;
 		array<int,ALPHABET> child;
 		int parent; char c;
@@ -30,7 +30,7 @@ struct Trie{
 			int &next = data[n][c];
 			if(next>=0) n = next;
 			// if using vector, use push_back
-			else 
+			else
 				data.push_back(Node(c,n)),n=data[n][c]=data.size()-1;
 		} // (^) create a node at index size
 		data[n].leaf= true;

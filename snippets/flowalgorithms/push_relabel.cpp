@@ -14,14 +14,14 @@ public:
 
 	int run(){
 		// we initialize all heights using a BFS starting at `t`
-		queue<int> q; q.push(t); 
+		queue<int> q; q.push(t);
 		while(!q.empty()){
 			int u = q.front(); q.pop();
 			for(auto && x : g[u])
 				if(h[x.v] == 0 && x.v != t)
 					hc[0]--,h[x.v] = h[u]+1,hc[h[x.v]]++, q.push(x.v);
 		}
-		
+	
 		// now set height of `s`
 		hc[h[s]]--; h[s]=V; hc[V]++;
 
@@ -55,7 +55,7 @@ public:
 						qc[e.v]=1, q.push(e.v);
 
 					if(x[u] == 0) break; // stop when done
-				} else 
+				} else
 					m = min(m, h[e.v]);
 			}
 			if(x[u]!=0){

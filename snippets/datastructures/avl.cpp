@@ -10,7 +10,7 @@ public:
 	};
 	AVL_Node *root;
 	AVL_Tree() : root(NULL) { }
-	
+
 	// Querying
 	AVL_Node *find(T &key) { // O(lg n)
 		AVL_Node *c = root;
@@ -35,7 +35,7 @@ public:
 	// Modification
 	AVL_Node *insert(T &nval) { // O(lg n)
 		AVL_Node *p = NULL, *c = root;
-		while (c != NULL) { 
+		while (c != NULL) {
 			p = c;
 			c = (c->val < nval ? c->r : c->l);
 		}
@@ -71,7 +71,7 @@ public:
 		if (del) delete n;
 	}
 	void cleanup() { _cleanup(root); }
-	
+
 private:
 	// Helpers
 	void _transplant(AVL_Node *u, AVL_Node *v) {

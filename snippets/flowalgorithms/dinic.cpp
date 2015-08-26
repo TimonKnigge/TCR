@@ -9,7 +9,7 @@ ll FlowNetwork::dinic_augment(int s, int t, int* d, ll cap) {
 			e[i].flo += df;
 			e[i ^ 1].flo -= df;
 			if((cap -= df) == 0) break;
-		}    }
+		}	}
 	return f;
 }
 

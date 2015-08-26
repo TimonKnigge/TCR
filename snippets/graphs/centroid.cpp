@@ -31,7 +31,7 @@ struct CentroidDecomposition {
 		while (true) {
 			int nu = -1;
 			for (int v : e[u]) {
-				if (!tocheck[v] || v == p[u]) 
+				if (!tocheck[v] || v == p[u])
 					continue;
 				if (1 + size[v] > V / 2) nu = v;
 			}

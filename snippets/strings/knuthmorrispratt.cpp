@@ -1,7 +1,7 @@
 void compute_prefix_function(string &w, vi &pi) {
 	pi.assign(w.length(), 0);
 	int k = pi[0] = -1;
-	
+
 	for (int i = 1; i < w.length(); ++i) {
 		while (k >= 0 && w[k + 1] != w[i])
 			k = pi[k];

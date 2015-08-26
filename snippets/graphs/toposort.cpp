@@ -4,7 +4,7 @@ struct Toposort {
 	int V, s_ix; // sorted-index
 	vi sorted, visited;
 
-	Toposort(vector<vi> &edges) : 
+	Toposort(vector<vi> &edges) :
 		edges(edges), V(edges.size()), s_ix(0),
 		sorted(V,-1), visited(V,false) {}
 

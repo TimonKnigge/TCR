@@ -34,7 +34,7 @@ public:
 		string s;
 		if(sign < 0) s = '-';
 		for(auto it = v.rbegin(); it!=v.rend(); it++){
-			string x = to_string(*it); 
+			string x = to_string(*it);
 			if(it!=v.rbegin()) s += string(P-x.size(),'0');
 			//s += '\'';
 			s += x;
@@ -47,7 +47,7 @@ public:
 		v.erase(v.begin() + i+1, v.end());
 		if(v.size()==0) sign=1;
 	}
-	
+
 	bool compare_abs(const BI &r) const{
 		if(r.v.size() != v.size()) // assume reduced input
 			return (v.size() < r.v.size());

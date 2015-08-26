@@ -14,10 +14,10 @@ void sieve() { // call at start in main!
 }
 
 bool is_prime(ll n) { // for N <= SIZE^2
-	if (n <= SIZE) return bs[n];                   
+	if (n <= SIZE) return bs[n];				  
 	for(const auto &prime : primes)
 	   	if (n % prime == 0) return false;
-	return true;            
+	return true;		
 }
 
 struct Factor{ll prime; ll exp;};
@@ -71,7 +71,7 @@ bool miller_rabin(const ll n){ // true when prime
 	for(auto a : test_primes){
 		if(a > n-2) break;
 		ll x = powmod(a,d,n);	// needs powmod with mulmod!
-		if(x == 1 || x == n-1) continue; 
+		if(x == 1 || x == n-1) continue;
 		REP(i,s-1){
 			x = mulmod(x,x,n);
 			if(x==1) return false;

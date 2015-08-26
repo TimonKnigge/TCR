@@ -53,7 +53,7 @@ public:
 					if(e.cap>e.f && d < dist[e.v]){
 						q.push({e.v, min(flow, e.cap-e.f),dist[e.v] = d});
 						cerr << "+++ u,c,w: "<<e.v<<","
-						     <<min(flow, e.cap-e.f)<<","<<d<<"\n";
+							 <<min(flow, e.cap-e.f)<<","<<d<<"\n";
 						p[e.v]=it;
 					}
 				}

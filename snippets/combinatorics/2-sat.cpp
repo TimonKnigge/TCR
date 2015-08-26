@@ -10,7 +10,7 @@ struct TwoSAT {
 	// Only copy the needed functions:
 	void add_implies(int c1, bool v1, int c2, bool v2) {
 		int u = 2 * c1 + (v1 ? 1 : 0),
-		    v = 2 * c2 + (v2 ? 1 : 0);
+			v = 2 * c2 + (v2 ? 1 : 0);
 		imp[u].push_back(v);		//  u =>  v
 		imp[v^1].push_back(u^1);	// -v => -u
 	}
@@ -40,11 +40,11 @@ struct TwoSAT {
 		for (int i = 0; i < n; ++i)
 			if (com[2 * i] == com[2 * i + 1])
 				return false;
-		
+	
 		vvi bycom(com.size());
 		for (int i = 0; i < 2 * n; ++i)
 			bycom[com[i]].push_back(i);
-		
+	
 		a.assign(n, false);
 		vb vis(n, false);
 		for(auto &&component : bycom){
