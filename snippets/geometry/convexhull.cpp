@@ -48,3 +48,21 @@ struct ConvexHull {
 	}
 };
 
+// Note: if h.size() is small (<5), consider brute forcing to avoid
+// the usual nasty computational-geometry-edge-cases.
+void rotating_calipers(vector<point> &p, vector<int> &h) {
+	int n = h.size(), i = 0, j = 1, a = 1, b = 2;
+	while (i < n) {
+		if (det(p[h[j]].x - p[h[i]].x, p[h[j]].y - p[h[i]].y,
+			p[h[b]].x - p[h[a]].x, p[h[b]].y - p[h[a]].y) >= 0) {
+			a = (a + 1) % n;
+			b = (b + 1) % n;
+		} else {
+			i++; // NOT %n!!
+			j = (j + 1) % n;
+		}
+		// Make computations on the pairs:
+		// 	h[i%n], h[a]
+		//	h[j], h[a]
+	}
+}

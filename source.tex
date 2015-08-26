@@ -116,14 +116,14 @@
 {snippets/datastructures/segmenttree.cpp}{}{}
 
 \entry{AVL Tree}
-{Can be augmented to support in $O(\log_2 n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
+{Can be augmented to support in $O(\log n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
 {snippets/datastructures/avl.cpp}{}{}
 
 \entry{Prefix Trie}{}
 {snippets/datastructures/trie.cpp}{}{}
 
 \entry{Suffix Array}{Note: dont forget to invert the returned array.}
-{snippets/datastructures/suffixarray.cpp}{$O(n \log_2 n)$}{}
+{snippets/datastructures/suffixarray.cpp}{$O(n \log^2 n)$}{}
 
 \entry{Built-in datastructures}{}
 {snippets/datastructures/builtin.cpp}{}{}
@@ -146,16 +146,16 @@
 
 \entry{Kruskal's algorithm}{}
 {snippets/graphs/kruskal.cpp}
-{$O(E \log_2 V)$}
+{$O(E \log V)$}
 {Union Find}
 
 \entry{Prim's algorithm}{}
 {snippets/graphs/prim.cpp}
-{$O(E \log_2 V)$}{}
+{$O(E \log V)$}{}
 
 \entry{Dijkstra's algorithm}{}
 {snippets/graphs/dijkstra.cpp}
-{$O((V + E) \log_2 V)$}{}
+{$O((V + E) \log V)$}{}
 
 \entry{Bellmann-Ford algorithm}
 {Returns \texttt{true} if the graph has no negative cycles.}
@@ -207,7 +207,7 @@
 
 \entry{Centroid Decomposition}
 {In case it is necessary to work with the subtrees directly, consider timestamping each node during the decomposition}
-{snippets/graphs/centroid.cpp}{$O(n \log_2 n)$}{}
+{snippets/graphs/centroid.cpp}{$O(n \log n)$}{}
 
 \section{Flow and Matching Algorithms}
 
@@ -278,7 +278,7 @@
 \entry{KP procedure}
 {Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}
 {snippets/combinatorics/twovariablesilp.cpp}
-{$O(d^2 log_2(d)log_2(log_2(d)))$}{}
+{$O(d^2 log(d)log(log(d)))$}{}
 
 \entry{2-SAT}{}
 {snippets/combinatorics/2-sat.cpp}
@@ -296,7 +296,7 @@
 
 \entry{Convex Hull}{}
 {snippets/geometry/convexhull.cpp}
-{$O(n \log_2 n)$}
+{$O(n \log n)$}
 {Geometry Essentials}
 
 \entry{Polygon}{}
@@ -318,7 +318,7 @@
 \entry{Fast Fourier Transform}
 {Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}
 {snippets/mathematics/fft.cpp}
-{$O(n \log_2 n)$}
+{$O(n \log n)$}
 {Bitmasking, Complex Numbers}
 
 \entry{Matrix Exponentation}
@@ -344,26 +344,26 @@
 \section{Miscellaneous}
 
 \entry{Longest Increasing Subsequence}
-{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log_2 n)$ factor.}
+{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log n)$ factor.}
 {snippets/misc/lis.cpp}
-{$O(n \log_2 n)$}{}
+{$O(n \log n)$}{}
 
 \section{Helpers}
 
 \entry{Golden Section Search}
 {For a discrete search: use binary search on the difference of successive elements, see the section on Binary Search.}
 {snippets/helpers/goldensectionsearch.cpp}
-{$O(\log_2 {1 / \epsilon})$}{}
+{$O(\log {1 / \epsilon})$}{}
 
 \entry{Binary Search}{}
 {snippets/helpers/binarysearch.cpp}
-{$O(\log_2 n), O(\log_2 {1 / \epsilon})$}{}
+{$O(\log n), O(\log {1 / \epsilon})$}{}
 
 \entry{Bitmasking}{}
 {snippets/helpers/bitmasking.cpp}{}{}
 
 \entry{QuickSelect}
-{Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log_2 n)$.}
+{Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log n)$.}
 {snippets/helpers/quickselect.cpp}
 {$O(n)$}{}
 
