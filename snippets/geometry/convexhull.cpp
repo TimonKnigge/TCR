@@ -1,12 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <functional>
-
-using namespace std;
-
-typedef long long ll;
-
 struct point { ll x, y; };
 bool operator==(const point &l, const point &r) {
 	return l.x == r.x && l.y == r.y; }
@@ -56,34 +47,4 @@ struct ConvexHull {
 		if (h.size() > 1 && h.back() == pivot) h.pop_back();
 	}
 };
-
-
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	
-	while (true) {
-		int n;
-		cin >> n;
-		if (n == 0) break;
-		
-		vector<point> pts;
-		for (int i = 0; i < n; ++i) {
-			ll x, y;
-			cin >> x >> y;
-			pts.push_back({x, y});
-		}
-		
-		ConvexHull ch(pts);
-		int m = ch.h.size();
-		cout << m << '\n';
-		for (int i = 0; i < m; ++i) {
-			int j = ch.h[i];
-			cout << pts[j].x << ' ' << pts[j].y << '\n';
-		}
-		cout << flush;
-	}
-	
-	return 0;
-}
 
