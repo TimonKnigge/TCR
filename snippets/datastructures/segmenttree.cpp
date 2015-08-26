@@ -13,7 +13,7 @@ class SegmentTree {
 	vector<Node> tree;
 
 public:
-	SegmentTree(int p, vector<T>& init) { // The segment tree will support 2^p leafs
+	SegmentTree(int p, vector<T> &init) { // The segment tree will support 2^p leafs
 		this->n = (1 << p);
 		tree.assign(2 * n, Node(ident, 0, 0));
 		tree[1].l = 0; tree[1].r = n - 1;

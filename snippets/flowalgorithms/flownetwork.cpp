@@ -21,5 +21,5 @@ struct FlowNetwork {
 	ll dinic_augment(int s, int t, int* d, ll cap);
 	ll push_relabel(int s, int t);
 	ll infer_mincut(int s);
-	void infer_mincut_dfs(int u, vb& vs);
+	void infer_mincut_dfs(int u, vb &vs);
 };

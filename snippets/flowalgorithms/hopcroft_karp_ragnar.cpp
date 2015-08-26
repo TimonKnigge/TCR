@@ -3,10 +3,10 @@
 class Hopcroft_Karp{
 public:
 	int V1; // vertices in the first part
-	Graph& g;
+	Graph &g;
 	vi d, p; // distance (size V1), paired vertex init to INF and -1
 
-	Hopcroft_Karp(Graph& g, int V1, int V2) : V1(V1), g(g){
+	Hopcroft_Karp(Graph &g, int V1, int V2) : V1(V1), g(g){
 		// initialize all members
 		p.assign(V1+V2,-1);
 		d.resize(V1); // d is assigned during bfs
@@ -27,7 +27,7 @@ public:
 			int u = q.front(); q.pop();
 			if(d[u]==maxdepth)
 				return true; // paths found
-			for(auto&& e : g[u]){
+			for(auto &&e : g[u]){
 				if(p[e.v]==-1) // free vertex in V2
 					maxdepth = d[u]+1;
 				else {
@@ -42,7 +42,7 @@ public:
 
 	// returns true when an augmenting path is found.
 	bool dfs(int u){
-		for(auto&& e : g[u])
+		for(auto &&e : g[u])
 			if(p[e.v] < 0 || d[p[e.v]]==d[u]+1)
 				if(p[e.v] < 0 || dfs(p[e.v])){
 					p[u]=e.v; p[e.v]=u;
@@ -55,7 +55,7 @@ public:
 	int run(){
 		int matching = 0; // number of matched edges
 		while(bfs())
-			REP(v,V1) 
+			REP(v,V1)
 				if(p[v]<0 && dfs(v)) matching++;
 		return matching;
 	}

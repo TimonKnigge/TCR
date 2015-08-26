@@ -34,7 +34,7 @@ public:
 		string s;
 		if(sign < 0) s = '-';
 		for(auto it = v.rbegin(); it!=v.rend(); it++){
-			string x = to_string(*it); 
+			string x = to_string(*it);
 			if(it!=v.rbegin()) s += string(P-x.size(),'0');
 			//s += '\'';
 			s += x;
@@ -47,8 +47,8 @@ public:
 		v.erase(v.begin() + i+1, v.end());
 		if(v.size()==0) sign=1;
 	}
-	
-	bool compare_abs(const BI& r) const{
+
+	bool compare_abs(const BI &r) const{
 		if(r.v.size() != v.size()) // assume reduced input
 			return (v.size() < r.v.size());
 		else
@@ -59,12 +59,12 @@ public:
 		return false;
 	}
 
-	bool operator<(const BI& r) const{
+	bool operator<(const BI &r) const{
 		if(sign!=r.sign) return sign < 0;
 		return (sign < 0) ^ compare_abs(r);
 	}
 
-	BI& operator+=(BI r){
+	BI &operator+=(BI r){
 		auto op = sign * r.sign; // -1 for subtraction
 		if(op < 0 && compare_abs(r)) sign *=-1, swap(*this, r);
 		v.resize(max(v.size(),r.v.size())+1,0);
@@ -80,11 +80,11 @@ public:
 		return *this;
 	}
 
-	BI& operator-=(const BI& r){
+	BI &operator-=(const BI &r){
 		sign *=-1; *this+=r; sign*=-1; return *this;
 	}
 	// just O(d^2) multiplication
-	BI operator*(const BI& r) const{
+	BI operator*(const BI &r) const{
 		BI w; w.sign = sign * r.sign;
 		w.v.resize(v.size() + r.v.size(),0);
 		REP(i,v.size())
@@ -96,13 +96,13 @@ public:
 		w.shrink();
 		return w;
 	}
-	BI operator+(const BI& r) const{
+	BI operator+(const BI &r) const{
 		BI a = *this; a += r; return a;
 	}
-	BI operator-(const BI& r) const{
+	BI operator-(const BI &r) const{
 		BI a = *this; a -= r; return a;
 	}
-	BI operator*=(const BI& r){
+	BI operator*=(const BI &r){
 		*this = (*this) * r;
 		return *this;
 	}
