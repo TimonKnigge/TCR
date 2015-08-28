@@ -1,57 +1,41 @@
-#pragma once
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-
-#include <vector>
-#include <stack>
-#include <queue>
-#include <set>
-#include <unordered_set>
-#include <map>
-#include <unordered_map>
-#include <list>
-#include <bitset>
-#include <tuple>
-
-#include <algorithm>
-#include <functional>
-
+#include <iostream> // strings/streams
 #include <string>
-#include <random>	//c++11
-#include <complex>
-
-#include <cstring>  // Include for memset!
+#include <sstream>
+#include <vector> // datastructures
+#include <list>
+#include <set>
+#include <map>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <tuple> // quick compare
+#include <cstdio> // utils
+#include <numeric>
+#include <iterator>
+#include <algorithm>
 #include <cmath>
-#include <cassert>
 #include <chrono>
-
-const int INF = 2e9+1;			// 9
-const long long LLINF = 9e18+1;	// 18
-const long double LDINF = 1e300+1;
-
-using namespace std;
-
-typedef long long ll;
-typedef long double ld;
-typedef pair<int, int> ii;
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-typedef vector<ii> vii;
-typedef vector<vii> vvii;
-typedef vector<bool> vb;
+#include <cassert>
 
 #define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
 #define F(v)		begin(v), end(v)
+constexpr bool LOG =
+#ifdef _LOG
+true;
+#define _GLIBCXX_DEBUG
+#else
+false;
+#endif
 
-constexpr bool LOG = false;
+using namespace std;
+using ll = long long;
+using ii = pair<int,int>;
+using vi = vector<int>;
+using vvi = vector<vi>;
+
+constexpr int  INF = 1e9+1; // < 1e9 - -1e9
+constexpr ll LLINF = 1e18+1;
 void Log() { if(LOG) cerr << "\n"; }
 template<class T, class... S> void Log(T t, S... s){
 	if(LOG) cerr << t << "\t", Log(s...);
-}
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-	return 0;
 }
