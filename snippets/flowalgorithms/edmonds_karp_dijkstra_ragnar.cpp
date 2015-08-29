@@ -1,5 +1,4 @@
 #include "flowgraph.cpp"
-// g.add_edge(u,v_index,cap,cost); g.add_edge(v,u_index,0,-cost)
 struct Q{ int u; ll c,w;}; // target, maxflow and total weight (cost)
 bool operator>(const Q &l, const Q &r){return l.w > r.w;}
 struct Edmonds_Karp_Dijkstra{

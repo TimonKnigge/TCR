@@ -1,13 +1,18 @@
 #include "../header.h"
-
 struct S{
 	int v;			// neighbour
 	const int r;	// index of the reverse edge
 	ll f;			// current flow
 	const ll cap;	// capacity
 	const ll cost;	// unit cost
-	S(int v, int r, int c, int cost = 0) :
-		v(v), r(r), f(0), cap(c), cost(cost) {}
+	S(int v, int reverse_index, int capacity, int cost = 0) :
+		v(v), r(reverse_index), f(0), cap(capacity), cost(cost) {}
 };
-using FlowGraph = vector<vector<S>>;
+struct FlowGraph : vector<vector<S>> {
+	FlowGraph(size_t n) : vector<vector<S>>(n) {}
+	void add_edge(int u, int v, ll capacity, ll cost = 0){
+		operator[](u).emplace_back(v, operator[](v).size(), capacity, cost);
+		operator[](v).emplace_back(u, operator[](u).size()-1, 0, -cost);
+	}
+};
 
