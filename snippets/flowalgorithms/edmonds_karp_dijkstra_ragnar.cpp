@@ -8,8 +8,13 @@ struct Edmonds_Karp_Dijkstra{
 	pair<ll,ll> run() { // return pair<f, cost>
 		ll maxflow = 0, cost = 0;
 		fill(F(pot), LLINF); pot[s]=0; // Bellman-Ford for potentials
-		REP(i,V-1) REP(u,V) for(auto &e : g[u])
-			if(e.cap>e.f) pot[e.v] = min(pot[e.v], pot[u] + e.cost);
+		REP(i,V-1) {
+			bool relax = false;
+			REP(u,V) if(pot[u] != LLINF) for(auto &e : g[u])
+					if(e.cap>e.f && pot[u] + e.cost < pot[e.v])
+						pot[e.v] = pot[u] + e.cost, relax=true;
+			if(!relax) break;
+		}
 		while (true) {
 			priority_queue<Q,vector<Q>,greater<Q>> q;
 			vector<vector<S>::iterator> p(V,g.front().end());
