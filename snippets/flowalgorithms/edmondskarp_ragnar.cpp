@@ -1,37 +1,27 @@
 #include "flowgraph.cpp"
 struct Edmonds_Karp{
-	FlowGraph &edges; int V,s,t; // directed graph
-	Edmonds_Karp(FlowGraph &edges, int s, int t) :
-		edges(edges), V(edges.size()), s(s), t(t) {}
-	int run() {
-		int maxflow = 0;
-		bool flowfound=true;
-		while (flowfound) {
-			struct S{ll u, c;};
-			queue<S> q; // <target, maxflow>
-			vector<int> p(V,-1); // parents
-			q.push({s, INF}); // s must have edges
-			flowfound = false;
-			while(!q.empty() && !flowfound){
-				auto &f = q.front(); ll u = f.u, flow = f.c; q.pop();
-				for(auto it = edges[u].begin(); it != edges[u].end(); it++)
-					if(it->cap - it->f > 0 && p[it->v]==-1 && it->v != s){
-						if(it->v==t){
-							// augment path
-							flow = min(flow, it->cap - it->f);
-							while(it->v != -1){
-								it->f -=flow; edges[it->v][it->r].f += flow;
-								it = edges[it->v].begin() + it->r;
-							}
-							maxflow += flow;
-							flowfound=true;
-							break;
-						}
-						q.push({it->v, min(flow, it->cap - it->f)});
-						p[it->v] = it->v;
-					}
+	FlowGraph &g; int V,s,t; // directed graph
+	Edmonds_Karp(FlowGraph &g, int s, int t) :
+		g(g), V(g.size()), s(s), t(t) {}
+	ll run() {
+		ll maxf = 0;
+		while (true) {
+			struct T{int u; ll f;}; queue<T> q;
+			auto end = g[0].end(); vector<vector<S>::iterator> p(V,end);
+			q.push({s, LLINF}); ll f;
+			while(!q.empty()){
+				auto u = q.front().u; f = q.front().f; q.pop();
+				for(auto it = g[u].begin(); it != g[u].end(); ++it){
+					const auto &e = *it;
+					if(e.cap > e.f && p[e.v]==end && e.v != s){
+						p[e.v] = it; q.push({e.v, min(f, e.cap - e.f)});
+						if(e.v == t){ f = min(f, e.cap - e.f); goto end;}
+			}	}	}
+end:		auto it = p[t]; if(it == end) return maxf;
+			while(it != end){
+				auto &r = g[it->v][it->r];
+				it->f += f; r.f -= f; it = p[r.v];
 			}
-		}
-		return maxflow;
-	}
+			maxf += f;
+	}	}
 };

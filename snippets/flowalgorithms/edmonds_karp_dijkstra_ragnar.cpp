@@ -1,76 +1,39 @@
 #include "flowgraph.cpp"
-
-// Note: Edges should be added in a single direction only
-// That is: g.add_edge(u,v,{C,W},{0,-W})
-// and for reverse g.add_edge(v,u,{C,W},{0,-W})
-//
-// We use Dijkstra's with potential to solve with
-// negative edges in the residual graph
-class Edmonds_Karp_Dijkstra{
-public:
-	FlowGraph &g; // directed
-	int V,s,t;
-	vector<ll> pot; // potential (distance to s)
-
+// g.add_edge(u,v_index,cap,cost); g.add_edge(v,u_index,0,-cost)
+struct Q{ int u; ll c,w;}; // target, maxflow and total weight (cost)
+bool operator>(const Q &l, const Q &r){return l.w > r.w;}
+struct Edmonds_Karp_Dijkstra{
+	FlowGraph &g; int V,s,t; vector<ll> pot;
 	Edmonds_Karp_Dijkstra(FlowGraph &g, int s, int t) :
-		g(g), V(g.size()), s(s), t(t), pot(V)
-	{}
-
-	// return pair<flow, cost>
-	pair<ll,ll> run() {
+		g(g), V(g.size()), s(s), t(t), pot(V) {}
+	pair<ll,ll> run() { // return pair<f, cost>
 		ll maxflow = 0, cost = 0;
-		// start by running Bellman-Ford to calculate potentials
-		fill(F(pot), INF); pot[s]=0;
-		REP(i,V-1) REP(u,V)
-			for(auto &&e : g[u])
-				if(e.cap>e.f) pot[e.v] = min(pot[e.v], pot[u] + e.cost);
-
-		REP(i,V) cout << "dist["<<i<<"]="<<pot[i]<<"\n";
+		fill(F(pot), INF); pot[s]=0; // Bellman-Ford for potentials
+		REP(i,V-1) REP(u,V) for(auto &e : g[u])
+			if(e.cap>e.f) pot[e.v] = min(pot[e.v], pot[u] + e.cost);
 		while (true) {
-			cerr << "starting new iteration\n";
-			struct Q{
-				int u; // target, maxflow and total weight (cost)
-				ll c,w;
-				bool operator<(const Q r)const{return w > r.w;}
-			};
-			priority_queue<Q> q;
-			// edges from parent
-			vector<decltype(g.front().begin())> p(V,g.front().end());
-			vector<int> dist(V, INF);
+			priority_queue<Q,vector<Q>,greater<Q>> q;
+			vector<vector<S>::iterator> p(V,g.front().end());
+			vector<ll> dist(V, INF); ll f;
 			q.push({s, INF, 0}); dist[s]=0;
-			ll flow;
 			while(!q.empty()){
-				auto &qt = q.top();
-				int u = qt.u, w = qt.w,d; flow = qt.c;
-				cerr << "--- u,c,w: "<<u<<","<<w<<","<<flow<<"\n";
-				q.pop();
-				if(w!=dist[u]) continue;
-				// we visit all nodes to calculate pot
-				if(u==t) break;
-				for(auto &&it = g[u].begin(); it!=g[u].end(); it++){
-					auto e = *it;
+				auto u = q.top().u; ll w = q.top().w,d;
+				f = q.top().c; q.pop();
+				if(w!=dist[u]) continue; if(u==t) break;
+				for(auto it = g[u].begin(); it!=g[u].end(); it++){
+					const auto &e = *it;
 					d =  w + e.cost + pot[u] - pot[e.v];
 					if(e.cap>e.f && d < dist[e.v]){
-						q.push({e.v, min(flow, e.cap-e.f),dist[e.v] = d});
-						cerr << "+++ u,c,w: "<<e.v<<","
-							 <<min(flow, e.cap-e.f)<<","<<d<<"\n";
+						q.push({e.v, min(f, e.cap-e.f),dist[e.v] = d});
 						p[e.v]=it;
-					}
-				}
-			}
-			if(p[t] == g.front().end()) return {maxflow,cost};
-			// augment path
-			cerr << "augmenting path with flow "<<flow<<"\n";
+			}	}	}
 			auto it = p[t];
+			if(it == g.front().end()) return {maxflow,cost};
 			while(it != g.front().end()){
-				cerr <<it->v<<" - ";
-				cost += flow * it->cost;
-				it->f+=flow;
-				g[it->v][it->r].f-=flow;
-				it = p[g[it->v][it->r].v];
+				auto & r = g[it->v][it->r];
+				cost += f * it->cost; it->f+=f;
+				r.f -= f; it = p[r.v];
 			}
-			cerr << s<<"\n";
-			maxflow += flow;
-		}
-	}
+			maxflow += f;
+	}	}
 };
