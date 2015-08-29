@@ -7,14 +7,14 @@ struct Edmonds_Karp_Dijkstra{
 		g(g), V(g.size()), s(s), t(t), pot(V) {}
 	pair<ll,ll> run() { // return pair<f, cost>
 		ll maxflow = 0, cost = 0;
-		fill(F(pot), INF); pot[s]=0; // Bellman-Ford for potentials
+		fill(F(pot), LLINF); pot[s]=0; // Bellman-Ford for potentials
 		REP(i,V-1) REP(u,V) for(auto &e : g[u])
 			if(e.cap>e.f) pot[e.v] = min(pot[e.v], pot[u] + e.cost);
 		while (true) {
 			priority_queue<Q,vector<Q>,greater<Q>> q;
 			vector<vector<S>::iterator> p(V,g.front().end());
-			vector<ll> dist(V, INF); ll f;
-			q.push({s, INF, 0}); dist[s]=0;
+			vector<ll> dist(V, LLINF); ll f;
+			q.push({s, LLINF, 0}); dist[s]=0;
 			while(!q.empty()){
 				auto u = q.top().u; ll w = q.top().w,d;
 				f = q.top().c; q.pop();
