@@ -5,7 +5,7 @@ struct S{
 	ll f;			// current flow
 	const ll cap;	// capacity
 	const ll cost;	// unit cost
-	S(int v, int reverse_index, int capacity, int cost = 0) :
+	S(int v, int reverse_index, ll capacity, ll cost = 0) :
 		v(v), r(reverse_index), f(0), cap(capacity), cost(cost) {}
 };
 struct FlowGraph : vector<vector<S>> {
