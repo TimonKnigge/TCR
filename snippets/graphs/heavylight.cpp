@@ -3,10 +3,11 @@ struct HLD {
 	int V,T; vi &p; vvi &childs;	// Size; dfs-time; input parent/childs
 	vi pr, size, heavy;		// path-root; size of subtrees; heavy child
 	vi t_in, t_out;			// dfs in and out times
-	HLD(vvi &childs, vi &p) : V(p.size()), T(0), p(p), childs(childs),
-	pr(V,-1), size(V,-1), heavy(V,-1), t_in(V,-1), t_out(V,-1) {
-		dfs(0); set_pr(0,0);
-	}
+	HLD(vvi &childs, vi &p, int root = 0) :
+		V(p.size()), T(0), p(p), childs(childs), pr(V,-1),
+		size(V,-1), heavy(V,-1), t_in(V,-1), t_out(V,-1) {
+			dfs(root); set_pr(root,0);
+		}
 	int dfs(int u){
 		size[u] = 1; t_in[u] = T++;
 		int m = -1, mi = -1, s;		// max, max index, size of subtree
