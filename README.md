@@ -42,7 +42,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
-- [ ] nCk % p using Lucas' Theorem
+- [x] nCk % p using Lucas' Theorem
 - [x] Miller Rabin
 
 #### Geometry
