@@ -7,7 +7,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 #### Datastructures
 - [ ] Segment Tree with lazy propagation
 - [ ] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
-- [ ] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
+- [x] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
 - [x] Suffix Array
 - [ ] Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
 - [ ] Ropes
@@ -22,7 +22,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] Biconnected Components
 - [ ] Triconnected Components
 - [x] Strongly Connected Components
-- [ ] Heavy Light Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
+- [x] Heavy Light Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
 - [x] Centroid Decomposition
 
 #### Flow & Matching
