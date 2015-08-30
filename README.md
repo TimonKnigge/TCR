@@ -8,7 +8,8 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Segment Tree with lazy propagation
 - [ ] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
 - [ ] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
-- [ ] Suffix Array or Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
+- [x] Suffix Array
+- [ ] Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
 - [ ] Ropes
 - [ ] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
 - [ ] Dancing Links (+ Algo X)
@@ -18,7 +19,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 #### Graphs and Trees
 - [x] Articulation Points/Bridges
-- [ ] Biconnected Components
+- [x] Biconnected Components
 - [ ] Triconnected Components
 - [x] Strongly Connected Components
 - [ ] Heavy Light Decomposition ([1](http://blog.anudeep2011.com/heavy-light-decomposition/))
@@ -42,12 +43,12 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
 - [ ] nCk % p using Lucas' Theorem
-- [ ] Miller Rabin
+- [x] Miller Rabin
 
 #### Geometry
 - [ ] Intersecting Halfspaces ([1](http://acm.math.spbu.ru/~kunyavskiy/notebook/))
 - [ ] Review 'basic' geometry code (line intersection checks etc.)
-- [ ] Rewrite the convex hull code
+- [x] Rewrite the convex hull code
 
 #### Misc.
 - [ ] Paragraph/writeup about SQRT Decompositions
