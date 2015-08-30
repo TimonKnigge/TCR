@@ -57,6 +57,6 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] DP Optimizations: Convex Hull, Quadrangle ([1](https://github.com/niklasb/contest-algos/tree/master/convex_hull), [2](http://wcipeg.com/wiki/Convex_hull_optimization), [3](http://codeforces.com/blog/entry/8219))
 
 #### Java    
-- [ ] Template    
-- [ ] Investigate BigNum/BigDecimal    
+- [X] Template    
+- [V] Investigate BigNum/BigDecimal    
 - [ ] Investigate `java.awt.geom` (esp. Area class) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file10))
