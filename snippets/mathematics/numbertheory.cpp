@@ -36,12 +36,12 @@ ll mulmod(ll a, ll b, ll m){
 }
 
 // Finds a^n % m in O(lg n) time, ensure that a < m to avoid overflow!
-ll modpow(ll a, ll n, ll m) {
+ll powmod(ll a, ll n, ll m) {
 	if (n == 0) return 1;
 	if (n == 1) return a;
 	ll aa = (a*a)%m; // use mulmod when b > 1e9
-	if (n % 2 == 0) return modpow(aa, n / 2, m);
-	return (a * modpow(aa, (n - 1) / 2, m)) % m;
+	if (n % 2 == 0) return powmod(aa, n / 2, m);
+	return (a * powmod(aa, (n - 1) / 2, m)) % m;
 }
 
 // Solve ax + by = c, returns false on failure.

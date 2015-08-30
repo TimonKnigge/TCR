@@ -35,6 +35,26 @@ vector<Factor> factor(ll n) {
 	return factors;
 }
 
+vector<ll> mf(SIZE, -1);		// mf[i]==i when prime
+void sieve2() { // call at start in main!
+	mf[0] = mf[1] = 1;
+	for (ll i = 2; i <= SIZE; i++) if (mf[i] < 0) {
+		mf[i] = i;
+		for (ll j = i * i; j <= SIZE; j += i)
+			if(mf[j] < 0) mf[j] = i;
+		primes.push_back(i);
+	}
+}
+
+vector<Factor> factor2(ll n){
+	vector<Factor> factors;
+	while(n>1){
+		if(factors.back().prime == mf[n]) factors.back().exp++;
+		else factors.push_back({mf[n],1});
+		n/=mf[n];
+	}
+	return factors;
+}
 
 ll numDiv(ll n) {
 	ll divisors = 1;
