@@ -64,11 +64,17 @@ ii crm(ll x1, ll a1, ll x2, ll a2) {
 	if (a1 % d != a2 % d) return ii(0, -1);
 	return ii(mod(s * a2 * x1 + t * a1 * x2, x1 * x2) / d, x1 * x2 / d);
 }
-ii crm(vi &x, vi &a){
+ii crm(vi &x, vi &a){		// ii = pair<long,long>!
 	ii ret = ii(a[0], x[0]);
 	for (size_t i = 1; i < x.size(); ++i) {
 		ret = crm(ret.second, ret.first, x[i], a[i]);
 		if (ret.second == -1) break;
 	}
 	return ret;
+}
+
+ll binom(ll n, ll k){
+	ll ans = 1;
+	for(ll i = 1; i <= min(k,n-k); i++) ans *= (n-k+i), ans/=i;
+	return ans;
 }
