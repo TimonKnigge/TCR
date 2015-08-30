@@ -92,58 +92,58 @@
 
 \section{Template}
 \entry{C++ Template}{}
-{snippets/header.h}{}{}
+{./snippets/header.h}{}{}
 
 \entry{Java Template}{}
-{snippets/template.java}{}{}
+{./snippets/template.java}{}{}
 
 \section{Data Structures}
 
 \entry{Union Find}{}
-{snippets/datastructures/unionfind.cpp}{}{}
+{./snippets/datastructures/unionfind.cpp}{}{}
 
 \entry{Max Queue}
 {\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, set union/intersection (use bitmasks), etc.}
-{snippets/datastructures/maxqueue.cpp}{}{}
+{./snippets/datastructures/maxqueue.cpp}{}{}
 
 \entry{Fenwick Tree}
 {The tree is 1-based! Use indices $1..n$.}
-{snippets/datastructures/fenwick.cpp}{}{}
+{./snippets/datastructures/fenwick.cpp}{}{}
 
 \entry{2D Fenwick Tree}
 {Can easily be extended to any dimension.}
-{snippets/datastructures/fenwick2d.cpp}{}{}
+{./snippets/datastructures/fenwick2d.cpp}{}{}
 
 \entry{Segment Tree}
 {The range should be of the form $2^p$.}
-{snippets/datastructures/segmenttree.cpp}{}{}
+{./snippets/datastructures/segmenttree.cpp}{}{}
 
 \entry{AVL Tree}
 {Can be augmented to support in $O(\log n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
-{snippets/datastructures/avl.cpp}{}{}
+{./snippets/datastructures/avl.cpp}{}{}
 
 \entry{Prefix Trie}{}
-{snippets/datastructures/trie.cpp}{}{}
+{./snippets/datastructures/trie.cpp}{}{}
 
 \entry{Suffix Array}{Note: dont forget to invert the returned array.}
-{snippets/datastructures/suffixarray.cpp}{$O(n \log^2 n)$}{}
+{./snippets/datastructures/suffixarray.cpp}{$O(n \log^2 n)$}{}
 
 \entry{Built-in datastructures}{}
-{snippets/datastructures/builtin.cpp}{}{}
+{./snippets/datastructures/builtin.cpp}{}{}
 
 \section{Basic Graph algorithms}
 
 \entry{Edge Classification}{}
-{snippets/graphs/edgeclassification.cpp}
+{./snippets/graphs/edgeclassification.cpp}
 {$O(V + E)$}{}
 
 \entry{Topological sort}{}
-{snippets/graphs/toposort.cpp}
+{./snippets/graphs/toposort.cpp}
 {$O(V + E)$}{}
 
 \entry{Tarjan: strongly connected components}
 {}
-{snippets/graphs/tarjan.cpp}
+{./snippets/graphs/tarjan.cpp}
 {$O(V + E)$}
 {}
 
@@ -154,36 +154,36 @@
 {}
 
 \entry{Kruskal's algorithm}{}
-{snippets/graphs/kruskal.cpp}
+{./snippets/graphs/kruskal.cpp}
 {$O(E \log V)$}
 {Union Find}
 
 \entry{Prim's algorithm}{}
-{snippets/graphs/prim.cpp}
+{./snippets/graphs/prim.cpp}
 {$O(E \log V)$}{}
 
 \entry{Dijkstra's algorithm}{}
-{snippets/graphs/dijkstra.cpp}
+{./snippets/graphs/dijkstra.cpp}
 {$O((V + E) \log V)$}{}
 
 \entry{Bellmann-Ford algorithm}
 {Returns \texttt{true} if the graph has no negative cycles.}
-{snippets/graphs/bellmannford.cpp}
+{./snippets/graphs/bellmannford.cpp}
 {$O(VE)$}{}
 
 \entry{Bellmann-Ford extended algorithm}
 {An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
-{snippets/graphs/bellmannford-extended.cpp}
+{./snippets/graphs/bellmannford-extended.cpp}
 {$O(VE)$}{}
 
 \entry{Floyd-Warshall algorithm}
 {Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}
-{snippets/graphs/floydwarshall.cpp}
+{./snippets/graphs/floydwarshall.cpp}
 {$O(V^3)$}{}
 
 \entry{Hierholzer's algorithm}
 {Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}
-{snippets/graphs/euleriancircuits.cpp}
+{./snippets/graphs/euleriancircuits.cpp}
 {$O(V + E)$}{}
 
 \entry{Bron-Kerbosch}
@@ -216,7 +216,7 @@
 
 \entry{Centroid Decomposition}
 {In case it is necessary to work with the subtrees directly, consider timestamping each node during the decomposition}
-{snippets/graphs/centroid.cpp}
+{./snippets/graphs/centroid.cpp}
 {$O(n \log n)$}{}
 
 \entry{Heavy-Light decomposition}
@@ -228,21 +228,21 @@
 
 \entry{Flow Network}
 {Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}
-{snippets/flowalgorithms/flownetwork.cpp}{}{}
+{./snippets/flowalgorithms/flownetwork.cpp}{}{}
 
 \entry{Edmonds-Karp algorithm}{}
-{snippets/flowalgorithms/edmondskarp.cpp}
+{./snippets/flowalgorithms/edmondskarp.cpp}
 {$O(VE^2)$}
 {Flow Network}
 
 \entry{Dinic's algorithm}{}
-{snippets/flowalgorithms/dinic.cpp}
+{./snippets/flowalgorithms/dinic.cpp}
 {$O(V^2E)$}
 {Flow Network}
 
 \entry{Minimum Cut Inference}
 {The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}
-{snippets/flowalgorithms/infermincut.cpp}
+{./snippets/flowalgorithms/infermincut.cpp}
 {$O(V + E)$}
 {Flow Network}
 
@@ -280,37 +280,37 @@
 
 \entry{Stable Marriage Problem}
 {If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}
-{snippets/combinatorics/stablemarriage.cpp}
+{./snippets/combinatorics/stablemarriage.cpp}
 {$O(mw)$}{}
 
 \entry{Meet in the Middle}
 {Sufficient for $2 \leq n \leq 14$.}
-{snippets/combinatorics/meetinthemiddle.cpp}
+{./snippets/combinatorics/meetinthemiddle.cpp}
 {$O(n^2\binom{n}
 	{n/2}\big(\frac{n}
 {2}\big)!)$}{}
 
 \entry{KP procedure}
 {Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}
-{snippets/combinatorics/twovariablesilp.cpp}
+{./snippets/combinatorics/twovariablesilp.cpp}
 {$O(d^2 log(d)log(log(d)))$}{}
 
 \entry{2-SAT}{}
-{snippets/combinatorics/2-sat.cpp}
+{./snippets/combinatorics/2-sat.cpp}
 {$O(|\text{variables}|+|\text{implications}|)$}
 {Tarjan's}
 
 \section{Computational geometry}
 
 \entry{Essentials}{}
-{snippets/geometry/geometryessentials.cpp}{}{}
+{./snippets/geometry/geometryessentials.cpp}{}{}
 
 \entry{Essentials, Ragnar}{}
 {./snippets/geometry/basics_ragnar.cpp}{}
 {}
 
 \entry{Convex Hull}{}
-{snippets/geometry/convexhull.cpp}
+{./snippets/geometry/convexhull.cpp}
 {$O(n \log n)$}
 {Geometry Essentials}
 
@@ -321,70 +321,73 @@
 \section{Mathematics}
 
 \entry{Primes}{}
-{snippets/mathematics/primes.cpp}{}{}
+{./snippets/mathematics/primes.cpp}{}{}
 
 \entry{Number theoretic algorithms}{}
-{snippets/mathematics/numbertheory.cpp}{}{}
+{./snippets/mathematics/numbertheory.cpp}{}{}
+
+\entry{Lucas' theorem}{}
+{./snippets/mathematics/lucas.cpp}{}{}
 
 \entry{Complex Numbers}
 {Faster-than-built-in complex numbers}
-{snippets/mathematics/complex.cpp}{}{}
+{./snippets/mathematics/complex.cpp}{}{}
 
 \entry{Fast Fourier Transform}
 {Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}
-{snippets/mathematics/fft.cpp}
+{./snippets/mathematics/fft.cpp}
 {$O(n \log n)$}
 {Bitmasking, Complex Numbers}
 
 \entry{Matrix Exponentation}
 {Matrix exponentation in logarithmic time.}
-{snippets/mathematics/matrixexponentation.cpp}{}{}
+{./snippets/mathematics/matrixexponentation.cpp}{}{}
 
 \section{Strings}
 
 \entry{Knuth Morris Pratt}{}
-{snippets/strings/knuthmorrispratt.cpp}
+{./snippets/strings/knuthmorrispratt.cpp}
 {$O(n + m)$}{}
 
 \entry{Z-algorithm}
 {To match pattern $P$ on string $S$: pick $\Phi$ s.t. $\Phi \notin P$, find $Z$ of $P{\Phi}S$.}
-{snippets/strings/zalgorithm.cpp}
+{./snippets/strings/zalgorithm.cpp}
 {$O(n)$}{}
 
 \entry{Aho-Corasick}
 {Constructs a Finite State Automaton that can match $k$ patterns of total length $m$ on a string of size $n$.}
-{snippets/strings/ahocorasick.cpp}
+{./snippets/strings/ahocorasick.cpp}
 {$O(n + m + k)$}{}
 
 \section{Miscellaneous}
 
 \entry{Longest Increasing Subsequence}
 {Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log n)$ factor.}
-{snippets/misc/lis.cpp}
+{./snippets/misc/lis.cpp}
 {$O(n \log n)$}{}
 
 \entry{Randomisation}{Might be useful for NP-Complete/Backtracking problems}
-{snippets/misc/randomisation.cpp}{}{}
+{./snippets/misc/randomisation.cpp}{}{}
 
 \section{Helpers}
 
 \entry{Golden Section Search}
 {For a discrete search: use binary search on the difference of successive elements, see the section on Binary Search.}
-{snippets/helpers/goldensectionsearch.cpp}
+{./snippets/helpers/goldensectionsearch.cpp}
 {$O(\log {1 / \epsilon})$}{}
 
 \entry{Binary Search}{}
-{snippets/helpers/binarysearch.cpp}
+{./snippets/helpers/binarysearch.cpp}
 {$O(\log n), O(\log {1 / \epsilon})$}{}
 
 \entry{Bitmasking}{}
-{snippets/helpers/bitmasking.cpp}{}{}
+{./snippets/helpers/bitmasking.cpp}{}{}
 
 \entry{QuickSelect}
 {Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log n)$.}
-{snippets/helpers/quickselect.cpp}
+{./snippets/helpers/quickselect.cpp}
 {$O(n)$}{}
 
-\entry{Fast IO}{}{snippets/helpers/fastinput.cpp}{}{}
+\entry{Fast IO}{}{./snippets/helpers/fastinput.cpp}{}{}
 
 \end{document}
