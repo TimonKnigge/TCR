@@ -38,7 +38,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 #### Combinatorics, Math
 - [x] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
 - [x] Review the code related to primes;
-- [ ] add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
+- [x] add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
 - [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [ ] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [ ] Determinant Calculation
