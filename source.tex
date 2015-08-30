@@ -1,7 +1,7 @@
 \documentclass[
 	a4paper,
 	landscape
-	twocolumn
+	article
 ]{article}
 \usepackage[
 	a4paper,
@@ -79,11 +79,17 @@
 	\lstinputlisting[language=]{#3}
 }
 
+% Custom \toc command, to remove the title
+\makeatletter
+\renewcommand\tableofcontents{%
+    \@starttoc{toc}%
+}
+\makeatother
 \begin{document}
 % Title without the newpage, see http://tex.stackexchange.com/questions/86249/maketitle-text-before-title
 {\let\newpage\relax\maketitle}
 \tableofcontents
-\newpage
+%\newpage
 
 \section{Vimrc}
 % Can't use the \entry command, because filetype is tex
