@@ -155,7 +155,7 @@
 {./snippets/graphs/toposort.cpp}
 {$O(V + E)$}{}
 
-\entry{Tarjan: strongly connected components}
+\entry{Tarjan: SCCs}
 {}
 {./snippets/graphs/tarjan.cpp}
 {$O(V + E)$}
@@ -185,7 +185,7 @@
 {./snippets/graphs/bellmannford.cpp}
 {$O(VE)$}{}
 
-\entry{Bellmann-Ford extended algorithm}
+\entry{Bellmann-Ford extended}
 {An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
 {./snippets/graphs/bellmannford-extended.cpp}
 {$O(VE)$}{}
@@ -238,7 +238,7 @@
 {./snippets/graphs/heavylight.cpp}
 {$O(n)$}{}
 
-\section{Flow and Matching Algorithms}
+\section{Flow and Matching}
 
 \entry{Flow Network}
 {Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}
@@ -274,7 +274,7 @@
 {$O(VE^2)$}
 {Flow Graph}
 
-\entry{Edmonds Karp using Dijkstra Ragnar}{}
+\entry{Edmonds Karp (Dijkstra)}{}
 {./snippets/flowalgorithms/edmonds_karp_dijkstra_ragnar.cpp}
 {}
 {Flow Graph}
@@ -289,8 +289,9 @@
 {}
 {Flow Graph}
 
-% \& crashes pdf-viewer index generator. Something due to hyperref
-\section{Combinatorics and Probability}
+% \& crashes pdf-viewer index generator. Something due to hyperref (working at Ragnar's pc)
+% \& needed to make the toc entry 1 line
+\section{Combinatorics \& Probability}
 
 \entry{Stable Marriage Problem}
 {If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}
@@ -352,6 +353,10 @@
 {./snippets/mathematics/fft.cpp}
 {$O(n \log n)$}
 {Bitmasking, Complex Numbers}
+
+\entry{Gaussian Elimination}
+{Solve $xM=a$ for $x$.}
+{./snippets/mathematics/gaussian_elimination.cpp}{}{}
 
 \entry{Matrix Exponentation}
 {Matrix exponentation in logarithmic time.}

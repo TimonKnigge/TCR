@@ -4,7 +4,7 @@ struct Node {
 	bool rev = false;
 	Node *l, *r;
 	Node(ll _val) : val(_val), mx(_val), size(1) { priority = rand(); }
-}
+};
 int size(Node *p) { return p == NULL ? 0 : p->size; }
 ll getmax(Node *p) { return p == NULL ? -LLINF : p->mx; }
 void update(Node *p) {
