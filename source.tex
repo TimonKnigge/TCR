@@ -125,12 +125,16 @@
 {./snippets/datastructures/segmenttree.cpp}{}{}
 
 \entry{Implicit Cartesian Tree}
-{Note that the tree is implicit, though it can be un-implicited quite easily. The indices are zero-based. Also, don't forget to initialise the empty tree to \texttt{NULL}. (Pretty much) all operations take $O(\log n)$ time.}
+{The indices are zero-based. Also, don't forget to initialise the empty tree to \texttt{NULL}. (Pretty much) all operations take $O(\log n)$ time.}
 {./snippets/datastructures/implicit-cartesian-tree.cpp}{}{}
 
 \entry{AVL Tree}
 {Can be augmented to support in $O(\log n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
 {./snippets/datastructures/avl.cpp}{}{}
+
+\entry{Treap}
+{Can be used like the built-in \texttt{set}, except that it also supports order statistics, can be merged/split in $O(\log n)$ time, can support range queries, and more.}
+{./snippets/datastructures/treap.cpp}{}{}
 
 \entry{Prefix Trie}{}
 {./snippets/datastructures/trie.cpp}{}{}
