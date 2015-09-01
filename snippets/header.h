@@ -39,3 +39,8 @@ void Log() { if(LOG) cerr << "\n"; }
 template<class T, class... S> void Log(T t, S... s){
 	if(LOG) cerr << t << "\t", Log(s...);
 }
+
+int main(){
+	ios::sync_with_stdio(false); cin.tie(nullptr);
+	return 0;
+}
