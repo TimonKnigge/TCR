@@ -18,7 +18,7 @@ struct Tarjan {
 		}
 		if (l[u] == n[u]) {
 			while (true) {
-				int v = st.top(); st.pop();
+				int v = st.top(); st.pop(); vs[v] = false;
 				com[v] = C;		//<== ACT HERE
 				if (u == v) break;
 			}
@@ -30,7 +30,7 @@ struct Tarjan {
 		com.assign(V, -1);
 		C = 0;
 		for (int u = 0; u < V; ++u)
-			if (!vs[u]) visit(u, com);
+			if (n[u] == -1) visit(u, com);
 		return C;
 	}
 
