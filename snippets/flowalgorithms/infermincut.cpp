@@ -1,19 +1,22 @@
-void FlowNetwork::infer_mincut_dfs(int u, vb &vs) {
-	vs[u] = true;
-	for (int i = h[u]; i != -1; i = e[i].nxt) {
-		if (e[i].cap > e[i].flo && !vs[e[i].v])
-			infer_mincut_dfs(e[i].v, vs);
-	}   }
-
-ll FlowNetwork::infer_mincut(int s) {
-	vb vs(n, false);
-	infer_mincut_dfs(s, vs);
-	ll c = 0;
-	for (int i = 0; i < e.size(); ++i) {
-		if (vs[e[i ^ 1].v] && !vs[e[i].v]) {
-			// The edge e[i ^ 1].v -> e[i].v,
-			// given as e[i], is in the min cut.
-			c += e[i].cap;
-		}   }
-	return c;
+void imc_dfs(FlowGraph &fg, int u, vb &cut) {
+	cut[u] = true;
+	for (auto &&e : fg[u]) {
+		if (e.cap > e.f && !cut[e.v])
+			imc_dfs(fg, e.v, cut);
+	}
+}
+ll infer_minimum_cut(FlowGraph &fg, int s, vb &cut) {
+	cut.assign(fg.size(), false);
+	imc_dfs(fg, s, cut);
+	ll cut_value = 0LL;
+	for (size_t u = 0; u < fg.size(); ++u) {
+		if (!cut[u]) continue;
+		for (auto &&e : fg[u]) {
+			if (cut[e.v]) continue;
+			cut_value += e.cap;
+			// The edge e from u to e.v is
+			// in the minimum cut.
+		}
+	}
+	return cut_value;
 }
