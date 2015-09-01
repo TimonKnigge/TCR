@@ -240,19 +240,24 @@
 
 \section{Flow and Matching}
 
-\entry{Flow Network}
-{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}
-{./snippets/flowalgorithms/flownetwork.cpp}{}{}
+%\entry{Flow Network}
+%{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}
+%{./snippets/flowalgorithms/flownetwork.cpp}{}{}
 
-\entry{Edmonds-Karp algorithm}{}
-{./snippets/flowalgorithms/edmondskarp.cpp}
-{$O(VE^2)$}
-{Flow Network}
 
-\entry{Dinic's algorithm}{}
-{./snippets/flowalgorithms/dinic.cpp}
-{$O(V^2E)$}
-{Flow Network}
+\entry{Flow Graph}
+{Structure used by the following flow algorithms.}
+{./snippets/flowalgorithms/flowgraph.cpp}{}{}
+
+%\entry{Edmonds-Karp algorithm}{}
+%{./snippets/flowalgorithms/edmondskarp.cpp}
+%{$O(VE^2)$}
+%{Flow Network}
+
+%\entry{Dinic's algorithm}{}
+%{./snippets/flowalgorithms/dinic.cpp}
+%{$O(V^2E)$}
+%{Flow Network}
 
 \entry{Minimum Cut Inference}
 {The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}
@@ -260,34 +265,30 @@
 {$O(V + E)$}
 {Flow Network}
 
-\entry{Flow Graph}
-{Structure used by the following flow algorithms.}
-{./snippets/flowalgorithms/flowgraph.cpp}{}{}
-
 \entry{Dinic Ragnar}{}
 {./snippets/flowalgorithms/dinic_ragnar.cpp}
 {$O(V^2E)$}
 {Flow Graph}
 
-\entry{Edmonds Karp Ragnar}{}
-{./snippets/flowalgorithms/edmondskarp_ragnar.cpp}
-{$O(VE^2)$}
-{Flow Graph}
+%\entry{Edmonds Karp Ragnar}{}
+%{./snippets/flowalgorithms/edmondskarp_ragnar.cpp}
+%{$O(VE^2)$}
+%{Flow Graph}
 
-\entry{Edmonds Karp (Dijkstra)}{}
-{./snippets/flowalgorithms/edmonds_karp_dijkstra_ragnar.cpp}
+\entry{Min cost flow}{}
+{./snippets/flowalgorithms/mincostflow.cpp}
 {}
 {Flow Graph}
 
-\entry{Push Relabel Ragnar}{}
-{./snippets/flowalgorithms/push_relabel.cpp}
-{}
-{Flow Graph}
+%\entry{Push Relabel Ragnar}{}
+%{./snippets/flowalgorithms/push_relabel.cpp}
+%{}
+%{Flow Graph}
 
-\entry{Hopcroft Karp Ragnar}{}
-{./snippets/flowalgorithms/hopcroft_karp_ragnar.cpp}
-{}
-{Flow Graph}
+%\entry{Hopcroft Karp Ragnar}{}
+%{./snippets/flowalgorithms/hopcroft_karp_ragnar.cpp}
+%{}
+%{Flow Graph}
 
 % \& crashes pdf-viewer index generator. Something due to hyperref (working at Ragnar's pc)
 % \& needed to make the toc entry 1 line
