@@ -1,34 +1,20 @@
-filetype plugin indent on
-syntax on				" syntax highlighting
+syntax on
+colorscheme default		" better colorscheme
+hi Comment ctermfg=cyan	" readable comments
 set hidden				" don't close buffers
 set tabstop=4			" tabsize of 4
 set softtabstop=4		" show tab as 4
 set shiftwidth=4		" cindent tabsize
 set noexpandtab			" use tabs; not spaces
 set laststatus=2		" always show the status bar
-set t_Co=256			" color terminal
 set encoding=utf-8		" just to be sure
 set mouse=nvc			" mouse scrolling in normal and visual mode
 set clipboard=unnamed	" copy paste to clipboard
 set backspace=indent,eol,start	" make backspace work over \n and \t
 set wrap				" enable line wrap
 set linebreak			" wrap at word boundaries
-set list				" show tabs and trailing spaces; 
-set listchars=tab:\|\ 	" show tab as '|   '; note the space after|
 set nu					" show linenumbers
 set incsearch			" show matches while typing
 set cindent				" use C-style indenting
 set autoindent			" autoindent
 set cinoptions=:0,l1,g0,(0	" set the right indenting options
-let delimitMate_expand_cr = 1			" expand { at start of block
-let delimitMate_expand_space = 1		" expand ( ) to (  )
-let delimitMate_balance_matchpairs = 1	" don't complete if #() is odd
-" CPP commands	(%:r strips .cpp part)
-set makeprg=mygpp		" DEPENDS ON CONTEST ENVIRONMENT
-command!-bar Run	w|!./a.out
-nnoremap <F8>	:Run<CR>
-command!-bar Make	w|make %:r
-nnoremap <F9>	:Make<CR>
-command! Test	Make|Run
-nnoremap <F10>	:Test<CR>
-command! In		vs %:r.in

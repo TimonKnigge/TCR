@@ -31,6 +31,7 @@ using namespace std;
 using ll = long long;
 using ii = pair<int,int>;
 using vi = vector<int>;
+using vb = vector<bool>;
 using vvi = vector<vi>;
 
 constexpr int  INF = 1e9+1; // < 1e9 - -1e9
@@ -38,9 +39,4 @@ constexpr ll LLINF = 1e18+1;
 void Log() { if(LOG) cerr << "\n"; }
 template<class T, class... S> void Log(T t, S... s){
 	if(LOG) cerr << t << "\t", Log(s...);
-}
-
-int main(){
-	ios::sync_with_stdio(false); cin.tie(nullptr);
-	return 0;
 }
