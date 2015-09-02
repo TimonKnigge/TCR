@@ -21,8 +21,9 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage[toc]{multitoc}
-\usepackage{tocloft}
+\usepackage[toc]{multitoc}			% multicolumn toc
+\usepackage{tocloft}				% to reduce toc spacing
+\usepackage[compact]{titlesec}		% shrink section whitespace
 \usepackage{ifthen}
 \usepackage{nicefrac}
 \usepackage{hyperref} % for clickable toc and index
@@ -48,7 +49,7 @@
 % all the \vspace are for reducing the vertical spacing
 \title{\vspace{-40pt}Team Code Reference\vspace{-0.5em}}
 \author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
-\date{ \vspace{-0.5em} \today \vspace{-2em} }
+\date{ \vspace{-0.5em} \today \vspace{-0em} }
 
 % remove the toc title
 \makeatletter
@@ -97,12 +98,11 @@
 \tableofcontents
 \newpage
 
-\section{Vimrc}
+\section{Templates}
 % Can't use the \entry command, because filetype is tex
 \vimentry{Vimrc}{}
 {./snippets/vimrc_tcr}
 
-\section{Template}
 \entry{C++ Template}{}
 {./snippets/header_tcr.h}{}{}
 
