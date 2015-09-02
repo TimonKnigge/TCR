@@ -295,7 +295,7 @@
 %{}
 %{Flow Graph}
 
-\entry{Min capacities}{
+\entry{Min edge capacities}{
 	Make a supersource $S$ and supersink $T$.
 	When there are a lowerbound $l(u,v)$ and upperbound $c(u,v)$,
 	add edge with capacity $c-l$.
@@ -311,6 +311,19 @@
 {}
 {Dinic}
 
+\entry{Min vertex capacities}{
+	$x(u)$ is the amount of flow that is extracted at $u$, or inserted when $x(u)<0$.
+	If $\sum_u s(u) > 0$, add edge $(t,\tilde t)$ with capacity $\infty$,
+	and set $x(\tilde t)=-\sum_ux(u)$. Otherwise add $(\tilde s,s)$ and set $x(\tilde s)=-\sum_u x(u)$.
+	$\tilde s$ or $\tilde t$ is the new source/sink.
+	Now, add $S$ and $T$, $(t,s)$ with capacity $\infty$.
+	If $x(u)>0$, add $(S,u)$ with capacity $x(u)$. Otherwise add $(u,T)$ with capacity $x(u)$.
+	Use Dinic to find a max flow. If all edges from $S$ are saturated, this is a feasible flow.
+	Run Dinic again in the residual graph to find the maximal feasible flow.
+}
+{}
+{}
+{Dinic}
 \section{Combinatorics \& Probability}
 
 \entry{Stable Marriage Problem}
