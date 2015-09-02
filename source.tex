@@ -22,6 +22,7 @@
 \usepackage{color}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[toc]{multitoc}
+\usepackage{tocloft}
 \usepackage{ifthen}
 \usepackage{nicefrac}
 \usepackage{hyperref} % for clickable toc and index
@@ -31,6 +32,7 @@
 \setlength{\columnseprule}{0.1pt}
 \newcommand{\latexcolumnseprulecolor}{\color{red}}
 
+% A red divider in the middle of the page
 \usepackage{etoolbox}
 \makeatletter
 \patchcmd\@outputdblcol{% find
@@ -42,6 +44,22 @@
 	\@latex@warning{Patching \string\@outputdblcol\space failed}%
 }
 \makeatother
+
+% all the \vspace are for reducing the vertical spacing
+\title{\vspace{-40pt}Team Code Reference\vspace{-0.5em}}
+\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
+\date{ \vspace{-0.5em} \today \vspace{-2em} }
+
+% remove the toc title
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+
+% reduce section spacing in toc
+\setlength{\cftbeforesecskip}{0pt}
+
+
+
 \lstset{
 	backgroundcolor=\color{white},
 	tabsize=2,
@@ -57,12 +75,6 @@
 	commentstyle=\color[rgb]{0, 0.5, 0},
 	stringstyle=\color{red}
 }
-
-% alle the \vspace are for reducing the vertical spacing
-\title{\vspace{-40pt}Team Code Reference\vspace{-0.5em}}
-\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
-\date{ \vspace{-0.5em} \today \vspace{-2em} }
-
 % \entry{name}{description}{snippet location}{complexity}{dependencies}
 \newcommand{\entry}[5]{
 	\subsection{#1}
@@ -79,26 +91,20 @@
 	\lstinputlisting[language=]{#3}
 }
 
-% Custom \toc command, to remove the title
-\makeatletter
-\renewcommand\tableofcontents{%
-    \@starttoc{toc}%
-}
-\makeatother
 \begin{document}
 % Title without the newpage, see http://tex.stackexchange.com/questions/86249/maketitle-text-before-title
 {\let\newpage\relax\maketitle}
 \tableofcontents
-%\newpage
+\newpage
 
 \section{Vimrc}
 % Can't use the \entry command, because filetype is tex
 \vimentry{Vimrc}{}
-{./snippets/vimrc}
+{./snippets/vimrc_tcr}
 
 \section{Template}
 \entry{C++ Template}{}
-{./snippets/header.h}{}{}
+{./snippets/header_tcr.h}{}{}
 
 \entry{Java Template}{}
 {./snippets/template.java}{}{}
@@ -265,7 +271,7 @@
 {$O(V + E)$}
 {Flow Network}
 
-\entry{Dinic Ragnar}{}
+\entry{Dinic}{}
 {./snippets/flowalgorithms/dinic_ragnar.cpp}
 {$O(V^2E)$}
 {Flow Graph}
