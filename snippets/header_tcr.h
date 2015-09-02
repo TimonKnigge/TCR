@@ -1,3 +1,4 @@
+//lstlistings skips the first [this] line
 iostream string sstream vector list set map unordered_map queue stack bitset
 tuple cstdio numeric iterator algorithm cmath chrono cassert unordered_set
 using namespace std;	// :s/ /\r/g  :s/\w*/#include <\0>/g

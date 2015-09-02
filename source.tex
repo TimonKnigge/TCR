@@ -84,9 +84,9 @@
 	\ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
 
 	\ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
-	\lstinputlisting[language=C++]{#3}
+	\lstinputlisting[firstline=2]{#3}
 }
-\newcommand{\vimentry}[3]{
+\newcommand{\otherentry}[3]{
 	\subsection{#1}
 	#2
 	\lstinputlisting[language=]{#3}
@@ -100,7 +100,7 @@
 
 \section{Templates}
 % Can't use the \entry command, because filetype is tex
-\vimentry{Vimrc}{}
+\otherentry{Vimrc}{}
 {./snippets/vimrc_tcr}
 
 \entry{C++ Template}{}
