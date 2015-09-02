@@ -26,14 +26,14 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] Centroid Decomposition
 
 #### Flow & Matching
-- [ ] Push Relabel ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
-- [ ] Min Cost Max Flow
+- [x] Push Relabel (not in TCR) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
+- [x] Min Cost Max Flow
 - [ ] Investigate how to adapt one of the algorithms to support minimum capacity edges
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows)
-- [ ] Hopcroft-Karp algorithm
+- [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
 - [ ] Hungarian Algorithm
-- [ ] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
+- [x] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
 - [x] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
@@ -52,12 +52,12 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 #### Misc.
 - [ ] Paragraph/writeup about SQRT Decompositions
-- [X] O(n lg n) Longest Increasing Subsequence ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file27))
+- [x] O(n lg n) Longest Increasing Subsequence ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file27))
 - [ ] Game Theory: Nim & Variations, Grundy ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/algorithm-games/), [2](https://github.com/niklasb/tcr/blob/master/tcr.pdf) (8.3))
 - [ ] DP Optimizations: Convex Hull, Quadrangle ([1](https://github.com/niklasb/contest-algos/tree/master/convex_hull), [2](http://wcipeg.com/wiki/Convex_hull_optimization), [3](http://codeforces.com/blog/entry/8219))
 
 #### Java    
-- [X] Template    
-- [X] Investigate BigNum/BigDecimal    
+- [x] Template    
+- [x] Investigate BigNum/BigDecimal    
 - [ ] Investigate `java.awt.geom` (esp. Area class) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file10))
 - [ ] Use of dates library
