@@ -299,6 +299,7 @@
 	Make a supersource $S$ and supersink $T$.
 	When there are a lowerbound $l(u,v)$ and upperbound $c(u,v)$,
 	add edge with capacity $c-l$.
+	Furthermore, add $(t,s)$ with capacity $\infty$.
 	\begin{align*}
 		M(u) = \sum_v l(v,u) - \sum_v l(u,v)
 	\end{align*}
@@ -399,7 +400,7 @@
 
 \section{Miscellaneous}
 
-\entry{Longest Increasing Subsequence}
+\entry{LIS}
 {Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log n)$ factor.}
 {./snippets/misc/lis.cpp}
 {$O(n \log n)$}{}
