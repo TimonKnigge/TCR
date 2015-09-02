@@ -28,7 +28,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 #### Flow & Matching
 - [x] Push Relabel (not in TCR) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
 - [x] Min Cost Max Flow
-- [ ] Investigate how to adapt one of the algorithms to support minimum capacity edges
+- [ ] Investigate how to adapt one of the algorithms to support minimum capacity edges ([1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows)
 - [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
