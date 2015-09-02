@@ -6,7 +6,7 @@ int dijkstra(vector<vector<Edge>> &edges, int s, int t) {
 	vi dist(edges.size(),INF);
 	priority_queue<PQ,vector<PQ>,greater<PQ>> pq;
 	dist[s] = 0; pq.push({0, s});
-	while (!pq.empty()) { 
+	while (!pq.empty()) {
 		auto d = pq.top().d, u = pq.top().v; pq.pop();
 		if(u==t) break;			// target reached
 		if (d == dist[u])
