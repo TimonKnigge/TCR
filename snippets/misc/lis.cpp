@@ -25,7 +25,7 @@ int longest_increasing_subsequence(vector<T> &a, vector<int> &seq) {
 			else
 				r = m - 1;
 		}
-	  
+
 		pre[i] =  lis[l - 2];
 		lis[l - 1] = i;
 		if (l > L) L = l;

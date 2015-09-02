@@ -40,11 +40,11 @@ struct TwoSAT {
 		for (int i = 0; i < n; ++i)
 			if (com[2 * i] == com[2 * i + 1])
 				return false;
-	
+
 		vvi bycom(com.size());
 		for (int i = 0; i < 2 * n; ++i)
 			bycom[com[i]].push_back(i);
-	
+
 		a.assign(n, false);
 		vb vis(n, false);
 		for(auto &&component : bycom){

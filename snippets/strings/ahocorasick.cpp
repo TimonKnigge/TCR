@@ -53,7 +53,7 @@ public:
 				ss = a[ss].failure;
 			state = a[state].child[mp(sentence[i])] = a[ss].child[mp(sentence[i])];
 			for (int w : a[state].match)
-				matches[w].push_back(i - words[w].length() + 1);		
+				matches[w].push_back(i - words[w].length() + 1);
 		}
 	}
 };

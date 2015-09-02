@@ -22,7 +22,7 @@ bool areIntersect(line l1, line l2, point &p) {
   if (fabs(l1.b) > EPS) p.y = -(l1.a * p.x + l1.c);
   else				  p.y = -(l2.a * p.x + l2.c);
   return true; }
-  
+
 double area(double ab, double bc, double ca) {
   // Heron's formula
   double s = 0.5 * perimeter(ab, bc, ca);
@@ -36,7 +36,7 @@ bool areParallel(line l1, line l2) {	   // check coefficients a & b
 
 bool areSame(line l1, line l2) {		   // also check coefficient c
   return areParallel(l1 ,l2) && (fabs(l1.c - l2.c) < EPS); }
-  
+
 void closestPoint(line l, point p, point &ans) {
   line perpendicular;		 // perpendicular to l and pass through p
   if (fabs(l.b) < EPS) {			  // special case 1: vertical line
@@ -56,7 +56,7 @@ void reflectionPoint(line l, point p, point &ans) {
   closestPoint(l, p, b);					 // similar to distToLine
   vec v = toVec(p, b);							 // create a vector
   ans = translate(translate(p, v), v); }		 // translate p twice
-  
+
 double cross(vec a, vec b) { return a.x * b.y - a.y * b.x; }
 
 // note: to accept collinear points, we have to change the `> 0'

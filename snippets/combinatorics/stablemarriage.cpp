@@ -7,7 +7,7 @@ vi stable_marriage(int M, int W, vvi &mpref, vvi &wpref) {
 		int m = st.top(); st.pop();
 		if (mmatch[m] != -1) continue;
 		if (mnext[m] >= W) continue;
-	
+
 		int w = mpref[m][mnext[m]++];
 		if (wmatch[w] == -1) {
 			mmatch[m] = w;

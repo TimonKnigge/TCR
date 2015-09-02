@@ -27,7 +27,7 @@ void split(Node *t, Node *&l, Node *&r, ll val) {
 		split(t->r, t->r, r, val); l = t;
 	} update(t);
 }
-bool insert(Node *&t, ll val) { 
+bool insert(Node *&t, ll val) {
 	// returns false if the element already existed
 	Node *n = new Node(val), *l, *r;
 	split(t, l, t, val);
@@ -37,7 +37,7 @@ bool insert(Node *&t, ll val) {
 	merge(t, t, r);
 	return empty;
 }
-void erase(Node *&t, ll val, bool del = true) { 
+void erase(Node *&t, ll val, bool del = true) {
 	// returns false if the element did not exist
 	Node *l, *rm;
 	split(t, l, t, val);

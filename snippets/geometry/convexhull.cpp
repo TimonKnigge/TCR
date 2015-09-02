@@ -8,7 +8,7 @@ ll det(ll x1, ll y1, ll x2, ll y2) {
 	return x1 * y2 - x2 * y1; }
 ll det(const point &p1, const point &p2, const point &d) {
 	return det(p1.x - d.x, p1.y - d.y, p2.x - d.x, p2.y - d.y); }
-bool comp_lexo(const point &l, const point &r) { 
+bool comp_lexo(const point &l, const point &r) {
 	return l.y != r.y ? l.y < r.y : l.x < r.x; }
 bool comp_angl(const point &l, const point &r, const point &c) {
 	ll d = det(l, r, c);
@@ -30,7 +30,7 @@ struct ConvexHull {
 		ps[0] = ps[n] = pivot; ps[pivot] = 0;
 		sort(ps.begin()+1, ps.end()-1, [this, &pivot](int l, int r) {
 			return comp_angl(p[l], p[r], p[pivot]); });
-		
+
 		h.push_back(ps[0]);
 		size_t i = 1; ll d;
 		while (i < ps.size()) {

@@ -14,10 +14,10 @@ void sieve() { // call at start in main!
 }
 
 bool is_prime(ll n) { // for N <= SIZE^2
-	if (n <= SIZE) return bs[n];				  
+	if (n <= SIZE) return bs[n];
 	for(const auto &prime : primes)
 	   	if (n % prime == 0) return false;
-	return true;		
+	return true;
 }
 
 struct Factor{ll prime; ll exp;};

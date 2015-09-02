@@ -21,7 +21,7 @@ public:
 				if(h[x.v] == 0 && x.v != t)
 					hc[0]--,h[x.v] = h[u]+1,hc[h[x.v]]++, q.push(x.v);
 		}
-	
+
 		// now set height of `s`
 		hc[h[s]]--; h[s]=V; hc[V]++;
 
