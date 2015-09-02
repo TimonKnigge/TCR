@@ -11,7 +11,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] Suffix Array
 - [ ] Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
 - [ ] Ropes
-- [ ] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
+- [X] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
 - [ ] Dancing Links (+ Algo X)
 - [ ] Palindromic Tree (Eertree)
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp))
