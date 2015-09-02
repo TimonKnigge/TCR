@@ -1,3 +1,4 @@
+#include "../header.h"
 // Minimum Heap
 #include <queue>
 using min_queue = priority_queue<T, vector<T>, greater<T>>;

@@ -1,3 +1,4 @@
+#include "../header.h"
 #include "flownetwork.cpp"
 #define MAXV 5000
 ll FlowNetwork::dinic_augment(int s, int t, int* d, ll cap) {

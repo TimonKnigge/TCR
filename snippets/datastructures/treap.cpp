@@ -1,3 +1,4 @@
+#include "../header.h"
 struct Node {
 	ll val;
 	int size, priority;

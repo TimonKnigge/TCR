@@ -1,3 +1,4 @@
+#include "../header.h"
 // Edge list as in Dijkstra's (see above)
 bool bellmann_ford(vvii edges, int source, vi &dist) {
 	dist.assign(edges.size(), INF); dist[source] = 0;

@@ -1,3 +1,4 @@
+#include "../header.h"
 const int ALPHABET_SIZE = 26;
 inline int mp(char c) { return c - 'a'; }
 

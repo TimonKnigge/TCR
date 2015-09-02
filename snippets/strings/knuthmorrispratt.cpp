@@ -1,3 +1,4 @@
+#include "../header.h"
 void compute_prefix_function(string &w, vi &pi) {
 	pi.assign(w.length(), 0);
 	int k = pi[0] = -1;

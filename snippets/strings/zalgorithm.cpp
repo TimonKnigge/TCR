@@ -1,3 +1,4 @@
+#include "../header.h"
 void Z_algorithm(string &s, vector<int> &Z) {
 	Z.assign(s.length(), -1);
 	int L = 0, R = 0, n = s.length();

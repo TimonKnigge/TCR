@@ -1,3 +1,4 @@
+#include "../header.h"
 # define EPSILON 1e -7
 
 // Finds the first i s.t. arr[i] >= val, assuming that arr[l] <= val <= arr[h]

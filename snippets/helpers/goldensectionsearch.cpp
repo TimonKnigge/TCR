@@ -1,3 +1,4 @@
+#include "../header.h"
 #define RES_PHI (2 - ((1.0 + sqrt(5)) / 2.0))
 #define EPSILON 1e-7
 

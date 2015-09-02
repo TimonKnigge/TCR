@@ -1,3 +1,4 @@
+#include "../header.h"
 // adj should be a V*V array s.t. adj[i][j] contains the weight of
 // the edge from i to j, INF if it does not exist.
 // set adj[i][i] to 0; and always do adj[i][j] = min(adj[i][j], w)

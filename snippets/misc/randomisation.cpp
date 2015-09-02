@@ -1,3 +1,4 @@
+#include "../header.h"
 #include <chrono>
 using namespace chrono;
 auto beg = high_resolution_clock::now();

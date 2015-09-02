@@ -1,3 +1,4 @@
+#include "../header.h"
 struct S { int l, r, p; };
 bool operator<(const S &lhs, const S &rhs) {
 	return lhs.l != rhs.l ? lhs.l < rhs.l : lhs.r < rhs.r;

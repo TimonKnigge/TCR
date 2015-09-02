@@ -1,3 +1,4 @@
+#include "../header.h"
 void bellmann_ford_extended(vvii &e, int source, vi &dist, vb &cyc) {
 	dist.assign(e.size(), INF);
 	cyc.assign(e.size(), false); // true when u is in a <0 cycle

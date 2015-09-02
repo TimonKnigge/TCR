@@ -1,3 +1,4 @@
+#include "../header.h"
 #include "./primes.cpp"
 ll lucas(ll n, ll k, ll p){ // calculate (n \choose k) % p
 	ll ans = 1;

@@ -1,3 +1,4 @@
+#include "../header.h"
 void FlowNetwork::infer_mincut_dfs(int u, vb &vs) {
 	vs[u] = true;
 	for (int i = h[u]; i != -1; i = e[i].nxt) {

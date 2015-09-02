@@ -1,3 +1,4 @@
+#include "../header.h"
 #ifdef _MSC_VER
 #define popcount(x) __popcnt(x)
 #else

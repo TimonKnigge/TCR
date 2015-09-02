@@ -1,3 +1,4 @@
+#include "../header.h"
 #include "flowgraph.cpp"
 struct Q{ int u; ll c,w;}; // target, maxflow and total weight (cost)
 bool operator>(const Q &l, const Q &r){return l.w > r.w;}

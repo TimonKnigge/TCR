@@ -1,3 +1,4 @@
+#include "../header.h"
 struct point { ll x, y; };
 bool operator==(const point &l, const point &r) {
 	return l.x == r.x && l.y == r.y; }

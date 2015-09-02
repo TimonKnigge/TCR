@@ -1,3 +1,4 @@
+#include "../header.h"
 #include "flowgraph.cpp"
 struct Edmonds_Karp{
 	FlowGraph &g; int V,s,t; // directed graph

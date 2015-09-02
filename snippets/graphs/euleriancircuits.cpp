@@ -1,3 +1,4 @@
+#include "../header.h"
 struct edge {
 	int v;
 	list<edge>::iterator rev;

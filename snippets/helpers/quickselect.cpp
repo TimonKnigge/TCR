@@ -1,3 +1,4 @@
+#include "../header.h"
 template<class T>
 T quickselect(vector<T> &v, int l, int r, int k) {
 	int p = l + (rand() % (r - l));

@@ -1,3 +1,4 @@
+#include "../header.h"
 void imc_dfs(FlowGraph &fg, int u, vb &cut) {
 	cut[u] = true;
 	for (auto &&e : fg[u]) {

@@ -1,3 +1,4 @@
+#include "../header.h"
 #include "flowgraph.cpp"
 struct Dinic{
 	FlowGraph &edges; int V,s,t;

@@ -2,7 +2,6 @@
 struct point { int x, y; };
 struct line { point p1, p2; };
 
-
 int intersects(line line1, line line2) {
 	return
 		((ccw(line1.p1, line1.p2, line2.p1) * ccw(line1.p1, line1.p2, line2.p2)) <= 0)

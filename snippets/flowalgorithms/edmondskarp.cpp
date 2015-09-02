@@ -1,3 +1,4 @@
+#include "../header.h"
 #define MAXV 2000
 ll FlowNetwork::edmonds_karp(int s, int t) {
 	int v, p[MAXV], q[MAXV]; ll f = 0, c[MAXV];

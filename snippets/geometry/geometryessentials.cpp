@@ -1,3 +1,4 @@
+#include "../header.h"
 #define EPSILON 1e-6
 
 // Coordinate type, change to long long or double when necessary.

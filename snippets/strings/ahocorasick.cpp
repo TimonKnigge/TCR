@@ -1,3 +1,4 @@
+#include "../header.h"
 template <int ALPHABET_SIZE, int (*mp)(char)>
 class AC_FSM {
 	struct Node {

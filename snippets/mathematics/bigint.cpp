@@ -1,4 +1,4 @@
-#include "header.h"
+#include "../header.h"
 using ll = long long;
 
 class BI{

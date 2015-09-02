@@ -1,3 +1,4 @@
+#include "../header.h"
 #define MAX_N 15
 ll d[MAX_N][MAX_N];
 

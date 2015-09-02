@@ -1,3 +1,4 @@
+#include "../header.h"
 int r() {
 	int sign = 1, n = 0;
 	char c;

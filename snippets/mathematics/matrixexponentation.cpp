@@ -1,3 +1,4 @@
+#include "../header.h"
 #define ITERATE_MATRIX(w) for (int r = 0; r < (w); ++r) \
 						  for (int c = 0; c < (w); ++c)
 template <class T, int N>

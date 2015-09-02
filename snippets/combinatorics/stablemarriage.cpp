@@ -1,3 +1,4 @@
+#include "../header.h"
 vi stable_marriage(int M, int W, vvi &mpref, vvi &wpref) {
 	stack<int> st;
 	for (int m = 0; m < M; ++m) st.push(m);

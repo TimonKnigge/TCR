@@ -1,3 +1,4 @@
+#include "../header.h"
 ll solve_single(ll c, ll a, ll b, ll L, ll U) {
 	if (c <= 0) return max(0LL, L);
 	else return min(U, b / a);

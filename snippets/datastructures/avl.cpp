@@ -1,3 +1,4 @@
+#include "../header.h"
 template <class T>
 class AVL_Tree {
 public:

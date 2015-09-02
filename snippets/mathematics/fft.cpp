@@ -1,3 +1,4 @@
+#include "../header.h"
 #define MY_PI 3.14159265358979323846
 #include "../header.h"
 #include "../helpers/bitmasking.cpp"

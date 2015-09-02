@@ -1,3 +1,4 @@
+#include "../header.h"
 // Length only
 template<class T>
 int longest_increasing_subsequence(vector<T> &a) {
