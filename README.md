@@ -32,7 +32,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows)
 - [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
-- [ ] Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorith, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
+- [ ] Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
 - [x] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
