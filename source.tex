@@ -80,11 +80,9 @@
 \newcommand{\entry}[5]{
 	\subsection{#1}
 	#2
-
 	\ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
-
 	\ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
-	\lstinputlisting[firstline=2]{#3}
+	\ifthenelse{\equal{#3}{}}{}{\lstinputlisting[firstline=2]{#3}}
 }
 \newcommand{\otherentry}[3]{
 	\subsection{#1}
@@ -265,16 +263,16 @@
 %{$O(V^2E)$}
 %{Flow Network}
 
+\entry{Dinic}{}
+{./snippets/flowalgorithms/dinic_ragnar.cpp}
+{$O(V^2E)$}
+{Flow Graph}
+
 \entry{Minimum Cut Inference}
 {The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}
 {./snippets/flowalgorithms/infermincut.cpp}
 {$O(V + E)$}
 {Flow Network}
-
-\entry{Dinic}{}
-{./snippets/flowalgorithms/dinic_ragnar.cpp}
-{$O(V^2E)$}
-{Flow Graph}
 
 %\entry{Edmonds Karp Ragnar}{}
 %{./snippets/flowalgorithms/edmondskarp_ragnar.cpp}
@@ -286,6 +284,7 @@
 {}
 {Flow Graph}
 
+
 %\entry{Push Relabel Ragnar}{}
 %{./snippets/flowalgorithms/push_relabel.cpp}
 %{}
@@ -296,8 +295,21 @@
 %{}
 %{Flow Graph}
 
-% \& crashes pdf-viewer index generator. Something due to hyperref (working at Ragnar's pc)
-% \& needed to make the toc entry 1 line
+\entry{Min capacities}{
+	Make a supersource $S$ and supersink $T$.
+	When there are a lowerbound $l(u,v)$ and upperbound $c(u,v)$,
+	add edge with capacity $c-l$.
+	\begin{align*}
+		M(u) = \sum_v l(v,u) - \sum_v l(u,v)
+	\end{align*}
+	If $M(u)>0$, add $(S,u)$ with capacity $M(u)$. Otherwise add $(u,T)$ with capacity $-M(u)$.
+	Run Dinic to find a max flow. This is a feasible flow in the original graph if all edges from $S$ are saturated.
+	Run Dinic again in the residual graph of the original problem to find the maximal feasible flow.
+}
+{}
+{}
+{Dinic}
+
 \section{Combinatorics \& Probability}
 
 \entry{Stable Marriage Problem}
