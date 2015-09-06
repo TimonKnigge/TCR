@@ -91,6 +91,12 @@
 }
 
 \begin{document}
+% remove spacing from align
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
 % Title without the newpage, see http://tex.stackexchange.com/questions/86249/maketitle-text-before-title
 {\let\newpage\relax\maketitle}
 \tableofcontents
@@ -372,7 +378,6 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 	= \sqrt{s(s-a)(s-b)(s-c)}
 	= \frac 12\left| (B-A, C-A)^T \right|
 \end{align*}
-\vspace{-2em}
 \begin{align*}
 	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
 	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
@@ -381,11 +386,15 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 \end{align*}
 
 
-
-
 \section{Mathematics}
 
-\entry{Primes}{}
+\entry{Primes}{
+	\begin{align*}
+		10^3 + \{-9,-3,9,13\},
+		\quad 10^6 + \{-17, 3, 33\},
+		\quad 10^9 + \{7,9,21,33,87\}
+	\end{align*}
+}
 {./snippets/mathematics/primes.cpp}{}{}
 
 \entry{Number theoretic algorithms}{}
