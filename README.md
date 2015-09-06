@@ -29,7 +29,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] Push Relabel (not in TCR) ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file2))
 - [x] Min Cost Max Flow
 - [x] Investigate how to adapt one of the algorithms to support minimum capacity edges ([1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
-- [ ] Investigate relevancy of 'circulations' (source/sinkless flows)
+- [ ] Investigate relevancy of 'circulations' (source/sinkless flows) ([1](http://www.cs.cmu.edu/afs/cs/academic/class/15750-s01/www/notes/lect0313))
 - [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
 - [ ] Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
