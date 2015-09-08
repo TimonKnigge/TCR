@@ -1,5 +1,5 @@
 #include "../header.h"
-constexpr long double ESP = 1e-10;
+constexpr long double EPS = 1e-10;
 using C = double;	// could be long long or long double
 struct P {			// may also be used as a vector
 	C x, y;
@@ -12,16 +12,6 @@ struct P {			// may also be used as a vector
 	C dot(const P &p) const { return x * p.x + y * p.y; }
 	C lensq() const { return x*x + y*y; }
 	C len() const { return sqrt(lensq()); }
-};
-struct S {
-	P p1, p2;
-	S(P p1 = 0, P p2 = 0) : p1(p1), p2(p2) {}
-};
-struct L{
-	C a,b,c; // ax + by + c = 0
-	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
-	L(S s) : a(s.p2.y-s.p1.y), b(s.p1.x-s.p2.x),
-	c(s.p2.x*s.p1.y - s.p2.y*s.p1.x) {}
 };
 
 C dist(P p1, P p2) { return (p1-p2).len(); }
@@ -38,33 +28,64 @@ double area(vector<P> polygon) { return abs(det(polygon)) / 2.0; }
 
 // 1 when p1-p2-p3 is a left turn (when viewed from p1) [use EPS if needed]
 int ccw(P p1, P p2, P p3) { C d = det(p1, p2, p3); return (d>0) - (d<0); }
-
-P project(S s, P p) {
-	double lambda = (p - s.p1).dot(s.p2 - s.p1)/double((s.p2 - s.p1).dot(s.p2 - s.p1));
-	case LType.SEGMENT: lambda = min(1.0, lambda);
-	case LType.RAY:	 lambda = max(0.0, lambda);
-	default: break;
-	}
-	return l.p1 + (l.p2 - l.p1) * lambda;
-}
-
-bool intersect_Ls(L l1, L l2, double* lambda, LType type) {
-	// Intersection P can be reconstructed as l1.p1 + lambda * (l1.p2 - l1.p1).
-	// Returns false if the Ls are parallel, handle coincidence in advance.
-	C s1x, s1y, s2x, s2y;
-	s1x = l1.p2.x - l1.p1.x;	s1y = l1.p2.y - l1.p1.y;
-	s2x = l2.p2.x - l2.p1.x;	s2y = l2.p2.y - l2.p1.y;
-	C denom = det(s1x, s1y, s2x, s2y);
-	if (denom == 0) return false;
-	else{
-		double l = det(s1x, s1y, l1.p1.x - l2.p1.x, l1.p1.y - l2.p1.y)/((double)denom),
-			   m = det(s2x, s2y, l1.p1.x - l2.p1.x, l1.p1.y - l2.p1.y)/((double)denom);
+struct S {
+	P p1, p2;
+	enum Type { Segment, Ray, Line } type;
+	S(P p1 = 0, P p2 = 0, Type type = Line) : p1(p1), p2(p2), type(type) {}
+	bool internal(P p) const {
+		if(det(p1,p2,p) > EPS) return false; // not on a line
 		switch(type){
-		case LType.SEGMENT:  if(l > 1 || m > 1) return false;
-		case LType.RAY:	  if(l < 0 || m < 0) return false;
-		default: break;
+		case Segment: return dist(p1, p) + dist(p, p2) - dist(p1,p2) <= EPS;
+		case Ray: return dist(p,p2) - abs(dist(p1,p) - dist(p1,p2)) <= EPS;
+		default: return true;
 		}
-		*lambda = l;
-		return true;
 	}
+};
+struct L{
+	C a,b,c; // ax + by + c = 0
+	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
+	L(S s) : a(s.p2.y-s.p1.y), b(s.p1.x-s.p2.x),
+	c(s.p2.x*s.p1.y - s.p2.y*s.p1.x) {}
+	operator S(){
+		S s; s.type = S::Line;
+		if(abs(a)<EPS) s.p1 = {0, -c/b}, s.p2 = {1, -c/b};
+		else s.p1 = {-c/a, 0}, s.p2 = {-(c+b)/a, 1};
+		return s;
+	}
+};
+struct Circle{ P p; C r; };
+P project(S s, P p) {
+	double l = (p-s.p1).dot(s.p2-s.p1)/double((s.p2-s.p1).dot(s.p2-s.p1));
+	switch(s.type){
+	case S::Segment: l = min(1.0, l);
+	case S::Ray:	 l = max(0.0, l);
+	default:;
+	}
+	return s.p1 + (s.p2 - s.p1) * l;
+}
+pair<bool,P> intersect(const L &l1, const L &l2) {
+	double x = l1.b*l2.c-l1.c*l2.b, y = l1.c*l2.a-l1.a*l2.c,
+		   z = l1.a*l2.b-l1.b*l2.a;
+	return {z!=0, {x/z, y/z}}; 
+}
+vector<P> intersect(const Circle& cc, const L& l){
+	const double &x = cc.p.x, &y = cc.p.y, &r = cc.r, &a=l.a,&b=l.b,&c=l.c;
+	double n = a*a + b*b, t1 = c + a*x + b*y, D = n*r*r  - t1*t1;
+	if(D<0) return {};
+	double xmid = b*b*x - a*(c + b*y), ymid = a*a*y - b*(c + a*x);
+	if(D==0) return {P{xmid/n, ymid/(n)}};
+	double sd = sqrt(D);
+	return {P{(xmid - b*sd)/n,(ymid + a*sd)/n},
+		    P{(xmid + b*sd)/n,(ymid - a*sd)/n}};
+}
+vector<P> intersect(const Circle& c1, const Circle& c2){
+	C x = c1.p.x-c2.p.x, y = c1.p.y-c2.p.y;
+	const C &r1 = c1.r, &r2 = c2.r;
+	C n = x*x+y*y, D = -(n - (r1+r2)*(r1+r2))*(n - (r1-r2)*(r1-r2));
+	if(D<0) return {};
+	C xmid = x*(-r1*r1+r2*r2+n), ymid = y*(-r1*r1+r2*r2+n);
+	if(D==0) return {P{c2.p.x + xmid/(2.*n),c2.p.y + ymid/(2.*n)}};
+	double sd = sqrt(D);
+	return {P{c2.p.x + (xmid - y*sd)/(2.*n),c2.p.y + (ymid + x*sd)/(2.*n)},
+			P{c2.p.x + (xmid + y*sd)/(2.*n),c2.p.y + (ymid - x*sd)/(2.*n)}};
 }
