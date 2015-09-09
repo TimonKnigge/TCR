@@ -41,7 +41,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
 - [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [x] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
-- [ ] Determinant Calculation
+- [x] Determinant Calculation
 - [x] nCk % p using Lucas' Theorem
 - [x] Miller Rabin
 
