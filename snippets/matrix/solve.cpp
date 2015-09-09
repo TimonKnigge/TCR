@@ -9,7 +9,7 @@ T ReducedRowEchelonForm(M<R,C> &m, int rows) {	// return the determinant
 	for(int c = 0; c < rows && r < rows; c++) {
 		int p = r;
 		for(int i=r+1; i<rows; i++) if(abs(m[i][c]) > abs(m[p][c])) p=i;
-		if(abs(m[p][c]) < EPS) continue;
+		if(abs(m[p][c]) < EPS){	det = 0; continue; }
 		swap(m[p], m[r]);		det *= ( (p-r)%2 ? -1 : 1 );
 		T s = 1.0 / m[r][c], t;	det *= m[r][c];
 		REP(j,C) m[r][j] *= s;				// make leading term in row 1
