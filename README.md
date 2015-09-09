@@ -47,7 +47,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 #### Geometry
 - [ ] Intersecting Halfspaces ([1](http://acm.math.spbu.ru/~kunyavskiy/notebook/))
-- [ ] Review 'basic' geometry code (line intersection checks etc.)
+- [x] Review 'basic' geometry code (line intersection checks etc.)
 - [x] Rewrite the convex hull code
 
 #### Misc.
