@@ -1,11 +1,11 @@
 #include "../header.h"
 constexpr int SIZE = 100;
-using   T = double;
-using  AT = array<T,SIZE>;
-using AAT = array<array<T,SIZE+1>,SIZE>;
+using T = double;						// type
+using V = array<T,SIZE>;				// vector
+using M = array<array<T,SIZE+1>,SIZE>;	// matrix
 constexpr T EPS = 1e-8;
 bool mult, inconst;		// true when multiple or no solutions
-void ReducedRowEchelonForm(AAT &M, int N) { // N*(N+1) matrix
+void ReducedRowEchelonForm(M &M, int N) { // N*(N+1) matrix
 	mult = false, inconst = false; int r = 0;
 	for(int c = 0; c < N+1 && r < N; c++) {
 		int j = r;
@@ -19,7 +19,7 @@ void ReducedRowEchelonForm(AAT &M, int N) { // N*(N+1) matrix
 	}
 }
 
-	AT ans; // the back substitution phase
+	V ans; // the back substitution phase
 	for(auto j = N-1; j >= 0; --j){
 		bool allzero=true; long double t=0;
 		for(auto k = j+1; k < N; ++k){
