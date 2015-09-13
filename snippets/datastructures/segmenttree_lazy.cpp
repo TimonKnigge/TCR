@@ -1,5 +1,5 @@
 #include "../header.h"
-using T=int; using U=int;
+using T=int; using U=int; using I=int;
 T t_id; U u_id;
 T merge(T a, T b){return a+b;}
 void join(U &a, U b){ a=a+b; }
@@ -7,6 +7,7 @@ struct Node { int l, r, lc, rc; T t; U u;
 	Node(int l, int r) : l(l), r(r), lc(-1), rc(-1), t(t_id), u(u_id) {}
 };
 T apply(const Node &n, int l=-1){ return merge(n.t,(l<0?n.r-n.l+1:l)*n.u); }
+T convert(const I &i){ return i; }
 struct LazySegmentTree {
 	vector<Node> tree;
 	void build(int i, int l, int r, const vector<T> &arr) {
@@ -17,7 +18,7 @@ struct LazySegmentTree {
 			tree.push_back({l,m});	tree.push_back({m+1,r});
 			build(n.lc,l,m,arr);	build(n.rc,m+1,r,arr);
 			n.t = merge(tree[n.lc].t, tree[n.rc].t);
-		} else n.t = arr[l];
+		} else n.t = convert(arr[l]);
 	}
 	LazySegmentTree(const vector<T> &arr){
 		tree.reserve(2*arr.size()-1);
