@@ -5,7 +5,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 ## TODO
 
 #### Datastructures
-- [ ] Segment Tree with lazy propagation
+- [x] Segment Tree with lazy propagation
 - [ ] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
 - [x] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
 - [x] Suffix Array
