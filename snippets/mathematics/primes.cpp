@@ -1,7 +1,7 @@
 #include "../header.h"
 #include "numbertheory.cpp"
 constexpr ll SIZE = 1e6+10;
-bitset<SIZE> bs;
+bitset<SIZE + 1> bs;
 vector<ll> primes;
 
 void sieve() { // call at start in main!
@@ -35,7 +35,7 @@ vector<Factor> factor(ll n) {
 	return factors;
 }
 
-vector<ll> mf(SIZE, -1);		// mf[i]==i when prime
+vector<ll> mf(SIZE + 1, -1);		// mf[i]==i when prime
 void sieve2() { // call at start in main!
 	mf[0] = mf[1] = 1;
 	for (ll i = 2; i <= SIZE; i++) if (mf[i] < 0) {
