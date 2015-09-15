@@ -8,8 +8,10 @@
 	landscape,
 	twocolumn,
 	left=0.8cm,
-	right=0.5cm,
-	vmargin=0.5cm,
+	right=0.3cm,
+% Weird top and bottom margins because of fancyhdr package
+	top=1.5cm,
+	bottom=-0.3cm,
 	columnsep=1cm
 ]{geometry}
 \usepackage[english]{babel}
@@ -21,17 +23,16 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage[toc]{multitoc}			% multicolumn toc
-\usepackage{tocloft}				% to reduce toc spacing
 \usepackage[compact]{titlesec}		% shrink section whitespace
 \usepackage{ifthen}
 \usepackage{nicefrac}
-\usepackage{hyperref} % for clickable toc and index
+\usepackage{hyperref}
 
-% two page landscape layout settings
-\renewcommand*{\multicolumntoc}{2}
-\setlength{\columnseprule}{0.1pt}
+%*************** Layout ***************
+\setlength{\columnseprule}{0.2pt}
 \newcommand{\latexcolumnseprulecolor}{\color{red}}
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\sloppy
 
 % A red divider in the middle of the page
 \usepackage{etoolbox}
@@ -46,21 +47,54 @@
 }
 \makeatother
 
-% all the \vspace are for reducing the vertical spacing
-\title{\vspace{-40pt}Team Code Reference\vspace{-0.5em}}
-\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
-\date{ \vspace{-0.5em} \today \vspace{-0em} }
 
+%*************** Title ***************
+
+% all the \vspace are for reducing the vertical spacing
+\title{
+	\vspace{-4em}
+	\includegraphics[scale=0.7]{./logo.eps}\\
+	\vspace{-1.5em}
+	Team Code Reference
+	\vspace{-0.7em}
+}
+%\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
+\author{
+	\Large \textbf{Curiously Recurring}\\
+%	Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit
+}
+\date{
+	\vspace{-0.5em}
+	Utrechts Kampioenschap Programmeren - BAPC Preliminaries\\
+	19 september 2015
+	\vspace{-1em}
+}
+
+
+%*************** Table of Contents ***************
+\usepackage[toc]{multitoc}			% multicolumn toc
+\usepackage{tocloft}				% to reduce toc spacing
+\renewcommand*{\multicolumntoc}{2}
+% reduce section spacing in toc
+\setlength{\cftbeforesecskip}{0pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
 \makeatother
 
-% reduce section spacing in toc
-\setlength{\cftbeforesecskip}{0pt}
 
+%*************** Headings ***************
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\setlength{\headsep}{0.4em}
+\setlength{\footskip}{0em}
+\lhead{{\bfseries Curiously Recurring} Utrecht University}
+\rhead{\thepage}
+\chead{\leftmark}
 
-
+%*************** Code highlighting ***************
 \lstset{
 	backgroundcolor=\color{white},
 	tabsize=4,
@@ -71,11 +105,13 @@
 	numberstyle=\tiny,
 	numbersep=5pt,
 	breaklines=true,
-	showstringspaces=false,
 	keywordstyle=\color[rgb]{0, 0, 1},
 	commentstyle=\color[rgb]{0, 0.5, 0},
 	stringstyle=\color{red}
 }
+
+
+%*************** Section entries ***************
 % \entry{name}{description}{snippet location}{complexity}{dependencies}
 \newcommand{\entry}[5]{
 	\subsection{#1}
@@ -90,17 +126,24 @@
 	\lstinputlisting[language=]{#3}
 }
 
+
+%*************** Begin document ***************
 \begin{document}
-% remove spacing from align
+
+
+%*************** Reduce align spacing ***************
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
 \setlength{\abovedisplayshortskip}{0pt}
 \setlength{\belowdisplayshortskip}{0pt}
 
-% Title without the newpage, see http://tex.stackexchange.com/questions/86249/maketitle-text-before-title
+%*************** Titlepage ***************
 {\let\newpage\relax\maketitle}
 \tableofcontents
+\thispagestyle{empty}
 \newpage
+
+%*************** Contents ***************
 
 \section{Templates}
 % Can't use the \entry command, because filetype is tex
