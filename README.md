@@ -39,7 +39,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] 2-SAT ([1](http://codeforces.com/blog/entry/16205))
 - [x] Review the code related to primes;
 - [x] add fast factorization. ([1](https://www.topcoder.com/community/data-science/data-science-tutorials/prime-numbers-factorization-and-euler-function/))
-- [ ] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
+- [x] Simplex Algorithm ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file17))
 - [x] Gauss Elimination ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file14))
 - [x] Determinant Calculation
 - [x] nCk % p using Lucas' Theorem
