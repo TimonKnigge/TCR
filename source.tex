@@ -531,4 +531,39 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 
 \entry{Fast IO}{}{./snippets/helpers/fastinput.cpp}{}{}
 
+\newpage
+\section{Strategies}
+\subsection{Techniques}
+\begin{itemize}
+\setlength\itemsep{0em}
+	\item Bruteforce: meet-in-the-middle, backtracking, memoization
+	\item DP (write full draft, include ALL loop bounds), easy direction
+	\item Binary search
+	\item $lg(n)$ datastructures
+	\item Mathematical insight
+	\item Randomisation
+	\item Look at it backwards
+	\item Common subproblems? Memoization
+	\item Compute modulo primes and use CRT
+\end{itemize}
+
+\subsection{WA}
+\begin{itemize}
+\setlength\itemsep{0em}
+	\item Read carefully
+	\item Check bounds (use long long or long double)
+	\item EDGE CASES: $n\in\{-1,0,1,2\}$. Empty list/graph?
+	\item Not enough precision
+	\item Assertions
+	\item Missing modulo operators
+\end{itemize}
+
+\subsection{TLE}
+\begin{itemize}
+\setlength\itemsep{0em}
+	\item Infinite loop
+	\item Use scanf or fastIO instead of cin
+	\item Wrong algorithm
+\end{itemize}
+
 \end{document}
