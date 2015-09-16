@@ -3,7 +3,7 @@ ll solve_single(ll c, ll a, ll b, ll L, ll U) {
 	if (c <= 0) return max(0LL, L);
 	else return min(U, b / a);
 }
-ll cdiv(ll a, ll b) { return (ll)ceil(a / (ld)b); }
+ll cdiv(ll a, ll b) { return ceil(a / ll(b)); }
 
 pair<ll, ll> KP(ll c1, ll c2, ll a1, ll a2, ll b, ll L, ll U) {
 	// Trivial solutions
@@ -18,16 +18,16 @@ pair<ll, ll> KP(ll c1, ll c2, ll a1, ll a2, ll b, ll L, ll U) {
 	if (U != LLINF) U = min(U, b / a1);
 	if (L != 0 || U != LLINF) {
 		pair<ll, ll>
-			kp = KP(c1, c2, a1, a2, b - cdiv(b - a1 * U, a2) * a2- a1 * L, 0, LLINF),
+			kp = KP(c1, c2, a1, a2, b-cdiv(b-a1*U,a2)*a2-a1*L, 0, LLINF),
 			s1 = {U, (b - a1 * U) / a2 },
 			s2 = {L + kp.first, cdiv(b - a1 * U, a2) + kp.second};
-		return (c1 * s1.first + c2 * s1.second > c1 * s2.first + c2 * s2.second ? s1 : s2);
+		return (c1*s1.first+c2*s1.second > c1*s2.first+c2*s2.second ?s1:s2);
 	} else if (a1 < a2) {
 		pair<ll, ll> s = KP(c2, c1, a2, a1, b, 0, LLINF);
 		return pair<ll, ll>(s.second, s.first);
 	} else {
 		ll k = a1 / a2, p = a1 - k * a2;
-		pair<ll, ll> kp = KP(c1 - c2 * k, c2, p, a2, b - k * (b / a1) * a2, 0, b / a1);
-		return {kp.first, kp.second - k * kp.first + k * (b / a1)};
+		pair<ll, ll> kp = KP(c1-c2*k, c2, p, a2, b-k*(b/a1)*a2, 0, b/a1);
+		return {kp.first, kp.second - k * kp.first + k * (b/a1)};
 	}
 }

@@ -1,7 +1,6 @@
 #include "../header.h"
 template <class T>
-class AVL_Tree {
-public:
+struct AVL_Tree {
 	struct AVL_Node {
 		T val;
 		AVL_Node *p, *l, *r;
@@ -42,7 +41,7 @@ public:
 		}
 		AVL_Node *r = new AVL_Node(nval, p);
 		(p == NULL ? root : (
-			nval < p->val ? p->l : p->r) = r;
+			nval < p->val ? p->l : p->r)) = r;
 		_fixup(r);
 		return r;
 	}
@@ -73,7 +72,6 @@ public:
 	}
 	void cleanup() { _cleanup(root); }
 
-private:
 	// Helpers
 	void _transplant(AVL_Node *u, AVL_Node *v) {
 		_pchild(u) = v;
@@ -83,16 +81,22 @@ private:
 		return (n == NULL ? root : (n->p == NULL ? root :
 			(n->p->l == n ? n->p->l : n->p->r)));
 	}
-	void _augmentation(AVL_Node *) {
+	void _augmentation(AVL_Node *n) {
 		if (n == NULL) return;
 		n->height = 1 + max(_get_height(n->l), _get_height(n->r));
 		n->size = 1 + _get_size(n->l) + _get_size(n->r);
 	}
 	int _get_height(AVL_Node *n) { return (n == NULL ? 0 : n->height); }
 	int _get_size(AVL_Node *n) { return (n == NULL ? 0 : n->size); }
-	bool _balanced(AVL_Node *) { return (abs(_get_height(n->l) - _get_height(n->r)) <= 1); }
-	bool _leans_left(AVL_Node *n) { return _get_height(n->l) > _get_height(n->r); }
-	bool _leans_right(AVL_Node *n) { return _get_height(n->r) > _get_height(n->l); }
+	bool _balanced(AVL_Node *n) {
+		return (abs(_get_height(n->l) - _get_height(n->r)) <= 1);
+	}
+	bool _leans_left(AVL_Node *n) {
+		return _get_height(n->l) > _get_height(n->r);
+	}
+	bool _leans_right(AVL_Node *n) {
+		return _get_height(n->r) > _get_height(n->l);
+	}
 #define ROTATE(L, R) \
 	AVL_Node *o = n->R; \
 	n->R = o->L; \
@@ -109,8 +113,9 @@ private:
 		while (n != NULL) {
 			_augmentation(n);
 			if (!_balanced(n)) {
-				if (_leans_left(n) && _leans_right(n->l)) _left_rotate(n->l);
-				else if (_leans_right(n) && _leans_left(n->r)) _right_rotate(n->r);
+				if (_leans_left(n)&&_leans_right(n->l)) _left_rotate(n->l);
+				else if (_leans_right(n) && _leans_left(n->r))
+					_right_rotate(n->r);
 				if (_leans_left(n)) _right_rotate(n);
 				if (_leans_right(n)) _left_rotate(n);
 			}

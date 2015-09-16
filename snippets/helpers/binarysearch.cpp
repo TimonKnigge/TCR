@@ -1,7 +1,7 @@
 #include "../header.h"
 # define EPSILON 1e -7
 
-// Finds the first i s.t. arr[i] >= val, assuming that arr[l] <= val <= arr[h]
+// Finds the first i s.t. arr[i]>=val, assuming that arr[l] <= val <= arr[h]
 int integer_binary_search(int l, int h, vector<double> &arr, double val) {
 	while (l < h) {
 		int m = l + (h - l) / 2;
@@ -11,7 +11,7 @@ int integer_binary_search(int l, int h, vector<double> &arr, double val) {
 	return l;
 }
 
-// Given a monotonically increasing function f, approximately solves f(x) = c,
+// Given a monotonically increasing function f, approximately solves f(x)=c,
 // assuming that f(l) <= c <= f(h)
 double binary_search(double l, double h, double (*f)(double), double c) {
 	while (true) {

@@ -29,6 +29,7 @@ false;
 
 using namespace std;
 using ll = long long;
+using ld = long double;
 using ii = pair<int,int>;
 using vi = vector<int>;
 using vb = vector<bool>;

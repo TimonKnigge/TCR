@@ -1,7 +1,7 @@
 #include "../header.h"
 #define MY_PI 3.14159265358979323846
-#include "../header.h"
 #include "../helpers/bitmasking.cpp"
+#include <complex>
 #include "complex.cpp"
 
 // A.size() = N = 2^p
@@ -9,7 +9,7 @@ void fft(vector<Complex> &A, int N, int p, bool inv = false) {
 	for(int i = 0, r = 0; i < N; ++i, r = brinc(r, p))
 		if (i < r) swap(A[i], A[r]);
 	for (int m = 2; m <= N; m <<= 1) {
-		Complex w, w_m = Complex::exp(complex<ld>(0, 2 * MY_PI / m * (inv ? -1 : 1)));
+		Complex w, w_m = Complex::exp(complex<ld>(0, 2*MY_PI/m*(inv?-1:1)));
 		for (int k = 0; k < N; k += m) {
 			w = {1, 0};
 			for (int j = 0; j < m / 2; ++j) {
@@ -25,7 +25,7 @@ void fft(vector<Complex> &A, int N, int p, bool inv = false) {
 	}
 }
 
-void convolution(vector<Complex> &A, vector<Complex> &B, vector<Complex> &C) {
+void convolution(vector<Complex> &A,vector<Complex> &B,vector<Complex> &C){
 	// Pad with zeroes
 	int N = 2 * max(next_power_of_2(A.size()), next_power_of_2(B.size()));
 	A.reserve(N); B.reserve(N); C.reserve(N);

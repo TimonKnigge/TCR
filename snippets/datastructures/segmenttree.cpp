@@ -8,7 +8,7 @@ struct SegmentTree {
 	};
 	int n;
 	vector<Node> tree;
-	SegmentTree(int p, vector<T> &init) : n(1 << p) { // The segment tree will support 2^p leafs
+	SegmentTree(int p, vector<T> &init) : n(1 << p) { // Needs 2^p leafs
 		tree.assign(2 * n, Node(ident, 0, n - 1));
 		for (int j = 1; j < n; ++j) {
 			int m = (tree[j].l + tree[j].r) / 2;

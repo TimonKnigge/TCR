@@ -1,6 +1,6 @@
 #include "../header.h"
 template <int ALPHABET_SIZE, int (*mp)(char)>
-class AC_FSM {
+struct AC_FSM {
 	struct Node {
 		int child[ALPHABET_SIZE], failure = 0;
 		vector<int> match;
@@ -9,7 +9,6 @@ class AC_FSM {
 		}
 	};
 	vector <Node> a;
-public:
 	AC_FSM() { a.push_back(Node()); }
 	void construct_automaton(vector<string> &words) {
 		for (int w = 0, n = 0; w < words.size(); ++w, n = 0) {
@@ -46,13 +45,14 @@ public:
 		}
 	}
 
-	void aho_corasick(string &sentence, vector<string> &words, vector< vector<int> > &matches) {
+	void aho_corasick(string &sentence, vector<string> &words,vvi &matches){
 		matches.assign(words.size(), vector<int>());
 		int state = 0, ss = 0;
 		for (int i = 0; i < sentence.length(); ++i, ss = state) {
 			while (a[ss].child[mp(sentence[i])] == -1)
 				ss = a[ss].failure;
-			state = a[state].child[mp(sentence[i])] = a[ss].child[mp(sentence[i])];
+			state = a[state].child[mp(sentence[i])]
+			      = a[ss].child[mp(sentence[i])];
 			for (int w : a[state].match)
 				matches[w].push_back(i - words[w].length() + 1);
 		}
