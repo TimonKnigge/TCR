@@ -433,19 +433,14 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
 	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
 	\textrm{Euler:}&&  1 + CC &= V - E + F\\
-	\textrm{Pick:}&& Area &= interior + \frac{boundary}2 - 1
+	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points} + \frac{\textrm{boundary points}}2 - 1
 \end{align*}
 
 Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_i)$, its centroid $(C_x, C_y)$ is given as:
-
 \begin{align*}
-	C_x = \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
-\end{align*}
-\begin{align*}
-	C_y = \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
-\end{align*}
-\begin{align*}
-	A = \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i)
+	C_x &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i), &
+	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)\\
+	A &= \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
 \end{align*}
 
 \section{Mathematics}
