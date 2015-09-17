@@ -557,21 +557,34 @@ Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_
 
 \subsection{WA}
 \begin{itemize}
-\setlength\itemsep{0em}
+	\setlength\itemsep{0em}
+	\item Beware of typos
+	\item Test sample input; make custom testcases
 	\item Read carefully
 	\item Check bounds (use long long or long double)
 	\item EDGE CASES: $n\in\{-1,0,1,2\}$. Empty list/graph?
+	\item Off by one error (in indices or loop bounds)
 	\item Not enough precision
 	\item Assertions
 	\item Missing modulo operators
+	\item Cases that need a (completely) different approach
 \end{itemize}
 
 \subsection{TLE}
 \begin{itemize}
-\setlength\itemsep{0em}
+	\setlength\itemsep{0em}
 	\item Infinite loop
 	\item Use scanf or fastIO instead of cin
-	\item Wrong algorithm
+	\item Wrong algorithm (is it theoretically fast enough)
+	\item Micro optimizations (but probably the approach just isn't right)
+\end{itemize}
+
+\subsection{RTE}
+\begin{itemize}
+	\setlength\itemsep{0em}
+	\item Typos
+	\item Off by one error (in array index of loop bound)
+	\item return 0 at end of program
 \end{itemize}
 
 \end{document}
