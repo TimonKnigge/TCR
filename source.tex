@@ -1,6 +1,7 @@
 \documentclass[
 	a4paper,
-	landscape
+	landscape,
+	twoside,
 	article
 ]{article}
 \usepackage[
@@ -10,9 +11,12 @@
 	left=0.8cm,
 	right=0.3cm,
 % Weird top and bottom margins because of fancyhdr package
-	top=1.5cm,
+	top=1.8cm,
 	bottom=-0.3cm,
-	columnsep=1cm
+	columnsep=1cm,
+% Set margins on even and odd pages equal
+	hmarginratio=1:1,
+	asymmetric
 ]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -67,7 +71,7 @@
 	\vspace{-0.5em}
 	Utrechts Kampioenschap Programmeren - BAPC Preliminaries\\
 	19 september 2015
-	\vspace{-1em}
+	\vspace{-1.5em}
 }
 
 
@@ -90,9 +94,10 @@
 \fancyfoot{}
 \setlength{\headsep}{0.4em}
 \setlength{\footskip}{0em}
-\lhead{{\bfseries Curiously Recurring} Utrecht University}
-\rhead{\thepage}
-\chead{\leftmark}
+\fancyhead[RE]{\bfseries Curiously Recurring \hspace{5em}}
+\fancyhead[LO]{\hspace{5em} Utrecht University}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[C]{\leftmark}
 
 %*************** Code highlighting ***************
 \lstset{
