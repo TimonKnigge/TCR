@@ -1,10 +1,10 @@
 # LaTeX stuff
 *.aux
 *.log
-*.pdf
 *.synctex.gz
 *.toc
 *.tex.swp
 *.dvi
 *.out
 
+source.pdf
