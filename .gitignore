@@ -7,4 +7,5 @@
 *.dvi
 *.out
 
-source.pdf
+# The release branch keeps the pdf
+#source.pdf
