@@ -11,7 +11,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [x] Suffix Array
 - [ ] Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
 - [ ] Ropes
-- [X] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
+- [x] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
 - [ ] Dancing Links (+ Algo X)
 - [ ] Palindromic Tree (Eertree)
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp))
@@ -32,7 +32,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows) ([1](http://www.cs.cmu.edu/afs/cs/academic/class/15750-s01/www/notes/lect0313))
 - [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
-- [-] Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
+- [ ] ~~Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))~~
 - [x] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
