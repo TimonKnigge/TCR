@@ -8,10 +8,10 @@ struct Node{
 	Node(It b, It e) : b(b), e(e), link(-1) {}
 	int size() const { return e-b; }
 };
-struct Ukkonen{
+struct SuffixTree{
 	const V &s; vector<Node> t;
 	int root,n,len,remainder,llink; It edge;
-	Ukkonen(const V &s) : s(s) { build(); }
+	SuffixTree(const V &s) : s(s) { build(); }
 	int add_node(It b, It e){ return t.push_back({b,e}), t.size()-1; }
 	int add_node(It b){ return add_node(b,s.end()); }
 	void link(int node){ if(llink) t[llink].link = node; llink = node; }
