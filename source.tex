@@ -210,6 +210,9 @@
 \entry{Suffix Array}{Note: dont forget to invert the returned array.}
 {./snippets/datastructures/suffixarray.cpp}{$O(n \log^2 n)$}{}
 
+\entry{Suffix Tree}{}
+{./snippets/datastructures/suffix_tree.cpp}{$O(n)$}{}
+
 \entry{Built-in datastructures}{}
 {./snippets/datastructures/builtin.cpp}{}{}
 
@@ -565,7 +568,7 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \newpage
 \section{Strategies}
-\subsection{Techniques}
+\subsubsection*{Techniques}
 \begin{itemize}
 \setlength\itemsep{0em}
 	\item Bruteforce: meet-in-the-middle, backtracking, memoization
@@ -581,7 +584,7 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 	\item Compute modulo primes and use CRT
 \end{itemize}
 
-\subsection{WA}
+\subsubsection*{WA}
 \begin{itemize}
 	\setlength\itemsep{0em}
 	\item Beware of typos
@@ -596,7 +599,7 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 	\item Cases that need a (completely) different approach
 \end{itemize}
 
-\subsection{TLE}
+\subsubsection*{TLE}
 \begin{itemize}
 	\setlength\itemsep{0em}
 	\item Infinite loop
@@ -605,7 +608,7 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 	\item Micro optimizations (but probably the approach just isn't right)
 \end{itemize}
 
-\subsection{RTE}
+\subsubsection*{RTE}
 \begin{itemize}
 	\setlength\itemsep{0em}
 	\item Typos
