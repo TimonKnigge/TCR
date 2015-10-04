@@ -1,140 +1,50 @@
 #include "../header.h"
-constexpr int ALPHABET = 26;
-//using C = array<int, ALPHABET>;
 using T = char;
-using M = map<T,int>;
-using V = string;		// could be string as well
+using M = map<T,int>;		// or array<T,ALPHABET_SIZE>
+using V = string;			// could be vector<T> as well
 using It = V::const_iterator;
 struct Node{
-	It begin, end;			// end is exclusive
-	M edges;
-	int parent,link;
-	Node(It begin, It end, int parent) :
-		begin(begin), end(end), parent(parent) ,link(-1) {}
+	It b, e; M edges; int link;		// end is exclusive
+	Node(It b, It e) : b(b), e(e), link(-1) {}
+	int size() const { return e-b; }
 };
-
 struct Ukkonen{
-	const V &s;
-	vector<Node> nodes;
-	int node, remainder;
-	It cur_char;
-	Ukkonen(const V &s) : s(s), nodes(1,{s.begin(),s.begin(),-1}){
-		build();
-	}
+	const V &s; vector<Node> t;
+	int root,n,len,remainder,llink; It edge;
+	Ukkonen(const V &s) : s(s) { build(); }
+	int add_node(It b, It e){ return t.push_back({b,e}), t.size()-1; }
+	int add_node(It b){ return add_node(b,s.end()); }
+	void link(int node){ if(llink) t[llink].link = node; llink = node; }
 	void build(){
-		node = 0;
-		cur_char = nodes[0].end;
-		remainder = 0;
-		operator<<(cout);
+		len = remainder =  0; edge = s.begin();
+		n = root = add_node(s.begin(), s.begin());
 		for(auto i = s.begin(); i != s.end(); ++i){
-			Log("\n\nNEXT ITERATION\n");
-			// descend from active position
-			++remainder;
+			++remainder; llink = 0;
 			while(remainder){
-				Log("[node, cur_char, remainder]");
-				Log(node, cur_char-s.begin(), remainder);
-				Log("looking for",*i, " cur_char=",*cur_char);
-				auto &n = nodes[node]; // valid till resize
-				if(cur_char >= n.end){
-					Log("End of current node");
-					// move to or create new child
-					if(n.edges.count(*i)){
-						Log("Move to next node");
-						// move to next node
-						node = n.edges[*i];
-						cur_char = nodes[node].begin;
-						++cur_char;
-						break;
-
-					} else {
-						Log("Create new child");
-						// insert new node
-						n.edges[*i]=nodes.size();
-						nodes.push_back({i,s.end(),node});
-						auto &n2 = nodes[node];
-
-						// update state
-						--remainder;
-						if(node == 0 || n2.parent == 0){ // root?
-							Log("Root; Rule 1"); // rule 1
-							node = 0;
-							//cur_char = i-remainder+1;
-							++cur_char;
-						} else {
-							node = n2.edges[*i];
-							cur_char = n2.begin;
-						}
-					}
+				if(len == 0) edge = i;
+				if(t[n].edges[*edge] == 0){			// add new leaf
+					t[n].edges[*edge] = add_node(i); link(n);
 				} else {
-					// move over implicit edge or split edge
-					if(*cur_char == *i){
-						Log("Walk over edge");
-						// just walk along
-						++cur_char;
-						break;
-					} else {
-						Log("Split edge");
-						// split the edge
-						// make a new node for the prefix, 
-						// and update the parent pointer
-
-						// new split node
-						nodes.push_back({n.begin,cur_char,n.parent});
-						// new child
-						nodes.push_back({i,s.end(),int(nodes.size())-1});
-
-						auto &n2 = nodes[node];		// new ref to the old node
-						auto &nc = nodes.back();		// the new child
-						auto &nn = *(nodes.end()-2);	// the split node
-
-						// child relations
-						nodes[n2.parent].edges[*nn.begin] = nodes.size()-2;
-						nn.edges[*cur_char] = node;
-						nn.edges[*i] = nodes.size()-1;
-
-						// parent relations
-						n2.parent = nodes.size()-2;
-
-						// intervals
-						n2.begin = cur_char;
-
-						// update state variables
-						--remainder;
-						if(node == 0 || nn.parent == 0){ // root?
-							Log("Root; Rule 1 in SPLIT CASE"); // rule 1
-							//cur_char = i-remainder+1;
-							//++cur_char;
-							node = nodes[0].edges[*cur_char];
-						} else {
-							assert(false);
-							node = n2.edges[*i];
-							cur_char = n2.begin;
-						}
+					auto x = t[n].edges[*edge];		// neXt node [with edge]
+					if(len >= t[x].size()){			// walk to next node
+						len -= t[x].size(); edge += t[x].size(); n = x;
+						continue;
 					}
+					if(*(t[x].b + len) == *i){		// walk along edge
+						++len; link(n); break;
+					}								// split edge
+					auto split = add_node(t[x].b, t[x].b+len);
+					t[n].edges[*edge] = split;
+					t[x].b += len;
+					t[split].edges[*i] = add_node(i);
+					t[split].edges[*t[x].b] = x;
+					link(split);
 				}
-				operator<<(cout);
+				--remainder;
+				if(n == root && len > 0)
+					--len, edge = i - remainder + 1;
+				else n = t[n].link > 0 ? t[n].link : root;
 			}
 		}
 	}
-
-	ostream &operator<<(ostream &o){
-		o << "String:\n";
-		for(auto x : s) o << x;
-		o << "\n";
-		for(auto &n : nodes){
-			o << "Node:\n";
-			o << n.begin - s.begin() << " - " << n.end - s.begin() << "\n";
-			o << n.parent << ", " << n.link << "\n";
-			for(auto x : n.edges)
-				o << x.first << "->" << x.second << ",\t";
-			o << "\n";
-		}
-		o << "\n";
-		return o;
-	}
 };
-
-int main(){
-	string s = "abcabx";
-	Ukkonen st(s);
-}
