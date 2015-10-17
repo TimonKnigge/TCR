@@ -1,59 +1,32 @@
 #include "../header.h"
-using T = char;
-using M = map<T,int>;		// or array<T,ALPHABET_SIZE>
-using V = string;			// could be vector<T> as well
-using It = V::const_iterator;
-struct Node{
-	int len, link; M edges; bool term;
-	Node(int len, int link=-1) : len(len), link(link), term(false) {}
+using T = char; using M = map<T,int>; using V = string;
+struct Node {		// s: start, len: length, link: suffix link, e: edges
+	int s, len, link; M e; bool term;				// term: terminal node?
+	Node(int s, int len, int link=-1):s(s), len(len), link(link), term(0) {}
 };
 struct SuffixAutomaton{
-	const string &s;
-	vector<Node> t;
-	int l;		// the last added state
-	SuffixAutomaton(const string &s) : s(s) { build(); }
+	const V &s; vector<Node> t; int l;	// string; tree; last added state
+	SuffixAutomaton(const V &s) : s(s) { build(); }
 	void build(){
-		// add root
-		l = t.size();
-		t.push_back({0,-1});
+		l = t.size(); t.push_back({0,-1});				// root node
 		for(auto c : s){
-			print();
-			int x = t.size();	// the newly added state
-			t.push_back({t[l].len + 1});
-			int p = l;			// loop over repeated suffixes
-			while(p>=0 && t[p].edges[c] == 0)
-					t[p].edges[c] = x, p = t[p].link;
-			if(p<0){
-				t[x].link = 0;
-			} else {
-				int q = t[p].edges[c];	// the c-child of q
-				if(t[q].len == t[p].len + 1){
-					t[x].link = q;
-				} else {		// cloning of q
-					int clone = t.size();
-					t.push_back(t[q]);
-					t[clone].len = t[p].len + 1;
-					t[x].link = clone;
-					t[q].link = clone;
-					while(p>=0&& t[p].edges.count(c)>0 && t[p].edges[c]==q){
-						t[p].edges[c] = clone;
-						p = t[p].link;
-					}
+			int p=l, x=t.size(); t.push_back({0,t[l].len + 1});	// new node
+			while(p>=0 && t[p].e[c] == 0) t[p].e[c] = x,  p= t[p].link;
+			if(p<0) t[x].link = 0;						// at root
+			else {
+				int q = t[p].e[c];						// the c-child of q
+				if(t[q].len == t[p].len + 1) t[x].link = q;
+				else {									// cloning of q
+					int cl = t.size(); t.push_back(t[q]);
+					t[cl].len = t[p].len + 1;
+					t[cl].s = t[q].s + t[q].len - t[p].len - 1;
+					t[x].link = t[q].link = cl;
+					while(p >= 0 && t[p].e.count(c) > 0 && t[p].e[c] == q)
+						t[p].e[c] = cl, p = t[p].link;	// relink suffix
 				}
 			}
-			l = x;
+			l = x;										// update last
 		}
-		while(l>=0)
-			t[l].term = true, l = t[l].link;
-	}
-	void print(){
-		cout << "\nSuffix Automaton:\n";
-		for(auto &n : t){
-			cout << "Node: " << n.len << ", " << n.link << "\n";
-			for(auto x : n.edges)
-				cout << x.first << "->" << x.second << ", ";
-			cout << "\n";
-
-		}
+		while(l>=0) t[l].term = true, l = t[l].link;
 	}
 };
