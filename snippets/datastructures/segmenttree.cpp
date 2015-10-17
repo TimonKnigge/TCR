@@ -23,7 +23,7 @@ struct SegmentTree {
 		}
 	}
 	void update(int i, T val) {
-		for (tree[i+n].val = val, i = (i+n)/2; i > 1; i /= 2)
+		for (tree[i+n].val = val, i = (i+n)/2; i > 0; i /= 2)
 			tree[i].val = op(tree[2*i].val, tree[2*i+1].val);
 	}
 	T query(int l, int r) {
