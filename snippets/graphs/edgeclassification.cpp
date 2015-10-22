@@ -8,7 +8,7 @@ struct Edge_Classification {
 	void visit(int u) {
 		color[u] = 1;		// in progress
 		for (int v : edges[u]) {
-			if (color[v] == 0) { // u -> v is a tree edge
+			if (color[v] == -1) { // u -> v is a tree edge
 				parent[v] = u;
 				visit(v);
 			} else if (color[v] == 1) {
@@ -19,6 +19,6 @@ struct Edge_Classification {
 		color[u] = 2;		// done
 	}
 	void run(){
-		REP(u,V) if(color[u] < 0) visit(u);
+		for (int u = 0; u < V; ++u) if(color[u] < 0) visit(u);
 	}
 };
