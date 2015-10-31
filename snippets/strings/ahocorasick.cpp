@@ -4,9 +4,7 @@ struct AC_FSM {
 	struct Node {
 		int child[ALPHABET_SIZE], failure = 0;
 		vector<int> match;
-		Node() {
-			for (int i = 0; i < ALPHABET_SIZE; ++i) child[i] = -1;
-		}
+		Node() { for (int i = 0; i < ALPHABET_SIZE; ++i) child[i] = -1; }
 	};
 	vector <Node> a;
 	AC_FSM() { a.push_back(Node()); }

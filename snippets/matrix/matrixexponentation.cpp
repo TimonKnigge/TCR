@@ -14,7 +14,7 @@ struct M {
 				out.m[r][c] += m[r][i] * rhs.m[i][c];
 		return out;
 	}
-	static M raise(const M &m, int n) {
+	M raise(int n) const {
 		if(n == 0) return id();
 		if(n == 1) return m;
 		auto r = (m*m).raise(n / 2);
