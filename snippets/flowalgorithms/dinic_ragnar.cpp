@@ -18,7 +18,7 @@ struct Dinic{
 	ll run() {
 		ll flow = 0, f;
 		while(true) {
-			fill(F(l),-1); l[s]=0; // recalculate the layers
+			fill(l.begin(), l.end(),-1); l[s]=0; // recalculate the layers
 			queue<int> q; q.push(s);
 			while(!q.empty()){
 				auto u = q.front(); q.pop();
@@ -26,7 +26,7 @@ struct Dinic{
 					l[e.v] = l[u]+1, q.push(e.v);
 			}
 			if (l[t] < 0) return flow;
-			REP(u,V) its[u] = edges[u].begin();
+			for (int u = 0; u < V; ++u) its[u] = edges[u].begin();
 			while ((f = augment(s, INF)) > 0) flow += f;
 		}	}
 };
