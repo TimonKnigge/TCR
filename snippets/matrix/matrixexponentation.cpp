@@ -16,8 +16,8 @@ struct M {
 	}
 	M raise(int n) const {
 		if(n == 0) return id();
-		if(n == 1) return m;
-		auto r = (m*m).raise(n / 2);
-		return (n%2 ? m*r : r);
+		if(n == 1) return *this;
+		auto r = (*this**this).raise(n / 2);
+		return (n%2 ? *this*r : r);
 	}
 };
