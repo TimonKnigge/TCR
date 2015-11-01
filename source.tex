@@ -576,6 +576,11 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \entry{Fast IO}{}{./snippets/helpers/fastinput.cpp}{}{}
 
+\subsection{Detecting overflow}
+These are GNU builtins, detect both over- and underflow. Returns a boolean upon failure, otherwise the result is present in \texttt{ref}. Follow the template: 
+
+\texttt{\_\_builtin\_[u|s][add|mul|sub](ll)?\_overflow(in, out, \&ref)} 
+
 \newpage
 \section{Strategies}
 \subsubsection*{Techniques}
