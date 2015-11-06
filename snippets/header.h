@@ -1,3 +1,5 @@
+#ifndef HEADER_H
+#define HEADER_H
 //#define _GLIBCXX_DEBUG
 constexpr bool LOG = false;
 
@@ -37,3 +39,4 @@ void Log() { if(LOG) cerr << "\n"; }
 template<class T, class... S> void Log(T t, S... s){
 	if(LOG) cerr << t << "\t", Log(s...);
 }
+#endif
