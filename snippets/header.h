@@ -1,3 +1,6 @@
+//#define _GLIBCXX_DEBUG
+constexpr bool LOG = false;
+
 #include <iostream> // strings/streams
 #include <string>
 #include <sstream>
@@ -19,13 +22,6 @@
 
 #define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
 #define F(v)		begin(v), end(v)
-constexpr bool LOG =
-#ifdef _LOG
-true;
-#define _GLIBCXX_DEBUG
-#else
-false;
-#endif
 
 using namespace std;
 using ll = long long;
