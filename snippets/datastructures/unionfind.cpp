@@ -12,7 +12,7 @@ public:
 	int get_size(int i) { return size[find(i)]; }
 	int count() { return c; }
 
-	void union_set(int i, int j) {
+	void merge(int i, int j) {
 		if ((i = find(i)) == (j = find(j))) return;
 		c--;
 		if (rank[i] > rank[j]) swap(i, j);

@@ -7,8 +7,7 @@ using min_queue = priority_queue<T, vector<T>, greater<T>>;
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-using order_tree =
-typedef tree<
+using order_tree = tree<
 	TIn, TOut, less<TIn>, // key, value types. TOut can be null_type
 	rb_tree_tag, tree_order_statistics_node_update>;
 // find_by_order(int r) (0-based)
