@@ -1,5 +1,5 @@
 #include "../header.h"
-class UnionFind {
+struct UnionFind {
 	vi par, rank, size; int c;
 	UnionFind(int n) : par(n), rank(n,0), size(n,1), c(n) {
 		for (int i = 0; i < n; ++i) par[i] = i;
