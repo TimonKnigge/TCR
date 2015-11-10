@@ -4,12 +4,12 @@
 class Push_Relabel {
 public:
 	FlowGraph &g; // directed
-	int V, s, t; // Vertices, souce and sink
+	int V, s, t; // Vertices, source and sink
 	vi h, hc, qc; // height, height count, queuecount
 	vector<ll> x; // excess
 
 	Push_Relabel(FlowGraph &g, int s, int t) :
-	   	g(g), V(g.size()), s(s), t(t), h(V,0), hc(2*V,0), qc(V,0), x(V,0){
+		g(g), V(g.size()), s(s), t(t), h(V,0), hc(2*V,0), qc(V,0), x(V,0){
 		hc[0] = V;
 	}
 
