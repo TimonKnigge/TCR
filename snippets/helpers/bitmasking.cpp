@@ -22,7 +22,14 @@ while (!(mask & 1 << N)) {
 	int lz = (mask + lo) & ~mask;
 	mask |= lz;
 	mask &= ~(lz - 1);
-	mask |= (lz / lo / 2) - 1;
+	mask |= ((lz / lo) >> 1) - 1;
+}
+
+// Same as above
+int mask = (1 << k) - 1;
+while (!(mask & 1 << N)) { // Decode mask here
+	int t = msk2 | (msk2 - 1);
+	msk2 = (t + 1) | (((~t & -~t) - 1) >> (__builtin_ctz(msk2) + 1));
 }
 
 // Iterate over all subsets of a subset
