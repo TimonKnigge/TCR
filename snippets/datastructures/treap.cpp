@@ -2,7 +2,7 @@
 struct Node {
 	ll val;
 	int size, priority;
-	Node *l, *r;
+	Node *l = NULL, *r = NULL;
 	Node(ll _v) : val(_v), size(1) { priority = rand(); }
 };
 
