@@ -48,11 +48,14 @@ struct HLD {
 		while(!is_parent(pr[u],v)) u = p[pr[u]];
 		return is_parent(u,v) ? u : v;
 	}
+	void update(int u, T v){
+		sts[path[u]].update(pi[u],v);
+	}
 	T query(int u, int l, bool inc){			// query up to lca
 		T a = ident;
-		while(path[u]!=path[l]) a=op(a,sts[path[u]].query(0,pi[u])),u=pr[u];
-		a = op(a, sts[path[u]].query(pi[l] - (inc ? 0 : 1), pi[u]));
-		return a;
+		while(path[u]!=path[l])
+			a = op(a, sts[path[u]].query(0, pi[u])), u = p[pr[u]];
+		return op(a, sts[path[u]].query(pi[l] + (inc ? 0 : 1), pi[u]));
 	}
 	T query(int u, int v){
 		auto l = lca(u,v);			// include l the right number of times!
