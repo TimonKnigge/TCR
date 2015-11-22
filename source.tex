@@ -2,6 +2,7 @@
 	a4paper,
 	landscape,
 	twoside,
+	10pt,
 	article
 ]{article}
 \usepackage[
@@ -82,6 +83,7 @@
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
 \setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{-1pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -590,6 +592,7 @@ These are GNU builtins, detect both over- and underflow. Returns a boolean upon 
 
 \newpage
 \section{Strategies}
+Take a break after 2 hours.
 \subsubsection*{Techniques}
 \begin{itemize}
 \setlength\itemsep{0em}

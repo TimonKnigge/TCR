@@ -1,6 +1,5 @@
 #include "../header.h"
 #include "../datastructures/segmenttree.cpp"
-
 template <class T, T(*op)(T, T), T ident>
 struct HLD {
 	int V,t; vi &p; vvi &childs;	// Size; dfs-time; input parent/childs
@@ -10,8 +9,7 @@ struct HLD {
 	vector<SegmentTree<T,op,ident>> sts;
 	HLD(vvi &childs, vi &p, vector<T> &init, int root = 0) :
 		V(p.size()), t(0), p(p), childs(childs), pr(V,-1), sz(V,-1),
-		heavy(V,-1), t_in(V,-1), t_out(V,-1), path(V,-1), pi(V,-1)
-		{
+		heavy(V,-1), t_in(V,-1), t_out(V,-1), path(V,-1), pi(V,-1) {
 			stack<int> s; s.push(root);		// toposort in ts (top down)
 			while(!s.empty()){
 				int u = s.top(); s.pop(); t_in[u] = ++t; ts.push_back(u);
