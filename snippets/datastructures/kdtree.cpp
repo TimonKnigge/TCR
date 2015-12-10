@@ -1,9 +1,5 @@
 #include "../header.h"
 struct P{ ll x,y; };
-struct Node {
-	ll i, cl, cr; bool hz;
-	Node(ll i, bool h) : i{i}, cl{-1}, cr{-1}, hz{h} {};
-};
 struct Box{
 	ll xl, xh, yl, yh;
 	Box(ll xl=-LLINF, ll xh=-LLINF, ll yl=LLINF, ll yh=LLINF) :
@@ -18,10 +14,14 @@ struct Box{
 		return xh < b.xl || b.xh < xl || yh < b.yl || b.yh < yl;
 	}
 };
+struct Node {
+	ll i, cl, cr; bool hz;
+	Node(ll i, bool h) : i{i}, cl{-1}, cr{-1}, hz{h} {};
+};
 struct KDTree {
-	size_t N; vector<P> ps; vector<Node> tree;
-	KDTree(vector<P> &ps) : N{ps.size()}, ps{ps} {
-		vi x(N); iota(x.begin(), x.end(), 0); vi y(x);
+	vector<P> &ps; vector<Node> tree;
+	KDTree(vector<P> &ps) : ps{ps} {
+		vi x(ps.size()); iota(x.begin(), x.end(), 0); vi y(x);
 		sort(x.begin(), x.end(), [&](ll l, ll r){ return compx(l,r); });
 		sort(y.begin(), y.end(), [&](ll l, ll r){ return compy(l,r); });
 		tree.reserve(ps.size());
@@ -50,14 +50,11 @@ bool compy(ll l,ll r){return tie(ps[l].y,ps[l].x,l)<tie(ps[r].y,ps[r].x,r);}
 				else if(compy(p,s)) xl.push_back(p);
 				else				xh.push_back(p);
 		}
-		tree[n].cl = build(xl,yl,!h);
-		tree[n].cr = build(xh,yh,!h);
+		tree[n].cl = build(xl,yl,!h); tree[n].cr = build(xh,yh,!h);
 		return n;
 	}
 	vi ans;		// returns a list of indices in ps
-	vi query(const Box &q){
-		ans.clear(); query(q, Box(), 0); return ans;
-	}
+	vi query(const Box &q){ ans.clear(); query(q, Box(), 0); return ans; }
 	void query(const Box &q, const Box &b, ll n){
 		auto &node = tree[n]; auto &p = ps[node.i];
 		if(q.contains(b)){ all(n); return; }
