@@ -1,32 +1,24 @@
 #include "../header.h"
 struct HLD {
-	int V,T; vi &p; vvi &childs;	// Size; dfs-time; input parent/childs
-	vi pr, size, heavy;		// path-root; size of subtrees; heavy child
-	vi t_in, t_out;			// dfs in and out times
+	int V; vvi &childs;
+	vi &p, pr, heavy, d; // parents, path-root; heavy child, depth
 	HLD(vvi &childs, vi &p, int root = 0) :
-		V(p.size()), T(0), p(p), childs(childs), pr(V,-1),
-		size(V,-1), heavy(V,-1), t_in(V,-1), t_out(V,-1) {
+		V(p.size()), childs(childs), p(p), pr(V,-1),
+		heavy(V,-1), d(V,0) {
 			dfs(root); set_pr(root,0);
 		}
 	int dfs(int u){
-		size[u] = 1; t_in[u] = T++;
-		int m = -1, mi = -1, s;		// max, max index, size of subtree
-		for(auto &v : childs[u]){
-			size[u] += s = dfs(v);
-			if(s > m) m=s, mi = v;
-		}
-		heavy[u] = mi; t_out[u] = T++; return size[u];
+		ii best; int s=1, ss;	// max, max index, size (of subtree)
+		for(auto &v : childs[u])
+			d[v]=d[u]+1, s+=ss=dfs(v), best = max(best,{ss,v});
+		heavy[u] = best.second; return s;
 	}
 	void set_pr(int u, int r){		// node, path root
 		pr[u] = r;
 		for(auto &v : childs[u]) set_pr(v, heavy[u] == v ? r : v);
 	}
-	bool is_parent(int p, int u){	// test whether p is a parent of u
-		return t_in[p] <= t_in[u] && t_out[p] >= t_out[u];
-	}
 	int lca(int u, int v){
-		while(!is_parent(pr[v],u)) v = p[pr[v]];
-		while(!is_parent(pr[u],v)) u = p[pr[u]];
-		return is_parent(u,v) ? u : v;
+		for(; pr[u]!=pr[v]; v=p[pr[u]]) if(d[pr[u]] > d[pr[v]]) swap(u,v);
+		return d[u] < d[v] ? u : v;
 	}
 };
