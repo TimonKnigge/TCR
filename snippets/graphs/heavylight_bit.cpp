@@ -5,16 +5,16 @@ struct HLD {
 	vi size;		// path-root; size of subtrees; h child
 	vi ts;		// dfs in and out times, toposort
 
+	int V; vvi &graph; // graph can be graph or childs only
+	vi p, r, d, h; // parents, path-root; h child, depth
+
 	vector<FenwickTree<ll>> fts;
 	// BIT stuff
 	vi pi;	// index in path
 	vi path;// number of the path
 
-	int V; vvi &graph; // graph can be graph or childs only
-	vi p, r, d, h; // parents, path-root; h child, depth
-
 	HLD(vvi &graph, int root = 0) : V(graph.size()), graph(graph),
-	p(V,-1), r(V,-1), d(V,0), h(V,-1) { dfs(root);
+	p(V,-1), r(V,-1), d(V,0), h(V,-1), pi(V,-1), path(V,-1) { dfs(root);
 		for(int i=0; i<V; ++i) if (p[i]==-1 || h[p[i]]!=i){ // new path
 			int k = 1;
 			for (int j=i; j!=-1; j=h[j],++k)
