@@ -1,6 +1,6 @@
 #include "../header.h"
 template <class T>
-struct FenwickTree {
+struct FenwickTree {		// use 1 based indices!!!
 	int n; vector<T> tree;
 	FenwickTree(int n) : n(n) { tree.assign(n + 1, 0); }
 	T query(int l, int r) { return query(r) - query(l - 1); }
