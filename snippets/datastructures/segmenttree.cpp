@@ -2,13 +2,12 @@
 template <class T, T(*op)(T, T), T ident>
 struct SegmentTree {
 	struct Node {
-		T val;
-		int l, r;
+		T val; int l, r;
 		Node(T _val, int _l, int _r) : val(_val), l(_l), r(_r) { };
 	};
 	int n;
-	vector<Node> tree;
-	SegmentTree(int p, vector<T> &init) : n(1 << p) { // Needs 2^p leafs
+	vector<Node> tree;	// removed the 2^p nodes requirement; seems to work
+	SegmentTree(vector<T> &init) : n(init.size()) {
 		tree.assign(2 * n, Node(ident, 0, n - 1));
 		for (int j = 1; j < n; ++j) {
 			int m = (tree[j].l + tree[j].r) / 2;
