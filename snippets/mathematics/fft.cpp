@@ -25,16 +25,13 @@ void fft(vector<Complex> &A, int N, int p, bool inv = false) {
 	}
 }
 void convolution(vector<Complex> &A,vector<Complex> &B,vector<Complex> &C){
-	// Pad with zeroes
 	int N = 2 * max(next_power_of_2(A.size()), next_power_of_2(B.size()));
 	A.reserve(N); B.reserve(N); C.reserve(N);
 	for (int i = A.size(); i < N; ++i) A.push_back({0, 0});
 	for (int i = B.size(); i < N; ++i) B.push_back({0, 0});
 	int p = int(log2(N) + 0.5);
-	// Transform A and B
 	fft(A, N, p, false);
 	fft(B, N, p, false);
-	// Calculate the convolution in C
 	for (int i = 0; i < N; ++i) C.push_back(A[i] * B[i]);
 	fft(C, N, p, true);
 }
