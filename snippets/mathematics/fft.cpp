@@ -24,7 +24,6 @@ void fft(vector<Complex> &A, int N, int p, bool inv = false) {
 		A[i].u /= N; A[i].v /= N;
 	}
 }
-
 void convolution(vector<Complex> &A,vector<Complex> &B,vector<Complex> &C){
 	// Pad with zeroes
 	int N = 2 * max(next_power_of_2(A.size()), next_power_of_2(B.size()));
@@ -39,7 +38,14 @@ void convolution(vector<Complex> &A,vector<Complex> &B,vector<Complex> &C){
 	for (int i = 0; i < N; ++i) C.push_back(A[i] * B[i]);
 	fft(C, N, p, true);
 }
-
+void convolution(vector<vector<Complex>> &ps, vector<Complex> &C){
+	int ts=0; for(auto &p : ps) ts+=p.size(); ts-=ps.size()-1;
+	int q = 32-__builtin_clz(ts-1), N=1<<q; C.assign(N,{1,0});
+	for(auto &p : ps) p.resize(N,{0,0}), fft(p,N,q,false),
+		transform(p.begin(),p.end(),C.begin(),C.begin(),
+			multiplies<Complex>());
+	fft(C, N, q, true); C.resize(ts);
+}
 void square_inplace(vector<Complex> &A) {
 	int N = 2 * next_power_of_2(A.size());
 	A.reserve(N);
