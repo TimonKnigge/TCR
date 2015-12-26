@@ -10,9 +10,9 @@ void fft(vector<T> &A, int N, int p, bool inv = false) {
 		T w, w_m = T::root(inv ? -m : m);
 		for (int k = 0; k < N; k += m) {
 			w = T{1};
-			for (int j = 0; j < m / 2; ++j) {
-				T t = w * A[k + j + m / 2];
-				A[k + j + m / 2] = A[k + j] - t;
+			for (int j = 0; j < m/2; ++j) {
+				T t = w * A[k + j + m/2];
+				A[k + j + m/2] = A[k + j] - t;
 				A[k + j] = A[k + j] + t;
 				w = w * w_m;
 			}
@@ -23,7 +23,7 @@ void fft(vector<T> &A, int N, int p, bool inv = false) {
 		for(auto &x : A) x = x*inverse;
 	}
 }
-void convolution(vector<T> &A,vector<T> &B,vector<T> &C){
+void convolution(vector<T> &A, vector<T> &B, vector<T> &C){
 	int q = 32 - __builtin_clz(A.size() + B.size() - 2), N=1<<q;
 	A.resize(N,{}); B.resize(N,{}); C.resize(N,{});
 	fft(A, N, q, false); fft(B, N, q, false);
