@@ -56,7 +56,7 @@ vector<Factor> factor2(ll n){
 	return factors;
 }
 
-ll numDiv(ll n) {
+ll num_div(ll n) {
 	ll divisors = 1;
 	for(auto &&p : factor(n))
 		divisors *= p.exp + 1;
@@ -68,14 +68,14 @@ ll bin_pow(ll b, ll e){
 	return p * p * (e&1 ? b : 1);
 }
 
-ll sumDiv(ll n) {
+ll sum_div(ll n) {
 	ll sum = 1;
 	for(const auto &p : factor(n))
 		sum *= (pow(p.prime, p.exp+1) - 1) / (p.prime - 1);
 	return sum;
 }
 
-ll EulerPhi(ll n) {
+ll phi(ll n) {
 	ll ans = n;
 	for(const auto &p : factor(n))
 		ans -= ans / p.prime;
