@@ -56,25 +56,29 @@ bool linear_diophantine(ll a, ll b, ll c, ll &x, ll &y) {
 	}
 }
 
-// Chinese remainder theorem: finds z s.t. z % xi = ai. z is
-// unique modulo M = lcm(xi). Returns (z, M), m = -1 on failure.
-ii crt(ll x1, ll a1, ll x2, ll a2) {
-	ll s, t, d;
-	extended_euclid(a1, a2, s, t, d);
-	if ((x1-x2) % d != 0) return {0, -1};
-	return {mod(s*x2*a1 + t*x1*a2, a1*a2)/d, a1/d*a2};
-}
-ii crt(vi &x, vi &a){		// ii = pair<long,long>!
-	ii ret = ii(a[0], x[0]);
-	for (size_t i = 1; i < x.size(); ++i) {
-		ret = crt(ret.second, ret.first, x[i], a[i]);
-		if (ret.second == -1) break;
-	}
-	return ret;
-}
-
 ll binom(ll n, ll k){
 	ll ans = 1;
 	for(ll i = 1; i <= min(k,n-k); i++) ans *= (n-k+i), ans/=i;
 	return ans;
 }
+
+// Solves x = a1 mod m1, x = a2 mod m2, x is unique modulo lcm(m1, m2).
+// Returns {0, -1} on failure, {x, lcm(m1, m2)} otherwise.
+pair<ll, ll> crt(ll a1, ll m1, ll a2, ll m2) {
+	ll s, t, d;
+	extended_euclid(m1, m2, s, t, d);
+	if (a1 % d != a2 % d) return {0, -1};
+	return {mod(s * a2 * m1 + t * a1 * m2, m1 * m2) / d, m1 / d * m2};
+}
+
+// Solves x = ai mod mi. x is unique modulo lcm mi.
+// Returns {0, -1} on failure, {x, lcm mi} otherwise.
+pair<ll, ll> crt(vector<ll> &a, vector<ll> &m) {
+	pair<ll, ll> res = {a[0], m[0]};
+	for (int i = 1; i < a.size(); ++i) {
+		res = crt(res.first, res.second, mod(a[i], m[i]), m[i]);
+		if (res.second == -1) break;
+	}
+	return res;
+}
+
