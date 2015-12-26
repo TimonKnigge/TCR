@@ -37,6 +37,7 @@ using vi  = vector<ll>;
 using vii = vector<ii>;
 using vb  = vector<bool>;
 using vvi = vector<vi>;
+using vvii = vector<vii>;
 
 constexpr int  INF = 1e9+1; // < 1e9 - -1e9
 constexpr ll LLINF = 1e18+1;
