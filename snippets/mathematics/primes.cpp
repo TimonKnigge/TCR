@@ -37,8 +37,8 @@ vector<Factor> factor(ll n) {
 
 vector<ll> divisors(ll n){
 	auto fs = factor(n); vector<ll> ds{1};
-	ds.reserve(accumulate(fs.begin(),fs.end(),0,
-		[](ll a,ll e){return a*(e+1);}));
+	ds.reserve(accumulate(fs.begin(),fs.end(),1,
+		[](ll a,auto f){return a*(f.exp+1);}));
 	for(auto f : fs) for(auto d : ds) for(ll i = 0; i <= f.exp; ++i)
 				ds.push_back(d), d*=f.prime;
 	return ds;
