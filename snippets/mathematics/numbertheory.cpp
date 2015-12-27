@@ -58,16 +58,16 @@ bool linear_diophantine(ll a, ll b, ll c, ll &x, ll &y) {
 
 // Chinese remainder theorem: finds z s.t. z % xi = ai. z is
 // unique modulo M = lcm(xi). Returns (z, M), m = -1 on failure.
-ii crm(ll x1, ll a1, ll x2, ll a2) {
+ii crt(ll x1, ll a1, ll x2, ll a2) {
 	ll s, t, d;
-	extended_euclid(x1, x2, s, t, d);
-	if (a1 % d != a2 % d) return ii(0, -1);
-	return ii(mod(s * a2 * x1 + t * a1 * x2, x1 * x2) / d, x1 * x2 / d);
+	extended_euclid(a1, a2, s, t, d);
+	if ((x1-x2) % d != 0) return {0, -1};
+	return {mod(s*x2*a1 + t*x1*a2, a1*a2)/d, a1/d*a2};
 }
-ii crm(vi &x, vi &a){		// ii = pair<long,long>!
+ii crt(vi &x, vi &a){		// ii = pair<long,long>!
 	ii ret = ii(a[0], x[0]);
 	for (size_t i = 1; i < x.size(); ++i) {
-		ret = crm(ret.second, ret.first, x[i], a[i]);
+		ret = crt(ret.second, ret.first, x[i], a[i]);
 		if (ret.second == -1) break;
 	}
 	return ret;

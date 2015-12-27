@@ -7,4 +7,7 @@
 *.dvi
 *.out
 
+# hidden files
+.*
+
 source.pdf

@@ -28,8 +28,8 @@ constexpr bool LOG = false;
 using namespace std;
 using ll = long long;
 using ld = long double;
-using ii = pair<int,int>;
-using vi = vector<int>;
+using ii = pair<ll,ll>;
+using vi = vector<ll>;
 using vb = vector<bool>;
 using vvi = vector<vi>;
 
