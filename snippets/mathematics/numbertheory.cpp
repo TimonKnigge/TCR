@@ -58,7 +58,7 @@ bool linear_diophantine(ll a, ll b, ll c, ll &x, ll &y) {
 
 ll binom(ll n, ll k){
 	ll ans = 1;
-	for(ll i = 1; i <= min(k,n-k); i++) ans *= (n-k+i), ans/=i;
+	for(ll i = 1; i <= min(k,n-k); ++i) ans = ans*(n+1-i)/i;
 	return ans;
 }
 
@@ -75,7 +75,7 @@ pair<ll, ll> crt(ll a1, ll m1, ll a2, ll m2) {
 // Returns {0, -1} on failure, {x, lcm mi} otherwise.
 pair<ll, ll> crt(vector<ll> &a, vector<ll> &m) {
 	pair<ll, ll> res = {a[0], m[0]};
-	for (int i = 1; i < a.size(); ++i) {
+	for (ull i = 1; i < a.size(); ++i) {
 		res = crt(res.first, res.second, mod(a[i], m[i]), m[i]);
 		if (res.second == -1) break;
 	}

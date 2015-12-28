@@ -6,6 +6,9 @@
 #endif
 
 template<typename F>	// f(ll mask) is called
+void iterate_subset(ll N, F f){for(ll mask=0; mask < 1<<N; ++mask) f(mask);}
+
+template<typename F>	// f(ll mask) is called
 void iterate_k_subset(ll N, ll k, F f){
 	ll mask = (1 << k) - 1;
 	while (!(mask & 1<<N)) { f(mask);
