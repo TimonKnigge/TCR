@@ -1,11 +1,11 @@
 #include "../header.h"
 #include "numbertheory.cpp"
-constexpr ll SIZE = 1e6+10;
-bitset<SIZE + 1> bs;
+ll SIZE;
+vector<bool> bs;
 vector<ll> primes;
 
-void sieve() { // call at start in main!
-	bs.set();
+void sieve(ll size = 1e6) { // call at start in main!
+	SIZE = size; bs.assign(SIZE,1);
 	bs[0] = bs[1] = 0;
 	for (ll i = 2; i <= SIZE; i++) if (bs[i]) {
 		for (ll j = i * i; j <= SIZE; j += i) bs[j] = 0;
