@@ -1,6 +1,6 @@
 #include "../header.h"
 #include "numbertheory.cpp"
-constexpr ll SIZE = 1e6+10;
+constexpr ll SIZE = 1e6;
 bitset<SIZE + 1> bs;
 vector<ll> primes;
 
@@ -58,7 +58,8 @@ void sieve2() { // call at start in main!
 vector<Factor> factor2(ll n){
 	vector<Factor> factors;
 	while(n>1){
-		if(factors.back().prime == mf[n]) factors.back().exp++;
+		if(!factors.empty() && factors.back().prime == mf[n])
+			factors.back().exp++;
 		else factors.push_back({mf[n],1});
 		n/=mf[n];
 	}
