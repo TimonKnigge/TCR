@@ -8,20 +8,9 @@
 template<typename F>	// f(ll mask) is called
 void iterate_k_subset(ll N, ll k, F f){
 	ll mask = (1 << k) - 1;
-	while (!(mask & 1 << N)) { f(mask);
-		ll lo = mask & ~(mask - 1);
-		ll lz = (mask + lo) & ~mask;
-		mask |= lz;
-		mask &= ~(lz - 1);
-		mask |= ((lz / lo) >> 1) - 1;
-	}
-}
-template<typename F>	// f(ll mask) is called
-void iterate_k_subset2(ll N, ll k, F f){
-	ll mask = (1 << k) - 1;
-	while (!(mask & 1 << N)) { f(mask);
-		ll t = mask | (mask - 1);
-		mask = (t + 1) | (((~t & -~t) - 1) >> (__builtin_ctz(mask) + 1));
+	while (!(mask & 1<<N)) { f(mask);
+		ll t = mask | (mask-1);
+		mask = (t+1) | (((~t & -~t) - 1) >> (__builtin_ctz(mask)+1));
 	}
 }
 
@@ -29,7 +18,7 @@ void iterate_k_subset2(ll N, ll k, F f){
 template<typename F>	// f(ll mask) is called
 void iterate_mask_subset(ll set, F f){
 	ll mask = set;
-	do  f(mask), mask = (mask - 1) & set;
+	do  f(mask), mask = (mask-1) & set;
 	while (mask != set);
 }
 
