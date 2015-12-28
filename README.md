@@ -6,11 +6,11 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 #### Datastructures
 - [x] Segment Tree with lazy propagation
-- [ ] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
+- [x] Investigate advantages of Sparse Table for the RMQ (over Segment Tree)
 - [x] LCA (either code or a deriviation from RMQ). ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file26), [2](https://www.topcoder.com/community/data-science/data-science-tutorials/range-minimum-query-and-lowest-common-ancestor/))
 - [x] Suffix Array
 - [x] Suffix Tree ([1](web.stanford.edu/~liszt90/acm/notebook.html#file5), [2](http://acm.math.spbu.ru/~kunyavskiy/notebook/), [3](http://codeforces.com/blog/entry/16780))
-- [ ] Ropes
+- [x] ~~Ropes~~ (Use Cartesian tree)
 - [x] Implicit Cartesian Tree ([1](http://wcipeg.com/wiki/Cartesian_tree)) + investigate how to use as dynamic segment tree
 - [ ] Dancing Links (+ Algo X)
 - [ ] Palindromic Tree (Eertree)
@@ -32,7 +32,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Investigate relevancy of 'circulations' (source/sinkless flows) ([1](http://www.cs.cmu.edu/afs/cs/academic/class/15750-s01/www/notes/lect0313))
 - [x] Hopcroft-Karp algorithm (equivalent to Dinic)
 - [ ] Edmond's Blossom Shrinking algorithm
-- [ ] ~~Hungarian Algorithm O(n^3) (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))~~
+- [ ] ~~Hungarian Algorithm O(n^3)~~ (Superseeded by the faster min cost flow algorithm, O(nm lg n); see [1](http://jeffe.cs.illinois.edu/teaching/algorithms/2009/notes/18-maxflowext.pdf))
 - [x] Graph Cut Inference ([1](http://web.stanford.edu/~liszt90/acm/notebook.html#file7))
 
 #### Combinatorics, Math
