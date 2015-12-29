@@ -26,7 +26,7 @@ constexpr bool LOG = false;
 #include <complex>
 
 #define REP(i,n)	for(auto i = decltype(n)(0); i<(n); i++)
-#define F(v)		begin(v), end(v)
+#define all(v)		begin(v), end(v)
 
 using namespace std;
 using ll  = long long;

@@ -20,9 +20,9 @@ bool is_prime(ll n) { // for N <= SIZE^2
 	return true;
 }
 
-struct Factor{ll prime; ll exp;};
-vector<Factor> factor(ll n) {
-	vector<Factor> factors;
+struct Factor{ll prime; ll exp;}; using Fs = vector<Factor>;
+Fs factor(ll n) {
+	Fs factors;
 	for(const auto &prime : primes){
 		if(n==1 || prime*prime > n) break;
 		ll exp=0;
@@ -35,7 +35,7 @@ vector<Factor> factor(ll n) {
 	return factors;
 }
 
-vector<ll> divisors(const vector<Factor> &fs){
+vector<ll> divisors(const Fs &fs){
 	vector<ll> ds{1};
 	ds.reserve(accumulate(fs.begin(),fs.end(),1,
 		[](ll a,auto f){return a*(f.exp+1);}));
@@ -56,8 +56,8 @@ void sieve2(ll size=1e6) {	// call at start in main!
 	}
 }
 bool is_prime2(ll n) { assert(n<=SIZE); return mf[n]==n; }
-vector<Factor> factor2(ll n){
-	vector<Factor> factors;
+Fs factor2(ll n){
+	Fs factors;
 	while(n>1){
 		if(!factors.empty() && factors.back().prime == mf[n])
 			factors.back().exp++;
@@ -67,26 +67,12 @@ vector<Factor> factor2(ll n){
 	return factors;
 }
 
-ll num_div(ll n) {
-	ll divisors = 1;
-	for(auto &&p : factor(n))
-		divisors *= p.exp + 1;
-	return divisors;
-}
-
-ll sum_div(ll n) {
-	ll sum = 1;
-	for(const auto &p : factor(n))
-		sum *= (pow(p.prime, p.exp+1) - 1) / (p.prime - 1);
-	return sum;
-}
-
-ll phi(ll n) {
-	ll ans = n;
-	for(const auto &p : factor(n))
-		ans -= ans / p.prime;
-	return ans;
-}
+ll num_div(  const Fs &fs) { ll d = 1;
+	for(auto &f : fs) d *= f.exp+1; return d; }
+ll sum_div(  const Fs &fs) { ll s = 1;
+	for(auto &f : fs) s *= (pow(f.prime,f.exp+1)-1)/(f.prime-1); return s; }
+ll phi(ll n, const Fs &fs) { ll p = n;
+	for(auto &f : fs) p -= p/f.prime; return p; }
 
 vector<ll> test_primes = {2,3,5,7,11,13,17,19,23};	// <= 3.8e18
 vector<ll> test_primes2= {2,13,23,1662803};			// <= 1.1e12
