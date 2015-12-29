@@ -34,14 +34,17 @@ ll mulmod(ll a, ll b, ll m){
 	}
 	return x % m;
 }
+ll mulmod2(ll a, ll b, ll m){ return __int128(a)*b%m; }
 
-// Finds a^n % m in O(lg n) time, ensure that a < m to avoid overflow!
-ll powmod(ll a, ll n, ll m) {
-	if (n == 0) return 1;
-	if (n == 1) return a;
-	ll aa = (a*a)%m; // use mulmod when b > 1e9
-	if (n % 2 == 0) return powmod(aa, n / 2, m);
-	return (a * powmod(aa, (n - 1) / 2, m)) % m;
+ll pow(ll b, ll e) {		// b^e in logarithmic time
+	ll p = e<2 ? 1 : pow(b*b,e/2);
+	return e&1 ? p*b : p;
+}
+
+// Finds b^e % m in O(lg n) time, ensure that b < m to avoid overflow!
+ll powmod(ll b, ll e, ll m) {
+	ll p = e<2 ? 1 : powmod((b*b)%m,e/2,m);
+	return e&1 ? p*b%m : p;
 }
 
 // Solve ax + by = c, returns false on failure.
