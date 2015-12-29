@@ -55,7 +55,7 @@ void sieve2(ll size=1e6) {	// call at start in main!
 		primes.push_back(i);
 	}
 }
-
+bool is_prime2(ll n) { assert(n<=SIZE); return mf[n]==n; }
 vector<Factor> factor2(ll n){
 	vector<Factor> factors;
 	while(n>1){
