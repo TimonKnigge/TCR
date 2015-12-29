@@ -35,8 +35,17 @@ vector<Factor> factor(ll n) {
 	return factors;
 }
 
-vector<ll> mf;		// mf[i]==i when prime
-void sieve2(ll size=1e6) { // call at start in main!
+vector<ll> divisors(const vector<Factor> &fs){
+	vector<ll> ds{1};
+	ds.reserve(accumulate(fs.begin(),fs.end(),1,
+		[](ll a,auto f){return a*(f.exp+1);}));
+	for(auto f : fs) for(auto d : ds) for(ll i = 0; i < f.exp; ++i)
+				ds.push_back(d*=f.prime);
+	return ds;
+}
+
+vector<ll> mf;				// mf[i]==i when prime
+void sieve2(ll size=1e6) {	// call at start in main!
 	SIZE = size; mf.assign(SIZE+1,-1);
 	mf[0] = mf[1] = 1;
 	for (ll i = 2; i <= SIZE; i++) if (mf[i] < 0) {
@@ -50,7 +59,8 @@ void sieve2(ll size=1e6) { // call at start in main!
 vector<Factor> factor2(ll n){
 	vector<Factor> factors;
 	while(n>1){
-		if(factors.back().prime == mf[n]) factors.back().exp++;
+		if(!factors.empty() && factors.back().prime == mf[n])
+			factors.back().exp++;
 		else factors.push_back({mf[n],1});
 		n/=mf[n];
 	}
