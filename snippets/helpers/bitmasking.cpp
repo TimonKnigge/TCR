@@ -6,14 +6,14 @@
 #endif
 
 template<typename F>	// f(ll mask) is called
-void iterate_subset(ll N, F f){for(ll mask=0; mask < 1<<N; ++mask) f(mask);}
+void iterate_subset(ll N, F f){for(ll mask=0; mask < 1ll<<N; ++mask) f(mask);}
 
 template<typename F>	// f(ll mask) is called
 void iterate_k_subset(ll N, ll k, F f){
-	ll mask = (1 << k) - 1;
-	while (!(mask & 1<<N)) { f(mask);
+	ll mask = (1ll << k) - 1;
+	while (!(mask & 1ll<<N)) { f(mask);
 		ll t = mask | (mask-1);
-		mask = (t+1) | (((~t & -~t) - 1) >> (__builtin_ctz(mask)+1));
+		mask = (t+1) | (((~t & -~t) - 1) >> (__builtin_ctzll(mask)+1));
 	}
 }
 
