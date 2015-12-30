@@ -71,8 +71,13 @@ ll num_div(  const Fs &fs) { ll d = 1;
 	for(auto &f : fs) d *= f.exp+1; return d; }
 ll sum_div(  const Fs &fs) { ll s = 1;
 	for(auto &f : fs) s *= (pow(f.prime,f.exp+1)-1)/(f.prime-1); return s; }
-ll phi(ll n, const Fs &fs) { ll p = n;
+ll phi(ll n, Fs fs={}    ) { ll p = n; if(fs.empty()) fs=factor(n);
 	for(auto &f : fs) p -= p/f.prime; return p; }
+ll ord(ll n, ll m){ ll o = phi(m);		// n^ord(n,m)=1 mod m
+	for(auto f : factor(o))
+		while(f.exp-- && powmod(n,o/f.prime,m)==1) o/=f.prime;
+	return o;
+}
 
 vector<ll> test_primes = {2,3,5,7,11,13,17,19,23};	// <= 3.8e18
 vector<ll> test_primes2= {2,13,23,1662803};			// <= 1.1e12
