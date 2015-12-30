@@ -82,7 +82,7 @@ bool miller_rabin(const ll n){	// true when prime
 	if(n%2==0) return n==2;
 	ll s = 0, d = n-1; // n-1 = 2^s * d
 	while(~d&1) s++, d/=2;
-	for(auto a : test_primes2){
+	for(auto a : test_primes){
 		if(a > n-2) break;
 		ll x = powmod(a,d,n);
 		if(x == 1 || x == n-1) continue;
