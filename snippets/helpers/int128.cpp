@@ -1,5 +1,5 @@
 #include "../header.h"
-//using ll = __int128;
+using lll = __int128;
 ostream& operator<<( ostream& o, __int128 n ) {
 	auto t = n<0 ? -n : n; char b[128], *d = end(b);
 	do *--d = '0'+t%10, t /= 10; while (t);
