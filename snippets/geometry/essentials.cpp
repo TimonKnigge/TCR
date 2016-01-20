@@ -26,9 +26,7 @@ C area(P p1, P p2, P p3) { return abs(det(p1, p2, p3))/C(2); }
 C area(vector<P> poly) { return abs(det(poly))/C(2); }
 int sign(C c){ return (c > C(0)) - (c < C(0)); }
 int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
-// Beware with integer types!
-// bool: non-parallel, p = a*l1+(1-a)*l2 = b*r1 + (1-b)*2
-// internal on both when 0<=a<=1 && 0<=b<=1
+// bool: non-parallel (P is valid), p = a*l1+(1-a)*l2 = b*r1 + (1-b)*2
 pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 	P dl = l2-r1, dr = r2-r1; ld d = det(dl,dr);
 	if(abs(d)<=EPS) return {false,{0,0}};	// parallel
@@ -41,22 +39,21 @@ pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 P project(P p1, P p2, P p){	 // Project p on the line p1-p2
 	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1);
 }
-struct L {		// line and three dimensional point
-	C x,y,z, &a=x, &b=y, &c=z; // ax + by + cz = 0
-	L(C a = 0, C b = 0, C c = 0) : x(a), y(b), z(c) {}
-	L(P p1, P p2) : x(p2.y-p1.y), y(p1.x-p2.x), z(p2.x*p1.y - p2.y*p1.x) {}
+struct L {		// also a 3D point
+	C a, b, c;	// ax + by + cz = 0
+	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
+	L(P p1, P p2) : a(p2.y-p1.y), b(p1.x-p2.x), c(p2.x*p1.y - p2.y*p1.x) {}
 	void points(P &p1, P &p2){
 		if(abs(a)<EPS) p1 = {0, -c/b}, p2 = {1, -(c+a)/b};
 		else p1 = {-c/a, 0}, p2 = {-(c+b)/a, 1};
 	}
 };
-using P3 = L;
-P3 cross(P3 p1, P3 p2){
+L cross(L p1, L p2){
 	return {p1.b*p2.c-p1.c*p2.b, p1.c*p2.a-p1.a*p2.c, p1.a*p2.b-p1.b*p2.a};
 }
 pair<bool,P> intersect(L l1, L l2) {
-	P3 p = cross(l1,l2);
-	return {p.z!=0, {p.x/p.z, p.y/p.z}}; 
+	L p = cross(l1,l2);
+	return {p.c!=0, {p.a/p.c, p.b/p.c}};
 }
 
 struct Circle{ P p; C r; };
