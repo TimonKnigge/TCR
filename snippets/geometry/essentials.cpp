@@ -8,7 +8,7 @@ struct P {		// may also be used as a 2D vector
 	P operator- (const P &p) const { return {x - p.x, y - p.y}; }
 	P operator* (C c) const { return {x * c, y * c}; }
 	P operator/ (C c) const { return {x / c, y / c}; }
-	bool  operator==(const P &r) const { return y == r.y && x == r.x; }
+	bool operator==(const P &r) const { return y == r.y && x == r.x; }
 	C lensq() const { return x*x + y*y; }
 	C len() const { return sqrt(lensq()); }
 };
@@ -37,13 +37,13 @@ pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 	return {true,p};
 }
 P project(P p1, P p2, P p){	 // Project p on the line p1-p2
-	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1);
-}
+	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1); }
+P reflection(P p1, P p2, P p){ return p + (project(p1,p2,p)-p)*2; }
 struct L {		// also a 3D point
 	C a, b, c;	// ax + by + cz = 0
 	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
 	L(P p1, P p2) : a(p2.y-p1.y), b(p1.x-p2.x), c(p2.x*p1.y - p2.y*p1.x) {}
-	void points(P &p1, P &p2){
+	void to_points(P &p1, P &p2){
 		if(abs(a)<EPS) p1 = {0, -c/b}, p2 = {1, -(c+a)/b};
 		else p1 = {-c/a, 0}, p2 = {-(c+b)/a, 1};
 	}
