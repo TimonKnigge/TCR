@@ -59,11 +59,9 @@ void rotating_calipers(vector<point> &p, vector<int> &h) {
 			a = (a + 1) % n;
 			b = (b + 1) % n;
 		} else {
-			i++; // NOT %n!!
+			++i; // NOT %n!!
 			j = (j + 1) % n;
 		}
-		// Make computations on the pairs:
-		// 	h[i%n], h[a]
-		//	h[j], h[a]
+		// Make computations on the pairs: h[i%n], h[a] and h[j], h[a]
 	}
 }
