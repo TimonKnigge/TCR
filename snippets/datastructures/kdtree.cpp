@@ -57,7 +57,7 @@ bool compy(ll l,ll r){return tie(ps[l].y,ps[l].x,l)<tie(ps[r].y,ps[r].x,r);}
 	vi query(const Box &q){ ans.clear(); query(q, Box(), 0); return ans; }
 	void query(const Box &q, const Box &b, ll n){
 		auto &node = tree[n]; auto &p = ps[node.i];
-		if(q.contains(b)){ all(n); return; }
+		if(q.contains(b)){ allq(n); return; }
 		if(q.disjunct(b)) return;
 		if(q.contains(p)) ans.push_back(node.i);
 		Box b1=b, b2=b;
@@ -65,7 +65,7 @@ bool compy(ll l,ll r){return tie(ps[l].y,ps[l].x,l)<tie(ps[r].y,ps[r].x,r);}
 		else		b1.yh = b2.yl = p.y;
 		query(q,b1,node.cl); query(q,b2,node.cr);
 	}
-	void all(ll n){ if(n==-1) return;
-		ans.push_back(tree[n].i); all(tree[n].cl); all(tree[n].cr);
+	void allq(ll n){ if(n==-1) return;
+		ans.push_back(tree[n].i); allq(tree[n].cl); allq(tree[n].cr);
 	}
 };
