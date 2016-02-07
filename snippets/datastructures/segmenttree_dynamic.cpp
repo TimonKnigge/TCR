@@ -1,5 +1,5 @@
 #include "../header.h"
-using T=int; using U=int;
+using T=ll; using U=ll;
 T t_id; U u_id;
 T merge(T a, T b){ return a+b; }
 void join(U &a, U b){ a=a+b; }
