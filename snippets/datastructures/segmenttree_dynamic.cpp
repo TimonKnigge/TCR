@@ -19,8 +19,7 @@ struct DynamicSegmentTree {
 		push(tree[n.lc], n.u); push(tree[n.rc], n.u); n.u = u_id;
 		return merge(query(l, r, n.lc), query(l, r, n.rc));
 	}
-	void update(int l, int r, U u, int i = 0) {
-		auto &n = tree[i];
+	void update(int l, int r, U u, int i = 0) { auto &n = tree[i];
 		if(r <= n.l || n.r <= l) return;
 		if(l <= n.l && n.r <= r){ push(n,u); return; }
 		if(n.lc < 0 || n.rc < 0) {
