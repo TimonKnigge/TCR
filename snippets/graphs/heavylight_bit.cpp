@@ -1,6 +1,5 @@
 #include "../header.h"
 #include "../datastructures/fenwick.cpp"
-
 struct HLD {
 	int V; vvi &graph; FenwickTree<ll> ft; //graph may contain childs only
 	vi p, r, d, h, t; // parents, path-root; heavy, tree index
@@ -12,7 +11,7 @@ struct HLD {
 	}
 	int dfs(int u){
 		ii best={-1,-1}; int s=1, ss;	// best, size (of subtree)
-		for(auto &v : graph[u]) if(u!=p[v])
+		for(auto &v : graph[u]) if(v!=p[u])
 			d[v]=d[u]+1, p[v]=u, s += ss=dfs(v), best = max(best,{ss,v});
 		h[u] = best.second; return s;
 	}
@@ -22,12 +21,12 @@ struct HLD {
 	}
 	void update(int u, ll v){ ft.update(t[u],v); }
 	ll query(int u, int v){
-		ll ans=0;
+		ll a = 0;
 		for(; r[u]!=r[v]; v=p[r[v]]){
 			if(d[r[u]] > d[r[v]]) swap(u,v);
-			ans += ft.query(t[r[v]], t[v]);
+			a += ft.query(t[r[v]], t[v]);
 		}
 		if(d[u] > d[v]) swap(u,v);
-		return ans + ft.query(t[u],t[v]);
+		return a + ft.query(t[u],t[v]);
 	}
 };

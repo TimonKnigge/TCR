@@ -14,7 +14,7 @@ struct HLD { //graph may contain childs only
 	}
 	int dfs(int u){
 		ii best={-1,-1}; int s=1, ss;	// best, size (of subtree)
-		for(auto &v : graph[u]) if(u!=p[v])
+		for(auto &v : graph[u]) if(v!=p[u])
 			d[v]=d[u]+1, p[v]=u, s += ss=dfs(v), best = max(best,{ss,v});
 		h[u] = best.second; return s;
 	}
@@ -22,6 +22,7 @@ struct HLD { //graph may contain childs only
 		for(; r[u]!=r[v]; v=p[r[v]]) if(d[r[u]] > d[r[v]]) swap(u,v);
 		return d[u] < d[v] ? u : v;
 	}
+	void update(int u, ll v){ st.update(t[u],v); }
 	T query(int u, int v){
 		T a = ident;
 		for(; r[u]!=r[v]; v=p[r[v]]){
@@ -31,5 +32,4 @@ struct HLD { //graph may contain childs only
 		if(d[u] > d[v]) swap(u,v);
 		return op(a,st.query(t[u],t[v])); // t[u]+1 if data is on edges
 	}
-	void update(int u, ll v){ st.update(t[u],v); }
 };

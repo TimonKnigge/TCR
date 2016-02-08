@@ -9,7 +9,7 @@ struct HLD {
 	}
 	int dfs(int u){
 		ii best={-1,-1}; int s=1, ss;	// best, size (of subtree)
-		for(auto &v : graph[u]) if(u!=p[v])
+		for(auto &v : graph[u]) if(v!=p[u])
 			d[v]=d[u]+1, p[v]=u, s += ss=dfs(v), best = max(best,{ss,v});
 		h[u] = best.second; return s;
 	}
