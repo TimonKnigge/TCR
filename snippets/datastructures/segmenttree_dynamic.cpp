@@ -15,9 +15,10 @@ struct DynamicSegmentTree {
 	T query(int l, int r, int i = 0) { auto &n = tree[i];
 		if(l >= n.r || r <= n.l) return t_id;
 		if(l <= n.l && n.r <= r) return n.t;
-		if(n.lc < 0) return part(n.t, n.r-n.l, min(n.r,r)-max(n.l,l));
-		push(tree[n.lc], n.u); push(tree[n.rc], n.u); n.u = u_id;
-		return op(query(l, r, n.lc), query(l, r, n.rc));
+		auto p = part(n.t, n.r-n.l, min(n.r,r)-max(n.l,l));
+		if(n.lc < 0) return p;
+		//push(tree[n.lc], n.u); push(tree[n.rc], n.u); n.u = u_id;
+		return op(p,op(query(l, r, n.lc), query(l, r, n.rc)));
 	}
 	void update(int l, int r, U u, int i = 0) { auto &n = tree[i];
 		if(r <= n.l || n.r <= l) return;
