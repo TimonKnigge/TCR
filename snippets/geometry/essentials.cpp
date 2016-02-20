@@ -28,7 +28,7 @@ int sign(C c){ return (c > C(0)) - (c < C(0)); }
 int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
 // bool: non-parallel (P is valid), p = a*l1+(1-a)*l2 = b*r1 + (1-b)*2
 pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
-	P dl = l2-r1, dr = r2-r1; ld d = det(dl,dr);
+	P dl = l2-l1, dr = r2-r1; ld d = det(dl,dr);
 	if(abs(d)<=EPS) return {false,{0,0}};	// parallel
 	C x = det(l1,l2)*(r1.x-r2.x) - det(r1,r2)*(l1.x-l2.x);
 	C y = det(l1,l2)*(r1.y-r2.y) - det(r1,r2)*(l1.y-l2.y);
