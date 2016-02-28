@@ -6,9 +6,13 @@ struct AC_FSM {
 		vi match;
 		Node() { for (int i = 0; i < ALPHABET_SIZE; ++i) child[i] = -1; }
 	};
-	vector <Node> a;
-	AC_FSM() { a.push_back(Node()); }
-	void construct_automaton(vector<string> &words) {
+	vector<Node> a;
+	vector<string> &words;
+	AC_FSM(vector<string> &words) : words(words) { 
+		a.push_back(Node());
+		construct_automaton();
+	}
+	void construct_automaton() {
 		for (int w = 0, n = 0; w < words.size(); ++w, n = 0) {
 			for (int i = 0; i < words[w].size(); ++i) {
 				if (a[n].child[mp(words[w][i])] == -1) {
@@ -44,7 +48,7 @@ struct AC_FSM {
 		}
 	}
 
-	void aho_corasick(string &sentence, vector<string> &words,vvi &matches){
+	void aho_corasick(string &sentence, vvi &matches){
 		matches.assign(words.size(), vi());
 		int state = 0, ss = 0;
 		for (int i = 0; i < sentence.length(); ++i, ss = state) {
