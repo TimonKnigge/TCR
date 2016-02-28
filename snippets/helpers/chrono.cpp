@@ -1,4 +1,4 @@
-#include "../header.h"
+#include "../header.h" // auto in type signature does not work on CF.
 auto now(){ return chrono::high_resolution_clock::now(); }
 using TP = decltype(now());	// time point
 auto duration(TP t1, TP t2){
