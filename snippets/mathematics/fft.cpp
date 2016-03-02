@@ -24,6 +24,8 @@ void fft(vector<Complex> &A, int N, int p, bool inv = false) {
 		A[i].u /= N; A[i].v /= N;
 	}
 }
+// For an inplace convolution (in A): Remove resizings, replace last
+// for loop with assignment to A.
 void convolution(vector<Complex> &A,vector<Complex> &B,vector<Complex> &C){
 	int N = 2 * max(next_power_of_2(A.size()), next_power_of_2(B.size()));
 	A.reserve(N); B.reserve(N); C.reserve(N);
