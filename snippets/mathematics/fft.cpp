@@ -2,8 +2,9 @@
 #include "../helpers/bitmasking.cpp"
 #include "./complex.cpp"
 #include "./field.cpp"
-using T = Field<1004535809,702606812>; //using T = Complex;
-void fft(vector<T> &A, int N, int p, bool inv = false) {
+using T = Complex;	// using T=F1,F2,F3
+void fft(vector<T> &A, int p, bool inv = false) {
+	int N = 1<<p;
 	for(int i = 0, r = 0; i < N; ++i, r = brinc(r, p))
 		if (i < r) swap(A[i], A[r]);
 	for (int m = 2; m <= N; m <<= 1) {
@@ -18,32 +19,29 @@ void fft(vector<T> &A, int N, int p, bool inv = false) {
 			}
 		}
 	}
-	if (inv){
-		T inverse = T(N).inv();
-		for(auto &x : A) x = x*inverse;
-	}
-}
+	if(inv){ T inverse = T(N).inv(); for(auto &x : A) x = x*inverse; }
+}	// convolution leaves A and B in frequency domain state
 void convolution(vector<T> &A, vector<T> &B, vector<T> &C){
-	int q = 32 - __builtin_clz(A.size() + B.size() - 2), N=1<<q;
+	int s = A.size() + B.size() - 1;
+	int q = 32 - __builtin_clz(s-1), N=1<<q;	// fails if s=1
 	A.resize(N,{}); B.resize(N,{}); C.resize(N,{});
-	fft(A, N, q, false); fft(B, N, q, false);
+	fft(A, q, false); fft(B, q, false);
 	for (int i = 0; i < N; ++i) C[i] = A[i] * B[i];
-	fft(C, N, q, true);
+	fft(C, q, true); C.resize(s);
 }
 void convolution(vector<vector<T>> &ps, vector<T> &C){
-	int ts=0; for(auto &p : ps) ts+=p.size(); ts-=ps.size()-1;
-	int q = 32-__builtin_clz(ts-1), N=1<<q;	// fails if ts=1
+	int s=1; for(auto &p : ps) s+=p.size()-1;
+	int q = 32 - __builtin_clz(s-1), N=1<<q;	// fails if s=1
 	C.assign(N,{1});
-	for(auto &p : ps) p.resize(N,{}),
-		fft(p,N,q,false),
-		transform(p.begin(),p.end(),C.begin(),C.begin(), multiplies<T>());
-	fft(C, N, q, true); C.resize(ts);
+	for(auto &p : ps){ p.resize(N,{}); fft(p, q, false);
+		for(int i = 0; i < N; ++i) C[i] = C[i] * p[i];
+	}
+	fft(C, q, true); C.resize(s);
 }
 
 void square_inplace(vector<T> &A) {
-	int q = 32 - __builtin_clz(2*A.size() - 2), N=1<<q;
-	A.resize(N,{});
-	fft(A, N, q, false);
+	int s = 2*A.size()-1, q = 32 - __builtin_clz(s-1), N=1<<q;
+	A.resize(N,{}); fft(A, q, false);
 	for(auto &x : A) x = x*x;
-	fft(A, N, q, true);
+	fft(A, q, true); A.resize(s);
 }
