@@ -6,6 +6,7 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 
 - [x] Reduce memory consumption of Aho-Corasick algorithm (TLE's frequently on large inputs, e.g. [here](http://codeforces.com/contest/633/submission/16359251)).
 - [ ] Range Update, Range Query Fenwick tree ([1](https://github.com/niklasb/tcr/blob/master/datenstrukturen/fenwick.cpp)).
+- [ ] Manacher's algorithm should build a datastructure that allows enumerating all distinct palindromes.
 - [ ] Rewrite and (more extensively test) the centroid decomposition.
 - [ ] Implement Hungarian Algorithm in C++ and compare with MCMF.
 - [ ] Intersecting halfspaces ([1](http://acm.math.spbu.ru/~kunyavskiy/notebook/))
