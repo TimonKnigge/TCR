@@ -265,7 +265,7 @@
 %{./snippets/graphs/bellmannford.cpp}
 %{$O(VE)$}{}
 
-\entry{Bellmann-Ford}
+\entry{Bellman-Ford}
 {An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
 {./snippets/graphs/bellmannford-extended.cpp}
 {$O(VE)$}{}
@@ -274,6 +274,10 @@
 {Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}
 {./snippets/graphs/floydwarshall.cpp}
 {$O(V^3)$}{}
+
+\subsection{Johnson's reweighting algorithm}
+Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex with zero weight edges were added), then reweight edges to $w_{uv} + h_u - h_v$, then use Dijkstra.
+\noindent\textbf{Complexity:} $O(VE \log V)$
 
 \entry{Hierholzer's algorithm}
 {Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}
