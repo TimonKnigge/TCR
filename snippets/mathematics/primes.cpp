@@ -51,8 +51,6 @@ vector<ll> divisors(const FS &fs){ vector<ll> ds{1};
 		ds.push_back(d*=f.p);
 	return ds;
 }
-vector<ll> phis(ll n){ vi p(n+1,0); iota(all(p), 0);
-	for(ll i=1; i<=n; ++i) for(ll j=2*i; j<=n; j+=i) p[j]-=p[i]; return p;}
 ll num_div(  const FS &fs) { ll d = 1;
 	for(auto &f : fs) d *= f.exp+1; return d; }
 ll sum_div(  const FS &fs) { ll s = 1;
