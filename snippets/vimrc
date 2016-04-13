@@ -1,14 +1,2 @@
-syntax on
-set tabstop=4			" tabsize of 4
-set softtabstop=4		" show tab as 4
-set shiftwidth=4		" cindent tabsize
-set noexpandtab			" use tabs; not spaces
-set mouse=nvc			" mouse scrolling in normal and visual mode
-set clipboard=unnamed	" copy paste to clipboard
-set backspace=indent,eol,start	" make backspace work over \n and \t
-set wrap				" enable line wrap
-set linebreak			" wrap at word boundaries
-set nu					" show linenumbers
-set cindent				" use C-style indenting
-set autoindent			" autoindent
-set cinoptions=:0,l1,g0,(0	" set the right indenting options
+syntax on noet wrap lbr nu is cin ai
+ts=4 sts=4 sw=4  mouse=nvc cb=unnamed bs=indent,eol,start cino=:0,l1,g0,(0
