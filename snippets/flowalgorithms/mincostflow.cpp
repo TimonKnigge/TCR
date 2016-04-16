@@ -10,15 +10,15 @@ struct Edmonds_Karp_Dijkstra{
 	pair<F,W> run() { // return pair<f, cost>
 		F maxflow = 0; W cost = 0;			// Bellmann-Ford for potentials
 		fill(pot.begin(),pot.end(),WINF); pot[s]=0;
-		REP(i,V-1) {
+		for (int i = 0; i < V - 1; ++i) {
 			bool relax = false;
-			REP(u,V) if(pot[u] != WINF) for(auto &e : g[u])
+			for (int u = 0; u < V; ++u) if(pot[u] != WINF) for(auto &e : g[u])
 				if(e.cap>e.f)
 					if(pot[u] + e.cost < pot[e.v])
 						pot[e.v] = pot[u] + e.cost, relax=true;
 			if(!relax) break;
 		}
-		REP(u,V) if(pot[u] == WINF) pot[u] = 0;
+		for (int u = 0; u < V; ++u) if(pot[u] == WINF) pot[u] = 0;
 		while(true){
 			priority_queue<Q,vector<Q>,greater<Q>> q;
 			vector<vector<S>::iterator> p(V,g.front().end());
@@ -43,7 +43,7 @@ struct Edmonds_Karp_Dijkstra{
 				cost += f * it->cost; it->f+=f;
 				r.f -= f; it = p[r.v];
 			}
-			REP(u,V) if(dist[u]!=WINF) pot[u] += dist[u];
+			for (int u = 0; u < V; ++u) if(dist[u]!=WINF) pot[u] += dist[u];
 		}
 	}
 };

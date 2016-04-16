@@ -19,7 +19,7 @@ C det(P p1, P p2) { return p1.x * p2.y - p1.y * p2.x; }
 C det(P p1, P p2, P o) { return det(p1-o, p2-o); }
 C det(vector<P> pts) {
 	C sum = 0;
-	REP(i,pts.size()) sum += det(pts[i], pts[(i+1)%pts.size()]);
+	for (size_t i = 0; i < pts.size(); ++i) sum += det(pts[i], pts[(i+1)%pts.size()]);
 	return sum;
 }
 
