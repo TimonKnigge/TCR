@@ -15,6 +15,6 @@ struct Toposort {
 		sorted[--s_ix] = u;
 	}
 	void topo_sort() {
-		REP(i,V) if (!visited[i]) visit(i);
+		for (int i = 0; i < V; ++i) if (!visited[i]) visit(i);
 	}
 };
