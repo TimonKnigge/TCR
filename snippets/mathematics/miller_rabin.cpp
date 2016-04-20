@@ -1,7 +1,9 @@
 #include "../header.h"
 #include "numbertheory.cpp"
-vector<ll> test_primes = {2,3,5,7,11,13,17,19,23};	// <= 3.8e18
-vector<ll> test_primes2= {2,13,23,1662803};			// <= 1.1e12
+vector<ll> test_primes  = {2,7,61};					// <= 2^32
+vector<ll> test_primes2 = {2,13,23,1662803};		// <= 1.1e12
+vector<ll> test_primes3 = {2,3,5,7,11,13,17,19,23};	// <= 3.8e18, v <= 2^64
+vector<ll> test_primes4 = {2,325,9375,28178,450775,9780504,1795265022};
 //using ll = __int128	// uncomment for n>=1e9, or use mulmod instead
 bool miller_rabin(const ll n){	// true when prime
 	if(n<2) return false;		
