@@ -1,4 +1,0 @@
-syntax on			colorscheme default				hi Comment ctermfg=cyan
-tabstop=4 softtabstop=4 shiftwidth=4 laststatus=2 encoding=utf-8 mouse=nvc
-clipboard=unnamed backspace=indent,eol,start cinoptions=:0,l1,g0,(0
-noexpandtab wrap linebreak nu incsearch cindent autoindent hidden

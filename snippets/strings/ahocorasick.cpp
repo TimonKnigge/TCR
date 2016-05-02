@@ -2,15 +2,17 @@
 template <int ALPHABET_SIZE, int (*mp)(char)>
 struct AC_FSM {
 	struct Node {
-		int child[ALPHABET_SIZE], failure = 0;
-		vector<int> match;
-		Node() {
-			for (int i = 0; i < ALPHABET_SIZE; ++i) child[i] = -1;
-		}
+		int child[ALPHABET_SIZE], failure = 0, match_par = -1;
+		vi match;
+		Node() { for (int i = 0; i < ALPHABET_SIZE; ++i) child[i] = -1; }
 	};
-	vector <Node> a;
-	AC_FSM() { a.push_back(Node()); }
-	void construct_automaton(vector<string> &words) {
+	vector<Node> a;
+	vector<string> &words;
+	AC_FSM(vector<string> &words) : words(words) { 
+		a.push_back(Node());
+		construct_automaton();
+	}
+	void construct_automaton() {
 		for (int w = 0, n = 0; w < words.size(); ++w, n = 0) {
 			for (int i = 0; i < words[w].size(); ++i) {
 				if (a[n].child[mp(words[w][i])] == -1) {
@@ -32,29 +34,31 @@ struct AC_FSM {
 		}
 		while (!q.empty()) {
 			int r = q.front(); q.pop();
-			for (int k = 0; k < ALPHABET_SIZE; ++k) {
-				if (a[r].child[k] != -1) {
-					q.push(a[r].child[k]);
+			for (int k = 0, arck; k < ALPHABET_SIZE; ++k) {
+				if ((arck = a[r].child[k]) != -1) {
+					q.push(arck);
 					int v = a[r].failure;
 					while (a[v].child[k] == -1) v = a[v].failure;
-					a[a[r].child[k]].failure = a[v].child[k];
-					for (int w : a[a[v].child[k]].match)
-						a[a[r].child[k]].match.push_back(w);
+					a[arck].failure = a[v].child[k];
+					a[arck].match_par = a[v].child[k];
+					while (a[arck].match_par != -1 && a[a[arck].match_par].match.empty())
+						a[arck].match_par = a[a[arck].match_par].match_par;
 				}
 			}
 		}
 	}
 
-	void aho_corasick(string &sentence, vector<string> &words,vvi &matches){
-		matches.assign(words.size(), vector<int>());
+	void aho_corasick(string &sentence, vvi &matches){
+		matches.assign(words.size(), vi());
 		int state = 0, ss = 0;
 		for (int i = 0; i < sentence.length(); ++i, ss = state) {
 			while (a[ss].child[mp(sentence[i])] == -1)
 				ss = a[ss].failure;
 			state = a[state].child[mp(sentence[i])]
 			      = a[ss].child[mp(sentence[i])];
-			for (int w : a[state].match)
-				matches[w].push_back(i - words[w].length() + 1);
+			for (ss = state; ss != -1; ss = a[ss].match_par)
+				for (int w : a[ss].match)
+					matches[w].push_back(i + 1 - words[w].length());
 		}
 	}
 };

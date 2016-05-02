@@ -1,8 +1,6 @@
 #include "../header.h"
-class UnionFind {
-private:
+struct UnionFind {
 	vi par, rank, size; int c;
-public:
 	UnionFind(int n) : par(n), rank(n,0), size(n,1), c(n) {
 		for (int i = 0; i < n; ++i) par[i] = i;
 	}
@@ -12,7 +10,7 @@ public:
 	int get_size(int i) { return size[find(i)]; }
 	int count() { return c; }
 
-	void union_set(int i, int j) {
+	void merge(int i, int j) {
 		if ((i = find(i)) == (j = find(j))) return;
 		c--;
 		if (rank[i] > rank[j]) swap(i, j);

@@ -3,7 +3,7 @@ struct Node {
 	ll val, mx;
 	int size, priority;
 	bool rev = false;
-	Node *l, *r;
+	Node *l = NULL, *r = NULL;
 	Node(ll _val) : val(_val), mx(_val), size(1) { priority = rand(); }
 };
 int size(Node *p) { return p == NULL ? 0 : p->size; }

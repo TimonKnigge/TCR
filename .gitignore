@@ -7,5 +7,8 @@
 *.dvi
 *.out
 
+# hidden files
+.*
+
 # The release branch keeps the pdf
 #source.pdf

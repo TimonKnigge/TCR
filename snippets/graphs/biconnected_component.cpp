@@ -22,7 +22,7 @@ struct BCC{		// find AVs and bridges in an undirected graph
 		}
 	}
 	void run() {
-		REP(u,V) if (n[u] == -1) {
+		for (int u = 0; u < V; ++u) if (n[u] == -1) {
 			root = u; rcs = 0; visit(u,-1);
 			if(rcs > 1) {}				// u is articulation point
 		}

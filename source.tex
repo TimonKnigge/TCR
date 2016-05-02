@@ -1,7 +1,8 @@
 \documentclass[
 	a4paper,
 	landscape,
-	twoside,
+	%twoside,
+	10pt,
 	article
 ]{article}
 \usepackage[
@@ -70,8 +71,8 @@
 }
 \date{
 	\vspace{-0.5em}
-	Benelux Algorithm Programming Contest (BAPC)\\
-	October 24, 2015
+	ACM-ICPC World Finals\\
+	May 19, 2016
 	\vspace{-1.5em}
 }
 
@@ -82,6 +83,7 @@
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
 \setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{-1pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -95,9 +97,17 @@
 \fancyfoot{}
 \setlength{\headsep}{0.4em}
 \setlength{\footskip}{0em}
-\fancyhead[RE]{\bfseries Curiously Recurring \hspace{6.5em}}
-\fancyhead[LO]{\hspace{5em} Utrecht University}
-\fancyhead[LE,RO]{\thepage}
+
+% two sided
+%\fancyhead[RE]{\bfseries Curiously Recurring \hspace{6.5em}}
+%\fancyhead[LO]{\hspace{5em} Utrecht University}
+%\fancyhead[LE,RO]{\thepage}
+%\fancyhead[C]{\leftmark}
+
+% one sided
+\fancyhead[L]{\hspace{5em} Utrecht University \phantom{-} \bfseries
+Curiously Recurring}
+\fancyhead[R]{\thepage \hspace{0.5em}}
 \fancyhead[C]{\leftmark}
 
 %*************** Code highlighting ***************
@@ -154,7 +164,7 @@
 \section{Templates}
 % Can't use the \entry command, because filetype is tex
 \otherentry{Vimrc}{}
-{./snippets/vimrc_tcr}
+{./snippets/vimrc}
 
 \entry{C++ Template}{}
 {./snippets/header_tcr.h}{}{}
@@ -195,6 +205,10 @@
 \entry{Implicit Cartesian Tree}
 {The indices are zero-based. Also, don't forget to initialise the empty tree to \texttt{NULL}. (Pretty much) all operations take $O(\log n)$ time.}
 {./snippets/datastructures/implicit-cartesian-tree.cpp}{}{}
+
+\entry{KD tree}
+{}
+{./snippets/datastructures/kdtree.cpp}{}{}
 
 \entry{AVL Tree}
 {Can be augmented to support in $O(\log n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
@@ -259,7 +273,7 @@
 %{./snippets/graphs/bellmannford.cpp}
 %{$O(VE)$}{}
 
-\entry{Bellmann-Ford}
+\entry{Bellman-Ford}
 {An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
 {./snippets/graphs/bellmannford-extended.cpp}
 {$O(VE)$}{}
@@ -268,6 +282,10 @@
 {Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}
 {./snippets/graphs/floydwarshall.cpp}
 {$O(V^3)$}{}
+
+\subsection{Johnson's reweighting algorithm}
+Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex with zero weight edges were added), then reweight edges to $w_{uv} + h_u - h_v$, then use Dijkstra.
+\noindent\textbf{Complexity:} $O(VE \log V)$
 
 \entry{Hierholzer's algorithm}
 {Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}
@@ -311,6 +329,11 @@
 {}
 {./snippets/graphs/heavylight.cpp}
 {$O(n)$}{}
+
+\entry{HLD with Segtree}
+{}
+{./snippets/graphs/heavylight_segtree.cpp}
+{$O(n \lg^2n)$}{}
 
 \section{Flow and Matching}
 
@@ -484,6 +507,9 @@ Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_
 \entry{Lucas' theorem}{}
 {./snippets/mathematics/lucas.cpp}{}{}
 
+\entry{Finite Field}{}
+{./snippets/mathematics/field.cpp}{}{}
+
 \entry{Complex Numbers}
 {Faster-than-built-in complex numbers}
 {./snippets/mathematics/complex.cpp}{}{}
@@ -555,6 +581,8 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 \entry{Randomisation}{Might be useful for NP-Complete/Backtracking problems}
 {./snippets/misc/randomisation.cpp}{}{}
 
+\entry{All Nearest Smaller Values}{}{./snippets/misc/all_nearest_smaller_values.cpp}{$O(n)$}{}
+
 \section{Helpers}
 
 \entry{Golden Section Search}
@@ -576,8 +604,14 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \entry{Fast IO}{}{./snippets/helpers/fastinput.cpp}{}{}
 
+\subsection{Detecting overflow}
+These are GNU builtins, detect both over- and underflow. Returns a boolean upon failure, otherwise the result is present in \texttt{ref}. Follow the template: 
+
+\texttt{\_\_builtin\_[u|s][add|mul|sub](ll)?\_overflow(in, out, \&ref)} 
+
 \newpage
 \section{Strategies}
+Take a break after 2 hours.
 \subsubsection*{Techniques}
 \begin{itemize}
 \setlength\itemsep{0em}

@@ -1,73 +1,62 @@
 #include "../header.h"
-constexpr long double EPS = 1e-10;
-using C = double;	// could be long long or long double
-struct P {			// may also be used as a vector
+using C = ld;	// could be long long or long double
+constexpr C EPS = 1e-10;	// change to 0 for C=ll
+struct P {		// may also be used as a 2D vector
 	C x, y;
 	P(C x = 0, C y = 0) : x(x), y(y) {}
 	P operator+ (const P &p) const { return {x + p.x, y + p.y}; }
 	P operator- (const P &p) const { return {x - p.x, y - p.y}; }
 	P operator* (C c) const { return {x * c, y * c}; }
 	P operator/ (C c) const { return {x / c, y / c}; }
-	bool  operator==(const P &r) const { return y == r.y && x == r.x; }
-	C dot(const P &p) const { return x * p.x + y * p.y; }
+	bool operator==(const P &r) const { return y == r.y && x == r.x; }
 	C lensq() const { return x*x + y*y; }
 	C len() const { return sqrt(lensq()); }
 };
-
+C sq(C x){ return x*x; }
+C dot(P p1, P p2){ return p1.x*p2.x + p1.y*p2.y; }
 C dist(P p1, P p2) { return (p1-p2).len(); }
 C det(P p1, P p2) { return p1.x * p2.y - p1.y * p2.x; }
 C det(P p1, P p2, P o) { return det(p1-o, p2-o); }
-C det(vector<P> pts) {
-	C sum = 0;
-	REP(i,pts.size()) sum += det(pts[i], pts[(i+1)%pts.size()]);
+C det(vector<P> ps) {
+	C sum = 0; P prev = ps.back();
+	for(auto &p : ps) sum+=det(p,prev), prev=p;
 	return sum;
 }
-
-double area(P p1, P p2, P p3) { return abs(det(p1, p2, p3)) / 2.0; }
-double area(vector<P> polygon) { return abs(det(polygon)) / 2.0; }
-
-// 1 when p1-p2-p3 is a left turn (when viewed from p1) [use EPS if needed]
-int ccw(P p1, P p2, P p3) { C d = det(p1, p2, p3); return (d>0) - (d<0); }
-struct S {
-	P p1, p2;
-	enum Type { Segment, Ray, Line } type;
-	S(P p1 = 0, P p2 = 0, Type type = Line) : p1(p1), p2(p2), type(type) {}
-	bool internal(P p) const {
-		if(det(p1,p2,p) > EPS) return false; // not on a line
-		switch(type){
-		case Segment: return dist(p1, p) + dist(p, p2) - dist(p1,p2) <= EPS;
-		case Ray: return dist(p,p2) - abs(dist(p1,p) - dist(p1,p2)) <= EPS;
-		default: return true;
-		}
-	}
-};
-struct L{
-	C a,b,c; // ax + by + c = 0
+C area(P p1, P p2, P p3) { return abs(det(p1, p2, p3))/C(2); }
+C area(vector<P> poly) { return abs(det(poly))/C(2); }
+int sign(C c){ return (c > C(0)) - (c < C(0)); }
+int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
+// bool: non-parallel (P is valid), p = a*l1+(1-a)*l2 = b*r1 + (1-b)*r2
+pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
+	P dl = l2-l1, dr = r2-r1; ld d = det(dl,dr);
+	if(abs(d)<=EPS) return {false,{0,0}};	// parallel
+	C x = det(l1,l2)*(r1.x-r2.x) - det(r1,r2)*(l1.x-l2.x);
+	C y = det(l1,l2)*(r1.y-r2.y) - det(r1,r2)*(l1.y-l2.y);
+	P p = {x/d, y/d}; a = det(r1-l1,dr)/d; b = det(r1-l1,dl)/d;
+	intern = 0<= a && a <= 1 && 0 <= b && b <= 1;
+	return {true,p};
+}
+P project(P p1, P p2, P p){	 // Project p on the line p1-p2
+	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1); }
+P reflection(P p1, P p2, P p){ return project(p1,p2,p)*2-p; }
+struct L {		// also a 3D point
+	C a, b, c;	// ax + by + cz = 0
 	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
-	L(S s) : a(s.p2.y-s.p1.y), b(s.p1.x-s.p2.x),
-	c(s.p2.x*s.p1.y - s.p2.y*s.p1.x) {}
-	operator S(){
-		S s; s.type = S::Line;
-		if(abs(a)<EPS) s.p1 = {0, -c/b}, s.p2 = {1, -c/b};
-		else s.p1 = {-c/a, 0}, s.p2 = {-(c+b)/a, 1};
-		return s;
+	L(P p1, P p2) : a(p2.y-p1.y), b(p1.x-p2.x), c(p2.x*p1.y - p2.y*p1.x) {}
+	void to_points(P &p1, P &p2){
+		if(abs(a)<=EPS) p1 = {0, -c/b}, p2 = {1, -(c+a)/b};
+		else p1 = {-c/a, 0}, p2 = {-(c+b)/a, 1};
 	}
 };
+L cross(L p1, L p2){
+	return {p1.b*p2.c-p1.c*p2.b, p1.c*p2.a-p1.a*p2.c, p1.a*p2.b-p1.b*p2.a};
+}
+pair<bool,P> intersect(L l1, L l2) {
+	L p = cross(l1,l2);
+	return {p.c!=0, {p.a/p.c, p.b/p.c}};
+}
+
 struct Circle{ P p; C r; };
-P project(S s, P p) {
-	double l = (p-s.p1).dot(s.p2-s.p1)/double((s.p2-s.p1).dot(s.p2-s.p1));
-	switch(s.type){
-	case S::Segment: l = min(1.0, l);
-	case S::Ray:	 l = max(0.0, l);
-	default:;
-	}
-	return s.p1 + (s.p2 - s.p1) * l;
-}
-pair<bool,P> intersect(const L &l1, const L &l2) {
-	double x = l1.b*l2.c-l1.c*l2.b, y = l1.c*l2.a-l1.a*l2.c,
-		   z = l1.a*l2.b-l1.b*l2.a;
-	return {z!=0, {x/z, y/z}}; 
-}
 vector<P> intersect(const Circle& cc, const L& l){
 	const double &x = cc.p.x, &y = cc.p.y, &r = cc.r, &a=l.a,&b=l.b,&c=l.c;
 	double n = a*a + b*b, t1 = c + a*x + b*y, D = n*r*r  - t1*t1;

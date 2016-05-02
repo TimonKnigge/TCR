@@ -5,7 +5,7 @@ struct Dinic{
 	vi l; vector<vector<S>::iterator> its; // levels and iterators
 	Dinic(FlowGraph &edges, int s, int t) :
 		edges(edges), V(edges.size()), s(s), t(t), l(V,-1), its(V) {}
-	ll augment(int u, ll c) { // we reuse the same iterators
+	ll augment(int u, F c) { // we reuse the same iterators
 		if (u == t) return c;
 		for(auto &i = its[u]; i != edges[u].end(); i++){
 			auto &e = *i;
@@ -18,7 +18,7 @@ struct Dinic{
 	ll run() {
 		ll flow = 0, f;
 		while(true) {
-			fill(F(l),-1); l[s]=0; // recalculate the layers
+			fill(l.begin(), l.end(),-1); l[s]=0; // recalculate the layers
 			queue<int> q; q.push(s);
 			while(!q.empty()){
 				auto u = q.front(); q.pop();
@@ -26,7 +26,7 @@ struct Dinic{
 					l[e.v] = l[u]+1, q.push(e.v);
 			}
 			if (l[t] < 0) return flow;
-			REP(u,V) its[u] = edges[u].begin();
+			for (int u = 0; u < V; ++u) its[u] = edges[u].begin();
 			while ((f = augment(s, INF)) > 0) flow += f;
 		}	}
 };

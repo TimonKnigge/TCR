@@ -34,14 +34,17 @@ ll mulmod(ll a, ll b, ll m){
 	}
 	return x % m;
 }
+ll mulmod2(ll a, ll b, ll m){ return __int128(a)*b%m; }
 
-// Finds a^n % m in O(lg n) time, ensure that a < m to avoid overflow!
-ll powmod(ll a, ll n, ll m) {
-	if (n == 0) return 1;
-	if (n == 1) return a;
-	ll aa = (a*a)%m; // use mulmod when b > 1e9
-	if (n % 2 == 0) return powmod(aa, n / 2, m);
-	return (a * powmod(aa, (n - 1) / 2, m)) % m;
+ll pow(ll b, ll e) {		// b^e in logarithmic time
+	ll p = e<2 ? 1 : pow(b*b,e/2);
+	return e&1 ? p*b : p;
+}
+
+// Finds b^e % m in O(lg n) time, ensure that b < m to avoid overflow!
+ll powmod(ll b, ll e, ll m) {
+	ll p = e<2 ? 1 : powmod((b*b)%m,e/2,m);
+	return e&1 ? p*b%m : p;
 }
 
 // Solve ax + by = c, returns false on failure.
@@ -56,25 +59,29 @@ bool linear_diophantine(ll a, ll b, ll c, ll &x, ll &y) {
 	}
 }
 
-// Chinese remainder theorem: finds z s.t. z % xi = ai. z is
-// unique modulo M = lcm(xi). Returns (z, M), m = -1 on failure.
-ii crm(ll x1, ll a1, ll x2, ll a2) {
-	ll s, t, d;
-	extended_euclid(x1, x2, s, t, d);
-	if (a1 % d != a2 % d) return ii(0, -1);
-	return ii(mod(s * a2 * x1 + t * a1 * x2, x1 * x2) / d, x1 * x2 / d);
-}
-ii crm(vi &x, vi &a){		// ii = pair<long,long>!
-	ii ret = ii(a[0], x[0]);
-	for (size_t i = 1; i < x.size(); ++i) {
-		ret = crm(ret.second, ret.first, x[i], a[i]);
-		if (ret.second == -1) break;
-	}
-	return ret;
-}
-
 ll binom(ll n, ll k){
 	ll ans = 1;
-	for(ll i = 1; i <= min(k,n-k); i++) ans *= (n-k+i), ans/=i;
+	for(ll i = 1; i <= min(k,n-k); ++i) ans = ans*(n+1-i)/i;
 	return ans;
 }
+
+// Solves x = a1 mod m1, x = a2 mod m2, x is unique modulo lcm(m1, m2).
+// Returns {0, -1} on failure, {x, lcm(m1, m2)} otherwise.
+pair<ll, ll> crt(ll a1, ll m1, ll a2, ll m2) {
+	ll s, t, d;
+	extended_euclid(m1, m2, s, t, d);
+	if (a1 % d != a2 % d) return {0, -1};
+	return {mod(s * a2 * m1 + t * a1 * m2, m1 * m2) / d, m1 / d * m2};
+}
+
+// Solves x = ai mod mi. x is unique modulo lcm mi.
+// Returns {0, -1} on failure, {x, lcm mi} otherwise.
+pair<ll, ll> crt(vector<ll> &a, vector<ll> &m) {
+	pair<ll, ll> res = {a[0], m[0]};
+	for (ull i = 1; i < a.size(); ++i) {
+		res = crt(res.first, res.second, mod(a[i], m[i]), m[i]);
+		if (res.second == -1) break;
+	}
+	return res;
+}
+

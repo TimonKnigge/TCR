@@ -6,7 +6,7 @@ int BronKerbosch(const vector<S> &edges, S &R, S &&P, S &&X){
 	auto PX = P | X; int p=-1;	// the last true bit is the pivot
 	for(int i = M-1; i>=0; i--) if(PX[i]){ p = i; break; }
 	auto mask = P & (~edges[p]); int count = 0;
-	REP(u,edges.size()){
+	for (size_t u = 0; u < edges.size(); ++u) {
 		if(!mask[u]) continue;
 		R[u]=true;
 		count += BronKerbosch(edges,R,P & edges[u],X & edges[u]);
