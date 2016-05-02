@@ -1,7 +1,7 @@
 \documentclass[
 	a4paper,
 	landscape,
-	twoside,
+	%twoside,
 	10pt,
 	article
 ]{article}
@@ -71,8 +71,8 @@
 }
 \date{
 	\vspace{-0.5em}
-	Northwestern Europe Regional Contest (NWERC)\\
-	November 29, 2015
+	ACM-ICPC World Finals\\
+	May 19, 2016
 	\vspace{-1.5em}
 }
 
@@ -97,9 +97,17 @@
 \fancyfoot{}
 \setlength{\headsep}{0.4em}
 \setlength{\footskip}{0em}
-\fancyhead[RE]{\bfseries Curiously Recurring \hspace{6.5em}}
-\fancyhead[LO]{\hspace{5em} Utrecht University}
-\fancyhead[LE,RO]{\thepage}
+
+% two sided
+%\fancyhead[RE]{\bfseries Curiously Recurring \hspace{6.5em}}
+%\fancyhead[LO]{\hspace{5em} Utrecht University}
+%\fancyhead[LE,RO]{\thepage}
+%\fancyhead[C]{\leftmark}
+
+% one sided
+\fancyhead[L]{\hspace{5em} Utrecht University \phantom{-} \bfseries
+Curiously Recurring}
+\fancyhead[R]{\thepage \hspace{0.5em}}
 \fancyhead[C]{\leftmark}
 
 %*************** Code highlighting ***************
