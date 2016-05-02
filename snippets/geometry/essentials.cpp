@@ -1,6 +1,6 @@
 #include "../header.h"
-constexpr ld EPS = 1e-10;
 using C = ld;	// could be long long or long double
+constexpr C EPS = 1e-10;	// change to 0 for C=ll
 struct P {		// may also be used as a 2D vector
 	C x, y;
 	P(C x = 0, C y = 0) : x(x), y(y) {}
@@ -26,7 +26,7 @@ C area(P p1, P p2, P p3) { return abs(det(p1, p2, p3))/C(2); }
 C area(vector<P> poly) { return abs(det(poly))/C(2); }
 int sign(C c){ return (c > C(0)) - (c < C(0)); }
 int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
-// bool: non-parallel (P is valid), p = a*l1+(1-a)*l2 = b*r1 + (1-b)*2
+// bool: non-parallel (P is valid), p = a*l1+(1-a)*l2 = b*r1 + (1-b)*r2
 pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 	P dl = l2-l1, dr = r2-r1; ld d = det(dl,dr);
 	if(abs(d)<=EPS) return {false,{0,0}};	// parallel
@@ -38,13 +38,13 @@ pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 }
 P project(P p1, P p2, P p){	 // Project p on the line p1-p2
 	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1); }
-P reflection(P p1, P p2, P p){ return p + (project(p1,p2,p)-p)*2; }
+P reflection(P p1, P p2, P p){ return project(p1,p2,p)*2-p; }
 struct L {		// also a 3D point
 	C a, b, c;	// ax + by + cz = 0
 	L(C a = 0, C b = 0, C c = 0) : a(a), b(b), c(c) {}
 	L(P p1, P p2) : a(p2.y-p1.y), b(p1.x-p2.x), c(p2.x*p1.y - p2.y*p1.x) {}
 	void to_points(P &p1, P &p2){
-		if(abs(a)<EPS) p1 = {0, -c/b}, p2 = {1, -(c+a)/b};
+		if(abs(a)<=EPS) p1 = {0, -c/b}, p2 = {1, -(c+a)/b};
 		else p1 = {-c/a, 0}, p2 = {-(c+b)/a, 1};
 	}
 };
