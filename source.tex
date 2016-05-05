@@ -465,27 +465,38 @@ Add $(0,-\infty)$ for upper envelope, and $(0,+\infty)$ for lower envelope.
 
 \subsection{Formulae}
 
-\begin{align*}
+\begin{equation*}
 	[ABC]
-	&= rs
+	= rs
 	= \frac 12 ab\sin\gamma
 	= \frac{abc}{4R}
 	= \sqrt{s(s-a)(s-b)(s-c)}
 	= \frac 12\left| (B-A, C-A)^T \right|
-\end{align*}
+\end{equation*}
+
 \begin{align*}
 	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
 	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
 	\textrm{Euler:}&&  1 + CC &= V - E + F\\
-	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points} + \frac{\textrm{boundary points}}2 - 1
+	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points}
+	+ \frac{\textrm{boundary points}}2 - 1\\
+	p\cdot q &= |p||q|\cos(\theta) & |p\times q| &= |p||q|\sin(\theta)\\
+	\textrm{Rotatie}&& (x';y') &= \left(\cos(\theta),
+	-\sin(\theta); \sin(\theta), \cos(\theta)\right)(x;y)\\
+	\textrm{Projectie $x$ op $y$}&& p(x,y) &= \frac{x\cdot
+	y}{y\cdot y} y
 \end{align*}
 
 Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_i)$, its centroid $(C_x, C_y)$ is given as:
+
 \begin{align*}
 	C_x &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i), &
-	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)\\
-	A &= \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
+	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
 \end{align*}
+
+\begin{equation*}
+	A = \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
+\end{equation*}
 
 \section{Mathematics}
 
