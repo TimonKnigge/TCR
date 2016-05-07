@@ -70,10 +70,10 @@
 %	Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit
 }
 \date{
-	\vspace{-0.5em}
+	\vspace{-0.7em}
 	ACM-ICPC World Finals\\
 	May 19, 2016
-	\vspace{-1.5em}
+	\vspace{-1.9em}
 }
 
 
@@ -82,8 +82,8 @@
 \usepackage{tocloft}				% to reduce toc spacing
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
-\setlength{\cftbeforesecskip}{0pt}
-\setlength{\cftbeforesubsecskip}{-1pt}
+\setlength{\cftbeforesecskip}{-1pt}
+\setlength{\cftbeforesubsecskip}{-1.5pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -589,6 +589,34 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 {Finds the largest palindrome centered at each position.}
 {./snippets/strings/manacher.cpp}
 {$O(|S|)$}{}
+
+\section{DP}
+\entry{Convex Hull optimization}{
+	When $a[j+1] < a[j]$ and $x[i+1] > x[i]$ (otherwise sort
+	$x$):
+\begin{align*}
+	dp[k][i] &= \min_{j<i}\left\{a[j]\cdot x[i] + dp[k-1][j]\right\} + c[i]\\
+	dp[i] &= \min_{j<i}\left\{a[j]\cdot x[i] + dp[j]\right\} + c[i]
+\end{align*}
+}{./snippets/dp/convex_hull.cpp}
+{$O(kn^2)\rightarrow O(kn)$, $O(n^2)\rightarrow O(n)$}{}
+
+\subsection{Knuth optimization}
+\begin{align*}
+	D_{l,r} &= \min_{l<m<r}\left\{D_{l,m}+D_{m,r}\right\} +
+	C_{l,r}
+	= \min_{P_{l,r-1}\leq m \leq P_{l+1,r}}\left\{D_{l,m}+D_{m,r}\right\} + C_{l,r}
+\end{align*}
+where $P_{l,r}$ is the $m$ for which $D_{l,r} =
+D_{l,m}+D_{m,r}+C_{l,r}$.
+Holds when $P_{l,r-1}\leq P_{l,r} \leq P_{l+1,r}$, or implied
+when for all $a\leq b\leq c\leq d$:
+\begin{align*}
+	C_{a,c} + C_{b,d}&\leq C_{a,d} + C_{b,d}
+	&
+	C_{b,c}&\leq C_{a,b}
+\end{align*}
+
 
 \section{Miscellaneous}
 
