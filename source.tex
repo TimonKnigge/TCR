@@ -83,7 +83,7 @@
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
 \setlength{\cftbeforesecskip}{-1pt}
-\setlength{\cftbeforesubsecskip}{-1.5pt}
+\setlength{\cftbeforesubsecskip}{-2.0pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -592,14 +592,22 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \section{DP}
 \entry{Convex Hull optimization}{
-	When $a[j+1] < a[j]$ and $x[i+1] > x[i]$ (otherwise sort
+	When $a_{j+1} < a_j$ and $x_{i+1} > x_i$ (otherwise sort
 	$x$):
 \begin{align*}
-	dp[k][i] &= \min_{j<i}\left\{a[j]\cdot x[i] + dp[k-1][j]\right\} + c[i]\\
-	dp[i] &= \min_{j<i}\left\{a[j]\cdot x[i] + dp[j]\right\} + c[i]
+	D_{k,i}&= \min_{j<i}\left\{a_j\cdot x_i +
+	D_{k-1,j}\right\} + c_{k,i}\\
+	D_i &= \min_{j<i}\left\{a_j\cdot x_i + D_j\right\} + c_i
 \end{align*}
 }{./snippets/dp/convex_hull.cpp}
 {$O(kn^2)\rightarrow O(kn)$, $O(n^2)\rightarrow O(n)$}{}
+
+\entry{Divide and Conquer}{
+	When $P_{l,r}\leq P_{l,r+1}$, solve the recursion
+\begin{equation*}
+	D_{k,i} = \min_{j<i}\left\{D_{k-1,j}+C(j,i)\right\}
+\end{equation*}
+}{./snippets/dp/divide_conquer.cpp}{$O(kn^2)\rightarrow O(kn\lg n)$}{}
 
 \subsection{Knuth optimization}
 \begin{align*}
@@ -616,6 +624,7 @@ when for all $a\leq b\leq c\leq d$:
 	&
 	C_{b,c}&\leq C_{a,b}
 \end{align*}
+\textbf{Complexity:} $O(n^3)\rightarrow O(n^2)$
 
 
 \section{Miscellaneous}
