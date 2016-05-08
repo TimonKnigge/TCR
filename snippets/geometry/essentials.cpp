@@ -37,7 +37,7 @@ pair<bool,P> intersect(P l1, P l2, P r1, P r2, ld &a, ld &b, bool &intern){
 	return {true,p};
 }
 P project(P p1, P p2, P p){	 // Project p on the line p1-p2
-	return p1 + (p2-p1)/(p2-p1).len() * dot(p-p1,p2-p1); }
+	return p1 + (p2-p1) * dot(p-p1,p2-p1)/(p2-p1).lensq(); }
 P reflection(P p1, P p2, P p){ return project(p1,p2,p)*2-p; }
 struct L {		// also a 3D point
 	C a, b, c;	// ax + by + cz = 0

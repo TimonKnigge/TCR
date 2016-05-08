@@ -70,10 +70,10 @@
 %	Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit
 }
 \date{
-	\vspace{-0.5em}
+	\vspace{-0.7em}
 	ACM-ICPC World Finals\\
 	May 19, 2016
-	\vspace{-1.5em}
+	\vspace{-1.9em}
 }
 
 
@@ -82,8 +82,8 @@
 \usepackage{tocloft}				% to reduce toc spacing
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
-\setlength{\cftbeforesecskip}{0pt}
-\setlength{\cftbeforesubsecskip}{-1pt}
+\setlength{\cftbeforesecskip}{-1pt}
+\setlength{\cftbeforesubsecskip}{-2.0pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -465,27 +465,38 @@ Add $(0,-\infty)$ for upper envelope, and $(0,+\infty)$ for lower envelope.
 
 \subsection{Formulae}
 
-\begin{align*}
+\begin{equation*}
 	[ABC]
-	&= rs
+	= rs
 	= \frac 12 ab\sin\gamma
 	= \frac{abc}{4R}
 	= \sqrt{s(s-a)(s-b)(s-c)}
 	= \frac 12\left| (B-A, C-A)^T \right|
-\end{align*}
+\end{equation*}
+
 \begin{align*}
 	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
 	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
 	\textrm{Euler:}&&  1 + CC &= V - E + F\\
-	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points} + \frac{\textrm{boundary points}}2 - 1
+	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points}
+	+ \frac{\textrm{boundary points}}2 - 1\\
+	p\cdot q &= |p||q|\cos(\theta) & |p\times q| &= |p||q|\sin(\theta)\\
+	\textrm{Rotatie}&& (x';y') &= \left(\cos(\theta),
+	-\sin(\theta); \sin(\theta), \cos(\theta)\right)(x;y)\\
+	\textrm{Projectie $x$ op $y$}&& p(x,y) &= \frac{x\cdot
+	y}{y\cdot y} y
 \end{align*}
 
 Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_i)$, its centroid $(C_x, C_y)$ is given as:
+
 \begin{align*}
 	C_x &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i), &
-	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)\\
-	A &= \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
+	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
 \end{align*}
+
+\begin{equation*}
+	A = \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
+\end{equation*}
 
 \section{Mathematics}
 
@@ -550,6 +561,14 @@ A game can be reduced to Nim if it is a finite impartial game, then for any stat
 \end{description}
 A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
+\subsection{Formulae}
+\begin{align*}
+	\textrm{Lucas}&&\binom
+	mn&\equiv\prod_{i=0}^k\binom{m_i}{n_i} \mod p\\
+	\textrm{Lagrange}&&L(x)&=\sum_{j=0}^ky_j\prod_{\substack{0\leq m\leq
+	k\\m\neq j}}\frac{x-x_m}{x_j-x_m}
+\end{align*}
+
 \section{Strings}
 
 \entry{Knuth Morris Pratt}{}
@@ -570,6 +589,43 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 {Finds the largest palindrome centered at each position.}
 {./snippets/strings/manacher.cpp}
 {$O(|S|)$}{}
+
+\section{DP}
+\entry{Convex Hull optimization}{
+	When $a_{j+1} < a_j$ and $x_{i+1} > x_i$ (otherwise sort
+	$x$):
+\begin{align*}
+	D_{k,i}&= \min_{j<i}\left\{a_j\cdot x_i +
+	D_{k-1,j}\right\} + c_{k,i}\\
+	D_i &= \min_{j<i}\left\{a_j\cdot x_i + D_j\right\} + c_i
+\end{align*}
+}{./snippets/dp/convex_hull.cpp}
+{$O(kn^2)\rightarrow O(kn)$, $O(n^2)\rightarrow O(n)$}{}
+
+\entry{Divide and Conquer}{
+	When $P_{l,r}\leq P_{l,r+1}$, solve the recursion
+\begin{equation*}
+	D_{k,i} = \min_{j<i}\left\{D_{k-1,j}+C(j,i)\right\}
+\end{equation*}
+}{./snippets/dp/divide_conquer.cpp}{$O(kn^2)\rightarrow O(kn\lg n)$}{}
+
+\subsection{Knuth optimization}
+\begin{align*}
+	D_{l,r} &= \min_{l<m<r}\left\{D_{l,m}+D_{m,r}\right\} +
+	C_{l,r}
+	= \min_{P_{l,r-1}\leq m \leq P_{l+1,r}}\left\{D_{l,m}+D_{m,r}\right\} + C_{l,r}
+\end{align*}
+where $P_{l,r}$ is the $m$ for which $D_{l,r} =
+D_{l,m}+D_{m,r}+C_{l,r}$.
+Holds when $P_{l,r-1}\leq P_{l,r} \leq P_{l+1,r}$, or implied
+when for all $a\leq b\leq c\leq d$:
+\begin{align*}
+	C_{a,c} + C_{b,d}&\leq C_{a,d} + C_{b,d}
+	&
+	C_{b,c}&\leq C_{a,b}
+\end{align*}
+\textbf{Complexity:} $O(n^3)\rightarrow O(n^2)$
+
 
 \section{Miscellaneous}
 
