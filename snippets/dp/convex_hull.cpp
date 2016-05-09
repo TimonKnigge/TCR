@@ -14,7 +14,7 @@ void convex_hull_dp_2d(vi &a, vi &x, vi &b, vi &c, ll k, vi &dp){
 		dp[i] = eval(v[q], x[i]) + c[i];
 	}
 }
-// dp[i] = min_{j<i} (a[j]*x[i] + dp[j]) + c[j], dp[0] = c[0]
+// dp[i] = min_{j<i} (a[j]*x[i] + dp[j]) + c[i], dp[0] = c[0]
 // a[j+1] < a[j], x[i+1] > x[i]
 void convex_hull_dp_1d(vi &a, vi &x, vi &c, vi &dp){
 	dp.assign(x.size(), 1e18); dp[0] = c[0];
