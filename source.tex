@@ -83,7 +83,7 @@
 \renewcommand*{\multicolumntoc}{2}
 % reduce section spacing in toc
 \setlength{\cftbeforesecskip}{-1pt}
-\setlength{\cftbeforesubsecskip}{-2.0pt}
+\setlength{\cftbeforesubsecskip}{-1.5pt}
 % remove the toc title
 \makeatletter
 \renewcommand{\@cftmaketoctitle}{}
@@ -283,7 +283,7 @@ Curiously Recurring}
 {./snippets/graphs/floydwarshall.cpp}
 {$O(V^3)$}{}
 
-\subsection{Johnson's reweighting algorithm}
+\subsection{Johnson's reweighting}
 Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex with zero weight edges were added), then reweight edges to $w_{uv} + h_u - h_v$, then use Dijkstra.
 \noindent\textbf{Complexity:} $O(VE \log V)$
 
@@ -713,6 +713,7 @@ Take a break after 2 hours.
 	\setlength\itemsep{0em}
 	\item Typos
 	\item Off by one error (in array index of loop bound)
+	\item empty vector front/back
 	\item return 0 at end of program
 \end{itemize}
 
