@@ -4,7 +4,7 @@
 // d:old, dp: new, calculate dp[l,r] with optimum in [optl,optr]
 void compute(vi &d, vi& dp, ll l, ll r, ll optl, ll optr, ll C(ll,ll)){
 	ll m = (l+r)/2; ii best{1e18, -1}; // calc dp[m]
-	for(ll j=optl; j<=min(optr, m-1); ++j) best = min(best,{d[j]+C(j,m),j});
+	for(ll j = min(optr, m - 1); j >= optl; --j) best = min(best,{d[j]+C(j,m),j});
 	dp[m] = best.first; ll opt = best.second;
 	if(l<m) compute(d,dp,l,m-1,optl,opt ,C);
 	if(m<r) compute(d,dp,m+1,r,opt ,optr,C);
