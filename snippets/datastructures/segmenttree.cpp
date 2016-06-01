@@ -1,5 +1,5 @@
 #include "../header.h"
-template <class T, T(*op)(T, T), T ident>
+template <class T, const T&(*op)(const T&, const T&), T ident>
 struct SegmentTree {
 	int n; vector<T> tree;
 	SegmentTree(int _n) : n(_n), tree(2 * n, ident) { }
