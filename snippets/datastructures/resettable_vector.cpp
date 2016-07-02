@@ -4,7 +4,7 @@ struct resettable_vector {
 	vector<T> val, def;
 	vi time; int cur = 0;
 	
-	void init(int n, T d) {
+	resettable_vector(int n, T d) {
 		val.assign(n, d); def.assign(n, d); time.assign(n, cur = 0);
 	}
 	
