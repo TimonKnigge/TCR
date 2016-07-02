@@ -10,5 +10,6 @@ struct resettable_vector {
 	
 	T get(int i) { return time[i] == cur ? val[i] : def[i]; }
 	void set(int i, T v) { val[i] = v; time[i] = cur; }
+	void set_default(int i, T v) { def[i] = v; }
 	void reset() { ++cur; }
 };
