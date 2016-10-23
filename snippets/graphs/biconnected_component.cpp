@@ -10,7 +10,7 @@ struct BCC{		// find AVs and bridges in an undirected graph
 		for(auto &v : edges[u]){
 			if (n[v] == -1) {
 				if (u == root) rcs++; visit(v,u);
-				if (l[v] >= n[u]) {}	// u is an articulation point
+				if (l[v]>=n[u] && u!=root) {} // u is an articulation point
 				if (l[v] > n[u]) {		// u<->v is a bridge
 					while(true){		// biconnected component
 						int w = s.top(); s.pop();	// <= ACT HERE
