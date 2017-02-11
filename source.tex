@@ -566,7 +566,11 @@ A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 	\textrm{Lucas}&&\binom
 	mn&\equiv\prod_{i=0}^k\binom{m_i}{n_i} \mod p\\
 	\textrm{Lagrange}&&L(x)&=\sum_{j=0}^ky_j\prod_{\substack{0\leq m\leq
-	k\\m\neq j}}\frac{x-x_m}{x_j-x_m}
+	k\\m\neq j}}\frac{x-x_m}{x_j-x_m}\\
+	\textrm{Derangements}&& D(n) &=n!\sum_{k=0}^n(-1)^k/k!\\
+	\textrm{Inclusion Exclusion}&& A\cup B\cup C &= A+B+C-A\cap B-A\cap C-B\cap C+A\cap B\cap C\\
+	\textrm{Inclusion Exclusion}&& \bigcup A_i &= \sum_{k=1}^n (-1)^{k-1} \binom nk a_k,
+	\quad\quad a_k = |A_1\cap \dots \cap A_k|
 \end{align*}
 
 \section{Strings}
