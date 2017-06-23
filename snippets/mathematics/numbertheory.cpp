@@ -71,7 +71,7 @@ pair<ll, ll> crt(ll a1, ll m1, ll a2, ll m2) {
 	ll s, t, d;
 	extended_euclid(m1, m2, s, t, d);
 	if (a1 % d != a2 % d) return {0, -1};
-	return {mod(s * a2 * m1 + t * a1 * m2, m1 * m2) / d, m1 / d * m2};
+	return {mod(s*a2 %m2 * m1 + t*a1 %m1 * m2, m1 * m2) / d, m1 / d * m2};
 }
 
 // Solves x = ai mod mi. x is unique modulo lcm mi.
