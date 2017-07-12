@@ -46,3 +46,7 @@ link_cut_tree<T> *link(link_cut_tree<T> *v, link_cut_tree<T> *w) {
 	v->link(&link_cut_tree<T>::splay_tree_t::l, w);
 	return v;
 }
+
+// todo: use the internal splay tree pointer for path parent
+// http://codeforces.com/contest/117/submission/860934
+// http://www.spoj.com/problems/DYNALCA/

@@ -39,7 +39,9 @@ struct splay_tree {
 	void unlink(node splay_tree::*_c) {
 		if(this->*_c) this->*_c = (this->*_c)->p = nullptr;
 	}
-	bool isroot() { return p == nullptr; }
+	bool isroot() {
+		return p == nullptr || (p->l != this && p->r != this);
+	}
 	bool isleft() { return this == p->l; }
 	bool isright() { return this == p->r; }
 	node min() { return l == nullptr ? this : l->min(); }
@@ -59,7 +61,7 @@ node<T, R> merge(node<T, R> s, node<T, R> t) {
 	return root;
 }
 
-// split into [min, x) and [x, max)
+// split root r into [min, x) and [x, max)
 template <typename T, typename R>
 std::pair<node<T, R>, node<T, R>> *split(node<T, R> r, node<T, R> x) {
 	x->splay();
