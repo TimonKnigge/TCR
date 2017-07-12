@@ -11,7 +11,11 @@ struct EulerTourTree {
 		return id;
 	}
 	// Find root of the subtree containg this vertex.
-	int root(int u) { return seqs[2*u]->root()->val / 2; }
+	int root(int u) { 
+		seq<int> *s = seqs[2*u]->root();
+		while (s->l != nullptr) s = s->l;
+		return s->l->val / 2;
+	}
 	// Cut from parent (if exists).
 	void cut(int u) {
 		seq<int> *uroot = seqs[2*u]->root();
