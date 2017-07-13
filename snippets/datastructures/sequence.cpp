@@ -1,40 +1,39 @@
 #include "../header.h"
 template <class T>
 struct seq {
-	T val; int size, priority;
+	T val; int size_, priority;
 	seq<T> *l = nullptr, *r = nullptr, *p = nullptr;
-	seq(T _v) : val(_v), size(1) { priority = rand(); }
+	seq(T _v) : val(_v), size_(1) { priority = rand(); }
 
+	static int size(seq<T> *c) { return c == nullptr ? 0 : c->size_; }
 	seq<T> *update() {
-		size = 1;
-		if (l != nullptr) { l->p = this; size += l->size; }
-		if (r != nullptr) { r->p = this; size += r->size; }
+		size_ = 1;
+		if(l != nullptr) l->p = this, size_ += l->size_;
+		if(r != nullptr) r->p = this, size_ += r->size_;
 		return this;
 	}
-	// Find the root representing this sequence.
-	seq<T> *root() {
-		seq<T> *c = this;
-		while (c->p != nullptr) c = c->p;
-		return c;
-	}
 	int index() {
-		int ind = (this->l != nullptr ? this->l->size : 0);
+		int ind = size(this->l);
 		seq<T> *c = this;
-		while (c->p != nullptr) {
-			if (c->p->l != c)
-				ind += 1+(c->p->l != nullptr ? c->p->l->size : 0);
+		while(c->p != nullptr) {
+			if(c->p->l != c) ind += 1 + size(c->p->l);
 			c = c->p;
 		}
 		return ind;
 	}
+	seq<T> *root() { return this->p == nullptr ? this : p->root(); }
+	seq<T> *min() { return this->l == nullptr ? this : l->min(); }
+	seq<T> *max() { return this->r == nullptr ? this : r->max(); }
+	seq<T> *next() { return this->r == nullptr ? this->p : this->r->min(); }
+	seq<T> *prev() { return this->l == nullptr ? this->p : this->l->max(); }
 };
 
 // Note: Assumes both nodes are the roots of their sequences.
 template <class T>
 seq<T> *merge(seq<T> *A, seq<T> *B) {
-	if (A == nullptr) return B;
-	if (B == nullptr) return A;
-	if (A->priority > B->priority) {
+	if(A == nullptr) return B;
+	if(B == nullptr) return A;
+	if(A->priority > B->priority) {
 		A->r = merge(A->r, B);
 		return A->update();
 	} else {
@@ -42,20 +41,30 @@ seq<T> *merge(seq<T> *A, seq<T> *B) {
 		return B->update();
 	}
 }
+template <class T, typename... Seqs>
+seq<T> *merge(seq<T> *l, Seqs... seqs) {
+	return merge(l, merge(seqs...));
+}
 
 // Split into [0, index) and [index, ..)
-template<class T>
-std::pair<seq<T>*, seq<T>*> split(seq<T> *A, int index) {
-	if (A == nullptr) return {nullptr, nullptr};
+template <class T>
+pair<seq<T> *, seq<T> *> split(seq<T> *A, int index) {
+	if(A == nullptr) return {nullptr, nullptr};
 	A->p = nullptr;
-	int lsize = (A->l != nullptr ? A->l->size : 0);
-	if (index <= lsize) {
+	if(index <= seq<T>::size(A->l)) {
 		auto pr = split(A->l, index);
 		A->l = pr.second;
 		return {pr.first, A->update()};
 	} else {
-		auto pr = split(A->r, index - (1 + lsize));
+		auto pr = split(A->r, index - (1 + seq<T>::size(A->l)));
 		A->r = pr.first;
 		return {A->update(), pr.second};
 	}
+}
+
+// TODO: a dedicated function not using index would be faster
+// return [0, x), [x, ..)
+template <class T>
+pair<seq<T> *, seq<T> *> split(seq<T> *root, seq<T> *x) {
+	return split(root, x->index());
 }
