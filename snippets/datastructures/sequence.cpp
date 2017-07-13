@@ -43,6 +43,12 @@ seq<T> *merge(seq<T> *A, seq<T> *B) {
 	}
 }
 
+// Note: Assumes both nodes are the roots of their sequences.
+template <class T, typename... Seqs>
+seq<T> *merge(seq<T> *l, Seqs... seqs) {
+	return merge(l, merge(seqs...));
+}
+
 // Split into [0, index) and [index, ..)
 template <class T>
 std::pair<seq<T> *, seq<T> *> split(seq<T> *A, int index) {
