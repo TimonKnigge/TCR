@@ -28,25 +28,25 @@ struct EulerTourForest {
 	int root(int v) { return nodes[v].root()->max()->val.u; }
 	node *reroot(node *x) {
 		if(x == nullptr) return x;
-		auto[left, right] = split(x);
-		return merge(right, left);
+		auto lr = split(x);
+		return merge(lr.second, lr.first);
 	}
 	void reroot(int v) { reroot(&nodes[v]); }
 	void cut(edge_handler &&e) {
 		if(e[0]->index() > e[1]->index()) swap(e[0], e[1]);
 		// (xxx e0 yyy e1 zzz) -> (xxx zzz, yyy)
 		auto xeyez = e[0]->root();
-		auto[x, eyez] = split(e[0].get()); // xeyez
-		auto[ey, ez] = split(e[1].get());  // eyez
-		auto[e0, y] = split(ey, 1);        // ey
-		auto[e1, z] = split(ez, 1);        // ez
+		auto x = split(e[0].get()).first;       // xeyez
+		auto ey_ez = split(e[1].get());         // eyez
+		auto y = split(ey_ez.first, 1).second;  // ey
+		auto z = split(ey_ez.second, 1).second; // ez
 		merge(x, z);
 	}
 	edge_handler link(int u, int v) {
 		auto x = reroot(&nodes[u]), y = &nodes[v];
-		auto[a, vb] = split(y); // or v->index()+1
+		auto a_vb = split(y); // or v->index()+1
 		edge_handler e{ptr{new node{{v, u}}}, ptr{new node{{u, v}}}};
-		::merge(a, e[0].get(), x, e[1].get(), vb);
+		::merge(a_vb.first, e[0].get(), x, e[1].get(), a_vb.second);
 		return e;
 	}
 	int size(int u) { return (nodes[u].root()->size_ + 2) / 3; }
