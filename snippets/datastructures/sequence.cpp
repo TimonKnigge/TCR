@@ -65,10 +65,25 @@ pair<seq<T> *, seq<T> *> split(seq<T> *A, int index) {
 	}
 }
 
-// TODO: a dedicated function not using index would be faster
-// return [0, x), [x, ..)
+// return [0, A), [A, ..)
 template <class T>
-std::pair<seq<T> *, seq<T> *> split(seq<T> *root, seq<T> *x) {
-	if(x == nullptr) return {root, nullptr};
-	return split(root, x->index());
+pair<seq<T> *, seq<T> *> split(seq<T> *A) {
+	if (A == nullptr) return {nullptr, nullptr};
+	seq<T> *B = A, *lr = A; A = A->l;
+	if (A == nullptr) {
+		while (lr->p != nullptr && lr->p->l == B) lr = B = lr->p;
+		if (lr->p != nullptr) {
+			lr = A = lr->p; lr->r = B->p = nullptr;
+		}
+	} else	A->p = lr->l = nullptr;
+	while (lr->update()->p != nullptr) {
+			if (lr->p->l == lr) {
+				if (lr == A) swap(A->p, B->p), B->p->l = B;
+				lr = B = B->p;
+			} else {
+				if (lr == B) swap(A->p, B->p), A->p->r = A;
+				lr = A = A->p;
+			}
+	}			
+	return {A, B};
 }
