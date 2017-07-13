@@ -18,14 +18,12 @@ struct EulerTourTree {
 	}
 	// Find root of the subtree containg this vertex.
 	int root(int u) { return vertices[u].root()->min()->val.u; }
-	bool connected(int u, int v) {
-		return vertices[u].root() == vertices[v].root();
-	}
+	bool connected(int u, int v) { return vertices[u].root()==vertices[v].root(); }
 	int size(int u) { return (vertices[u].root()->size_ + 2) / 3; }
 	// Make v the parent of u. Assumes u has no parent!
 	void attach(int u, int v) {
 		seq<edge> *i1, *i2;
-		tie(i1, i2) = split(vertices[v].root(), &vertices[v]);
+		tie(i1, i2) = split(&vertices[v]);
 		::merge(i1,
 				&(edges[v].emplace(u, seq<edge>{edge{v, u}}).first)->second,
 				vertices[u].root(),
@@ -35,7 +33,7 @@ struct EulerTourTree {
 	// Reroot the tree containing u at u.
 	void reroot(int u) {
 		seq<edge> *i1, *i2;
-		tie(i1, i2) = split(vertices[u].root(), &vertices[u]);
+		tie(i1, i2) = split(&vertices[u]);
 		merge(i2, i1);
 	}
 	// Links u and v.
@@ -45,12 +43,8 @@ struct EulerTourTree {
 		auto uv = edges[u].find(v), vu = edges[v].find(u);
 		if (uv->second.index() > vu->second.index()) swap(u, v), swap(uv, vu);
 		seq<edge> *i1, *i2;
-		tie(i1, i2) = split(vertices[u].root(), &uv->second);
-		i2 = split(i2, 1).second;
-		i2 = split(i2, &vu->second).second;
-		i2 = split(i2, 1).second;
-		merge(i1, i2);
+		tie(i1, i2) = split(&uv->second); split(i2, 1);
+		merge(i1, split(split(&vu->second).second, 1).second);
 		edges[u].erase(uv); edges[v].erase(vu);
 	}
 };
-
