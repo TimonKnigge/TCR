@@ -1,48 +1,54 @@
 #include "../header.h"
 #include "sequence.cpp"
-
 struct EulerTourTree {
-	vector<seq<int> *> seqs;
+	struct edge { int u, v; };
+	vector<seq<edge>> vertices;
+	vector<unordered_map<int, seq<edge>>> edges;
+	EulerTourTree(int n) {
+		vertices.reserve(n); edges.reserve(n);
+		for (int i = 0; i < n; ++i) add_vertex();
+	}
+		
 	// Create a new vertex.
 	int add_vertex() {
-		int id = (int)seqs.size() / 2;
-		seq<int> *l = new seq<int>(2 * id), *r = new seq<int>(2 * id + 1);
-		merge(l, r), seqs.push_back(l), seqs.push_back(r);
+		int id = (int)vertices.size();
+		vertices.push_back(edge{id, id});
+		edges.emplace_back();
 		return id;
 	}
-<<<<<<< HEAD
 	// Find root of the subtree containg this vertex.
-	int root(int u) { 
-		seq<int> *s = seqs[2*u]->root();
-		while (s->l != nullptr) s = s->l;
-		return s->l->val / 2;
-	}
-=======
-	// Find root of the subtree containing this vertex.
-	int root(int u) { return seqs[2 * u]->root()->val / 2; }
->>>>>>> 97ee6c9350c05638fd02040b68428a1eeceea6fa
-	// Cut from parent (if exists).
-	void cut(int u) {
-		seq<int> *uroot = seqs[2 * u]->root();
-		int l = seqs[2 * u]->index(), r = seqs[2 * u + 1]->index();
-		seq<int> *i1, *i2, *i3;
-		tie(i2, i3) = split(uroot, r + 1);
-		tie(i1, i2) = split(i2, l);
-		merge(i1, i3);
-	}
-	// Whether u is an ancestor of v.
-	bool ancestor(int u, int v) {
-		if(root(u) != root(v)) return false;
-		int lu = seqs[2 * u]->index(), ru = seqs[2 * u + 1]->index();
-		int lv = seqs[2 * v]->index(), rv = seqs[2 * v + 1]->index();
-		return lu <= lv && rv <= ru;
-	}
+	int root(int u) { return vertices[u].root()->min()->val.u; }
+	bool same(int u, int v) { return vertices[u].root()==vertices[v].root(); }
+	int size(int u) { return (vertices[u].root()->size_ + 2) / 3; }
 	// Make v the parent of u. Assumes u has no parent!
 	void attach(int u, int v) {
-		seq<int> *vroot = seqs[2 * v]->root(), *i1, *i2;
-		int end = seqs[2 * v + 1]->index();
-		tie(i1, i2) = split(vroot, end);
-		merge(i1, merge(seqs[2 * u]->root(), i2));
+		seq<edge> *i1, *i2;
+		tie(i1, i2) = split(vertices[v].root(), &vertices[v]);
+		::merge(i1,
+				&(edges[v].emplace(u, seq<edge>{edge{v, u}}).first)->second,
+				vertices[u].root(),
+				&(edges[u].emplace(v, seq<edge>{edge{u, v}}).first)->second,
+				i2);
 	}
-	int size(int u) { return (seqs[2 * u]->root()->size + 1) / 2; }
+	// Reroot the tree containing u at u.
+	void reroot(int u) {
+		seq<edge> *i1, *i2;
+		tie(i1, i2) = split(vertices[u].root(), &vertices[u]);
+		merge(i2, i1);
+	}
+	// Links u and v.
+	void link(int u, int v) { reroot(u); attach(u, v); }
+	// Cut {u, v}. Assumes it exists!!
+	void cut(int u, int v) {
+		auto uv = edges[u].find(v), vu = edges[v].find(u);
+		if (uv->second.index() > vu->second.index()) swap(u, v), swap(uv, vu);
+		seq<edge> *i1, *i2;
+		tie(i1, i2) = split(vertices[u].root(), &uv->second);
+		i2 = split(i2, 1).second;
+		i2 = split(i2, &vu->second).second;
+		i2 = split(i2, 1).second;
+		merge(i1, i2);
+		edges[u].erase(uv); edges[v].erase(vu);
+	}
 };
+

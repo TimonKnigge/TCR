@@ -41,12 +41,8 @@ seq<T> *merge(seq<T> *A, seq<T> *B) {
 		return B->update();
 	}
 }
-template <class T, typename... Seqs>
-seq<T> *merge(seq<T> *l, Seqs... seqs) {
-	return merge(l, merge(seqs...));
-}
 
-// Note: Assumes both nodes are the roots of their sequences.
+// Note: Assumes all nodes are the roots of their sequences.
 template <class T, typename... Seqs>
 seq<T> *merge(seq<T> *l, Seqs... seqs) {
 	return merge(l, merge(seqs...));
