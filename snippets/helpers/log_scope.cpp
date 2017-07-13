@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -34,7 +35,7 @@ struct log_scope : log_scope_base {
 		++log_scope_base::nesting;
 	}
 	log_scope(const log_scope &) = delete;
-	log_scope(log_scope &&)      = delete;
+	log_scope(log_scope &&) = delete;
 	log_scope &operator=(const log_scope &) = delete;
 	log_scope &operator=(log_scope &&) = delete;
 

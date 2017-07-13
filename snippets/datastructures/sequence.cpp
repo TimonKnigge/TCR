@@ -1,7 +1,8 @@
 #include "../header.h"
 template <class T>
 struct seq {
-	T val; int size_, priority;
+	T val;
+	int size_, priority;
 	seq<T> *l = nullptr, *r = nullptr, *p = nullptr;
 	seq(T _v) : val(_v), size_(1) { priority = rand(); }
 
@@ -67,6 +68,7 @@ pair<seq<T> *, seq<T> *> split(seq<T> *A, int index) {
 // TODO: a dedicated function not using index would be faster
 // return [0, x), [x, ..)
 template <class T>
-pair<seq<T> *, seq<T> *> split(seq<T> *root, seq<T> *x) {
+std::pair<seq<T> *, seq<T> *> split(seq<T> *root, seq<T> *x) {
+	if(x == nullptr) return {root, nullptr};
 	return split(root, x->index());
 }
