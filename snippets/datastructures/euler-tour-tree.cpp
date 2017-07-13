@@ -18,7 +18,9 @@ struct EulerTourTree {
 	}
 	// Find root of the subtree containg this vertex.
 	int root(int u) { return vertices[u].root()->min()->val.u; }
-	bool same(int u, int v) { return vertices[u].root()==vertices[v].root(); }
+	bool connected(int u, int v) {
+		return vertices[u].root() == vertices[v].root();
+	}
 	int size(int u) { return (vertices[u].root()->size_ + 2) / 3; }
 	// Make v the parent of u. Assumes u has no parent!
 	void attach(int u, int v) {
