@@ -53,4 +53,7 @@ struct EulerTourForest {
 		return e;
 	}
 	int size(int u) { return (nodes[u].root()->size + 2) / 3; }
+	bool connected(int u, int v) {
+		return nodes[u].root() == nodes[v].root();
+	}
 };
