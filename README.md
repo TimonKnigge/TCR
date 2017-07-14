@@ -12,4 +12,4 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Link/Cut trees.
 - [ ] Rework file structure in math/.
 - [ ] Short description for edge classification in .tex.
-
+- [ ] Rework Java header.
