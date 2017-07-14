@@ -9,12 +9,6 @@ int r() {
 			default: n *= 10; n += c - '0'; break;
 		}
 }
-
-void scan(ll &x){	// doesn't handle negative numbers
-	char c;
-	while((x=getchar_unlocked())<'0');
-	for(x-='0'; '0'<=(c=getchar_unlocked()); x=10*x+c-'0');
-}
 void print(ll x){
 	char buf[20], *p=buf;
 	if(!x) putchar_unlocked('0');
