@@ -1,5 +1,5 @@
 #include "../header.h"
-template <class T, void M(T *, T *, T *) = T::merge>
+template <class T, void M(T *, T *, T *) = nullptr>
 struct seq {
 	T val;
 	int size_, priority;
@@ -11,7 +11,7 @@ struct seq {
 		size_ = 1;
 		if(l != nullptr) l->p = this, size_ += l->size_;
 		if(r != nullptr) r->p = this, size_ += r->size_;
-		M(l ? &l->val : nullptr, &this->val, r ? &r->val : nullptr);
+		if(M) M(l ? &l->val : nullptr, &this->val, r ? &r->val : nullptr);
 		return this;
 	}
 	int index() {
