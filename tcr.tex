@@ -172,51 +172,38 @@ Curiously Recurring}
 \entry{Java Template}{}
 {./snippets/template.java}{}{}
 
-\section{Data Structures}
+\section{Datastructures}
+
+\entry{Fenwick Tree}
+{}
+{./snippets/datastructures/fenwick.cpp}{}{}
+
+\entry{2D Fenwick Tree}
+{Note the $1$-based indices. Can easily be extended to any dimension.}
+{./snippets/datastructures/fenwick2d.cpp}{}{}
+
+\entry{Segment Tree}{}
+{./snippets/datastructures/segmenttree.cpp}{}{}
+
+\entry{Lazy Dynamic Segment Tree}{}
+{./snippets/datastructures/segmenttree_dynamic.cpp}{}{}
+
+\entry{Sequence}{Operations run in $O(\log n)$ time.}
+{./snippets/datastructures/sequence.cpp}{}{}
 
 \entry{Union Find}{}
 {./snippets/datastructures/unionfind.cpp}{}{}
 
-\entry{Max Queue}
-{\texttt{dequeue} runs in amortized constant time. Can be modified to query minimum, gcd/lcm, set union/intersection (use bitmasks), etc.}
-{./snippets/datastructures/maxqueue.cpp}{}{}
+\entry{Euler Tour tree}{}
+{./snippets/datastructures/euler-tour-tree.cpp}{}{}
 
-\entry{Fenwick Tree}
-{The tree is 1-based! Use indices $1..n$.}
-{./snippets/datastructures/fenwick.cpp}{}{}
+\entry{Heavy-Light decomposition}{}
+{./snippets/datastructures/heavylight.cpp}
+{$O(n)$}{}
 
-\entry{2D Fenwick Tree}
-{Can easily be extended to any dimension.}
-{./snippets/datastructures/fenwick2d.cpp}{}{}
-
-\entry{Sparse Table}
-{For $O(1)$ range minimum query with $O(n\lg n)$ precalculation.}
-{./snippets/datastructures/sparsetable.cpp}
-{}{}
-
-\entry{Segment Tree}
-{The range should be of the form $2^p$.}
-{./snippets/datastructures/segmenttree.cpp}{}{}
-
-\entry{Lazy Dynamic Segment Tree}
-{}
-{./snippets/datastructures/segmenttree_dynamic.cpp}{}{}
-
-\entry{Implicit Cartesian Tree}
-{The indices are zero-based. Also, don't forget to initialise the empty tree to \texttt{NULL}. (Pretty much) all operations take $O(\log n)$ time.}
-{./snippets/datastructures/implicit-cartesian-tree.cpp}{}{}
-
-\entry{KD tree}
-{}
-{./snippets/datastructures/kdtree.cpp}{}{}
-
-\entry{AVL Tree}
-{Can be augmented to support in $O(\log n)$ time: range queries/updates (similar to a segment tree), insert at position $n$/query for position $n$, order statistics, etc.}
-{./snippets/datastructures/avl.cpp}{}{}
-
-\entry{Treap}
-{Can be used like the built-in \texttt{set}, except that it also supports order statistics, can be merged/split in $O(\log n)$ time, can support range queries, and more.}
-{./snippets/datastructures/treap.cpp}{}{}
+\entry{HLD with Segtree}{}
+{./snippets/datastructures/heavylight_segtree.cpp}
+{$O(n \lg^2n)$}{}
 
 \entry{Prefix Trie}{}
 {./snippets/datastructures/trie.cpp}{}{}
@@ -230,56 +217,40 @@ Curiously Recurring}
 \entry{Suffix Automaton}{}
 {./snippets/datastructures/suffix_automaton.cpp}{$O(n)$}{}
 
+\entry{Increasing function}{}
+{./snippets/datastructures/increasing_function.cpp}{}{}
+
 \entry{Built-in datastructures}{}
 {./snippets/datastructures/builtin.cpp}{}{}
 
-\section{Basic Graph algorithms}
+\section{Graphs}
 
-\entry{Edge Classification}{}
-{./snippets/graphs/edgeclassification.cpp}
-{$O(V + E)$}{}
+\entry{Dijkstra's algorithm}{}
+{./snippets/graphs/dijkstra.cpp}
+{$O((V + E) \log V)$}{}
 
 \entry{Topological sort}{}
 {./snippets/graphs/toposort.cpp}
 {$O(V + E)$}{}
 
-\entry{Tarjan: SCCs}
-{}
+\entry{Tarjan: SCCs}{}
 {./snippets/graphs/tarjan.cpp}
-{$O(V + E)$}
-{}
+{$O(V + E)$}{}
 
-\entry{Biconnected components}
-{}
+\entry{Biconnected components}{}
 {./snippets/graphs/biconnected_component.cpp}
-{$O(V + E)$}
-{}
+{$O(V + E)$}{}
 
 \entry{Kruskal's algorithm}{}
 {./snippets/graphs/kruskal.cpp}
 {$O(E \log V)$}
 {Union Find}
 
-\entry{Prim's algorithm}{}
-{./snippets/graphs/prim.cpp}
-{$O(E \log V)$}{}
-
-\entry{Dijkstra's algorithm}{}
-{./snippets/graphs/dijkstra.cpp}
-{$O((V + E) \log V)$}{}
-
-%\entry{Bellmann-Ford algorithm}
-%{Returns \texttt{true} if the graph has no negative cycles.}
-%{./snippets/graphs/bellmannford.cpp}
-%{$O(VE)$}{}
-
-\entry{Bellman-Ford}
-{An improved (but slower) version of Bellmann-Ford that can indicate for each vertex separately whether it is reachable, and if so, whether there is a lowerbound on the length of the shortest path.}
-{./snippets/graphs/bellmannford-extended.cpp}
-{$O(VE)$}{}
+\entry{Bellman-Ford}{}
+{./snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
 
 \entry{Floyd-Warshall algorithm}
-{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}, transitive reduction: \texttt{R[a,c] = R[a,c] \& !(R[a,b] \& R[b, c]).}}
+{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}}
 {./snippets/graphs/floydwarshall.cpp}
 {$O(V^3)$}{}
 
@@ -296,7 +267,6 @@ Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex wi
 {Count the number of maximal cliques in a graph with up to a few hundred nodes.}
 {./snippets/graphs/bronkerbosch.cpp}
 {$O(3^{\nicefrac n3})$}{}
-
 
 \subsection{Theorems in Graph Theory}
 \begin{description}
@@ -320,44 +290,14 @@ Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex wi
 		In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and only if all vertices have even degree, and all vertices of nonzero degree belong to a single connected component. In an \textit{undirected graph}, an \textit{Eulerian Trail} exists if and only if at most two vertices have odd degree, and all of its vertices of nonzero degree belong to a single connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit} exists if and only if every vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component. In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only at most one vertex has $outdegree - indegree = 1$, at most one vertex has $indegree - outdegree = 1$, every other vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component \textit{in the underlying undirected graph}.
 \end{description}
 
-\entry{Centroid Decomposition}
-{In case it is necessary to work with the subtrees directly, consider timestamping each node during the decomposition}
-{./snippets/graphs/centroid.cpp}
-{$O(n \log n)$}{}
-
-\entry{Heavy-Light decomposition}
-{}
-{./snippets/graphs/heavylight.cpp}
-{$O(n)$}{}
-
-\entry{HLD with Segtree}
-{}
-{./snippets/graphs/heavylight_segtree.cpp}
-{$O(n \lg^2n)$}{}
-
 \section{Flow and Matching}
-
-%\entry{Flow Network}
-%{Generic flow network used by the algorithms in this section. Should not require any modifications. \emph{Note:} Get the reverse of \texttt{e[i]} as \texttt{e[i \textasciicircum  1]}. Don't forget to \texttt{cleanup()} afterwards.}
-%{./snippets/flowalgorithms/flownetwork.cpp}{}{}
-
 
 \entry{Flow Graph}
 {Structure used by the following flow algorithms.}
 {./snippets/flowalgorithms/flowgraph.cpp}{}{}
 
-%\entry{Edmonds-Karp algorithm}{}
-%{./snippets/flowalgorithms/edmondskarp.cpp}
-%{$O(VE^2)$}
-%{Flow Network}
-
-%\entry{Dinic's algorithm}{}
-%{./snippets/flowalgorithms/dinic.cpp}
-%{$O(V^2E)$}
-%{Flow Network}
-
 \entry{Dinic}{}
-{./snippets/flowalgorithms/dinic_ragnar.cpp}
+{./snippets/flowalgorithms/dinic.cpp}
 {$O(V^2E)$}
 {Flow Graph}
 
@@ -365,28 +305,12 @@ Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex wi
 {The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}
 {./snippets/flowalgorithms/infermincut.cpp}
 {$O(V + E)$}
-{Flow Network}
-
-%\entry{Edmonds Karp Ragnar}{}
-%{./snippets/flowalgorithms/edmondskarp_ragnar.cpp}
-%{$O(VE^2)$}
-%{Flow Graph}
+{Flow Graph}
 
 \entry{Min cost flow}{}
 {./snippets/flowalgorithms/mincostflow.cpp}
 {}
 {Flow Graph}
-
-
-%\entry{Push Relabel Ragnar}{}
-%{./snippets/flowalgorithms/push_relabel.cpp}
-%{}
-%{Flow Graph}
-
-%\entry{Hopcroft Karp Ragnar}{}
-%{./snippets/flowalgorithms/hopcroft_karp_ragnar.cpp}
-%{}
-%{Flow Graph}
 
 \subsection{Min edge capacities}
 Make a supersource $S$ and supersink $T$.
@@ -419,31 +343,12 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 {./snippets/combinatorics/stablemarriage.cpp}
 {$O(mw)$}{}
 
-%\entry{Meet in the Middle}
-%{Sufficient for $2 \leq n \leq 14$.}
-%{./snippets/combinatorics/meetinthemiddle.cpp}
-%{$O(n^2\binom{n}
-%{n/2}\big(\frac{n}
-%{2}\big)!)$}{}
-
-\entry{KP procedure}
-{Solves a two variable single constraint integer linear programming problem. It can be extended to an arbitrary number of constraints by inductively decomposing the constrained region into its binding constraints (hence the $L$ and $U$), and solving for each region.}
-{./snippets/combinatorics/twovariablesilp.cpp}
-{$O(d^2 log(d)log(log(d)))$}{}
-
 \entry{2-SAT}{}
 {./snippets/combinatorics/2-sat.cpp}
 {$O(|\text{variables}|+|\text{implications}|)$}
 {Tarjan's}
 
 \section{Geometry}
-
-%\entry{Essentials}{}
-%{./snippets/geometry/geometryessentials.cpp}{}{}
-%
-%\entry{Essentials, Ragnar}{}
-%{./snippets/geometry/basics_ragnar.cpp}{}
-%{}
 
 \entry{Essentials}{}
 {./snippets/geometry/essentials.cpp}{}
@@ -453,10 +358,6 @@ Run Dinic again in the residual graph to find the maximal feasible flow.
 {./snippets/geometry/convexhull.cpp}
 {$O(n \log n)$}
 {Geometry Essentials}
-
-%\entry{Polygon}{}
-%{./snippets/geometry/polygon.cpp}{}
-%{Geometry Essentials}
 
 \subsection{Upper envelope}
 To find the envelope of lines $a_i + b_i x$,
@@ -500,6 +401,9 @@ Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_
 
 \section{Mathematics}
 
+\entry{Number theoretic algorithms}{}
+{./snippets/math/numbertheory.cpp}{}{}
+
 \entry{Primes}{
 	\begin{align*}
 		10^3 + \{-9,-3,9,13\},
@@ -507,44 +411,41 @@ Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_
 		\quad 10^9 + \{7,9,21,33,87\}
 	\end{align*}
 }
-{./snippets/mathematics/primes.cpp}{}{}
+{./snippets/math/primes.cpp}{}{}
 
 \entry{Euler Phi}{}
-{./snippets/mathematics/phi.cpp}{$O(n \log \log n)$}{}
-
-\entry{Number theoretic algorithms}{}
-{./snippets/mathematics/numbertheory.cpp}{}{}
+{./snippets/math/phi.cpp}{$O(n \log \log n)$}{}
 
 \entry{Lucas' theorem}{}
-{./snippets/mathematics/lucas.cpp}{}{}
+{./snippets/math/lucas.cpp}{}{}
 
 \entry{Finite Field}{}
-{./snippets/mathematics/field.cpp}{}{}
+{./snippets/math/field.cpp}{}{}
 
 \entry{Complex Numbers}
 {Faster-than-built-in complex numbers}
-{./snippets/mathematics/complex.cpp}{}{}
+{./snippets/math/complex.cpp}{}{}
 
 \entry{Fast Fourier Transform}
 {Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}
-{./snippets/mathematics/fft.cpp}
+{./snippets/math/fft.cpp}
 {$O(n \log n)$}
 {Bitmasking, Complex Numbers}
 
 \entry{Matrix equation solver}
 {Solve $MX=A$ for $X$, and write the square matrix $M$ in reduced row echelon form, where each row starts with a $1$, and this $1$ is the only nonzero value in its column.}
-{./snippets/matrix/solve.cpp}{}{}
+{./snippets/math/matrix_solve.cpp}{}{}
 
 \entry{Matrix Exponentation}
 {Matrix exponentation in logarithmic time.}
-{./snippets/matrix/matrixexponentation.cpp}{}{}
+{./snippets/math/matrix_exp.cpp}{}{}
 
 \entry{Simplex algorithm}
 {
 	Maximize $c^tx$ subject to $Ax \leq b$ and $x\geq 0$.
 	$A[m \times n]$, $b[m]$, $c[n]$, $x[n]$. Solution in $x$.
 }
-{./snippets/matrix/simplex.cpp}{}{}
+{./snippets/combinatorics/simplex.cpp}{}{}
 
 \subsection{Game theory}
 A game can be reduced to Nim if it is a finite impartial game, then for any state $x$, $g(x) = \inf (\mathbb{N}_0 - \{g(y) : y \in F(x) \})$. Nim and its variants include:
@@ -630,39 +531,19 @@ when for all $a\leq b\leq c\leq d$:
 \end{align*}
 \textbf{Complexity:} $O(n^3)\rightarrow O(n^2)$
 
-
-\section{Miscellaneous}
-
 \entry{LIS}
-{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$. Note that the elements should be totally ordered. To find the LIS of a sequence of elements from a partially ordered set (e.g. coordinates in the plane), replace \texttt{lis[]} with a set of equivalent elements, at a cost of another $O(\log n)$ factor.}
-{./snippets/misc/lis.cpp}
+{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$.}
+{./snippets/dp/lis.cpp}
 {$O(n \log n)$}{}
 
-\entry{Randomisation}{Might be useful for NP-Complete/Backtracking problems}
-{./snippets/misc/randomisation.cpp}{}{}
+\entry{All Nearest Smaller Values}{}{./snippets/dp/all_nearest_smaller_values.cpp}{$O(n)$}{}
 
-\entry{All Nearest Smaller Values}{}{./snippets/misc/all_nearest_smaller_values.cpp}{$O(n)$}{}
-
-\section{Helpers}
-
-\entry{Golden Section Search}
-{For a discrete search: use binary search on the difference of successive elements, see the section on Binary Search.}
-{./snippets/helpers/goldensectionsearch.cpp}
-{$O(\log {1 / \epsilon})$}{}
-
-\entry{Binary Search}{}
-{./snippets/helpers/binarysearch.cpp}
-{$O(\log n), O(\log {1 / \epsilon})$}{}
+\section{Utils}
 
 \entry{Bitmasking}{}
-{./snippets/helpers/bitmasking.cpp}{}{}
+{./snippets/utils/bitmasking.cpp}{}{}
 
-%\entry{QuickSelect}
-%{Running time is expected, quadratic in the worst case. Alternatingly breaks ties left and right, so it should be pretty resilient to edge cases. Note that the vector is changed in the process. Recursion depth is $O(\log n)$.}
-%{./snippets/helpers/quickselect.cpp}
-%{$O(n)$}{}
-
-\entry{Fast IO}{}{./snippets/helpers/fastinput.cpp}{}{}
+\entry{Fast IO}{}{./snippets/utils/fastinput.cpp}{}{}
 
 \subsection{Detecting overflow}
 These are GNU builtins, detect both over- and underflow. Returns a boolean upon failure, otherwise the result is present in \texttt{ref}. Follow the template: 
