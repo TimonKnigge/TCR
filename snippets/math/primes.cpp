@@ -51,12 +51,6 @@ vector<ll> divisors(const FS &fs){ vector<ll> ds{1};
 		ds.push_back(d*=f.p);
 	return ds;
 }
-ll num_div(  const FS &fs) { ll d = 1;
-	for(auto &f : fs) d *= f.exp+1; return d; }
-ll sum_div(  const FS &fs) { ll s = 1;
-	for(auto &f : fs) s *= (pow(f.p,f.exp+1)-1)/(f.p-1); return s; }
-ll phi(ll n, const FS &fs) { ll p = n;
-	for(auto &f : fs) p -= p/f.p; return p; }
 ll ord(ll n, ll m, const FS &fs){ ll o = phi(m,fs);	// n^ord(n,m)=1 mod m
 	for(auto f : factor(o)) while(f.exp-- && powmod(n,o/f.p,m)==1) o/=f.p;
 	return o; }
