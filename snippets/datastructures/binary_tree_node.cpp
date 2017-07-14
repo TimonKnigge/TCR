@@ -38,6 +38,6 @@ struct binary_tree_node {
 		return c;
 	}
 	node *unlink(bool right) { return unlink(get_member(right)); }
-	node *unleft(node *c) { return unlink(false); }
-	node *unright(node *c) { return unlink(true); }
+	node *unleft() { return unlink(false); }
+	node *unright() { return unlink(true); }
 };

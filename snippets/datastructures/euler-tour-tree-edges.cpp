@@ -1,7 +1,8 @@
 #include "../header.h"
 #include "sequence.cpp"
+// provides: add_vertex, link(int,int), cut(eh), connected(int,int), size(int)
 template <class T, void M(const T *, T *, const T *) = T::merge>
-struct EulerTourForest {
+struct euler_tour_forest {
 	struct edge {
 		T val;
 		int u, v;
@@ -18,7 +19,7 @@ struct EulerTourForest {
 		edge_handler(ptr &&l, ptr &&r) : array<ptr, 2>{{move(l), move(r)}} {}
 	};
 	vector<node> nodes; // one node for each vertex
-	EulerTourForest(int n = 0) {
+	euler_tour_forest(int n = 0) {
 		nodes.reserve(n);
 		while(n--) add_vertex();
 	}
@@ -27,13 +28,11 @@ struct EulerTourForest {
 		nodes.emplace_back(edge{v, v});
 		return v;
 	}
-	int root(int v) { return nodes[v].root()->max()->val.u; }
 	node *reroot(node *x) {
 		if(x == nullptr) return x;
 		auto lr = split(x);
 		return merge(lr.second, lr.first);
 	}
-	void reroot(int v) { reroot(&nodes[v]); }
 	void cut(edge_handler &&e) {
 		if(e[0]->index() > e[1]->index()) swap(e[0], e[1]);
 		auto x = split(e[0].get()).first;       // xeyez -> (x,eyez)
