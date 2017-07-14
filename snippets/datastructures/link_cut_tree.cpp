@@ -1,7 +1,9 @@
 #include "../header.h"
 #include "./splay_tree.cpp"
 
-template <typename T>
+struct empty_t {};
+
+template <typename T = empty_t>
 struct link_cut_tree : splay_tree<T, link_cut_tree<T> *> {
 	using node = link_cut_tree *;
 	using splay_tree_t = splay_tree<T, link_cut_tree<T> *>;
