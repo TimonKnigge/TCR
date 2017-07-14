@@ -3,7 +3,7 @@
 struct EulerTourTree {
 	struct edge { int u, v; };
 	vector<seq<edge>> vertices;
-	vector<unordered_map<int, seq<edge>>> edges;
+	vector<map<int, seq<edge>>> edges;
 	EulerTourTree(int n) {
 		vertices.reserve(n); edges.reserve(n);
 		for (int i = 0; i < n; ++i) add_vertex();
