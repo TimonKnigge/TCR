@@ -1,7 +1,22 @@
 #include "../header.h"
-#include "../helpers/bitmasking.cpp"
 #include "./complex.cpp"
 #include "./field.cpp"
+ll next_power_of_2(ll x) {
+	x  = (x - 1) | ((x - 1) >> 1);
+	x |= x >> 2; x |= x >> 4; x |= x >> 8; x |= x >> 16;
+	return x + 1;
+}
+ll brinc(ll x, ll k) {
+	ll i = k - 1, s = 1 << i;
+	x ^= s;
+	if ((x & s) != s) {
+		--i; s >>= 1;
+		while (i >= 0 && ((x & s) == s))
+			x = x &~ s, --i, s >>= 1;
+		if (i >= 0) x |= s;
+	}
+	return x;
+}
 using T = Complex;	// using T=F1,F2,F3
 void fft(vector<T> &A, int p, bool inv = false) {
 	int N = 1<<p;
