@@ -1,31 +1,32 @@
 #include "../header.h"
-#include "flownetwork.cpp"
-#define MAXV 5000
-ll FlowNetwork::dinic_augment(int s, int t, int* d, ll cap) {
-	if (s == t) return cap;
-	ll f = 0, df = 0;
-	for (int i = h[s]; i != -1; i = e[i].nxt) {
-		if (e[i].cap > e[i].flo && d[s] + 1 == d[e[i].v]) {
-			f += (df = dinic_augment(e[i].v, t, d, min(cap, e[i].cap - e[i].flo)));
-			e[i].flo += df;
-			e[i ^ 1].flo -= df;
-			if((cap -= df) == 0) break;
-		}	}
-	return f;
-}
-
-ll FlowNetwork::dinic(int s, int t) {
-	int q[MAXV], d[MAXV]; ll f = 0;
-	while (true) {
-		memset(d, -1, n * sizeof(int));
-		int l = 0, r = 0, u = -1, i;
-		d[q[r++] = s] = 0;
-		while (l != r && u != t)
-			for (u = q[l++], i = h[u]; i != -1; i = e[i].nxt)
-				if (e[i].cap > e[i].flo && d[e[i].v] == -1)
-					d[q[r++] = e[i].v] = d[u] + 1;
-		if (d[t] == -1) break;
-		f += dinic_augment(s, t, d, LLINF);
+#include "flowgraph.cpp"
+struct Dinic{
+	FlowGraph &edges; int V,s,t;
+	vi l; vector<vector<S>::iterator> its; // levels and iterators
+	Dinic(FlowGraph &edges, int s, int t) :
+		edges(edges), V(edges.size()), s(s), t(t), l(V,-1), its(V) {}
+	ll augment(int u, F c) { // we reuse the same iterators
+		if (u == t) return c;
+		for(auto &i = its[u]; i != edges[u].end(); i++){
+			auto &e = *i;
+			if (e.cap > e.f && l[u] < l[e.v]) {
+				auto d = augment(e.v, min(c, e.cap - e.f));
+				if (d > 0) { e.f += d; edges[e.v][e.r].f -= d; return d; }
+			}	}
+		return 0;
 	}
-	return f;
-}
+	ll run() {
+		ll flow = 0, f;
+		while(true) {
+			fill(l.begin(), l.end(),-1); l[s]=0; // recalculate the layers
+			queue<int> q; q.push(s);
+			while(!q.empty()){
+				auto u = q.front(); q.pop();
+				for(auto &&e : edges[u]) if(e.cap > e.f && l[e.v]<0)
+					l[e.v] = l[u]+1, q.push(e.v);
+			}
+			if (l[t] < 0) return flow;
+			for (int u = 0; u < V; ++u) its[u] = edges[u].begin();
+			while ((f = augment(s, INF)) > 0) flow += f;
+		}	}
+};

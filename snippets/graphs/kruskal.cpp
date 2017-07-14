@@ -1,11 +1,11 @@
 #include "../header.h"
 #include "../datastructures/unionfind.cpp"
 // Edges are given as (weight, (u, v)) triples.
-struct E {int u, v, weight;};
+struct E {int u, v; ll weight;};
 bool operator<(const E &l, const E &r){return l.weight < r.weight;}
-int kruskal(vector<E> &edges, int V) {
+ll kruskal(vector<E> &edges, int V) {
 	sort(edges.begin(), edges.end());
-	int cost = 0, count = 0;
+	ll cost = 0, count = 0;
 	UnionFind uf(V);
 	for (auto &e : edges) {
 		if (!uf.same(e.u, e.v)) {
