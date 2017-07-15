@@ -13,29 +13,18 @@ struct link_cut_forest {
 	struct node : splay_tree_node<node, T> {
 		using splay_tree_node::splay_tree_node;
 		node *access(bool lca = false) { // set for lca queries
-			if(this->p == nullptr && this->val.pp == nullptr) return this;
-			n();
-			this->splay();
-			if(this->r) {
-				this->r->val.pp = this;
-				unright();
-			}
+			if(auto r = this->splitleft().second) r->val.pp = this;
 			node *last = this;
 			while(node *w = this->val.pp) {
 				last = w;
-				w->splay();
-				this->val.pp = nullptr;
-				if(w->r) {
-					w->r->val.pp = w;
-					w->unright();
-				}
-				w->right(this);
+				if(auto r = w->splitleft().second) r->val.pp = w;
+				node::merge(w, this);
 				this->splay();
 			}
 			if(lca) return last;
 			return this;
 		}
-		node *lc_root() { return access()->min()->splay(); }
+		node *lc_root() { return access()->root()->min()->splay(); }
 		node *parent() {
 			node *previous = this->prev();
 			if(previous) return previous;
@@ -89,7 +78,6 @@ struct link_cut_forest {
 		}
 		*/
 	};
-	using edge_handler = array<node *, 2>;
 	vector<node> nodes;
 	link_cut_forest(int n = 0) : nodes(n) {}
 	int add_vertex() {
@@ -97,10 +85,10 @@ struct link_cut_forest {
 		return nodes.size() - 1;
 	}
 	node *reroot(node *x) {
-		x->access()->val.toggle();
+		x->access()->root()->val.toggle();
 		return x;
 	}
-	node *cut(node *x) { return x->access()->unleft(); }
+	node *cut(node *x) { return x->access()->split().first; }
 	void cut(int v) { cut(&nodes[v]); } // cut v from parent
 	void cut(int u, int v) {
 		if(&nodes[v] == nodes[u].parent())
@@ -112,7 +100,7 @@ struct link_cut_forest {
 		return nodes[u].lc_root() == nodes[v].lc_root();
 	}
 	void attach(int u, int v) { // u must be root; make child of v
-		nodes[u].access()->left(nodes[v].access());
+		nodes[u].access()->left(nodes[v].access()->root());
 	}
 	void link(node *x, node *y) { // will reroot x
 		reroot(x)->access()->left(y->access());
