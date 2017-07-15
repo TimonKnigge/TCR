@@ -2,58 +2,130 @@
 #include "./splay_tree.cpp"
 
 struct link_cut_forest {
-	struct node : splay_tree_node<node *> {
+	struct node;
+	struct T {
+		// int x = 0, sx = 0;	// for sum aggregate
+		node *pp = nullptr;
+		bool reverse = false;
+		void toggle() { reverse = !reverse; }
+	};
+	// void update(int u, int count) { nodes[u].access()->val.x = count; }
+	struct node : splay_tree_node<node, T> {
 		using splay_tree_node::splay_tree_node;
-		void access(node *v = nullptr) {
+		node *access(bool lca = false) { // set for lca queries
+			if(this->p == nullptr && this->val.pp == nullptr) return this;
+			n();
 			this->splay();
 			if(this->r) {
-				this->r->val = this;
-				if(v) {
-					this->r->p = nullptr;
-					this->r = v;
-					v->val = nullptr;
-				} else
-					this->unright();
+				this->r->val.pp = this;
+				unright();
 			}
-			if(this->val) this->val->access(this);
+			node *last = this;
+			while(node *w = this->val.pp) {
+				last = w;
+				w->splay();
+				this->val.pp = nullptr;
+				if(w->r) {
+					w->r->val.pp = w;
+					w->unright();
+				}
+				w->right(this);
+				this->splay();
+			}
+			if(lca) return last;
+			return this;
 		}
-		node *lc_root() {
-			access();
-			return up(this->min()->splay());
+		node *lc_root() { return access()->min()->splay(); }
+		node *parent() {
+			node *previous = this->prev();
+			if(previous) return previous;
+			return this->root()->val.pp;
 		}
-		static node *up(splay_tree_node *s) { return static_cast<node *>(s); }
+		virtual node *u() {
+			if(val.pp == nullptr) {
+				if(l && l->val.pp) swap(val.pp, l->val.pp);
+				if(r && r->val.pp) swap(val.pp, r->val.pp);
+			}
+			/*
+			val.sx = val.x;
+			if(l) val.sx += l->val.sx;
+			if(r) val.sx += r->val.sx;
+			*/
+		}
+		virtual node *n() {
+			if(this->val.reverse) {
+				swap(this->l, this->r);
+				if(this->l) this->l->val.toggle();
+				if(this->r) this->r->val.toggle();
+				this->val.reverse = false;
+			}
+			return this;
+		}
+
+		/*
+		friend ostream &operator<<(ostream &o, const node &x) {
+		    o << '(';
+		    if(x.l)
+		        o << *x.l;
+		    else
+		        o << '-';
+		    o << x.val.v << (x.val.reverse ? 'R' : '.') << x.val.x
+		      << x.val.sx;
+		    if(x.r)
+		        o << *x.r;
+		    else
+		        o << '-';
+		    o << ")";
+		    if(x.isroot()) {
+		        o << " -> ";
+		        if(x.val.pp)
+		            o << x.val.pp->val.v;
+		        else
+		            o << '-';
+		    } else {
+		        if(x.val.pp) o << '*';
+		    }
+		    return o;
+		}
+		*/
 	};
+	using edge_handler = array<node *, 2>;
 	vector<node> nodes;
 	link_cut_forest(int n = 0) : nodes(n) {}
 	int add_vertex() {
-		nodes.emplace_back(nullptr);
+		nodes.push_back(T{});
 		return nodes.size() - 1;
 	}
-
-	// cut this loose of the tree; returns the other component
-	node *cut() {
-		access();
-		node *l = up(this->l);
-		this->unleft();
-		return l;
+	node *reroot(node *x) {
+		x->access()->val.toggle();
+		return x;
 	}
-
+	node *cut(node *x) { return x->access()->unleft(); }
+	void cut(int v) { cut(&nodes[v]); } // cut v from parent
+	void cut(int u, int v) {
+		if(&nodes[v] == nodes[u].parent())
+			cut(&nodes[u]);
+		else
+			cut(&nodes[v]);
+	}
 	bool connected(int u, int v) {
-		return nodes[u].root() == nodes[v].root();
+		return nodes[u].lc_root() == nodes[v].lc_root();
 	}
-	void link(node *x, node *y) {
-		x->access();
-		y->access();
-		x->left(y);
+	void attach(int u, int v) { // u must be root; make child of v
+		nodes[u].access()->left(nodes[v].access());
 	}
-	void link(int u, int v) { link(&nodes[u], &nodes[y]) }
+	void link(node *x, node *y) { // will reroot x
+		reroot(x)->access()->left(y->access());
+	}
+	void link(int u, int v) { link(&nodes[u], &nodes[v]); } // u child of v
+	int lca(int u, int v) {
+		nodes[u].access();
+		return nodes[v].access(true) - &nodes[0];
+	}
 };
 
 // todo: use the internal splay tree pointer for path parent
 // http://codeforces.com/contest/117/submission/860934
+// http://www.spoj.com/problems/DYNACON1/
+// http://www.spoj.com/problems/DYNACON2/
 // http://www.spoj.com/problems/DYNALCA/
-
-int main() {
-	link_cut_tree t;
-	t.add_vertex();
-}
