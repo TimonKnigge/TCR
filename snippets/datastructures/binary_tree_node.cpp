@@ -7,9 +7,9 @@ struct binary_tree_node {
 
 	node *up() { return static_cast<node *>(this); }
 
-	node *root() { return this->p ? p->root() : this; }
-	node *min() { return this->l ? l->min() : this; }
-	node *max() { return this->r ? r->max() : this; }
+	node *root() { return this->p ? p->root() : up(); }
+	node *min() { return this->l ? l->min() : up(); }
+	node *max() { return this->r ? r->max() : up(); }
 	node *next() { return this->r ? this->r->min() : this->p; }
 	node *prev() { return this->l ? this->l->max() : this->p; }
 
