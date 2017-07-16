@@ -1,6 +1,5 @@
 #include "../header.h"
 #include "./splay_tree.cpp"
-
 struct link_cut_forest {
 	struct node;
 	struct T {
@@ -13,11 +12,12 @@ struct link_cut_forest {
 	struct node : splay_tree_node<node, T> {
 		using splay_tree_node::splay_tree_node;
 		node *access(bool lca = false) { // set for lca queries
-			if(auto r = this->splitleft().second) r->val.pp = this;
+			if(auto r = this->split(false).second) r->val.pp = this;
 			node *last = this;
 			while(node *w = this->val.pp) {
 				last = w;
-				if(auto r = w->splitleft().second) r->val.pp = w;
+				this->val.pp = nullptr;
+				if(auto r = w->split(false).second) r->val.pp = w;
 				node::merge(w, this);
 				this->splay();
 			}
@@ -35,6 +35,7 @@ struct link_cut_forest {
 				if(l && l->val.pp) swap(val.pp, l->val.pp);
 				if(r && r->val.pp) swap(val.pp, r->val.pp);
 			}
+			return this;
 			/*
 			val.sx = val.x;
 			if(l) val.sx += l->val.sx;
@@ -88,7 +89,7 @@ struct link_cut_forest {
 		x->access()->root()->val.toggle();
 		return x;
 	}
-	node *cut(node *x) { return x->access()->split().first; }
+	void cut(node *x) { x->access()->split(); }
 	void cut(int v) { cut(&nodes[v]); } // cut v from parent
 	void cut(int u, int v) {
 		if(&nodes[v] == nodes[u].parent())

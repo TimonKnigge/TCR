@@ -1,18 +1,16 @@
 #include "../header.h"
 #include "./binary_tree_node.cpp"
-#include "tcr/utils/log_scope.cpp"
 template <typename node, typename T>
 struct splay_tree_node : binary_tree_node<node> {
 	using node_pr = std::pair<node *, node *>;
 	using binary_tree_node<node>::isleft;
 	T val;
 	splay_tree_node(const T &t = {}) : val(t) {}
-	node *up() { return static_cast<node *>(this); }
 	static T *get(node *x) { return x == nullptr ? nullptr : &x->val; }
-	virtual node *u() { return up(); }
-	virtual node *n() { return up(); }
+	virtual node *u() { return this->up(); }
+	virtual node *n() { return this->up(); }
 	node *rotate(bool right) { // return root of rotation
-		node *p = up(), *x = p->child(!right);
+		node *p = this->up(), *x = p->child(!right);
 		x->p = p->p;
 		p->link(!right, x->child(right));
 		x->link(right, p);
@@ -22,7 +20,7 @@ struct splay_tree_node : binary_tree_node<node> {
 		return x;
 	}
 	node *splay() { // return new root
-		auto x = up();
+		auto x = this->up();
 		if(x->isroot()) return x->n();
 		x->p->n();
 		x->n();
@@ -35,12 +33,14 @@ struct splay_tree_node : binary_tree_node<node> {
 	}
 	static node *merge(node *s, node *t) { // s++t, both roots
 		if(s == nullptr) return t;
-		return s->max()->splay()->right(t)->update();
+		return s->max()->splay()->right(t)->u();
 	}
 	template <typename... Ns>
 	static node *merge(node *l, Ns... ns) {
 		return merge(l, merge(ns...));
 	}
-	node_pr split() { return {splay()->unleft()->u(), up()}; }      // ..|x..
-	node_pr splitleft() { return {up(), splay()->unright()->u()}; } // ..x|..
+	node_pr split(bool right = true) {
+		return right ? node_pr{splay()->unleft(), this->up()}
+		             : node_pr{this->up(), splay()->unright()};
+	}
 };
