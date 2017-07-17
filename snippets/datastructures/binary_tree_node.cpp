@@ -1,3 +1,4 @@
+#pragma once
 #include "../header.h"
 template <typename node> // argument is the derived type
 struct binary_tree_node {

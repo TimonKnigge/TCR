@@ -1,26 +1,45 @@
 #include "../header.h"
-#include "./sequence.cpp"
-#include "./splay_tree.cpp"
+#include "./sequence_link_cut_tree.cpp"
+//#include "./splay_tree.cpp"
 struct empty_t {};
 // provides: add_vertex, link(int,int), cut(eh), connected(int,int), size(int)
-template <class T = empty_t, void M(const T *, T *, const T *) = nullptr>
+template <class T = empty_t>
 struct euler_tour_forest {
 	struct edge {
 		int u, v;
 		T val;
-		static void merge(const edge *l, edge *m, const edge *r) {
-			M(l ? &l->val : nullptr, m->val, r ? &r->val : nullptr);
+	};
+	// struct node : splay_tree_node<node, edge> {
+	struct node : seq<node, edge> {
+		using seq<node, edge>::seq;
+		virtual node *u() {
+			T::merge(this->l ? &this->l->val.val : nullptr, &this->val.val,
+			         this->r ? &this->r->val.val : nullptr);
+			return this;
+		}
+		void update_to_root() {
+			if(this->u()->p) this->p->update_to_root();
+		}
+		friend ostream &operator<<(ostream &o, const node &x) {
+			o << '(';
+			if(x.l)
+				o << *x.l;
+			else
+				o << '-';
+			o << x.val.u << x.val.v;
+			if(x.r)
+				o << *x.r;
+			else
+				o << '-';
+			o << ")";
+			return o;
 		}
 	};
-	// using node = seq<edge>;
-	using node = splay_tree_node<edge>;
+	void update(int i) { // update all values from i to root
+		nodes[i].update_to_root();
+	}
 	using ptr = std::unique_ptr<node>;
-	struct edge_handler : array<ptr, 2> {
-		edge_handler(edge_handler &&e) : array<ptr, 2>{move(e)} {
-			for(auto &p : e) p.reset();
-		}
-		edge_handler(ptr &&l, ptr &&r) : array<ptr, 2>{{move(l), move(r)}} {}
-	};
+	using edge_handler = pair<ptr, ptr>;
 	vector<node> nodes; // one node for each vertex
 	euler_tour_forest(int n = 0) {
 		nodes.reserve(n);
@@ -33,28 +52,44 @@ struct euler_tour_forest {
 	}
 	node *reroot(node *x) {
 		if(x == nullptr) return x;
-		typename node::node_pr lr;
-		lr = x->split();
+		auto lr = x->split();
 		return node::merge(lr.second, lr.first);
 	}
 	void cut(edge_handler &&e) {
-		auto x_eyez = e[0]->split();                  // or xey|ez
-		auto yez = x_eyez.second->splitleft().second; // or z
-		if(e[1]->root() == yez)
-			node::merge(x_eyez.first,
-			            e[1]->split().second->splitleft().second);
-		else
-			node::merge(e[1]->splitleft().first->split().first, yez);
+		auto x_eyez = e.first->split();          // or xey|ez
+		auto yez = e.first->split(false).second; // or z
+		if(e.second->root() == yez) {
+			e.second->split();
+			node::merge(x_eyez.first, e.second->split(false).second);
+		} else {
+			e.second->split(false);
+			node::merge(e.second->split().first, yez);
+		}
 	}
 	edge_handler link(int u, int v) {
 		auto x = reroot(&nodes[u]), y = &nodes[v];
 		auto a_vb = y->split();
-		edge_handler e{ptr{new node{{v, u}}}, ptr{new node{{u, v}}}};
-		node::merge(a_vb.first, e[0].get(), x, e[1].get(), a_vb.second);
+		edge_handler e{new node{{v, u}}, new node{{u, v}}};
+		node::merge(a_vb.first, e.first.get(), x, e.second.get(),
+		            a_vb.second);
 		return e;
 	}
-	int size(int u) { return (nodes[u].root()->size_ + 2) / 3; }
 	bool connected(int u, int v) {
 		return nodes[u].root() == nodes[v].root();
+	}
+	friend ostream &operator<<(ostream &o, const euler_tour_forest &t) {
+		struct Comp {
+			bool operator()(const node *l, const node *r) { return l < r; }
+		};
+		set<const node *, Comp> done;
+		for(int i = 0; i < t.nodes.size(); ++i) {
+			auto r = t.nodes[i].root();
+			if(done.insert(r).second) o << *r << endl;
+		}
+		for(int i = 0; i < t.nodes.size(); ++i) {
+			o << i << ": " << t.nodes[i].val.val.cur << ", "
+			  << t.nodes[i].val.val.sum << endl;
+		}
+		return o;
 	}
 };

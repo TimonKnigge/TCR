@@ -1,5 +1,5 @@
 #include "../header.h"
-template <class T, void M(T *, T *, T *) = nullptr>
+template <class T, void M(const T *, T *, const T *) = nullptr>
 struct seq {
 	T val;
 	int size_, priority;

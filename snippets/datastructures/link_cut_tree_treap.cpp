@@ -1,6 +1,6 @@
 #include "../header.h"
 #include "./sequence_link_cut_tree.cpp"
-struct link_cut_forest {
+struct link_cut_forest_treap {
 	struct node;
 	struct T {
 		size_t v;
@@ -13,14 +13,34 @@ struct link_cut_forest {
 	struct node : seq<node, T> {
 		using seq::seq;
 		node *access(bool lca = false) { // set for lca queries
-			if(auto r = this->split(false).second) r->val.pp = this;
-			node *last = this;
-			while(node *w = this->val.pp) {
-				last = w;
-				this->val.pp = nullptr;
-				if(auto r = w->split(false).second) r->val.pp = w;
-				node::merge(w, this);
+			log_scope _("access", this, this->root());
+			auto lr = this->split(false);
+			node *root = lr.first;
+			if(lr.second) {
+				//_.print("P1", this, this->root(), lr.second);
+				if(lr.second && lr.second->val.pp)
+					swap(lr.first->val.pp, lr.second->val.pp);
+				//_.print("P2", this, this->root(), lr.second);
+				lr.second->val.pp = this;
 			}
+			//_.print("P3", this, this->root(), r);
+			node *last = this;
+			while(node *w = root->val.pp) {
+				log_scope _("while", w, w->root(), this, this->root());
+				last = w;
+				root->val.pp = nullptr;
+				auto lr = w->split(false);
+				if(lr.second) {
+					log_scope _("fix pps", lr.first, lr.second);
+					if(lr.second && lr.second->val.pp)
+						swap(lr.first->val.pp, lr.second->val.pp);
+					lr.second->val.pp = w;
+				}
+				root = node::merge(lr.first, root->root());
+				//_.leave("W,this", w, this);
+				//_.leave("Roots", w->root(), this->root());
+			}
+			//_.leave(this, this->root());
 			if(lca) return last;
 			return this;
 		}
@@ -78,7 +98,7 @@ struct link_cut_forest {
 		}
 	};
 	vector<node> nodes;
-	link_cut_forest(int n = 0) : nodes(n) {
+	link_cut_forest_treap(int n = 0) : nodes(n) {
 		for(int i = 0; i < n; ++i) nodes[i].val.v = i;
 	}
 	int add_vertex() {
@@ -101,8 +121,10 @@ struct link_cut_forest {
 		return nodes[u].lc_root() == nodes[v].lc_root();
 	}
 	void attach(int u, int v) { // u must be root; make child of v
-		// assert(nodes[u].l == nullptr);
+		log_scope _("attach", nodes[u], nodes[v]);
+		assert(nodes[u].l == nullptr);
 		nodes[u].access()->left(nodes[v].access()->root());
+		//_.leave(nodes[u], nodes[v], nodes[v].root());
 	}
 	void link(node *x, node *y) { // will reroot x
 		reroot(x)->access()->left(y->access()->root());
@@ -113,7 +135,7 @@ struct link_cut_forest {
 		return nodes[v].access(true) - &nodes[0];
 	}
 };
-ostream &operator<<(ostream &o, const link_cut_forest::node *x) {
+ostream &operator<<(ostream &o, const link_cut_forest_treap::node *x) {
 	if(x) return o << *x;
 	return o << '-';
 }

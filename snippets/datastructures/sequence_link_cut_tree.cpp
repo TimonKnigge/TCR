@@ -39,7 +39,7 @@ struct seq : binary_tree_node<node> {
 				lr = A = A->p;
 			}
 		}
-		return np{A, B};
+		return right ? np{A, B} : np{B, A};
 	}
 	// Note: Assumes both nodes are the roots of their sequences.
 	static node *merge(node *A, node *B) {
@@ -54,7 +54,7 @@ struct seq : binary_tree_node<node> {
 		}
 	}
 	template <typename... Ns>
-	node *merge(node *l, Ns... ns) {
+	static node *merge(node *l, Ns... ns) {
 		return merge(l, merge(ns...));
 	}
 };
