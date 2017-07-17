@@ -24,6 +24,7 @@ constexpr bool LOG = false;
 #include <string>
 #include <tuple> // quick compare
 #include <unordered_map>
+#include <unordered_set>
 #include <vector> // datastructures
 
 #define REP(i, n) for(auto i = decltype(n)(0); i < (n); i++)
