@@ -13,3 +13,4 @@ A Team Code Reference for competitive programming contests. A somewhat up-to-dat
 - [ ] Rework file structure in math/.
 - [ ] Short description for edge classification in .tex.
 - [ ] Rework Java header.
+- [ ] Incremental convex hull set (for lines with arbitrary slopes, current code in dp/ does not do this)
