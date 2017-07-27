@@ -6,7 +6,7 @@ struct empty_t {};
 template <class T = empty_t>
 struct euler_tour_forest {
 	struct edge {
-		int u, v;
+		int u;
 		T val;
 	};
 	// struct node : splay_tree_node<node, edge> {
@@ -39,7 +39,13 @@ struct euler_tour_forest {
 		nodes[i].update_to_root();
 	}
 	using ptr = std::unique_ptr<node>;
-	using edge_handler = pair<ptr, ptr>;
+	struct edge_handler : pair<ptr, ptr> {
+		edge_handler(edge_handler &&r) = default;
+		edge_handler(ptr &&l, ptr &&r) : pair<ptr, ptr>{move(l), move(r)} {}
+		edge_handler &operator=(edge_handler &&r) = delete;
+		edge_handler &operator=(const edge_handler &) = delete;
+		edge_handler(const edge_handler &) = delete;
+	};
 	vector<node> nodes; // one node for each vertex
 	euler_tour_forest(int n = 0) {
 		nodes.reserve(n);
@@ -47,7 +53,7 @@ struct euler_tour_forest {
 	}
 	int add_vertex() {
 		int v = nodes.size();
-		nodes.emplace_back(edge{v, v});
+		nodes.emplace_back(edge{v});
 		return v;
 	}
 	node *reroot(node *x) {
@@ -69,7 +75,7 @@ struct euler_tour_forest {
 	edge_handler link(int u, int v) {
 		auto x = reroot(&nodes[u]), y = &nodes[v];
 		auto a_vb = y->split();
-		edge_handler e{new node{{v, u}}, new node{{u, v}}};
+		edge_handler e{ptr{new node{{v}}}, ptr{new node{{u}}}};
 		node::merge(a_vb.first, e.first.get(), x, e.second.get(),
 		            a_vb.second);
 		return e;
