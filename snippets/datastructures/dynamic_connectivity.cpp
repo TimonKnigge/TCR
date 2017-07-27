@@ -16,10 +16,11 @@ struct dynamic_graph_connectivity {
 	};
 	using etf = euler_tour_forest<node_data>;
 	struct edge_data {
-		int level;
+		int level = -1;
 		array<list<int>::iterator, 2> list_pos;
-		vector<etf::edge_handler> tree_nodes; // pointers to tree edges
-		int count;                            // for duplicate edges
+		// vector<etf::edge_handler> tree_nodes; // pointers to tree edges
+		list<etf::edge_handler> tree_nodes; // pointers to tree edges
+		int count = 1;                      // for duplicate edges
 	};
 
 	// the number of components
@@ -124,7 +125,7 @@ struct dynamic_graph_connectivity {
 		void erase(const pair<int, int> &p) { this->map_type::erase(p); }
 	};
 
-	small_vector2d_of_edges edges;
+	vector_of_edges edges;
 
 	dynamic_graph_connectivity(int n) : components(n) {
 		int lgn = 0;
@@ -242,8 +243,10 @@ struct dynamic_graph_connectivity {
 		bool intree = !edge_info.tree_nodes.empty();
 		if(intree) {
 			// assert(edge_info.tree_nodes.size() == level + 1);
-			for(int l = level; l >= 0; --l) {
-				F[l].cut(move(edge_info.tree_nodes[l]));
+			int l = 0;
+			for(auto it = edge_info.tree_nodes.begin();
+			    it != edge_info.tree_nodes.end(); ++it) {
+				F[l++].cut(move(*it));
 			}
 			edge_info.tree_nodes.clear();
 		}
