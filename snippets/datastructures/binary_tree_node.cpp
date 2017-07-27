@@ -15,8 +15,15 @@ struct binary_tree_node {
 	node *root() { return this->p ? p->root() : up(); }
 	node *min() { return this->n()->l ? l->min() : up(); }
 	node *max() { return this->n()->r ? r->max() : up(); }
-	node *next() { return this->n()->r ? this->r->min() : this->p; }
-	node *prev() { return this->n()->l ? this->l->max() : this->p; }
+	node *next() {
+		if(this->n()->r) return this->r->min();
+		auto x = this;
+		while(true) {
+			if(x->isroot()) return nullptr;
+			if(x->isleft()) return x->p;
+			x = x->p;
+		}
+	}
 
 	bool isroot() const { return p == nullptr; }
 	bool isleft() const { return this == p->l; }
