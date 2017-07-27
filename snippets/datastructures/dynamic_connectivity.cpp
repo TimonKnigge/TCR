@@ -19,22 +19,125 @@ struct dynamic_graph_connectivity {
 		int level;
 		array<list<int>::iterator, 2> list_pos;
 		vector<etf::edge_handler> tree_nodes; // pointers to tree edges
+		int count;                            // for duplicate edges
 	};
 
+	// the number of components
+	int components;
 	// The forest for each level
 	vector<etf> F;
 	// The adjacency lists for each level
 	vector<vector<list<int>>> adj;
 	// Edge data: which level and where in the adjacency lists
-	unordered_map<pair<int, int>, edge_data> edges;
+	struct vector_of_edges : vector<vector<edge_data>> {
+		void init(int n) {
+			resize(n);
+			for(auto &x : *this) x.resize(n);
+		}
+		using vector<vector<edge_data>>::operator[];
+		edge_data &operator[](const pair<int, int> &p) {
+			return (*this)[p.first][p.second];
+		}
+		edge_data *find(pair<int, int> p) {
+			auto &e = (*this)[p.first][p.second];
+			return e.level >= 0 ? &e : nullptr;
+		}
+		edge_data &insert(const pair<int, int> &p, edge_data &&d) {
+			return (*this)[p] = move(d);
+		}
+		void erase(const pair<int, int> &p) { (*this)[p].level = -1; }
+	};
+	struct small_vector_of_edges : vector<vector<edge_data>> {
+		void init(int n) {
+			resize(n);
+			for(int i = 0; i < n; ++i) (*this)[i].resize(n - i - 1);
+		}
+		using vector<vector<edge_data>>::operator[];
+		edge_data &operator[](const pair<int, int> &p) {
+			return (*this)[p.first][p.second - p.first - 1];
+		}
+		edge_data *find(pair<int, int> p) {
+			auto &e = (*this)[p];
+			return e.level >= 0 ? &e : nullptr;
+		}
+		edge_data &insert(const pair<int, int> &p, edge_data &&d) {
+			return (*this)[p] = move(d);
+		}
+		void erase(const pair<int, int> &p) { (*this)[p].level = -1; }
+	};
 
-	dynamic_graph_connectivity(int n) {
+	struct vector2d_of_edges : vector<edge_data> {
+		int _n;
+		void init(int n) {
+			_n = n;
+			resize(n * n);
+		}
+		using vector<edge_data>::operator[];
+		edge_data &operator[](const pair<int, int> &p) {
+			return (*this)[p.first * _n + p.second];
+		}
+		edge_data *find(pair<int, int> p) {
+			auto &e = (*this)[p.first * _n + p.second];
+			return e.level >= 0 ? &e : nullptr;
+		}
+		edge_data &insert(const pair<int, int> &p, edge_data &&d) {
+			return (*this)[p] = move(d);
+		}
+		void erase(const pair<int, int> &p) { (*this)[p].level = -1; }
+	};
+	struct small_vector2d_of_edges : vector<edge_data> {
+		int _n;
+		void init(int n) {
+			_n = n;
+			resize(n * (n - 1) / 2);
+		}
+		using vector<edge_data>::operator[];
+		int index(const pair<int, int> &p) {
+			return p.first * (2 * _n - 3 - p.first) / 2 + p.second - 1;
+		}
+		edge_data &operator[](const pair<int, int> &p) {
+			return (*this)[index(p)];
+		}
+		edge_data *find(pair<int, int> p) {
+			auto &e = (*this)[p];
+			return e.level >= 0 ? &e : nullptr;
+		}
+		edge_data &insert(const pair<int, int> &p, edge_data &&d) {
+			return (*this)[p] = move(d);
+		}
+		void erase(const pair<int, int> &p) { (*this)[p].level = -1; }
+	};
+
+	using map_type = unordered_map<pair<int, int>, edge_data>;
+	struct map_of_edges : map_type {
+		void init(int n) {}
+		edge_data &operator[](const pair<int, int> &p) {
+			return this->map_type::find(p)->second;
+		}
+		edge_data *find(const pair<int, int> &p) {
+			auto it = this->map_type::find(p);
+			return it == this->end() ? nullptr : &it->second;
+		}
+		edge_data &insert(const pair<int, int> &p, edge_data &&d) {
+			return this->map_type::emplace(p, move(d)).first->second;
+		}
+		void erase(const pair<int, int> &p) { this->map_type::erase(p); }
+	};
+
+	small_vector2d_of_edges edges;
+
+	dynamic_graph_connectivity(int n) : components(n) {
 		int lgn = 0;
 		for(int _n = n; _n > 0; _n /= 2, ++lgn)
 			;
+		F.reserve(lgn);
+		adj.reserve(lgn);
+		lgn = 1;
 		F.assign(lgn, etf(n));
 		adj.resize(lgn);
 		for(auto &x : adj) x.resize(n);
+
+		edges.init(n);
 	}
 
 	bool connected(int u, int v) { return F[0].connected(u, v); }
@@ -46,12 +149,25 @@ struct dynamic_graph_connectivity {
 		F[l].update(v);
 	}
 
-	void push_level(int l, int u, int v) { // push {u,v} from level l to l+1
-		assert(u < v);
+	// push {u,v} from level l to l+1; set connect to true if this may
+	// introduce a new connection
+	void push_level(int l, int u, int v, bool push_tree) {
+		// assert(u < v);
 		// B: update edge info
-		auto it = edges.find({u, v});
-		auto &edge_info = it->second;
-		assert(l == edge_info.level);
+		auto &edge_info = edges[{u, v}];
+
+		// when pushing in phase B, we don't have to do
+		// anything when the level is already high enough
+		if(push_tree && l < edge_info.level) return;
+
+		// add new layer if needed
+		if(l + 1 >= F.size()) {
+			F.push_back(etf(adj[0].size()));
+			adj.push_back({});
+			adj.back().resize(adj[0].size());
+		}
+
+		// assert(l == edge_info.level);
 		++edge_info.level;
 
 		// A: move to adjacency list at next level
@@ -63,7 +179,9 @@ struct dynamic_graph_connectivity {
 		                     edge_info.list_pos[1]);
 
 		// C: add uv to the next level tree if not yet connected
-		if(!F[l + 1].connected(u, v)) {
+		// assert(push_tree == !F[l + 1].connected(u, v));
+		if(push_tree) {
+			// assert(push_tree);
 			// add edge to tree and store it's handlers pointers
 			auto eh = F[l + 1].link(u, v);
 			edge_info.tree_nodes.emplace_back(move(eh));
@@ -76,6 +194,12 @@ struct dynamic_graph_connectivity {
 
 	void link(int u, int v) {
 		if(u > v) swap(u, v);
+
+		if(auto it = edges.find({u, v})) {
+			++it->count;
+			return;
+		}
+
 		int level = 0;
 		// A: adjacency list for level
 		adj[level][u].push_back(v);
@@ -84,15 +208,14 @@ struct dynamic_graph_connectivity {
 		auto i1 = --adj[level][v].end();
 
 		// B: edge data
-		auto &edge_info =
-		    edges.emplace(pair<int, int>{u, v}, edge_data{0, {{i0, i1}}, {}})
-		        .first->second;
+		auto &edge_info = edges.insert({u, v}, {0, {{i0, i1}}, {}, 1});
 
 		// C: part of tree
 		if(!F[level].connected(u, v)) {
 			// add edge to tree and store it's handlers pointers
 			auto eh = F[level].link(u, v);
 			edge_info.tree_nodes.emplace_back(move(eh));
+			--components;
 		}
 
 		// D: increase incidence count
@@ -104,8 +227,13 @@ struct dynamic_graph_connectivity {
 
 		// get the edge info
 		auto it = edges.find({u, v});
-		auto &edge_info = it->second;
+		auto &edge_info = *it;
 		int level = edge_info.level;
+
+		if(edge_info.count > 1) {
+			--edge_info.count;
+			return;
+		}
 
 		// ~D: decrease incidence count
 		update_edge_counter(level, u, v, -1);
@@ -113,8 +241,10 @@ struct dynamic_graph_connectivity {
 		// ~C: remove from level trees if needed
 		bool intree = !edge_info.tree_nodes.empty();
 		if(intree) {
-			for(int l = level; l >= 0; --l)
+			// assert(edge_info.tree_nodes.size() == level + 1);
+			for(int l = level; l >= 0; --l) {
 				F[l].cut(move(edge_info.tree_nodes[l]));
+			}
 			edge_info.tree_nodes.clear();
 		}
 
@@ -123,7 +253,7 @@ struct dynamic_graph_connectivity {
 		adj[level][v].erase(edge_info.list_pos[1]);
 
 		// ~B: remove from edges
-		edges.erase(it);
+		edges.erase({u, v});
 
 		if(!intree) return;
 
@@ -140,7 +270,23 @@ struct dynamic_graph_connectivity {
 				swap(u, v);
 
 			// b) we can afford to push all edges in T_v to the next level
-			//    (but no need to this this; just shows that (c) is allowed)
+			//  - for each vertex but the root in represented tree, push edge
+			//  to its parent
+			//  - in the ETT, only consider edge-nodes with u<v by doing
+			//  in-order traversal
+			auto v_root = F[l].nodes[v].root();
+			auto u_root = F[l].nodes[u].root();
+			{
+				auto cur = v_root->min();
+				auto first = cur->val.u;
+				auto last = first;
+				while((cur = cur->next())) {
+					if(cur->val.u < last)
+						push_level(l, cur->val.u, last, true);
+					last = cur->val.u;
+				}
+				if(first < last) push_level(l, first, last, true);
+			}
 
 			// c) iterate over level i edges incident to T_v at x.
 			//  - if y in T_u: add xy to F_0 .. F_level and stop
@@ -148,8 +294,6 @@ struct dynamic_graph_connectivity {
 
 			// dfs T_v while skipping subtrees with node_data::sum == 0
 			stack<etf::node *> s;
-			auto v_root = F[l].nodes[v].root();
-			auto u_root = F[l].nodes[u].root();
 			s.push(v_root);
 
 			while(!s.empty()) {
@@ -161,11 +305,11 @@ struct dynamic_graph_connectivity {
 
 				// succes! Start processing edges incident to this vertex
 				if(cur->val.val.cur > 0) {
-					assert(cur->val.u == cur->val.v);
+					// assert(cur->val.u == cur->val.v);
 					// x is the current vertex in T_v
 					int x = cur->val.u;
 					// loop over edges on level incident to x
-					assert(cur->val.val.cur == int(adj[l][x].size()));
+					// assert(cur->val.val.cur == int(adj[l][x].size()));
 					// it is incremented within the loop, because we might
 					// remove edges from the list
 					for(auto it = adj[l][x].begin(); it != adj[l][x].end();) {
@@ -177,15 +321,14 @@ struct dynamic_graph_connectivity {
 							for(int i = l; i >= 0; --i) {
 								auto eh = F[i].link(x, y);
 								auto &edge_info =
-								    edges.find({min(x, y), max(x, y)})
-								        ->second;
+								    edges[{min(x, y), max(x, y)}];
 								edge_info.tree_nodes.emplace_back(move(eh));
 							}
 							return;
 						} else {
 							// failure: push (x,y) to level l+1
 							it = next(it);
-							push_level(l, min(x, y), max(x, y));
+							push_level(l, min(x, y), max(x, y), false);
 						}
 					}
 				}
@@ -194,5 +337,8 @@ struct dynamic_graph_connectivity {
 				if(cur->r && cur->r->val.val.sum > 0) s.push(cur->r);
 			}
 		}
+
+		// no suitable replacement found
+		++components;
 	}
 };
