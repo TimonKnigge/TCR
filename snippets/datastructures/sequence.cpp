@@ -35,7 +35,7 @@ struct seq {
 };
 
 // Note: Assumes both nodes are the roots of their sequences.
-template <class T, void M(T *, T *, T *)>
+template <class T, void M(const T *, T *, const T *)>
 seq<T, M> *merge(seq<T, M> *A, seq<T, M> *B) {
 	if(A == nullptr) return B;
 	if(B == nullptr) return A;
@@ -49,13 +49,13 @@ seq<T, M> *merge(seq<T, M> *A, seq<T, M> *B) {
 }
 
 // Note: Assumes all nodes are the roots of their sequences.
-template <class T, void M(T *, T *, T *), typename... Seqs>
+template <class T, void M(const T *, T *, const T *), typename... Seqs>
 seq<T, M> *merge(seq<T, M> *l, Seqs... seqs) {
 	return merge(l, merge(seqs...));
 }
 
 // Split into [0, index) and [index, ..)
-template <class T, void M(T *, T *, T *)>
+template <class T, void M(const T *, T *, const T *)>
 pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A, int index) {
 	if(A == nullptr) return {nullptr, nullptr};
 	A->p = nullptr;
@@ -71,7 +71,7 @@ pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A, int index) {
 }
 
 // return [0, A), [A, ..)
-template <class T, void M(T *, T *, T *)>
+template <class T, void M(const T *, T *, const T *)>
 pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A) {
 	if(A == nullptr) return {nullptr, nullptr};
 	seq<T, M> *B = A, *lr = A;
