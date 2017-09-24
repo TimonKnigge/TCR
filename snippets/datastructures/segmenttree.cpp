@@ -8,7 +8,7 @@ struct SegmentTree {
 			tree[i] = op(tree[2*i], tree[2*i+1]);
 	}
 	T query(int l, int r) {
-		T lhs = T(_id), rhs = T(_id);
+		T lhs = T(id), rhs = T(id);
 		for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
 			if (  l&1 ) lhs = op(lhs, tree[l++]);
 			if (!(r&1)) rhs = op(tree[r--], rhs);
