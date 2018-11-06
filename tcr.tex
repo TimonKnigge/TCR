@@ -66,13 +66,12 @@
 }
 %\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
 \author{
-	\Large \textbf{Curiously Recurring}\\
+	\Large \textbf{ETH Team}\\
 %	Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit
 }
 \date{
 	\vspace{-0.7em}
-	ACM-ICPC World Finals\\
-	May 19, 2016
+	SWERC 2018
 	\vspace{-1.9em}
 }
 
@@ -105,8 +104,8 @@
 %\fancyhead[C]{\leftmark}
 
 % one sided
-\fancyhead[L]{\hspace{5em} Utrecht University \phantom{-} \bfseries
-Curiously Recurring}
+\fancyhead[L]{\hspace{5em} ETH Z\"urich \phantom{-} \bfseries
+ETH Team}
 \fancyhead[R]{\thepage \hspace{0.5em}}
 \fancyhead[C]{\leftmark}
 
@@ -129,11 +128,9 @@ Curiously Recurring}
 
 %*************** Section entries ***************
 % \entry{name}{description}{snippet location}{complexity}{dependencies}
-\newcommand{\entry}[5]{
+\newcommand{\entry}[3]{
 	\subsection{#1}
 	#2
-	\ifthenelse{\equal{#4}{}}{}{\noindent\textbf{Complexity:} #4}
-	\ifthenelse{\equal{#5}{}}{}{\noindent\textbf{Dependencies:} #5}
 	\ifthenelse{\equal{#3}{}}{}{\lstinputlisting[firstline=2]{#3}}
 }
 \newcommand{\otherentry}[3]{
@@ -161,445 +158,185 @@ Curiously Recurring}
 
 %*************** Contents ***************
 
-\section{Templates}
-% Can't use the \entry command, because filetype is tex
-\otherentry{Vimrc}{}
-{./snippets/vimrc}
-
-\entry{C++ Template}{}
-{./snippets/header_tcr.h}{}{}
-
-\entry{Java Template}{}
-{./snippets/template.java}{}{}
-
 \section{Datastructures}
 
-\entry{Fenwick Tree}
+\entry{Union Find}
 {}
-{./snippets/datastructures/fenwick.cpp}{}{}
+{./snippets/datastructures/unionfind.cpp}
 
-\entry{2D Fenwick Tree}
-{Note the $1$-based indices. Can easily be extended to any dimension.}
-{./snippets/datastructures/fenwick2d.cpp}{}{}
+\entry{Fenwick Tree}
+{Can be generalized to arbitrary dimensions by duplicating loops.}
+{./snippets/datastructures/fenwick.cpp}
 
-\entry{Segment Tree}{}
-{./snippets/datastructures/segmenttree.cpp}{}{}
+\entry{Segment Tree}{Works bottom up, so not suitable for lazy propagation.}
+{./snippets/datastructures/segmenttree.cpp}
 
-\entry{Lazy Dynamic Segment Tree}{}
-{./snippets/datastructures/segmenttree_dynamic.cpp}{}{}
-
-\entry{Sequence}{Operations run in $O(\log n)$ time.}
-{./snippets/datastructures/sequence.cpp}{}{}
-
-\entry{Union Find}{}
-{./snippets/datastructures/unionfind.cpp}{}{}
-
-\entry{Euler Tour tree}{}
-{./snippets/datastructures/euler-tour-tree.cpp}{}{}
+\entry{Lazy Dynamic Segment Tree}
+{Here \texttt{T} is the data type and \texttt{U} the lazy update type.
+Implement all helper functions.}
+{./snippets/datastructures/segmenttree_dynamic.cpp}
 
 \entry{Heavy-Light decomposition}{}
 {./snippets/datastructures/heavylight.cpp}
-{$O(n)$}{}
-
-\entry{HLD with Segtree}{}
-{./snippets/datastructures/heavylight_segtree.cpp}
-{$O(n \lg^2n)$}{}
-
-\entry{Prefix Trie}{}
-{./snippets/datastructures/trie.cpp}{}{}
-
-\entry{Suffix Array}{Note: dont forget to invert the returned array.}
-{./snippets/datastructures/suffixarray.cpp}{$O(n \log n)$}{}
-
-\entry{Suffix Tree}{}
-{./snippets/datastructures/suffix_tree.cpp}{$O(n)$}{}
-
-\entry{Suffix Automaton}{}
-{./snippets/datastructures/suffix_automaton.cpp}{$O(n)$}{}
-
-\entry{Increasing function}{}
-{./snippets/datastructures/increasing_function.cpp}{}{}
-
-\entry{Built-in datastructures}{}
-{./snippets/datastructures/builtin.cpp}{}{}
-
-\section{Graphs}
-
-\entry{Dijkstra's algorithm}{}
-{./snippets/graphs/dijkstra.cpp}
-{$O((V + E) \log V)$}{}
-
-\entry{Topological sort}{}
-{./snippets/graphs/toposort.cpp}
-{$O(V + E)$}{}
-
-\entry{Tarjan: SCCs}{}
-{./snippets/graphs/tarjan.cpp}
-{$O(V + E)$}{}
-
-\entry{Biconnected components}{}
-{./snippets/graphs/biconnected_component.cpp}
-{$O(V + E)$}{}
-
-\entry{Kruskal's algorithm}{}
-{./snippets/graphs/kruskal.cpp}
-{$O(E \log V)$}
-{Union Find}
-
-\entry{Bellman-Ford}{}
-{./snippets/graphs/bellmannford.cpp}{$O(VE)$}{}
-
-\entry{Floyd-Warshall algorithm}
-{Transitive closure: \texttt{R[a,c] = R[a,c] | (R[a,b] \& R[b,c]))}}
-{./snippets/graphs/floydwarshall.cpp}
-{$O(V^3)$}{}
-
-\subsection{Johnson's reweighting}
-Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra vertex with zero weight edges were added), then reweight edges to $w_{uv} + h_u - h_v$, then use Dijkstra.
-\noindent\textbf{Complexity:} $O(VE \log V)$
-
-\entry{Hierholzer's algorithm}
-{Verify existence of the circuit/trail in advance (see Theorems in Graph Theory for more information). When looking for a trail, be sure to specify the starting vertex.}
-{./snippets/graphs/euleriancircuits.cpp}
-{$O(V + E)$}{}
-
-\entry{Bron-Kerbosch}
-{Count the number of maximal cliques in a graph with up to a few hundred nodes.}
-{./snippets/graphs/bronkerbosch.cpp}
-{$O(3^{\nicefrac n3})$}{}
-
-\subsection{Theorems in Graph Theory}
-\begin{description}
-	\item[Dilworth's theorem]:
-		The minimum number of disjoint chains into which S can be decomposed equals the length of a longest antichain of S.
-
-		Compute by defining a bipartite graph with a source $u_x$ and sink $v_x$ for each vertex $x$, and adding an edge $(u_x, v_y)$ if $x \leq y, x \neq y$. Let $m$ denote the size of the maximum matching, then the number of disjoint chains is $|S| - m$ (the collection of unmatched endpoints).
-
-	\item[Mirsky's theorem]:
-		The minimum number of disjoint antichains into which S can be decomposed equals the length of a longest chain of S.
-
-		Compute by defining $L_v$ to be the length of the longest chain ending at $v$. Sort $S$ topologically and use bottom-up DP to compute $L_u$ for all $u \in S$.
-
-	\item[Kirchhoff's theorem]:
-		Define a $V \times V$ matrix $M$ as: $M_{ij} = deg(i)$ if $i == j$, $M_{ij} = - 1$ if $\{i, j\} \in E$, $M_{ij} = 0$ otherwise. Then the number of distinct spanning trees equals any minor of $M$.
-
-	\item[Acyclicity]:
-		A directed graph is acyclic if and only if a depth-first search yields no back edges.
-
-	\item[Euler Circuits and Trails]:
-		In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and only if all vertices have even degree, and all vertices of nonzero degree belong to a single connected component. In an \textit{undirected graph}, an \textit{Eulerian Trail} exists if and only if at most two vertices have odd degree, and all of its vertices of nonzero degree belong to a single connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit} exists if and only if every vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component. In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only at most one vertex has $outdegree - indegree = 1$, at most one vertex has $indegree - outdegree = 1$, every other vertex has equal indegree and outdegree, and all vertices of nonzero degree belong to a single strongly connected component \textit{in the underlying undirected graph}.
-\end{description}
-
-\section{Flow and Matching}
-
-\entry{Flow Graph}
-{Structure used by the following flow algorithms.}
-{./snippets/flowalgorithms/flowgraph.cpp}{}{}
-
-\entry{Dinic}{}
-{./snippets/flowalgorithms/dinic.cpp}
-{$O(V^2E)$}
-{Flow Graph}
-
-\entry{Minimum Cut Inference}
-{The maximum flow equals the minimum cut. Only use this if the specific edges are needed. Run a flow algorithm in advance.}
-{./snippets/flowalgorithms/infermincut.cpp}
-{$O(V + E)$}
-{Flow Graph}
-
-\entry{Min cost flow}{}
-{./snippets/flowalgorithms/mincostflow.cpp}
-{}
-{Flow Graph}
-
-\subsection{Min edge capacities}
-Make a supersource $S$ and supersink $T$.
-When there are a lowerbound $l(u,v)$ and upperbound $c(u,v)$,
-add edge with capacity $c-l$.
-Furthermore, add $(t,s)$ with capacity $\infty$.
-\begin{align*}
-	M(u) = \sum_v l(v,u) - \sum_v l(u,v)
-\end{align*}
-If $M(u)>0$, add $(S,u)$ with capacity $M(u)$. Otherwise add $(u,T)$ with capacity $-M(u)$.
-Run Dinic to find a max flow. This is a feasible flow in the original graph if all edges from $S$ are saturated.
-Run Dinic again in the residual graph of the original problem to find the maximal feasible flow.
-
-\subsection{Min vertex capacities}
-$x(u)$ is the amount of flow that is extracted at $u$, or inserted when $x(u)<0$.
-If $\sum_u s(u) > 0$, add edge $(t,\tilde t)$ with capacity $\infty$,
-and set $x(\tilde t)=-\sum_ux(u)$. Otherwise add $(\tilde s,s)$ and set $x(\tilde s)=-\sum_u x(u)$.
-$\tilde s$ or $\tilde t$ is the new source/sink.
-Now, add $S$ and $T$, $(t,s)$ with capacity $\infty$.
-If $x(u)>0$, add $(S,u)$ with capacity $x(u)$. Otherwise add $(u,T)$ with capacity $x(u)$.
-Use Dinic to find a max flow. If all edges from $S$ are saturated, this is a feasible flow.
-Run Dinic again in the residual graph to find the maximal feasible flow.
 
 
+\entry{Sequence}{This is essentially a treap, but it needs special
+	functionality for the Euler Tour Tree}
+{./snippets/datastructures/sequence.cpp}
 
-\section{Combinatorics \& Probability}
+\entry{Euler Tour Tree}{Maintain information about the trees using
+	the underlying \texttt{seq} datastructure.}
+{./snippets/datastructures/euler-tour-tree.cpp}
 
-\entry{Stable Marriage Problem}
-{If $m = w$, the algorithm finds a complete, optimal matching. \texttt{mpref[i][j]} gives the id of the j'th preference of the i'th man. \texttt{wpref[i][j]} gives the preference the j'th woman assigns to the i'th man. Both \texttt{mpref} and \texttt{wpref} should be zero-based permutations.}
-{./snippets/combinatorics/stablemarriage.cpp}
-{$O(mw)$}{}
+\entry{Suffix Array}{An $O(n \log n)$ implementation. Note that the resulting
+	array maps values to their position in the suffix array, so invert if
+	necessary.}
+{./snippets/datastructures/suffixarray.cpp}
 
-\entry{2-SAT}{}
-{./snippets/combinatorics/2-sat.cpp}
-{$O(|\text{variables}|+|\text{implications}|)$}
-{Tarjan's}
+\entry{Convex Hull Set}{}{./snippets/datastructures/convex-hull-set.cpp}
+
+\entry{GNU Built-in datastructures}
+{These require \texttt{gnu} so check in test session.}
+{./snippets/datastructures/builtin.cpp}
+
+\section{Combinatorics and Exact Algorithms}
+
+\subsection{Formulae}
+\subsubsection*{Permutations}
+The number of derangements $D_n$, $n$-permutations without a fixed point,
+satisfies $D_{n+1} = n(D_n + D_{n-1}) = (n+1)D_n + (-1)^{n+1}$. If
+$g_S(n)$ counts the number of $n$-permutations whose cycle lengths are in
+$S$, then
+		$$\sum_{n=0}^\infty g_S(n)\frac{x^n}{n!} = \exp\Big(\sum_{k\in S}
+			\frac{x^k}{k}\Big)$$
+
+Stirling numbers of the first kind $S_1(n, k)$ count permutations on $n$ items
+with $k$ cycles. $S_1(n, k) = S_1(n-1, k-1) + (n-1)S_1(n-1, k)$ with
+$S_1(0, 0) = 1$. Note $\sum_{k=0}^n S_1(n, k)x^k = x(x+1)\dots(x+n-1)$.
+
+Eulerian numbers $E(n, k)$ count the number of permutations on $n$ elments,
+with exactly $k$ elements that are greater than their predecessor, i.e.
+$k$ `ascents'. We have $E(n, k) = (n-k)E(n-1,k-1)+(k+1)E(n-1,k)$ with
+$E(n, 0) = E(n, n-1)=1$.
+
+\subsubsection*{Binomials and other partitionings}
+We have $\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1} =
+	\prod_{i=1}^k \frac{n-i+1}{i}$. This last product may be computed
+incrementally since any product of $k'$ consecutive values is divisibleby
+$k'!$.
+
+Hockeystick identity: $\sum_{k=r}^n \binom{k}{r} = \binom{n+1}{r+1}$.
+
+For $n, m \geq 0$ and $p$ prime. Write $n, m$ in base $p$, i.e.
+$n = n_k p^k + \dots + n_1 p + n_0$ and $m = m_k p^k + \dots m_1 p + m_0$. Then
+by Lucas theorem we have $\binom{n}{m} \equiv \prod_{i=0}^k \binom{n_i}{m_i}
+	\mod p$, with the convention that $n_i < m_i \implies \binom{n_i}{m_i} =0$.
+
+We can put $n$ indistinguishable items into $k$ distinguishable bins in exactly
+$\binom{n+k-1}{k-1}$ ways, or if we require the bins be non-empty, in
+$\binom{n-1}{k-1}$ ways.
+
+Stirling numbers of the second kind $S_2(n, k)$ count partitions of $n$
+distinct elements into exactly $k$ non-empty groups.
+$S_2(n, k) = S_2(n-1, k-1) + kS_2(n-1, k)$ with $S_2(n, 1) = S_2(n, n) = 1$ and
+$$S_2(n, k) = \frac{1}{k!}\sum_{i=0}^k (-1)^{k-i}\binom{k}{i}i^n$$
+
+Bell numbers $B_n$ count arbitrary partitions of $n$ distinct elements, i.e.
+$B_n = \sum_k S_2(n, k)$.
+
+\subsubsection*{Catalan numbers}
+Catalan numbers $C_n$ satisfy $C_n = \frac{1}{2n+1}\binom{2n}{n}$ as well
+as $C_0 = 1, C_{n+1} = \sum_i C_i C_{n-i}$. These count, among other things:
+\begin{itemize}
+	\item Valid parenthesis sequences of length $2n$.
+	\item Sub-diagonal monotone paths from $(0, 0)$ to $(n, n)$ in the
+		$n\times n$ grid.
+	\item Complete binary trees (i.e. no vertices with exactly $1$ child)
+		with $n+1$ leaves.
+	\item Triangulations of a convex polygon with $n+2$ sides.
+	\item Stack-sortable permutations of size $n$.
+\end{itemize}
+
+\subsubsection*{Trees}
+There are $n^{n-2}$ labeled unrooted (cq. $n^{n-1}$ rooted) trees on $n$
+vertices. A bijection between a tree and it's Pr\"ufer sequence
+$(a_1, a_2, \dots, a_{n-2})$is given by:
+\begin{enumerate}
+	\item[$\leftarrow$] Given the Pr\"ufer sequence, let $d_i$ be $1$ plus the
+		number of occurences of $i$ in $a$. Now for each $a_j$ for $j=1\dots$,
+		find the lowest
+		numbered node $k$ with degree $1$ and add $\{a_j, k\}$, and decrement
+		the degrees $d_{a_j}, d_k$. At the end two degree $1$ nodes remain,
+		connect them.
+	\item[$\rightarrow$] Iterate, at step $i=1\dots$ pick the leaf with the
+		smallest label and set the $i^{th}$ element of $a$ to be its
+		neighbour.
+\end{enumerate}
+
+\subsection{Burnside's lemma}
+
+
+\subsection{Inclusion-Exclusion}
+
+For appropriate $f$ compute $\sum_{S\subseteq T} (-1)^{|T\setminus S} f(S)$.
+In some contexts we might use Stirling numbers, not binomial coefficients!
+
+Some useful applications:
+\begin{enumerate}
+	\item[Graph coloring] Let $I(S)$ count the number of independent sets
+		contained in $S \subseteq V$ ($I(\emptyset) = 1$,
+		$I(S) = I(S\setminus v) + I(S\setminus N(v))$). Let
+		$c_k = \sum_{S\subseteq V} (-1)^{|V\setminus S|} I(S)$. Then $V$
+		is $k$-colorable iff $v > 0$.
+	\item[TODO]
+\end{enumerate}
+
+\subsection{Stable Marriage Algorithm}
+Given $n$ men and $n$ women, with each man ranking each woman by preference
+(and vice versa), we can find a stable marriage by trying to match each man
+to his most preferred woman that wasn't tried before. Runs in $O(n^2)$.
+
+\section{Dynamic Programming}
+
+\entry{LIS}
+{For the actual sequence, store parent pointers. Note that longest common
+subsequence can be reduced to LIS with unique elements.}
+{./snippets/dp/lis.cpp}
+
+\entry{All Nearest Smaller Values}{}{./snippets/dp/ansv.cpp}
+
+\subsection{DP Optimalizations}
+\begin{enumerate}
+	\item[CH] Recurrences are generally of the form
+		$dp_i = dp_j \cdot a_i + b_j$ or equivalent. Insert all lines as
+		functions of $a_i$ into the convex hull set (see datastructures) to
+		query in logarithmic time.
+	\item[DC] Recurrences are generally of the form
+		$dp_{k,i} = \max_{j<i} f(dp_{k-1,j}, i, j, k)$. If the $\arg\max$ is
+		monotonic in $i$, do divide and conquer by first finding the answer
+		for $i = \frac{n}{2}$, and then recursing for larger and smaller $i$.
+	\item[Knuth] Recurrences are generally of form similar to
+		$$dp_{i,j} = min_{i\leq k<j} \big(f(i, j) + dp_{i,k} + dp_{k+1,j}\big)$$
+		Let $a_{i,j}$ be the $\text{argmin}$ for $dp_{i, j}$, then if
+		$a_{i,j-1} \leq a_{i, j} \leq a_{i+1,j}$, for a fixed $len > 0$ the
+		ranges we have to scan for all $dp_{i, i+len}$ are (almost) disjoint,
+		and we can solve the recurrence in $O(n^2)$ time.
+
+		A sufficient condition for applicability on $f$ is, for
+		$i\leq j\leq k\leq l$, monotonicity: $f(j,k) \leq f(i, l)$, and
+		the quadrangle inequality: $f(i,k)+f(j,l)\leq f(i,l)+f(j,k)$.
+\end{enumerate}
 
 \section{Geometry}
 
-\entry{Essentials}{}
-{./snippets/geometry/essentials.cpp}{}
-{}
-
-\entry{Convex Hull}{}
-{./snippets/geometry/convexhull.cpp}
-{$O(n \log n)$}
-{Geometry Essentials}
-
-\subsection{Upper envelope}
-To find the envelope of lines $a_i + b_i x$,
-find the convex hull of points $(b_i, a_i)$.
-Add $(0,-\infty)$ for upper envelope, and $(0,+\infty)$ for lower envelope.
-
 \subsection{Formulae}
+Line equations $ax + by = e$. For a line going through points $(x_1, y_1)$ and
+$(x_2, y_2)$, note that $n = (y_1 - y_2, x_2 - x_1)$ is a normal vector, so
+the line equation is given by $n \cdot p = n \cdot (x_1, y_1)$ for
+$p \in.\mathbb{R}^2$.
+$$\begin{aligned}ax+by=e\\cx+dy=f\end{aligned}
+\,\to\,
+\begin{aligned}x=\dfrac{ed-bf}{ad-bc}\\y=\dfrac{af-ec}{ad-bc}\end{aligned}$$
 
-\begin{equation*}
-	[ABC]
-	= rs
-	= \frac 12 ab\sin\gamma
-	= \frac{abc}{4R}
-	= \sqrt{s(s-a)(s-b)(s-c)}
-	= \frac 12\left| (B-A, C-A)^T \right|
-\end{equation*}
-
-\begin{align*}
-	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
-	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
-	\textrm{Euler:}&&  1 + CC &= V - E + F\\
-	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points}
-	+ \frac{\textrm{boundary points}}2 - 1\\
-	p\cdot q &= |p||q|\cos(\theta) & |p\times q| &= |p||q|\sin(\theta)\\
-	\textrm{Rotatie}&& (x';y') &= \left(\cos(\theta),
-	-\sin(\theta); \sin(\theta), \cos(\theta)\right)(x;y)\\
-	\textrm{Projectie $x$ op $y$}&& p(x,y) &= \frac{x\cdot
-	y}{y\cdot y} y
-\end{align*}
-
-Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_i)$, its centroid $(C_x, C_y)$ is given as:
-
-\begin{align*}
-	C_x &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i), &
-	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
-\end{align*}
-
-\begin{equation*}
-	A = \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
-\end{equation*}
-
-\section{Mathematics}
-
-\entry{Number theoretic algorithms}{}
-{./snippets/math/numbertheory.cpp}{}{}
-
-\entry{Primes}{
-	\begin{align*}
-		10^3 + \{-9,-3,9,13\},
-		\quad 10^6 + \{-17, 3, 33\},
-		\quad 10^9 + \{7,9,21,33,87\}
-	\end{align*}
-}
-{./snippets/math/primes.cpp}{}{}
-
-\entry{Euler Phi}{}
-{./snippets/math/phi.cpp}{$O(n \log \log n)$}{}
-
-\entry{Lucas' theorem}{}
-{./snippets/math/lucas.cpp}{}{}
-
-\entry{Finite Field}{}
-{./snippets/math/field.cpp}{}{}
-
-\entry{Complex Numbers}
-{Faster-than-built-in complex numbers}
-{./snippets/math/complex.cpp}{}{}
-
-\entry{Fast Fourier Transform}
-{Calculates the discrete convolution of two vectors. Note that the method accepts and outputs complex numbers, and the input is changed in place.}
-{./snippets/math/fft.cpp}
-{$O(n \log n)$}
-{Bitmasking, Complex Numbers}
-
-\entry{Matrix equation solver}
-{Solve $MX=A$ for $X$, and write the square matrix $M$ in reduced row echelon form, where each row starts with a $1$, and this $1$ is the only nonzero value in its column.}
-{./snippets/math/matrix_solve.cpp}{}{}
-
-\entry{Matrix Exponentation}
-{Matrix exponentation in logarithmic time.}
-{./snippets/math/matrix_exp.cpp}{}{}
-
-\entry{Simplex algorithm}
-{
-	Maximize $c^tx$ subject to $Ax \leq b$ and $x\geq 0$.
-	$A[m \times n]$, $b[m]$, $c[n]$, $x[n]$. Solution in $x$.
-}
-{./snippets/combinatorics/simplex.cpp}{}{}
-
-\subsection{Game theory}
-A game can be reduced to Nim if it is a finite impartial game, then for any state $x$, $g(x) = \inf (\mathbb{N}_0 - \{g(y) : y \in F(x) \})$. Nim and its variants include:
-\begin{description}
-	\item[Nim] Let $X = \bigoplus_{i=1}^n x_i$, then $(x_i)_{i=1}^n$ is a winning position iff $X\neq 0$. Find a move by picking $k$ such that $x_k > x_k \oplus X$.
-    \item[Misère Nim] Regular Nim, except that the last player to move \textit{loses}. Play regular Nim until there is only one pile of size larger than $1$, reduce it to $0$ or $1$ such that there is an odd number of piles.
-    \item[Staricase Nim] Stones are moved down a staircase and only removed from the last pile. $(x_i)_{i=1}^n$ is an $L$-position if $(x_{2i-1})_{i=1}^{n/2}$ is (i.e. only look at odd-numbered piles).
-    \item[Moore's Nim$_k$] The player may remove from at most $k$ piles (Nim $=$ Nim$_1$). Expand the piles in base $2$, do a carry-less addition in base $k+1$ (i.e. the number of ones in each column should be divisible by $k+1$).
-    \item[Dim$^+$] The number of removed stones must be a divisor of the pile size. The Sprague-Grundy function is $k+1$ where $2^k$ is the largest power of $2$ dividing the pile size.
-    \item[Aliquot game] Same as above, except the divisor should be proper (hence $1$ is also a terminal state, but watch out for size $0$ piles). Now the Sprague-Grundy function is just $k$.
-    \item[Nim (at most half)] Write $n+1 = 2^my$ with $m$ maximal, then the Sprague-Grundy function of $n$ is $(y - 1) / 2$.
-    \item[Lasker's Nim] Players may alternatively split a pile into two new non-empty piles. $g(4k+1) = 4k+1$, $g(4k+2) = 4k+2$, $g(4k+3) = 4k+4$, $g(4k+4) = 4k+3$ ($k\geq 0$).
-    \item[Hackenbush on trees] A tree with stalks $(x_i)_{i=1}^n$ may be replaced with a single stalk with length $\bigoplus_{i=1}^n x_i$.
-\end{description}
-A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
-
-\subsection{Formulae}
-\begin{align*}
-	\textrm{Lucas}&&\binom
-	mn&\equiv\prod_{i=0}^k\binom{m_i}{n_i} \mod p\\
-	\textrm{Lagrange}&&L(x)&=\sum_{j=0}^ky_j\prod_{\substack{0\leq m\leq
-	k\\m\neq j}}\frac{x-x_m}{x_j-x_m}\\
-	\textrm{Derangements}&& D(n) &=n!\sum_{k=0}^n(-1)^k/k!\\
-	\textrm{Inclusion Exclusion}&& A\cup B\cup C &= A+B+C-A\cap B-A\cap C-B\cap C+A\cap B\cap C\\
-	\textrm{Inclusion Exclusion}&& \bigcup A_i &= \sum_{k=1}^n (-1)^{k-1} \binom nk a_k,
-	\quad\quad a_k = |A_1\cap \dots \cap A_k|
-\end{align*}
-
-\section{Strings}
-
-\entry{Knuth Morris Pratt}{}
-{./snippets/strings/knuthmorrispratt.cpp}
-{$O(n + m)$}{}
-
-\entry{Z-algorithm}
-{To match pattern $P$ on string $S$: pick $\Phi$ s.t. $\Phi \notin P$, find $Z$ of $P{\Phi}S$.}
-{./snippets/strings/zalgorithm.cpp}
-{$O(n)$}{}
-
-\entry{Aho-Corasick}
-{Constructs a Finite State Automaton that can match $k$ patterns of total length $m$ on a string of size $n$.}
-{./snippets/strings/ahocorasick.cpp}
-{$O(n + m + k)$}{}
-
-\entry{Manacher's Algorithm}
-{Finds the largest palindrome centered at each position.}
-{./snippets/strings/manacher.cpp}
-{$O(|S|)$}{}
-
-\section{DP}
-\entry{Convex Hull optimization}{
-	When $a_{j+1} < a_j$ and $x_{i+1} > x_i$ (otherwise sort
-	$x$):
-\begin{align*}
-	D_{k,i}&= \min_{j<i}\left\{a_j\cdot x_i +
-	D_{k-1,j}\right\} + c_{k,i}\\
-	D_i &= \min_{j<i}\left\{a_j\cdot x_i + D_j\right\} + c_i
-\end{align*}
-}{./snippets/dp/convex_hull.cpp}
-{$O(kn^2)\rightarrow O(kn)$, $O(n^2)\rightarrow O(n)$}{}
-
-\entry{Divide and Conquer}{
-	When $P_{l,r}\leq P_{l,r+1}$, solve the recursion
-\begin{equation*}
-	D_{k,i} = \min_{j<i}\left\{D_{k-1,j}+C(j,i)\right\}
-\end{equation*}
-}{./snippets/dp/divide_conquer.cpp}{$O(kn^2)\rightarrow O(kn\lg n)$}{}
-
-\subsection{Knuth optimization}
-\begin{align*}
-	D_{l,r} &= \min_{l<m<r}\left\{D_{l,m}+D_{m,r}\right\} +
-	C_{l,r}
-	= \min_{P_{l,r-1}\leq m \leq P_{l+1,r}}\left\{D_{l,m}+D_{m,r}\right\} + C_{l,r}
-\end{align*}
-where $P_{l,r}$ is the $m$ for which $D_{l,r} =
-D_{l,m}+D_{m,r}+C_{l,r}$.
-Holds when $P_{l,r-1}\leq P_{l,r} \leq P_{l+1,r}$, or implied
-when for all $a\leq b\leq c\leq d$:
-\begin{align*}
-	C_{a,c} + C_{b,d}&\leq C_{a,d} + C_{b,d}
-	&
-	C_{b,c}&\leq C_{a,b}
-\end{align*}
-\textbf{Complexity:} $O(n^3)\rightarrow O(n^2)$
-
-\entry{LIS}
-{Finds the longest strictly increasing subsequence. To find the longest non-decreasing subsequence, insert pairs $(a_i, i)$.}
-{./snippets/dp/lis.cpp}
-{$O(n \log n)$}{}
-
-\entry{All Nearest Smaller Values}{}{./snippets/dp/all_nearest_smaller_values.cpp}{$O(n)$}{}
-
-\section{Utils}
-
-\entry{Bitmasking}{}
-{./snippets/utils/bitmasking.cpp}{}{}
-
-\entry{Fast IO}{}{./snippets/utils/fastinput.cpp}{}{}
-
-\subsection{Detecting overflow}
-These are GNU builtins, detect both over- and underflow. Returns a boolean upon failure, otherwise the result is present in \texttt{ref}. Follow the template: 
-
-\texttt{\_\_builtin\_[u|s][add|mul|sub](ll)?\_overflow(in, out, \&ref)} 
-
-\newpage
-\section{Strategies}
-Take a break after 2 hours.
-\subsubsection*{Techniques}
-\begin{itemize}
-\setlength\itemsep{0em}
-	\item Bruteforce: meet-in-the-middle, backtracking, memoization
-	\item DP (write full draft, include ALL loop bounds), easy direction
-	\item Precomputation
-	\item Divide and Conquer
-	\item Binary search
-	\item $lg(n)$ datastructures
-	\item Mathematical insight
-	\item Randomisation
-	\item Look at it backwards
-	\item Common subproblems? Memoization
-	\item Compute modulo primes and use CRT
-\end{itemize}
-
-\subsubsection*{WA}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Beware of typos
-	\item Test sample input; make custom testcases
-	\item Read carefully
-	\item Check bounds (use long long or long double)
-	\item EDGE CASES: $n\in\{-1,0,1,2\}$. Empty list/graph?
-	\item Off by one error (in indices or loop bounds)
-	\item Not enough precision
-	\item Assertions
-	\item Missing modulo operators
-	\item Cases that need a (completely) different approach
-\end{itemize}
-
-\subsubsection*{TLE}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Infinite loop
-	\item Use scanf or fastIO instead of cin
-	\item Wrong algorithm (is it theoretically fast enough)
-	\item Micro optimizations (but probably the approach just isn't right)
-\end{itemize}
-
-\subsubsection*{RTE}
-\begin{itemize}
-	\setlength\itemsep{0em}
-	\item Typos
-	\item Off by one error (in array index of loop bound)
-	\item empty vector front/back
-	\item return 0 at end of program
-\end{itemize}
-
+For a general equation of the form $Ax = b$, we have $x_i = \det A_i / \det A$ with $A_i$ equal to $A$ with the $i^{th}$ column replaced by $b$.
 \end{document}
