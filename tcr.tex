@@ -325,6 +325,10 @@ Some useful applications:
 		number of a graph in $O^*(2^n)$ time.
 \end{enumerate}
 
+\entry{Fast Subset Convolution}
+{Sets $a'(S) = \sum_{T\subseteq S} a(T)$ in $O(n2^n)$ time.}
+{./snippets/combinatorics/fsc.cpp}
+
 \subsection{Stable Marriage Algorithm}
 Given $n$ men and $n$ women, with each man ranking each woman by preference
 (and vice versa) (i.e. these are permutations),
@@ -348,7 +352,25 @@ marriages (a man and a woman not engaged to each other, but both prefer each
 other over their actual partner). When the number of men and women is different
 we can add dummy people that noone prefers.
 
+\entry{Bron-Kerbosch maximal clique enumeration}
+{Runs in about $O(3^{n/3})$ time.}
+{./snippets/graphs/bronkerbosch.cpp}
+
+\entry{$2$-SAT}
+{Depends on Tarjan.}
+{./snippets/combinatorics/2-sat.cpp}
+
+\entry{Simplex Algorithm}
+{Maximize $c^tx$ subject to $Ax\leq b$ and $x\geq 0$. With
+$A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
+{./snippets/combinatorics/simplex.cpp}
+
 \section{Dynamic Programming}
+
+\subsection{Distinct subsequences}
+For a sequence $a_1, \dots, a_n$, the number of distinct subsequences $s_i$
+is found with $s_0 = 1$ and $s_i = 2 * s_{i-1} - s_j$ where $j$ is the previous
+occurrence of $a_i$.
 
 \entry{LIS}
 {For the actual sequence, store parent pointers. Note that longest common
