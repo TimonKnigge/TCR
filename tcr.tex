@@ -225,7 +225,10 @@ We have $\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1} =
 incrementally since any product of $k'$ consecutive values is divisibleby
 $k'!$.
 
-Hockeystick identity: $\sum_{k=r}^n \binom{k}{r} = \binom{n+1}{r+1}$.
+Basic identities: The hockeystick identity: $\sum_{k=r}^n \binom{k}{r}
+	= \binom{n+1}{r+1}$
+or $\sum_{k\leq n}\binom{r+k}{k} = \binom{r+n+1}{n}$.
+Also $\sum_{k=0}^n \binom{k}{m} = \binom{n+1}{m+1}$.
 
 For $n, m \geq 0$ and $p$ prime. Write $n, m$ in base $p$, i.e.
 $n = n_k p^k + \dots + n_1 p + n_0$ and $m = m_k p^k + \dots m_1 p + m_0$. Then
@@ -274,27 +277,76 @@ $(a_1, a_2, \dots, a_{n-2})$is given by:
 \end{enumerate}
 
 \subsection{Burnside's lemma}
+Given a group $G$ acting on a set $X$, the number of elements in $X$ up to
+symmetry is $$\frac{1}{|G|}\sum_{g\in G} |X^g|$$ with $X^g$ the elements of
+$X$ invariant under $g$. For example, if $f(n)$ counts ``configurations''
+of some sort of length $n$, and we want to count them up to rotational symmetry
+using $G = \mathbb{Z}/n\mathbb{Z}$, then
+
+$$g(n) = \frac{1}{n} \sum_{k=0}^{n-1} f(\gcd(n, k))
+	= \frac{1}{n}\sum_{k \| n} f(k) \phi(n / k)$$
+
+I.e. for coloring with $c$ colors we have $f(k) = k^c$.
+
+Relatedly, in P\'olya's enumeration theorem we imagine $X$ as a set of $n$
+beads with $G$ permuting the beads (e.g. a necklace, with $G$ all rotations and
+reflections of the $n$-cycle, i.e. the dihedral group $D_n$).
+Suppose further that we had $Y$ colors, then
+the number of $G$-invariant colorings $Y^X / G$ is counted by
+
+$$\frac{1}{|G|}\sum_{g\in G} |Y|^{c(g)}$$
+
+with $c(g)$ counting the number of cycles of $g$ when viewed as a permutation
+of $X$. We can generalize this to a weighted version: if the color $i$ can
+occur exactly $r_i$ times, then this is counted by the coefficient of
+$t_1^{r_1}\dots t_n^{r_n}$ in the polynomial
+$$Z(t_1,\dots,t_n) = \frac{1}{|G|}\sum_{g\in G} \prod_{m\geq 1}
+	(t_1^m+\dots+t_n^m)^{c_m(g)}$$
+where $c_m(g)$ counts the number of length $m$ cycles in $g$ acting as a
+permutation on $X$. Note we get the original formula by setting all $t_i=1$.
+Here $Z$ is the cycle index. Note: you can cleverly deal with even/odd sizes
+by setting some $t_i$ to $-1$.
 
 
 \subsection{Inclusion-Exclusion}
 
-For appropriate $f$ compute $\sum_{S\subseteq T} (-1)^{|T\setminus S} f(S)$.
+For appropriate $f$ compute $\sum_{S\subseteq T} (-1)^{|T\setminus S|} f(S)$,
+or if only the size of $S$ matters, $\sum_{s=0}^n (-1)^{n-s} \binom{n}{s}f(s)$.
 In some contexts we might use Stirling numbers, not binomial coefficients!
 
 Some useful applications:
 \begin{enumerate}
-	\item[Graph coloring] Let $I(S)$ count the number of independent sets
+	\item[] \textbf{Graph coloring} Let $I(S)$ count the number
+		of independent sets
 		contained in $S \subseteq V$ ($I(\emptyset) = 1$,
 		$I(S) = I(S\setminus v) + I(S\setminus N(v))$). Let
 		$c_k = \sum_{S\subseteq V} (-1)^{|V\setminus S|} I(S)$. Then $V$
-		is $k$-colorable iff $v > 0$.
-	\item[TODO]
+		is $k$-colorable iff $v > 0$. Thus we can compute the chromatic
+		number of a graph in $O^*(2^n)$ time.
 \end{enumerate}
 
 \subsection{Stable Marriage Algorithm}
 Given $n$ men and $n$ women, with each man ranking each woman by preference
-(and vice versa), we can find a stable marriage by trying to match each man
-to his most preferred woman that wasn't tried before. Runs in $O(n^2)$.
+(and vice versa) (i.e. these are permutations),
+we can find a stable marriage by applying the following
+procedure:
+\begin{itemize}
+	\item Initialize all men $m$ and women $w$ to `free'.
+	\item While there is a free man $m$ for whom there is some woman $w$ he
+		has not proposed to, let $w$ be the first/most prefered such woman. Now
+		$m$ proposes to $w$.
+	\begin{itemize}
+		\item If $w$ is free, then $(m, w)$ become engaged.
+		\item If $w$ is engaged to $m'$ and $w$ prefers $m'$, nothing happens.
+		\item If $w$ is engaged to $m'$ and $w$ prefers $m$, then $(m, w)$
+			become engaged and $m'$ becomes free.
+	\end{itemize}
+\end{itemize}
+With the right bookkeeping this can be done in $O(n^2)$ time. It is guaranteed
+the resulting configuration marries everyone, and there are no unstable
+marriages (a man and a woman not engaged to each other, but both prefer each
+other over their actual partner). When the number of men and women is different
+we can add dummy people that noone prefers.
 
 \section{Dynamic Programming}
 
