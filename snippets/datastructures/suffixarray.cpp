@@ -39,7 +39,7 @@ struct SuffixArray {
 			if (cnt[i] > 0) cnt[i] = mp++;
 		for (int i = 0; i < n; ++i) P[0][i] = cnt[s[i]];
 	}
-	vi &get_array() { return P.back(); }
+	const vi &get_array() { return P.back(); }
 	int lcp(int x, int y) {
 		int ret = 0;
 		if (x == y) return n - x;
