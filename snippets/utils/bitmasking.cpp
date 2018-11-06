@@ -1,6 +1,4 @@
 #include "../header.h"
-template<typename F>	// All subsets of {0..N-1}
-void iterate_subset(ll N, F f){for(ll mask=0; mask < 1ll<<N; ++mask) f(mask);}
 template<typename F>	// All subsets of size k of {0..N-1}
 void iterate_k_subset(ll N, ll k, F f){
 	ll mask = (1ll << k) - 1;
