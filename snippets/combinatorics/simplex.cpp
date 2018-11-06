@@ -1,4 +1,5 @@
 #include "../header.h"
+#define REP(i, n) for(auto i = decltype(n)(0); i < (n); i++)
 using T     = long double;
 using vd    = vector<T>;
 using vvd   = vector<vd>;
@@ -44,7 +45,7 @@ struct LPSolver {
 	}
 	T Solve(vd &x) {
 		int r = 0;
-		for(int i                           = 1; i < m; i++)
+		for(int i = 1; i < m; i++)
 			if(D[i][n + 1] < D[r][n + 1]) r = i;
 		if(D[r][n + 1] <= -EPS) {
 			Pivot(r, n);
