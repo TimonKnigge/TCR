@@ -374,11 +374,65 @@ we can add dummy people that noone prefers.
 $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 {./snippets/combinatorics/simplex.cpp}
 
+\section{Flows and cuts}
+\subsection{Relevant theorems}
+\begin{description}
+	\item[Min-Cut Max-Flow] The minimum cut separating $s$ and $t$ equals the
+		maximum flow between $s$ and $t$.
+	\item[K\"onigs Theorem] There is a bijection between the maximum matchings
+		in a bipartite graph and the minimal vertex covers. To find the cover:
+		find a maximum matching and run minimum cut inference. Then pick all
+		vertices that are on the `wrong' side. Also note the complement of a
+		minimum vertex cover is a maximum independent set.
+	\item[Hall's Marriage Theorem] For a bipartite graph $(L \cup R, E)$, a
+		matching saturating $L$ exists iff $\forall L' \subseteq L$ we have
+		$|L'| \leq |N(L')|$ where $N(L')$ is the neighbour set of $L'$.
+	\item[Dilworth's Theorem] The minimum number of disjoint chains into which
+		a partial ordering $S$ can be decomposed equals the length of
+		the longest antichain of
+		$S$. Compute by defining a bipartite graph with $l_x$ and $r_x$ for
+		each $x \in S$, and add $(l_x, r_y)$ if $l_x \leq r_y, y \neq x$. For
+		a maximum matching of size $m$ the number of disjoint chains is then
+		$|S|-m$. To find the actual antichain, find the minimal vertex cover
+		and take all $x$ with neither $l_x$ nor $r_x$ in the cover.
+		
+		As for the decomposition into chains,
+		note that actually, $S$ does not have to be a partial order, but can be
+		any DAG. Then we find a decomposition of the DAG into disjoint paths.
+	\item[Mirsky's Theorem] Dual theorem to the above, for the smallest
+		decomposition into antichains and the longest chain. Easily computable
+		using dynamic programming.
+\end{description}
+
+\entry{Flow Graph}
+{Datastructure used by all flow algorithms}
+{./snippets/flowalgorithms/flowgraph.cpp}
+
+\entry{Dinic Algorithm}
+{Runs in $O(V^2 E)$, or $O(VE \log U)$ after introducing scaling.}
+{./snippets/flowalgorithms/dinic.cpp}
+
+\entry{Minimum Cut Inference}{}
+{./snippets/flowalgorithms/infermincut.cpp}
+
+\entry{Minimum Cost Flow}
+{Cannot handle negative cycles}
+{./snippets/flowalgorithms/mincostflow.cpp}
+
+\subsection{Cirulations}
+Add a supersource S and supersink T. For an arc $(x, y)$ with lowerbound $l$
+and upperbound $u$, set its new capacity to $u-l$, and add arcs $(S, y)$ and
+$(x, T)$ with capacity $l$. Then find a flow from $S$ to $T$. This corresponds
+to a circulation if the flow equals $\sum_{(x, y)} l$.
+
+Note: This approach can often be speed up significantly by merging double
+edges.
+
 \section{Dynamic Programming}
 
 \subsection{Distinct subsequences}
 For a sequence $a_1, \dots, a_n$, the number of distinct subsequences $s_i$
-is found with $s_0 = 1$ and $s_i = 2 * s_{i-1} - s_j$ where $j$ is the previous
+is found with $s_0 = 1$ and $s_i = 2 s_{i-1} - s_j$ where $j$ is the previous
 occurrence of $a_i$.
 
 \entry{LIS}
