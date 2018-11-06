@@ -19,11 +19,11 @@ bool comp_angl(const point &l, const point &r, const point &c) {
 
 struct ConvexHull {
 	vector<point> &p;
-	vector<int> h;	// incides of the hull in p, ccw
+	vi h;	// incides of the hull in p, ccw
 	ConvexHull(vector<point> &_p) : p(_p) { compute_hull(); }
 	void compute_hull() {
 		int pivot = 0, n = p.size();
-		vector<int> ps(n + 1, 0);
+		vi ps(n + 1, 0);
 		for (int i = 1; i < n; ++i) {
 			ps[i] = i;
 			if (comp_lexo(p[i], p[pivot])) pivot = i;
@@ -51,7 +51,7 @@ struct ConvexHull {
 
 // Note: if h.size() is small (<5), consider brute forcing to avoid
 // the usual nasty computational-geometry-edge-cases.
-void rotating_calipers(vector<point> &p, vector<int> &h) {
+void rotating_calipers(vector<point> &p, vi &h) {
 	int n = h.size(), i = 0, j = 1, a = 1, b = 2;
 	while (i < n) {
 		if (det(p[h[j]].x - p[h[i]].x, p[h[j]].y - p[h[i]].y,

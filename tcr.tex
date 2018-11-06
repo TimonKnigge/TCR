@@ -203,7 +203,7 @@ Implement all helper functions.}
 {These require \texttt{gnu} so check in test session.}
 {./snippets/datastructures/builtin.cpp}
 
-\section{Combinatorics and Exact Algorithms}
+\section{Combinatorics}
 
 \subsection{Formulae}
 \subsubsection*{Permutations}
@@ -361,18 +361,72 @@ marriages (a man and a woman not engaged to each other, but both prefer each
 other over their actual partner). When the number of men and women is different
 we can add dummy people that noone prefers.
 
-\entry{Bron-Kerbosch maximal clique enumeration}
-{Runs in about $O(3^{n/3})$ time.}
+\entry{Bron-Kerbosch}
+{Maximal clique enumeration, runs in about $O(3^{n/3})$ time (or
+	$O(\#cliques)$).}
 {./snippets/graphs/bronkerbosch.cpp}
 
-\entry{$2$-SAT}
-{Depends on Tarjan.}
+\entry{$2$-SAT}{}
 {./snippets/combinatorics/2-sat.cpp}
 
 \entry{Simplex Algorithm}
 {Maximize $c^tx$ subject to $Ax\leq b$ and $x\geq 0$. With
 $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 {./snippets/combinatorics/simplex.cpp}
+
+\section{Graph Algorithms}
+
+\entry{Tarjan's Algorithm}{}
+{./snippets/graphs/tarjan.cpp}
+
+\entry{Biconnected Components}{}
+{./snippets/graphs/biconnected_component.cpp}
+
+\entry{Eulerian paths and tours}
+{In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and
+only if all vertices have even degree, and all vertices of nonzero degree
+belong to a single connected component. In an \textit{undirected graph},
+an \textit{Eulerian Trail} exists if and only if at most two vertices have
+odd degree, and all of its vertices of nonzero degree belong to a single
+connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit}
+exists if and only if every vertex has equal indegree and outdegree, and all
+vertices of nonzero degree belong to a single strongly connected component.
+In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only
+at most one vertex has $outdegree - indegree = 1$, at most one vertex has
+$indegree - outdegree = 1$, every other vertex has equal indegree and
+outdegree, and all vertices of nonzero degree belong to a single strongly
+connected component \textit{in the underlying undirected graph}.}
+{./snippets/graphs/euleriancircuits.cpp}
+
+\entry{Bellmann-Ford}{$O(VE)$}{./snippets/graphs/bellmannford.cpp}
+
+\subsection{Johnson's reweighting}
+For computing all pairs shortest paths in sparse graphs with negative weights.
+Apply Bellman-Ford to the graph with \texttt{d[u] = 0} (as if an extra
+vertex with zero weight edges were added), then reweight edges to
+$w_{uv} + h_u - h_v$, then use Dijkstra from every vertex.
+The result is $O(VE + (V+E)(\log E))$.
+
+\subsection{Tree isomorphisms}
+For a rooted tree isomorphism, from the lowest level to the highest, compute
+a hash for each subtree based on the ordered or unordered set of hashes of
+the children. This can be implemented deterministically and fast using radix
+sorts, but this takes a lot of code - use strong hash functions instead.
+
+For an unrooted tree isomorphism, try finding a rooted tree isomorphism between
+all pairs of centroids.
+
+\subsection{Relevant Theorems}
+\begin{description}
+\item[Kirchhoff's Theorem]
+Given an undirected graph $G$ on $n$ vertices, let $D$ be the $n\times n$
+matrix with all degrees on the diagonal, and $A$ the $n\times n$ incidence
+matrix of $G$. Let $M$ be any minor (remove one row and one column) of $D-A$.
+Then the number of spanning trees of $G$ is $|\det M|$.
+\item[Acyclicity]
+A directed graph is acyclic if and only a depth-first search yields no back
+edges.
+\end{description}
 
 \section{Flows and cuts}
 \subsection{Relevant theorems}
@@ -465,15 +519,134 @@ subsequence can be reduced to LIS with unique elements.}
 \end{enumerate}
 
 \section{Geometry}
+\textbf{\color{red} Use 64-bit integer arithmetic whenever possible.}
 
-\subsection{Formulae}
-Line equations $ax + by = e$. For a line going through points $(x_1, y_1)$ and
-$(x_2, y_2)$, note that $n = (y_1 - y_2, x_2 - x_1)$ is a normal vector, so
-the line equation is given by $n \cdot p = n \cdot (x_1, y_1)$ for
-$p \in.\mathbb{R}^2$.
+\subsection{Formulae I}
+To \textbf{intersect two lines}, assume by equations of the form
+$ax + by = e$. For a line going through points $(x_1, y_1)$ and
+$(x_2, y_2)$, note that $\vec{n} = (y_1 - y_2, x_2 - x_1)$ is a normal vector,
+so the line equation is given by $\vec{n}\cdot\vec{p}
+	 = \vec{n} \cdot (x_1, y_1)$ for
+$\vec{p} \in \mathbb{R}^2$. Note: normalizing $\vec{n}$ might be necessary due
+to input sizes, but this does result in a loss of precision. Then:
 $$\begin{aligned}ax+by=e\\cx+dy=f\end{aligned}
 \,\to\,
 \begin{aligned}x=\dfrac{ed-bf}{ad-bc}\\y=\dfrac{af-ec}{ad-bc}\end{aligned}$$
 
-For a general equation of the form $Ax = b$, we have $x_i = \det A_i / \det A$ with $A_i$ equal to $A$ with the $i^{th}$ column replaced by $b$.
+This equation is undefined precisely when $ad-bc = 0$, i.e. the given lines
+coincide ($e=f$) or are parellel ($e \neq f$). For segment-segment
+intersections, just check that $(x, y)$ is in the bounding box of the two
+segments.
+For a general equation of the form $Ax = b$, we have $x_i = \det A_i / \det A$
+with $A_i$ equal to $A$ with the $i^{th}$ column replaced by $b$.
+
+When only deciding whether two segments intersect, there is no need
+to compute the intersection point, use determinants instead (or rather,
+the derived \texttt{ccw} function). Specifically, the sequence $\vec{a}
+	\to \vec{b} \to \vec{c}$ goes counterclockwise iff
+$(\vec{b}-\vec{a})\times(\vec{c}-\vec{a})$ is positive, and clockwise if it
+is negative. Colinearity if and only if the determinant is $0$.
+
+The \textbf{projection} of $\vec{u}$ onto $\vec{v}$ is
+$\lambda\vec{v}$ for $\lambda = \frac{\vec{u}\cdot\vec{v}}{|\vec{v}|^2}$.
+When projecting on a segment, truncate $\lambda$ to $[0, 1]$.
+
+The \textbf{reflection} of $\vec{q}$ through the line $\vec{p_1}\to\vec{p_2}$
+is $2\vec{q'} - \vec{q}$ where $\vec{q'}$ is the projection of $\vec{q}$ onto
+the line (see above).
+
+To do a \textbf{line-circle intersection} project the center of the circle onto
+the line, and move left/right over the line using Pythagoras theorem.
+
+The line intersecting two three-dimensional planes can be found by taking the
+cross product of their normal vectors. The three dimensional cross product is
+given as:
+$$\begin{aligned}
+	\begin{bmatrix}
+		x_1 \\ y_1 \\ z_1
+	\end{bmatrix}
+	&\times
+	\begin{bmatrix}
+		x_2 \\ y_2 \\ z_2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		y_1 z_2 - y_2 z_1 \\
+		z_1 x_2 - z_2 x_1 \\
+		x_1 y_2 - x_2 y_1
+	\end{bmatrix}
+\end{aligned}$$
+Given $\vec{p}, \vec{q}, \vec{r} \in \mathbb{R}^3$, the associated plane
+is defined by $\vec{x} \cdot \vec{n} = \vec{p}\cdot\vec{n}$ for
+$\vec{n} =(\vec{p}-\vec{r})\times(\vec{q}-\vec{r})$.
+
+\entry{Geometry Utilities}{}{snippets/geometry/essentials.cpp}
+
+\subsection{Formulae II}
+\begin{equation*}
+	[ABC]
+	= rs
+	= \frac 12 ab\sin\gamma
+	= \frac{abc}{4R}
+	= \sqrt{s(s-a)(s-b)(s-c)}
+	= \frac 12\left| (B-A, C-A)^T \right|
+\end{equation*}
+
+\begin{align*}
+	s &= \frac {a+b+c}2 & 2R &=\frac{a}{\sin \alpha}\\
+	\textrm{cosine rule:}&&  c^2 &= a^2 + b^2 - 2ab\cos \gamma\\
+	\textrm{Euler:}&&  1 + CC &= V - E + F\\
+	\textrm{Pick:}&& \textrm{Area} &= \textrm{interior points}
+	+ \frac{\textrm{boundary points}}2 - 1\\
+	p\cdot q &= |p||q|\cos(\theta) & |p\times q| &= |p||q|\sin(\theta)\\
+\end{align*}
+
+Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_i)$, its centroid $(C_x, C_y)$ is given as:
+
+\begin{align*}
+	C_x &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (x_i + x_{i+1}) (x_i y_{i+1} - x_{i+1} y_i), &
+	C_y &= \frac{1}{6A} \sum_{i = 0}^{n - 1} (y_i + y_{i+1}) (x_i y_{i+1} - x_{i+1} y_i)
+\end{align*}
+
+\begin{equation*}
+	A = \frac{1}{2} \sum_{i = 0}^{n - 1} (x_i y_{i+1} - x_{i+1} y_i) = \textrm{polygon area}
+\end{equation*}
+
+
+\entry{Convex Hull}{}
+{snippets/geometry/convexhull.cpp}
+
+\subsection{Halfspace intersection}
+Intersection is hard, but testing if the intersection is not empty is easy.
+Divide the halfplanes into a lower and upper envelope, and build associated
+convex hull datastructures $U$ and $L$
+(the datastructures contains an online version, though this is not
+strictly necessary). Now the function $x \mapsto U(x) - L(x)$ is concave, so
+we can ternary search for a maximum, which is positive if and only if the
+halfplanes have a non-empty intersection.
+
+\section{Strings}
+\entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}
+\entry{KMP}{}{snippets/strings/knuthmorrispratt.cpp}
+\entry{Aho-Corasick}{}{snippets/strings/ahocorasick.cpp}
+
+\section{Nondeterminism}
+\subsection{Hashing}
+Possibly \texttt{rand()} draws from a small range, verify by checking
+\texttt{RAND\_MAX}. Otherwise use mt19937 (see language documentation).
+
+For a proper rolling hash over a string, fix the modulus, and draw the base
+$b$ uniformly at random from $\{0, 1, \dots, p-1\}$. Note that when comparing
+rolling hashes of strings of different lengths, it is useful to hash the
+empty character to $0$, and hash all actual characters to nonzero values.
+
+Some primes:
+\begin{align*}
+		10^3 + \{-9,-3,9,13\},
+		\quad 10^6 + \{-17, 3, 33\},
+		\quad 10^9 + \{7,9,21,33,87\}
+\end{align*}
+
+\entry{Timing}{}{snippets/utils/chrono.cpp}
+
 \end{document}
