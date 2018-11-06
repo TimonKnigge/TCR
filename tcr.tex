@@ -239,6 +239,8 @@ $n = n_k p^k + \dots + n_1 p + n_0$ and $m = m_k p^k + \dots m_1 p + m_0$. Then
 by Lucas theorem we have $\binom{n}{m} \equiv \prod_{i=0}^k \binom{n_i}{m_i}
 	\mod p$, with the convention that $n_i < m_i \implies \binom{n_i}{m_i} =0$.
 
+\lstinputlisting[firstline=2]{snippets/combinatorics/binom.cpp}
+
 We can put $n$ indistinguishable items into $k$ distinguishable bins in exactly
 $\binom{n+k-1}{k-1}$ ways, or if we require the bins be non-empty, in
 $\binom{n-1}{k-1}$ ways.
@@ -374,6 +376,29 @@ we can add dummy people that noone prefers.
 $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 {./snippets/combinatorics/simplex.cpp}
 
+\section{Mathematics}
+
+\entry{Elementary Number Theory}{}{snippets/math/elementary-nt.cpp}
+\entry{Chinese Remainder Theorem}{}{snippets/math/crt.cpp}
+\entry{Euler-Phi function}{
+For $n>0$, $\phi(n)$ counts all numbers in $\{1, \dots, n-1\}$ coprime to $n$.
+Note for $n = {p_1}^{k_1}\dots p_m^{k_m}$ we have
+$$\phi(n) = \prod_i \frac{p-1}{p} = \prod_i \big(1-\frac{1}{p}\big)$$
+Also $\sum_{d\|n} \phi(d) = n$.
+
+For $a$ and $n$ relatively prime, $a^{\phi(n)} \equiv 1 \mod n$.
+}{snippets/math/phi.cpp}
+
+\entry{Primes}{Note that sieving into a bitset might be more space
+efficient.}{snippets/math/primes.cpp}
+
+\entry{Miller-Rabin}{}{snippets/math/miller_rabin.cpp}
+
+\entry{Finite Field}{For usage with FFT.}{snippets/math/field.cpp}
+\entry{Complex Field}{For usage with FFT.}{snippets/math/complex.cpp}
+\entry{Fast Fourier Transform}{Use Finite Field for NTT.}
+{snippets/math/fft.cpp}
+
 \section{Graph Algorithms}
 
 \entry{Tarjan's Algorithm}{}
@@ -496,7 +521,7 @@ subsequence can be reduced to LIS with unique elements.}
 
 \entry{All Nearest Smaller Values}{}{./snippets/dp/ansv.cpp}
 
-\subsection{DP Optimalizations}
+\subsection{DP Optimizations}
 \begin{enumerate}
 	\item[CH] Recurrences are generally of the form
 		$dp_i = dp_j \cdot a_i + b_j$ or equivalent. Insert all lines as
@@ -540,7 +565,7 @@ segments.
 For a general equation of the form $Ax = b$, we have $x_i = \det A_i / \det A$
 with $A_i$ equal to $A$ with the $i^{th}$ column replaced by $b$.
 
-When only deciding whether two segments intersect, there is no need
+When only \textbf{deciding whether two segments intersect}, there is no need
 to compute the intersection point, use determinants instead (or rather,
 the derived \texttt{ccw} function). Specifically, the sequence $\vec{a}
 	\to \vec{b} \to \vec{c}$ goes counterclockwise iff

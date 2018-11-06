@@ -1,11 +1,6 @@
 #include "../header.h"
 #include "./complex.cpp"
 #include "./field.cpp"
-ll next_power_of_2(ll x) {
-	x  = (x - 1) | ((x - 1) >> 1);
-	x |= x >> 2; x |= x >> 4; x |= x >> 8; x |= x >> 16;
-	return x + 1;
-}
 ll brinc(ll x, ll k) {
 	ll i = k - 1, s = 1 << i;
 	x ^= s;
@@ -44,15 +39,6 @@ void convolution(vector<T> &A, vector<T> &B, vector<T> &C){
 	A.resize(N,{}); B.resize(N,{}); C.resize(N,{});
 	fft(A, q, false); fft(B, q, false);
 	for (int i = 0; i < N; ++i) C[i] = A[i] * B[i];
-	fft(C, q, true); C.resize(s);
-}
-void convolution(vector<vector<T>> &ps, vector<T> &C){
-	int s=1; for(auto &p : ps) s+=p.size()-1;
-	int q = 32 - __builtin_clz(s-1), N=1<<q;	// fails if s=1
-	C.assign(N,{1});
-	for(auto &p : ps){ p.resize(N,{}); fft(p, q, false);
-		for(int i = 0; i < N; ++i) C[i] = C[i] * p[i];
-	}
 	fft(C, q, true); C.resize(s);
 }
 void square_inplace(vector<T> &A) {
