@@ -547,6 +547,11 @@ the derived \texttt{ccw} function). Specifically, the sequence $\vec{a}
 $(\vec{b}-\vec{a})\times(\vec{c}-\vec{a})$ is positive, and clockwise if it
 is negative. Colinearity if and only if the determinant is $0$.
 
+In \texttt{C++}, the angle between $(x_1, y_1)$ and $(x_2, y_2)$ is
+\texttt{atan2(y1-y2, x1-x2)}. Note that it returns values in
+$(-\pi, \pi]$. In general though, when sorting by angle, try to use
+determinants to avoid precision errors.
+
 The \textbf{projection} of $\vec{u}$ onto $\vec{v}$ is
 $\lambda\vec{v}$ for $\lambda = \frac{\vec{u}\cdot\vec{v}}{|\vec{v}|^2}$.
 When projecting on a segment, truncate $\lambda$ to $[0, 1]$.
@@ -580,7 +585,7 @@ Given $\vec{p}, \vec{q}, \vec{r} \in \mathbb{R}^3$, the associated plane
 is defined by $\vec{x} \cdot \vec{n} = \vec{p}\cdot\vec{n}$ for
 $\vec{n} =(\vec{p}-\vec{r})\times(\vec{q}-\vec{r})$.
 
-\entry{Geometry Utilities}{}{snippets/geometry/essentials.cpp}
+\entry{2D Geometry Utilities}{}{snippets/geometry/essentials.cpp}
 
 \subsection{Formulae II}
 \begin{equation*}

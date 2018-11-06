@@ -10,6 +10,7 @@ struct P {		// may also be used as a 2D vector
 	P operator/ (C c) const { return {x / c, y / c}; }
 	C operator* (const P &p) const { return x*p.x + y*p.y; }
 	C operator^ (const P &p) const { return x*p.y - p.x*y; }
+	P perp() const { return P{y, -x}; }
 	C lensq() const { return x*x + y*y; }
 	ld len() const { return sqrt((ld)lensq()); }
 	static ld dist(const P &p1, const P &p2) {
@@ -24,7 +25,12 @@ C det(const vector<P> &ps) {
 	for(auto &p : ps) sum += det(p, prev), prev = p;
 	return sum;
 }
+// Careful with division by two and C=ll
 C area(P p1, P p2, P p3) { return abs(det(p1, p2, p3))/C(2); }
 C area(const vector<P> &poly) { return abs(det(poly))/C(2); }
 int sign(C c){ return (c > C(0)) - (c < C(0)); }
 int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
+
+// Only well defined for C = ld.
+P unit(const P &p) { return p / p.len(); }
+P rotate(ld a) { return P{p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a)}; }
