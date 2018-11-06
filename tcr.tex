@@ -168,6 +168,10 @@ ETH Team}
 {Can be generalized to arbitrary dimensions by duplicating loops.}
 {./snippets/datastructures/fenwick.cpp}
 
+\entry{Skew Heap}
+{Meldable heap, all operations in $O(\log n)$ time.}
+{./snippets/datastructures/skew-heap.cpp}
+
 \entry{Segment Tree}{Works bottom up, so not suitable for lazy propagation.}
 {./snippets/datastructures/segmenttree.cpp}
 
@@ -325,8 +329,13 @@ Some useful applications:
 		number of a graph in $O^*(2^n)$ time.
 \end{enumerate}
 
+\entry{Subset enumeration}
+{Note: for sum over subsets use FSC.}
+{./snippets/utils/bitmasking.cpp}
+
 \entry{Fast Subset Convolution}
-{Sets $a'(S) = \sum_{T\subseteq S} a(T)$ in $O(n2^n)$ time.}
+{Sets $a'(S) = \sum_{T\subseteq S} a(T)$ in $O(n2^n)$ time (rather than
+$O(3^n)$ or even $O(4^n)$).}
 {./snippets/combinatorics/fsc.cpp}
 
 \subsection{Stable Marriage Algorithm}
