@@ -1,4 +1,5 @@
 #include "../header.h"
+#define REP(i, n) for(auto i = decltype(n)(0); i < (n); i++)
 using T = double;
 constexpr T EPS = 1e-8;
 template<int R, int C>
