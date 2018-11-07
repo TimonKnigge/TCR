@@ -29,7 +29,7 @@ C det(const vector<P> &ps) {
 C area(P p1, P p2, P p3) { return abs(det(p1, p2, p3))/C(2); }
 C area(const vector<P> &poly) { return abs(det(poly))/C(2); }
 int sign(C c){ return (c > C(0)) - (c < C(0)); }
-int ccw(P p1, P p2, P p3) { return sign(det(p1, p2, p3)); }
+int ccw(P p1, P p2, P o) { return sign(det(p1, p2, o)); }
 
 // Only well defined for C = ld.
 P unit(const P &p) { return p / p.len(); }
