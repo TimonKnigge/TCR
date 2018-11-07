@@ -11,7 +11,7 @@ T ReducedRowEchelonForm(M<R,C> &m, int rows) {	// return the determinant
 		int p = r;
 		for(int i=r+1; i<rows; i++) if(abs(m[i][c]) > abs(m[p][c])) p=i;
 		if(abs(m[p][c]) < EPS){	det = 0; continue; }
-		swap(m[p], m[r]);		det *= ( (p-r)%2 ? -1 : 1 );
+		swap(m[p], m[r]);		det = -det;
 		T s = 1.0 / m[r][c], t;	det *= m[r][c];
 		REP(j,C) m[r][j] *= s;				// make leading term in row 1
 		REP(i,rows) if (i!=r){ t = m[i][c]; REP(j,C) m[i][j] -= t*m[r][j]; }
@@ -35,7 +35,7 @@ M<R,C> solve(const M<R,R> &m, const M<R,C> &a, int rows){
 			t += q[j][k]*sol[k][c], allzero &= abs(q[j][k]) < EPS;
 		if(abs(q[j][j]) < EPS)
 			error = true, inconst |= allzero && abs(q[j][R+c]) > EPS;
-		else sol[j][c] = (q[j][R+c] - t) / q[j][j];
+		else sol[j][c] = (q[j][R+c] - t) / q[j][j]; // usually q[j][j]=1
 	}
 	return sol;
 }

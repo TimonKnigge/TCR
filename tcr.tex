@@ -58,16 +58,15 @@
 
 % all the \vspace are for reducing the vertical spacing
 \title{
-	\vspace{-5em}
-	\includegraphics[scale=0.7]{./logo.eps}\\
-	\vspace{-1.5em}
+	\vspace{-4em}
+	\includegraphics[scale=0.7]{./eth-logo.eps}\\
+	\vspace{-1em}
 	Team Code Reference
 	\vspace{-0.7em}
 }
 %\author{ Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit }
 \author{
-	\Large \textbf{ETH Team}\\
-%	Timon Knigge, Ragnar Groot Koerkamp, \& Harry Smit
+	\Large \textbf{Team RaclETH}\\
 }
 \date{
 	\vspace{-0.7em}
@@ -97,15 +96,9 @@
 \setlength{\headsep}{0.4em}
 \setlength{\footskip}{0em}
 
-% two sided
-%\fancyhead[RE]{\bfseries Curiously Recurring \hspace{6.5em}}
-%\fancyhead[LO]{\hspace{5em} Utrecht University}
-%\fancyhead[LE,RO]{\thepage}
-%\fancyhead[C]{\leftmark}
-
 % one sided
 \fancyhead[L]{\hspace{5em} ETH Z\"urich \phantom{-} \bfseries
-ETH Team}
+Team RaclETH}
 \fancyhead[R]{\thepage \hspace{0.5em}}
 \fancyhead[C]{\leftmark}
 
@@ -398,6 +391,43 @@ efficient.}{snippets/math/primes.cpp}
 \entry{Complex Field}{For usage with FFT.}{snippets/math/complex.cpp}
 \entry{Fast Fourier Transform}{Use Finite Field for NTT.}
 {snippets/math/fft.cpp}
+
+\entry{Matrix Exponentiation}{}{snippets/math/matrix_exp.cpp}
+
+\subsection{Game theory}
+A game can be reduced to Nim if it is a finite impartial game, then for any
+state $x$, $g(x) = \inf (\mathbb{N}_0 - \{g(y) : y \in F(x) \})$. Nim and
+its variants include:
+\begin{description}
+	\item[Nim] Let $X = \bigoplus_{i=1}^n x_i$, then $(x_i)_{i=1}^n$ is a
+		winning position iff $X\neq 0$. Find a move by picking $k$ such
+		that $x_k > x_k \oplus X$.
+    \item[Misère Nim] Regular Nim, except that the last player to move
+		\textit{loses}. Play regular Nim until there is only one pile of size
+		larger than $1$, reduce it to $0$ or $1$ such that there is an odd
+		number of piles.
+    \item[Staricase Nim] Stones are moved down a staircase and only removed
+		from the last pile. $(x_i)_{i=1}^n$ is an $L$-position if 
+		$(x_{2i-1})_{i=1}^{n/2}$ is (i.e. only look at odd-numbered piles).
+    \item[Moore's Nim$_k$] The player may remove from at most $k$ piles
+		(Nim $=$ Nim$_1$). Expand the piles in base $2$, do a carry-less
+		addition in base $k+1$ (i.e. the number of ones in each column
+		should be divisible by $k+1$).
+    \item[Dim$^+$] The number of removed stones must be a divisor of the
+		pile size. The Sprague-Grundy function is $k+1$ where $2^k$ is the
+		largest power of $2$ dividing the pile size.
+    \item[Aliquot game] Same as above, except the divisor should be proper
+		(hence $1$ is also a terminal state, but watch out for size $0$ piles).
+		Now the Sprague-Grundy function is just $k$.
+    \item[Nim (at most half)] Write $n+1 = 2^my$ with $m$ maximal, then the
+		Sprague-Grundy function of $n$ is $(y - 1) / 2$.
+    \item[Lasker's Nim] Players may alternatively split a pile into two new
+		non-empty piles. $g(4k+1) = 4k+1$, $g(4k+2) = 4k+2$, $g(4k+3) = 4k+4$,
+		$g(4k+4) = 4k+3$ ($k\geq 0$).
+    \item[Hackenbush on trees] A tree with stalks $(x_i)_{i=1}^n$ may be
+		replaced with a single stalk with length $\bigoplus_{i=1}^n x_i$.
+\end{description}
+A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \section{Graph Algorithms}
 
