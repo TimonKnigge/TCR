@@ -454,7 +454,31 @@ edges.
 \end{description}
 
 \section{Flows and cuts}
-\subsection{Relevant theorems}
+\entry{Flow Graph}
+{Datastructure used by all flow algorithms}
+{./snippets/flowalgorithms/flowgraph.cpp}
+
+\entry{Dinic Algorithm}
+{Runs in $O(V^2 E)$, or $O(VE \log U)$ after introducing scaling.}
+{./snippets/flowalgorithms/dinic.cpp}
+
+\entry{Minimum Cut Inference}{}
+{./snippets/flowalgorithms/infermincut.cpp}
+
+\entry{Minimum Cost Flow}
+{Cannot handle negative cycles}
+{./snippets/flowalgorithms/mincostflow.cpp}
+
+\subsection{Cirulations}
+Add a supersource S and supersink T. For an arc $(x, y)$ with lowerbound $l$
+and upperbound $u$, set its new capacity to $u-l$, and add arcs $(S, y)$ and
+$(x, T)$ with capacity $l$. Then find a flow from $S$ to $T$. This corresponds
+to a circulation if the flow equals $\sum_{(x, y)} l$.
+
+Note: This approach can often be speed up significantly by merging double
+edges.
+
+\subsection{Relevant Theorems}
 \begin{description}
 	\item[Min-Cut Max-Flow] The minimum cut separating $s$ and $t$ equals the
 		maximum flow between $s$ and $t$.
@@ -482,30 +506,6 @@ edges.
 		decomposition into antichains and the longest chain. Easily computable
 		using dynamic programming.
 \end{description}
-
-\entry{Flow Graph}
-{Datastructure used by all flow algorithms}
-{./snippets/flowalgorithms/flowgraph.cpp}
-
-\entry{Dinic Algorithm}
-{Runs in $O(V^2 E)$, or $O(VE \log U)$ after introducing scaling.}
-{./snippets/flowalgorithms/dinic.cpp}
-
-\entry{Minimum Cut Inference}{}
-{./snippets/flowalgorithms/infermincut.cpp}
-
-\entry{Minimum Cost Flow}
-{Cannot handle negative cycles}
-{./snippets/flowalgorithms/mincostflow.cpp}
-
-\subsection{Cirulations}
-Add a supersource S and supersink T. For an arc $(x, y)$ with lowerbound $l$
-and upperbound $u$, set its new capacity to $u-l$, and add arcs $(S, y)$ and
-$(x, T)$ with capacity $l$. Then find a flow from $S$ to $T$. This corresponds
-to a circulation if the flow equals $\sum_{(x, y)} l$.
-
-Note: This approach can often be speed up significantly by merging double
-edges.
 
 \section{Dynamic Programming}
 
