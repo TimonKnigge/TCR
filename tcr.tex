@@ -330,7 +330,8 @@ Some useful applications:
 
 \entry{Fast Subset Convolution}
 {Sets $a'(S) = \sum_{T\subseteq S} a(T)$ in $O(n2^n)$ time (rather than
-$O(3^n)$ or even $O(4^n)$).}
+$O(3^n)$ or even $O(4^n)$). Note that if you flip the \texttt{+=} to a
+\texttt{-=} you get inclusion-exclusion for all subsets!}
 {./snippets/combinatorics/fsc.cpp}
 
 \subsection{Stable Marriage Algorithm}
