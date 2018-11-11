@@ -474,7 +474,10 @@ The result is $O(VE + (V+E)(\log E))$.
 For a rooted tree isomorphism, from the lowest level to the highest, compute
 a hash for each subtree based on the ordered or unordered set of hashes of
 the children. This can be implemented deterministically and fast using radix
-sorts, but this takes a lot of code - use strong hash functions instead.
+sorts, but this takes a lot of code - use strong hash functions instead. An
+example of a good hash function is to pick $s_d \in \mathbb{F}_p$ uniformly
+at random for each depth $d$ and hash a vertex $v$ at depth $d$ to
+$h_v = s_d + \prod_{u \text{ child of } v} h_u$.
 
 For an unrooted tree isomorphism, try finding a rooted tree isomorphism between
 all pairs of centroids.
@@ -497,7 +500,10 @@ edges.
 {./snippets/flowalgorithms/flowgraph.cpp}
 
 \entry{Dinic Algorithm}
-{Runs in $O(V^2 E)$, or $O(VE \log U)$ after introducing scaling.}
+{Runs in $O(V^2 E)$, or $O(VE \log U)$ after introducing scaling. On unit
+capacity networks it runs in $O(\min\{V^{2/3}, E^{1/2}\}E)$ time. On networks
+where every vertex has either a single incoming edge that also has unit capacity,
+or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$.}
 {./snippets/flowalgorithms/dinic.cpp}
 
 \entry{Minimum Cut Inference}{}
@@ -688,12 +694,11 @@ Given a non-self-intersecting closed polygon on $n$ vertices, given as $(x_i, y_
 
 \subsection{Halfspace intersection}
 Intersection is hard, but testing if the intersection is not empty is easy.
-Divide the halfplanes into a lower and upper envelope, and build associated
-convex hull datastructures $U$ and $L$
-(the datastructures contains an online version, though this is not
-strictly necessary). Now the function $x \mapsto U(x) - L(x)$ is concave, so
+Divide the halfplanes into a lower and upper envelope, and consider the
+associated convex hull structures $U$ and $L$.
+Now the function $x \mapsto U(x) - L(x)$ is concave, so
 we can ternary search for a maximum, which is positive if and only if the
-halfplanes have a non-empty intersection.
+halfplanes have a non-empty intersection. Runs in $O(n \log C)$ time.
 
 \section{Strings}
 \entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}
