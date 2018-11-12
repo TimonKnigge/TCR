@@ -1,3 +1,4 @@
+#include "../header.h"
 struct SuffixArray {
 	string s;
 	int n;

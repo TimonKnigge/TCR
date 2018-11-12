@@ -1,3 +1,4 @@
+#include "../header.h"
 // Requires ll modpow(ll a, ll b, ll m);
 template <ll N>
 struct nCkMp {
