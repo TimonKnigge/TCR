@@ -33,4 +33,4 @@ int ccw(P p1, P p2, P o) { return sign(det(p1, p2, o)); }
 
 // Only well defined for C = ld.
 P unit(const P &p) { return p / p.len(); }
-P rotate(pt p, ld a) { return P{p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a)}; }
+P rotate(P p, ld a) { return P{p.x*cos(a)-p.y*sin(a), p.x*sin(a)+p.y*cos(a)}; }
