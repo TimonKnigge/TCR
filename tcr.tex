@@ -705,6 +705,46 @@ Now the function $x \mapsto U(x) - L(x)$ is concave, so
 we can ternary search for a maximum, which is positive if and only if the
 halfplanes have a non-empty intersection. Runs in $O(n \log C)$ time.
 
+\subsection{Delaunay and Voronoi}
+The Delaunay triangulation $D$ of a point set $S$ is a triangulation of
+$S$ such
+that the interior of the circumcircle of any triangle does not contain any
+other points of $S$. Useful properties:
+\begin{itemize}
+	\item $D$ contains only $O(n)$ simplices.
+	\item If a cricle passing through two points $p \in S$ does not contain
+		any other points in $S$ in its interior, the segment connecting these
+		two points is part of the Delaunay triangulation.
+	\item The \textit{nearest neighbour graph} is a subset of the Delaunay
+		triangulation.
+	\item In $d=2$, $D$ is a geometric spanner, the shortest path through $D$
+		between any two points is at no more than $\frac{4\pi}{3\sqrt{3}}$
+		times the Euclidian distance.
+	\item The dual graph of a Delaunay triangulation is a Voronoi diagram
+		(find the centers of the circumcircles, and connect those of
+		adjacent faces with an edge).
+\end{itemize}
+
+Computation: see \textit{Parabolic lifting map}.
+
+\subsection{Parabolic lifting map}
+The parabolic lifting map is the map
+$p \mapsto p^+, (x, y) \mapsto (x, y, x^2+y^2)$. This embedding has several
+useful properties:
+\begin{itemize}
+	\item For a point set $S$ let $\text{conv} S^+$ be the convex hull of its
+		parabolic lift. A face $f$ of this convex hull is
+		\textit{downward-facing} if no other point in $\text{conv} S^+$ is
+		directly below $f$ (w.r.t. the $z$-axis). Projecting these faces back
+		into $\mathbb{R}^2$ (by discarding all $z$-coordinates) yields a
+		Delaunay triangulation of $S$.
+	\item Two sets of points in $\mathbb{R}^2$ can be separated by a circle
+		iff their lifts in $\mathbb{R}^3$ can be separated by a plane (this
+		plane corresponds exactly to the circle).
+	\item More generally, testing whether a point $p$ is in a circle $C$ is
+		equivalent to testing whether $p^+$ is below the induced plane $C^+$.
+\end{itemize}
+
 \section{Strings}
 \entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}
 \entry{KMP}{}{snippets/strings/knuthmorrispratt.cpp}
