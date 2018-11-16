@@ -586,6 +586,23 @@ components are left. To find the cut with high probability, repeat the algorithm
 $\binom{n}{2}\log{n}$ times for a failure probability of $\frac{1}{n}$. The
 total running time is then $O(n^2 m \log{n})$.
 
+\subsection{Gomory-Hu tree}
+Given a capacitated graph $(V, E, c)$, find a tree on the same vertex set such
+that all pairwise minimum cuts are the same. Takes $n-1$ runs of a minimum cut
+algorithm.
+
+Initially, start with $P = \{V\}$. Repeatedly, take some $X \in P$ with $|X|>1$,
+and take $u, v \in X$ distinct. Root the tree (found so far) at $X$ and
+contract all subtrees into single vertices. Now find a minimum cut between $u$
+and $v$, and split $X$ into the two sides of the cut, with the weight of the
+edge connecting them equal to the size of the cut. Subtrees move with
+whichever side of the cut they are in.
+
+Now pairwise minimum cuts can be found by path-minimum queries in the tree.
+Using e.g. Dinic give $O(V^3E)$ runtime (worst-case). This tree can be used
+to approximate the minimum $k$-cut problem: just remove the $k$ lightest edges
+from the tree. This is guaranteed to give a $2-2/k$ approximation.
+
 \section{Dynamic Programming}
 
 \subsection{Distinct subsequences}
