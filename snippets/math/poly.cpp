@@ -37,8 +37,7 @@ pair<vector<T>, vector<T>> divmod(const vector<T> &A, const vector<T> &B) {
 	Y.resize(B.size()), copy_into(B, Y, B.size());
 	convolution(X, Y, X);
 
-	R.resize(m);
-	copy_into(A, R, m);
+	R.resize(m), copy_into(A, R, m);
 	for (size_t i = 0; i < m; ++i) R[i] = R[i] - X[i];
 	while (R.size() > 1 && R.back().zero()) R.pop_back();
 	return {Q, R};
