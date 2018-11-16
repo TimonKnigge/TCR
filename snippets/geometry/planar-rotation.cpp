@@ -20,13 +20,13 @@ void rotate(const vector<P> &pts) {
 		if (quad(pts[l.j]-pts[l.i]) != quad(pts[r.j]-pts[r.i]))
 			return quad(pts[l.j]-pts[l.i]) < quad(pts[r.j]-pts[r.i]);
 		else
-			return ccw(pts[l.j]-pts[l.i], pts[r.j]-pts[r.i], P{0LL, 0LL}) > 0;
+			return ccw(pts[l.j]-pts[l.i], pts[r.j]-pts[r.i], P{0, 0}) > 0;
 	});
 
 	vector<size_t> vs(n), vsi(n);
 	for (size_t i = 0; i < vs.size(); ++i) vs[i] = i;
 	sort(vs.begin(), vs.end(), [&pts](const size_t &i, const size_t &j) {
-		return pts[i].y != pts[j].y ? pts[i].y < pts[j].y : pts[i].x < pts[j].x;
+		return pts[i].y != pts[j].y ? pts[i].y<pts[j].y : pts[i].x<pts[j].x;
 	});
 	for (size_t i = 0; i < vs.size(); ++i) vsi[vs[i]] = i;
 	for (pr p : prs) {

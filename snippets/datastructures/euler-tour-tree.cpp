@@ -43,7 +43,8 @@ struct EulerTourTree {
 	// Cut {u, v}. Assumes it exists!!
 	void cut(int u, int v) {
 		auto uv = edges[u].find(v), vu = edges[v].find(u);
-		if (uv->second.index() > vu->second.index()) swap(u, v), swap(uv, vu);
+		if (uv->second.index() > vu->second.index())
+			swap(u, v), swap(uv, vu);
 		seq<edge> *i1, *i2;
 		tie(i1, i2) = split(&uv->second); split(i2, 1);
 		merge(i1, split(split(&vu->second).second, 1).second);

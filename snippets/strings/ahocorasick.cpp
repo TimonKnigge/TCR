@@ -41,7 +41,8 @@ struct AC_FSM {
 					while (a[v].child[k] == -1) v = a[v].failure;
 					a[arck].failure = a[v].child[k];
 					a[arck].match_par = a[v].child[k];
-					while (a[arck].match_par != -1 && a[a[arck].match_par].match.empty())
+					while (a[arck].match_par != -1
+							&& a[a[arck].match_par].match.empty())
 						a[arck].match_par = a[a[arck].match_par].match_par;
 				}
 			}

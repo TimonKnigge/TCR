@@ -22,7 +22,7 @@ struct ConvexHullSet {
 		}
 	}
 	bool empty() { return lines.empty(); }
-	T query(T x) { // Returns the max. Insert -ax-b and use -query(x) for min.
+	T query(T x) { // Returns max. Insert -ax-b / use -query(x) for min.
 		auto it = lines.lower_bound(Line{T(0), T(0), ld(x), true});
 		return it != lines.end() ? it->a * x + it->b : MIN;
 	}

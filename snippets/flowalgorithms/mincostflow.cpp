@@ -12,10 +12,11 @@ struct Edmonds_Karp_Dijkstra{
 		fill(pot.begin(),pot.end(),WINF); pot[s]=0;
 		for (int i = 0; i < V - 1; ++i) {
 			bool relax = false;
-			for (int u = 0; u < V; ++u) if(pot[u] != WINF) for(auto &e : g[u])
-				if(e.cap>e.f)
-					if(pot[u] + e.cost < pot[e.v])
-						pot[e.v] = pot[u] + e.cost, relax=true;
+			for (int u = 0; u < V; ++u) if(pot[u] != WINF)
+				for(auto &e : g[u])
+					if(e.cap>e.f)
+						if(pot[u] + e.cost < pot[e.v])
+							pot[e.v] = pot[u] + e.cost, relax=true;
 			if(!relax) break;
 		}
 		for (int u = 0; u < V; ++u) if(pot[u] == WINF) pot[u] = 0;
