@@ -1,5 +1,5 @@
 // Manacher's Algorithm
-void manacher(string &s, vector<int> &pal) {
+void manacher(string &s, vi &pal) {
 	int n = s.length(), i = 1, l, r;
 	pal.assign(2 * n + 1, 0);
 	while (i < 2 * n + 1) {
