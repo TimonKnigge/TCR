@@ -192,6 +192,8 @@ Implement all helper functions.}
 	necessary.}
 {./snippets/datastructures/suffixarray.cpp}
 
+\entry{Suffix Tree}{}{snippets/datastructures/suffix_tree.cpp}
+
 \entry{Convex Hull Set}{}{./snippets/datastructures/convex-hull-set.cpp}
 
 \entry{Dominating Set}{}{./snippets/datastructures/dominating-set.cpp}
@@ -331,6 +333,18 @@ Some useful applications:
 \entry{Subset enumeration}
 {Note: for sum over subsets use FSC.}
 {./snippets/utils/bitmasking.cpp}
+
+Some related gnu built-in functions that might be useful. Note that all of
+these take \textit{unsigned} values!!
+\begin{description}
+	\item[\texttt{\_\_builtin\_popcount[ll](x)}] Counts the number of $1$s in
+		{\tt x}.
+	\item[\texttt{\_\_builtin\_ctz[ll](x)}] Counts the number of trailing $0$s
+		in {\tt x}. In other words, the exponent of the largest power of $2$
+		dividing {\tt x}.
+	\item[\texttt{\_\_builtin\_clz[ll](x)}] Counts the number of leading $0$s
+		in {\tt x}.
+\end{description}
 
 \entry{Fast Subset Convolution}
 {Sets $a'(S) = \sum_{T\subseteq S} a(T)$ in $O(n2^n)$ time (rather than
@@ -564,6 +578,14 @@ edges.
 		using dynamic programming.
 \end{description}
 
+\subsection{Karger's Algorithm}
+To find a minimum cut in a graph, repeatedly contract a random edge until there
+are only two components left. One easy way to implement this is to randomly
+give each edge a weight, and then run Kruskal's algorithm until only two
+components are left. To find the cut with high probability, repeat the algorithm
+$\binom{n}{2}\log{n}$ times for a failure probability of $\frac{1}{n}$. The
+total running time is then $O(n^2 m \log{n})$.
+
 \section{Dynamic Programming}
 
 \subsection{Distinct subsequences}
@@ -758,6 +780,7 @@ useful properties:
 \entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}
 \entry{KMP}{}{snippets/strings/knuthmorrispratt.cpp}
 \entry{Aho-Corasick}{}{snippets/strings/ahocorasick.cpp}
+\entry{Manacher's Algorithm}{}{snippets/strings/manacher.cpp}
 
 \section{Nondeterminism}
 \subsection{Hashing}
