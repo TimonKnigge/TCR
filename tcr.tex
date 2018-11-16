@@ -402,6 +402,15 @@ of squares.}{snippets/math/lucy.cpp}
 \entry{Fast Fourier Transform}{Use Finite Field for NTT.}
 {snippets/math/fft.cpp}
 
+\entry{Polynomial Arithmetic}{Power series inversion and polynomial division
+each in $O(n \log n)$ time.}{./snippets/math/poly.cpp}
+
+\entry{Linear Recurrence Solver}{Given a linear recurrence of the form
+$$a_n = \sum_{i=0}^{k-1} c_i a_{n-i-1}$$
+this code computes $a_n$ in $O(k \log k \log n)$ time. However, in practice
+the constant factor is quite large. On codeforces it runs in about $1200$ms
+for $k=3000$ and $n=10^{18}$.}{snippets/math/lin-rec.cpp}
+
 \entry{Matrix Solver}{}{snippets/math/matrix_solve.cpp}
 
 \entry{Matrix Exponentiation}{}{snippets/math/matrix_exp.cpp}
