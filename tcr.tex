@@ -151,7 +151,10 @@ Team RaclETH}
 
 %*************** Contents ***************
 
+\textbf{Testsession}: Check if GNU builtins are available, as well as \texttt{\_\_int128}.
+
 \entry{C++ Header}{}{./snippets/header.h}
+\entry{Java Header}{}{./snippets/template.java}
 
 \section{Datastructures}
 
@@ -175,9 +178,10 @@ Team RaclETH}
 Implement all helper functions.}
 {./snippets/datastructures/segmenttree_dynamic.cpp}
 
+\entry{Treap}{}{snippets/datastructures/treap.cpp}
+
 \entry{Heavy-Light decomposition}{}
 {./snippets/datastructures/heavylight.cpp}
-
 
 \entry{Sequence}{This is essentially a treap, but it needs special
 	functionality for the Euler Tour Tree}
@@ -196,7 +200,7 @@ Implement all helper functions.}
 
 \entry{Convex Hull Set}{}{./snippets/datastructures/convex-hull-set.cpp}
 
-\entry{Dominating Set}{}{./snippets/datastructures/dominating-set.cpp}
+\entry{Dominator Set}{}{./snippets/datastructures/dominating-set.cpp}
 
 \entry{GNU Built-in datastructures}
 {These require \texttt{gnu} so check in test session.}
@@ -541,6 +545,10 @@ or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$
 {Cannot handle negative cycles}
 {./snippets/flowalgorithms/mincostflow.cpp}
 
+\entry{Minimum Cost Circulation}
+{Fast in practice, can do min cost matching upto $n=1000$.}
+{snippets/flowalgorithms/mcmf-circulation.cpp}
+
 \subsection{Cirulations}
 Add a supersource S and supersink T. For an arc $(x, y)$ with lowerbound $l$
 and upperbound $u$, set its new capacity to $u-l$, and add arcs $(S, y)$ and
@@ -601,8 +609,8 @@ whichever side of the cut they are in.
 
 Now pairwise minimum cuts can be found by path-minimum queries in the tree.
 Using e.g. Dinic give $O(V^3E)$ runtime (worst-case). This tree can be used
-to approximate the minimum $k$-cut problem: just remove the $k$ lightest edges
-from the tree. This is guaranteed to give a $2-2/k$ approximation.
+to approximate the minimum $k$-cut problem: just remove the $k-1$ lightest
+edges from the tree. This is guaranteed to give a $2-2/k$ approximation.
 
 \section{Dynamic Programming}
 
@@ -793,6 +801,8 @@ useful properties:
 	\item More generally, testing whether a point $p$ is in a circle $C$ is
 		equivalent to testing whether $p^+$ is below the induced plane $C^+$.
 \end{itemize}
+
+\entry{3D Convex Hull}{}{snippets/geometry/convexhull-3d.cpp}
 
 \section{Strings}
 \entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}

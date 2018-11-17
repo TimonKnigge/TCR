@@ -22,7 +22,14 @@ public class Main { // Check what this should be called
 	
 	static class Solver {
 		public void solve(InputReader in, PrintWriter out) {
-			// solve
+			int n = in.nextInt();
+			BigInteger ans = BigInteger.ONE;
+			for (int k = 1; k <= n; k += 1)
+				ans = ans
+					.multiply(new BigInteger(Integer.toString(n + k)))
+					.divide(new BigInteger(Integer.toString(k)));
+			ans = ans.divide(new BigInteger(Integer.toString(n + 1)));	
+			out.println(String.format("c_%d = %s", n, ans.toString()));
 		}
 	}
 	
@@ -33,25 +40,20 @@ public class Main { // Check what this should be called
 			reader = new BufferedReader(new InputStreamReader(st), 32768);
 			tokenizer = null;
 		}
-		public String next() {
+		public String nextString() {
 			while (tokenizer == null || !tokenizer.hasMoreTokens()) {
 				try {
-					String s = reader.readLine();
-					if (s == null) {
-						tokenizer = null; break; }
-					if (s.isEmpty()) continue;
-					tokenizer = new StringTokenizer(s);
+					tokenizer = new StringTokenizer(reader.readLine());
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
 			}
-			return (tokenizer != null && tokenizer.hasMoreTokens()
-				? tokenizer.nextToken() : null);
+			return tokenizer.nextToken();
 		}
-		public int nextInt() {
-			String s = next();
-			if (s != null) return Integer.parseInt(s);
-			else return -1; // handle appropriately
+		public int nextInt() { return Integer.parseInt(nextString()); }
+		public long nextLong() { return Long.parseLong(nextString()); }
+		public double nextDouble() {
+			return Double.parseDouble(nextString());
 		}
 	}
 }
