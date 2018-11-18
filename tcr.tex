@@ -423,6 +423,12 @@ of squares.}{snippets/math/lucy.cpp}
 
 \entry{Polynomial Arithmetic}{Power series inversion and polynomial division
 each in $O(n \log n)$ time.}{./snippets/math/poly.cpp}
+ Some other useful operations:
+\begin{description}
+	\item[$\sqrt{P(x)}$] Like Hensel lifting for the inverse, start with
+		a solution $\mod x$. Then if $S_n(x)^2 = P(x) \mod x^n$, we have
+		$$S_{2n}(x) = \frac{1}{2}(S_n(x) + F(x)S_n(x)^{-1}) \mod x^{2n}$$
+\end{description}
 
 \entry{Linear Recurrence Solver}{Given a linear recurrence of the form
 $$a_n = \sum_{i=0}^{k-1} c_i a_{n-i-1}$$
