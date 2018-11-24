@@ -396,6 +396,7 @@ $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 
 \entry{Elementary Number Theory}{}{snippets/math/elementary-nt.cpp}
 \entry{Chinese Remainder Theorem}{}{snippets/math/crt.cpp}
+\entry{Tonelli-Shanks}{}{snippets/math/tonelli-shanks.cpp}
 \entry{Euler-Phi function}{
 For $n>0$, $\phi(n)$ counts all numbers in $\{1, \dots, n-1\}$ coprime to $n$.
 Note for $n = {p_1}^{k_1}\dots p_m^{k_m}$ we have
@@ -434,7 +435,8 @@ each in $O(n \log n)$ time.}{./snippets/math/poly.cpp}
 $$a_n = \sum_{i=0}^{k-1} c_i a_{n-i-1}$$
 this code computes $a_n$ in $O(k \log k \log n)$ time. However, in practice
 the constant factor is quite large. On codeforces it runs in about $1200$ms
-for $k=3000$ and $n=10^{18}$.}{snippets/math/lin-rec.cpp}
+for $k=3000$ and $n=10^{18}$. Caching inverses for each input \texttt{n}
+gives about $800ms$.}{snippets/math/lin-rec.cpp}
 
 \entry{Matrix Solver}{}{snippets/math/matrix_solve.cpp}
 
@@ -775,14 +777,8 @@ that the interior of the circumcircle of any triangle does not contain any
 other points of $S$. Useful properties:
 \begin{itemize}
 	\item $D$ contains only $O(n)$ simplices.
-	\item If a cricle passing through two points $p \in S$ does not contain
-		any other points in $S$ in its interior, the segment connecting these
-		two points is part of the Delaunay triangulation.
 	\item The \textit{nearest neighbour graph} is a subset of the Delaunay
 		triangulation.
-	\item In $d=2$, $D$ is a geometric spanner, the shortest path through $D$
-		between any two points is at no more than $\frac{4\pi}{3\sqrt{3}}$
-		times the Euclidian distance.
 	\item The dual graph of a Delaunay triangulation is a Voronoi diagram
 		(find the centers of the circumcircles, and connect those of
 		adjacent faces with an edge).
