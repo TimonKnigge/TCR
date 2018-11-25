@@ -23,7 +23,6 @@ struct AC_FSM {
 			}
 			a[n].match.push_back(w);
 		}
-
 		queue<int> q;
 		for (int k = 0; k < ALPHABET_SIZE; ++k) {
 			if (a[0].child[k] == -1) a[0].child[k] = 0;
@@ -48,7 +47,6 @@ struct AC_FSM {
 			}
 		}
 	}
-
 	void aho_corasick(string &sentence, vvi &matches){
 		matches.assign(words.size(), vi());
 		int state = 0, ss = 0;

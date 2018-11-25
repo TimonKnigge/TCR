@@ -2,7 +2,6 @@
 ll gcd(ll a, ll b) { while (b) { a %= b; swap(a, b); } return a; }
 ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
 ll mod(ll a, ll b) { return ((a % b) + b) % b; }
-
 // Finds x, y s.t. ax + by = d = gcd(a, b).
 void extended_euclid(ll a, ll b, ll &x, ll &y, ll &d) {
 	ll xx = y = 0;
@@ -15,14 +14,12 @@ void extended_euclid(ll a, ll b, ll &x, ll &y, ll &d) {
 	}
 	d = a;
 }
-
 // solves ab = 1 (mod n), -1 on failure
 ll mod_inverse(ll a, ll n) {
 	ll x, y, d;
 	extended_euclid(a, n, x, y, d);
 	return (d > 1 ? -1 : mod(x, n));
 }
-
 // All modular inverses of [1..n] mod P in O(n) time.
 vi inverses(ll n, ll P) {
 	vi I(n+1, 1LL);
@@ -30,7 +27,6 @@ vi inverses(ll n, ll P) {
 		I[i] = mod(-(P/i) * I[P%i], P);
 	return I;
 }
-
 // (a*b)%m
 ll mulmod(ll a, ll b, ll m){
 	ll x = 0, y=a%m;
@@ -40,13 +36,11 @@ ll mulmod(ll a, ll b, ll m){
 	}
 	return x % m;
 }
-
 // Finds b^e % m in O(lg n) time, ensure that b < m to avoid overflow!
 ll powmod(ll b, ll e, ll m) {
 	ll p = e<2 ? 1 : powmod((b*b)%m,e/2,m);
 	return e&1 ? p*b%m : p;
 }
-
 // Solve ax + by = c, returns false on failure.
 bool linear_diophantine(ll a, ll b, ll c, ll &x, ll &y) {
 	ll d = gcd(a, b);

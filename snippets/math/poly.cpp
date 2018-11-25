@@ -1,8 +1,5 @@
 #include "../header.h"
 #include "./fft.h"
-// Extra functionality for polynomial arithmetic. Note that some of
-// these functions call fft directly rather than use convolutions,
-// in order to speed up computation.
 vector<T> &rev(vector<T> &A) { reverse(A.begin(), A.end()); return A; }
 void copy_into(const vector<T> &A, vector<T> &B, size_t n) {
 	std::copy(A.begin(), A.begin()+min({n, A.size(), B.size()}), B.begin());
@@ -22,7 +19,6 @@ vector<T> inverse(const vector<T> &A, int n) {
 	Ai.resize(n);
 	return Ai;
 }
-
 // Polynomial division. Returns {Q, R} such that A = QB+R, deg R < deg B.
 // Requires that the leading term of B is nonzero.
 pair<vector<T>, vector<T>> divmod(const vector<T> &A, const vector<T> &B) {

@@ -146,10 +146,12 @@ Team RaclETH}
 %*************** Titlepage ***************
 {\let\newpage\relax\maketitle}
 \tableofcontents
+\textbf{Testsession}: Check if GNU builtins are available, as well as \texttt{\_\_int128}.
 \thispagestyle{empty}
 \newpage
 
 %*************** Contents ***************
+
 
 \subsection{Swiss keyboard}
 \begin{figure}[H]
@@ -157,7 +159,14 @@ Team RaclETH}
 	\includegraphics[scale=0.8]{ch.png}
 \end{figure}
 
-\textbf{Testsession}: Check if GNU builtins are available, as well as \texttt{\_\_int128}.
+\subsection{Memory}
+$10^5$ time $32$ bits is $0.4$ MegaBytes.
+$10^6$ times $64$ bits is $8$ MB.
+$10^6 \cdot \log 10^6$ times $64$ bits is $48$ MB.
+In general, one megabyte is $8\cdot10^6$ bits. A \texttt{char},
+\texttt{short}, \texttt{int}, \texttt{long long} is $8,16,32,64$
+bits. A \texttt{float}, \texttt{double}, \texttt{long double} is
+$32,64,80$ bits. Finally note $\log_2 10^{3k} \approx 10k$.
 
 \entry{C++ Header}{}{./snippets/header.h}
 \entry{Java Header}{}{./snippets/template.java}
@@ -485,18 +494,18 @@ a useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 {./snippets/graphs/biconnected_component.cpp}
 
 \entry{Eulerian paths and tours}
-{In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists if and
-only if all vertices have even degree, and all vertices of nonzero degree
+{In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists iff
+all vertices have even degree, and all vertices of nonzero degree
 belong to a single connected component. In an \textit{undirected graph},
-an \textit{Eulerian Trail} exists if and only if at most two vertices have
-odd degree, and all of its vertices of nonzero degree belong to a single
+an \textit{Eulerian Trail} exists iff at most two vertices have
+odd degree, and all vertices of nonzero degree belong to a single
 connected component. In a \textit{directed graph}, an \textit{Eulerian Circuit}
-exists if and only if every vertex has equal indegree and outdegree, and all
+exists iff every vertex has equal indegree and outdegree, and all
 vertices of nonzero degree belong to a single strongly connected component.
-In a \textit{directed graph}, an \textit{Eulerian Trail} exists if and only
-at most one vertex has $outdegree - indegree = 1$, at most one vertex has
-$indegree - outdegree = 1$, every other vertex has equal indegree and
-outdegree, and all vertices of nonzero degree belong to a single strongly
+In a \textit{directed graph}, an \textit{Eulerian Trail} exists iff
+at most one vertex has $d_{out} - d_{in} = 1$, at most one vertex has
+$d_{in} - d_{out} = 1$, every other vertex has equal indegree and
+outdegree, and all vertices of nonzero degree belong to a singl
 connected component \textit{in the underlying undirected graph}.}
 {./snippets/graphs/euleriancircuits.cpp}
 

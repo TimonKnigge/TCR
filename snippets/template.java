@@ -2,7 +2,6 @@
 import java.io.*;
 import java.util.*;
 import java.math.*;
-
 public class Main { // Check what this should be called
 	public static void main(String[] args) {
 		InputReader in = new InputReader(System.in);
@@ -11,7 +10,6 @@ public class Main { // Check what this should be called
 		s.solve(in, out);
 		out.close();
 	}
-	
 	static class Solver {
 		public void solve(InputReader in, PrintWriter out) {
 			int n = in.nextInt();
@@ -24,7 +22,6 @@ public class Main { // Check what this should be called
 			out.println(String.format("c_%d = %s", n, ans.toString()));
 		}
 	}
-	
 	static class InputReader {
 		public BufferedReader reader;
 		public StringTokenizer tokenizer;
@@ -46,6 +43,4 @@ public class Main { // Check what this should be called
 		public long nextLong() { return Long.parseLong(nextString()); }
 		public double nextDouble() {
 			return Double.parseDouble(nextString());
-		}
-	}
-}
+		}	}	}

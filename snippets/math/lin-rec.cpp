@@ -18,7 +18,6 @@ vector<T> xmod(const vector<T> f, ll k) {
 	}
 	return r;
 }
-
 // Given A[0,k) and C[0, k), computes the n-th term of:
 // A[n] = \sum_i C[i] * A[n-i-1]
 T nth_term(const vector<T> &A, const vector<T> &C, ll n) {
