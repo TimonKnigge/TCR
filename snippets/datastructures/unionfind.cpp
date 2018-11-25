@@ -11,8 +11,7 @@ struct UnionFind {
 	int count() { return c; }
 
 	void merge(int i, int j) {
-		if ((i = find(i)) == (j = find(j))) return;
-		c--;
+		if ((i = find(i)) == (j = find(j))) return; else --c;
 		if (rank[i] > rank[j]) swap(i, j);
 		par[i] = j; size[j] += size[i];
 		if (rank[i] == rank[j]) rank[j]++;
