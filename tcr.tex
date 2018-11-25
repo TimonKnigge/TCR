@@ -151,6 +151,12 @@ Team RaclETH}
 
 %*************** Contents ***************
 
+\subsection{Swiss keyboard}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{ch.png}
+\end{figure}
+
 \textbf{Testsession}: Check if GNU builtins are available, as well as \texttt{\_\_int128}.
 
 \entry{C++ Header}{}{./snippets/header.h}
@@ -211,12 +217,7 @@ Implement all helper functions.}
 \subsection{Formulae}
 \subsubsection*{Permutations}
 The number of derangements $D_n$, $n$-permutations without a fixed point,
-satisfies $D_{n+1} = n(D_n + D_{n-1}) = (n+1)D_n + (-1)^{n+1}$. If
-$g_S(n)$ counts the number of $n$-permutations whose cycle lengths are in
-$S$, then
-		$$\sum_{n=0}^\infty g_S(n)\frac{x^n}{n!} = \exp\Big(\sum_{k\in S}
-			\frac{x^k}{k}\Big)$$
-
+satisfies $D_{n+1} = n(D_n + D_{n-1}) = (n+1)D_n + (-1)^{n+1}$. 
 Stirling numbers of the first kind $S_1(n, k)$ count permutations on $n$ items
 with $k$ cycles. $S_1(n, k) = S_1(n-1, k-1) + (n-1)S_1(n-1, k)$ with
 $S_1(0, 0) = 1$. Note $\sum_{k=0}^n S_1(n, k)x^k = x(x+1)\dots(x+n-1)$.
@@ -419,8 +420,14 @@ of squares.}{snippets/math/lucy.cpp}
 
 \entry{Finite Field}{For usage with FFT.}{snippets/math/field.cpp}
 \entry{Complex Field}{For usage with FFT.}{snippets/math/complex.cpp}
-\entry{Fast Fourier Transform}{Use Finite Field for NTT.}
+\entry{Fast Fourier Transform}{Use Finite Field for NTT. For the complex FFT,
+\texttt{double} is noticably faster ($>2$x) than \texttt{long double}. Use
+high precision FFT when worried about precision.}
 {snippets/math/fft.cpp}
+
+\entry{High-Precision Convolution}{A \texttt{double} is precise for all integers
+upto $2^{53}\approx 9e15$. This version breaks up the FFT in lower and upper
+15 bits.}{snippets/math/high-prec-convolution.cpp}
 
 \entry{Polynomial Arithmetic}{Power series inversion and polynomial division
 each in $O(n \log n)$ time.}{./snippets/math/poly.cpp}
@@ -440,7 +447,9 @@ gives about $800ms$.}{snippets/math/lin-rec.cpp}
 
 \entry{Matrix Solver}{}{snippets/math/matrix_solve.cpp}
 
-\entry{Matrix Exponentiation}{}{snippets/math/matrix_exp.cpp}
+\entry{Matrix Exponentiation}{Note: swapping the last two loops of the
+multiplication helps with speed (due to cache).}
+{snippets/math/matrix_exp.cpp}
 
 \subsection{Game theory}
 A game can be reduced to Nim if it is a finite impartial game, then for any
@@ -454,28 +463,18 @@ its variants include:
 		\textit{loses}. Play regular Nim until there is only one pile of size
 		larger than $1$, reduce it to $0$ or $1$ such that there is an odd
 		number of piles.
-    \item[Staricase Nim] Stones are moved down a staircase and only removed
-		from the last pile. $(x_i)_{i=1}^n$ is an $L$-position if 
-		$(x_{2i-1})_{i=1}^{n/2}$ is (i.e. only look at odd-numbered piles).
     \item[Moore's Nim$_k$] The player may remove from at most $k$ piles
 		(Nim $=$ Nim$_1$). Expand the piles in base $2$, do a carry-less
 		addition in base $k+1$ (i.e. the number of ones in each column
 		should be divisible by $k+1$).
-    \item[Dim$^+$] The number of removed stones must be a divisor of the
-		pile size. The Sprague-Grundy function is $k+1$ where $2^k$ is the
-		largest power of $2$ dividing the pile size.
-    \item[Aliquot game] Same as above, except the divisor should be proper
-		(hence $1$ is also a terminal state, but watch out for size $0$ piles).
-		Now the Sprague-Grundy function is just $k$.
-    \item[Nim (at most half)] Write $n+1 = 2^my$ with $m$ maximal, then the
-		Sprague-Grundy function of $n$ is $(y - 1) / 2$.
     \item[Lasker's Nim] Players may alternatively split a pile into two new
 		non-empty piles. $g(4k+1) = 4k+1$, $g(4k+2) = 4k+2$, $g(4k+3) = 4k+4$,
 		$g(4k+4) = 4k+3$ ($k\geq 0$).
     \item[Hackenbush on trees] A tree with stalks $(x_i)_{i=1}^n$ may be
 		replaced with a single stalk with length $\bigoplus_{i=1}^n x_i$.
 \end{description}
-A useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
+For others, bruteforce $g$ for small $x$ and try to spot a pattern. And
+a useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \section{Graph Algorithms}
 
@@ -621,11 +620,6 @@ to approximate the minimum $k$-cut problem: just remove the $k-1$ lightest
 edges from the tree. This is guaranteed to give a $2-2/k$ approximation.
 
 \section{Dynamic Programming}
-
-\subsection{Distinct subsequences}
-For a sequence $a_1, \dots, a_n$, the number of distinct subsequences $s_i$
-is found with $s_0 = 1$ and $s_i = 2 s_{i-1} - s_j$ where $j$ is the previous
-occurrence of $a_i$.
 
 \entry{LIS}
 {For the actual sequence, store parent pointers. Note that longest common
@@ -807,9 +801,6 @@ useful properties:
 \entry{3D Convex Hull}{}{snippets/geometry/convexhull-3d.cpp}
 
 \section{Strings}
-Note: the \texttt{std} functions \texttt{string::find}, \texttt{std::equal},
-etc, 
-are actually ridiculously fast. Consider using them instead.
 \entry{Z-Algorithm}{}{snippets/strings/zalgorithm.cpp}
 \entry{KMP}{}{snippets/strings/knuthmorrispratt.cpp}
 \entry{Aho-Corasick}{}{snippets/strings/ahocorasick.cpp}
