@@ -5,7 +5,6 @@ struct Node {
 	Node *l = nullptr, *r = nullptr;
 	Node(ll val) : v(val), sz(1) { pr = rand(); }
 };
-
 int size(Node *p) { return p ? p->sz : 0; }
 void update(Node* p) {
 	if (!p) return;

@@ -2,7 +2,6 @@
 struct point { ll x, y; };
 bool operator==(const point &l, const point &r) {
 	return l.x == r.x && l.y == r.y; }
-
 ll dsq(const point &p1, const point &p2) {
 	return (p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y); }
 ll det(ll x1, ll y1, ll x2, ll y2) {
@@ -16,7 +15,6 @@ bool comp_angl(const point &l, const point &r, const point &c) {
 	if (d != 0) return d > 0;
 	else return dsq(c, l) < dsq(c, r);
 }
-
 struct ConvexHull {
 	vector<point> &p;
 	vi h;	// incides of the hull in p, ccw
@@ -31,7 +29,6 @@ struct ConvexHull {
 		ps[0] = ps[n] = pivot; ps[pivot] = 0;
 		sort(ps.begin()+1, ps.end()-1, [this, &pivot](int l, int r) {
 			return comp_angl(p[l], p[r], p[pivot]); });
-
 		h.push_back(ps[0]);
 		size_t i = 1; ll d;
 		while (i < ps.size()) {
@@ -48,9 +45,7 @@ struct ConvexHull {
 		if (h.size() > 1 && h.back() == pivot) h.pop_back();
 	}
 };
-
-// Note: if h.size() is small (<5), consider brute forcing to avoid
-// the usual nasty computational-geometry-edge-cases.
+// Note: bruteforce for h.size()<5 to avoid usual nasty edge cases.
 void rotating_calipers(vector<point> &p, vi &h) {
 	int n = h.size(), i = 0, j = 1, a = 1, b = 2;
 	while (i < n) {
@@ -59,9 +54,9 @@ void rotating_calipers(vector<point> &p, vi &h) {
 			a = (a + 1) % n;
 			b = (b + 1) % n;
 		} else {
+			// Make computations on the pairs: h[i%n], h[a] and h[j], h[a]
 			++i; // NOT %n!!
 			j = (j + 1) % n;
 		}
-		// Make computations on the pairs: h[i%n], h[a] and h[j], h[a]
 	}
 }

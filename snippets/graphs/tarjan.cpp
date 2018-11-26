@@ -5,10 +5,8 @@ struct Tarjan {
 	vi n, l;
 	vb vs;
 	stack<int> st;
-
 	Tarjan(vvi &e) : edges(e), V(e.size()),
 		n(V, -1), l(V, -1), vs(V, false) { }
-
 	void visit(int u, vi &com) {
 		l[u] = n[u] = counter++;
 		st.push(u); vs[u] = true;
@@ -25,7 +23,6 @@ struct Tarjan {
 			C++;
 		}
 	}
-
 	int find_sccs(vi &com) { // component indices will be stored in 'com'
 		com.assign(V, -1);
 		C = 0;
@@ -33,11 +30,9 @@ struct Tarjan {
 			if (n[u] == -1) visit(u, com);
 		return C;
 	}
-
-	// scc is a map of the original vertices of the graph
-	// to the vertices of the SCC graph, scc_graph is its
-	// adjacency list.
-	// Scc indices and edges are stored in 'scc' and 'scc_graph'.
+	// scc is a map of the original vertices of the graph to the vertices
+	// of the SCC graph, scc_graph is its adjacency list.
+	// SCC indices and edges are stored in 'scc' and 'scc_graph'.
 	void scc_collapse(vi &scc, vvi &scc_graph) {
 		find_sccs(scc);
 		scc_graph.assign(C,vi());

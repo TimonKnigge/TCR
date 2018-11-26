@@ -5,7 +5,6 @@ struct seq {
 	int size_, priority;
 	seq<T, M> *l = nullptr, *r = nullptr, *p = nullptr;
 	seq(T _v) : val(_v), size_(1) { priority = rand(); }
-
 	static int size(seq<T, M> *c) { return c ? c->size_ : 0; }
 	seq<T, M> *update() {
 		size_ = 1;
@@ -29,7 +28,6 @@ struct seq {
 	seq<T, M> *next() { return this->r ? this->r->min() : this->p; }
 	seq<T, M> *prev() { return this->l ? this->l->max() : this->p; }
 };
-
 // Note: Assumes both nodes are the roots of their sequences.
 template <class T, void M(const T *, T *, const T *)>
 seq<T, M> *merge(seq<T, M> *A, seq<T, M> *B) {
@@ -43,13 +41,11 @@ seq<T, M> *merge(seq<T, M> *A, seq<T, M> *B) {
 		return B->update();
 	}
 }
-
 // Note: Assumes all nodes are the roots of their sequences.
 template <class T, void M(const T *, T *, const T *), typename... Seqs>
 seq<T, M> *merge(seq<T, M> *l, Seqs... seqs) {
 	return merge(l, merge(seqs...));
 }
-
 // Split into [0, index) and [index, ..)
 template <class T, void M(const T *, T *, const T *)>
 pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A, int index) {
@@ -65,7 +61,6 @@ pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A, int index) {
 		return {A->update(), pr.second};
 	}
 }
-
 // return [0, A), [A, ..)
 template <class T, void M(const T *, T *, const T *)>
 pair<seq<T, M> *, seq<T, M> *> split(seq<T, M> *A) {

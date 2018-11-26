@@ -8,7 +8,6 @@ struct EulerTourTree {
 		vertices.reserve(n); edges.reserve(n);
 		for (int i = 0; i < n; ++i) add_vertex();
 	}
-		
 	// Create a new vertex.
 	int add_vertex() {
 		int id = (int)vertices.size();

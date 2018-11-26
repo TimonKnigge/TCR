@@ -169,6 +169,10 @@ bits. A \texttt{float}, \texttt{double}, \texttt{long double} is
 $32,64,80$ bits. Finally note $\log_2 10^{3k} \approx 10k$.
 
 %\entry{C++ Header}{}{./snippets/header.h}
+\subsection{C++}
+Fast IO in C++: initialize with \texttt{ios::sync\_with\_stdio(false)}
+and \texttt{cin.tie(nullptr)}. For debugging locally, it might help to
+add \texttt{\#define \_GLIBCXX\_DEBUG}.
 \entry{Java Header}{}{./snippets/template.java}
 
 \section{Datastructures}
@@ -269,15 +273,13 @@ $B_n = \sum_k S_2(n, k)$.
 \subsubsection*{Catalan numbers}
 Catalan numbers $C_n$ satisfy $C_n = \frac{1}{2n+1}\binom{2n}{n}$ as well
 as $C_0 = 1, C_{n+1} = \sum_i C_i C_{n-i}$. These count, among other things:
-\begin{itemize}
-	\item Valid parenthesis sequences of length $2n$.
-	\item Sub-diagonal monotone paths from $(0, 0)$ to $(n, n)$ in the
+	Valid parenthesis sequences of length $2n$.
+	Sub-diagonal monotone paths from $(0, 0)$ to $(n, n)$ in the
 		$n\times n$ grid.
-	\item Complete binary trees (i.e. no vertices with exactly $1$ child)
+	Complete binary trees (i.e. no vertices with exactly $1$ child)
 		with $n+1$ leaves.
-	\item Triangulations of a convex polygon with $n+2$ sides.
-	\item Stack-sortable permutations of size $n$.
-\end{itemize}
+	Triangulations of a convex polygon with $n+2$ sides.
+	Stack-sortable permutations of size $n$.
 
 \subsubsection*{Trees}
 There are $n^{n-2}$ labeled unrooted (cq. $n^{n-1}$ rooted) trees on $n$
@@ -367,10 +369,9 @@ $O(3^n)$ or even $O(4^n)$). Note that if you flip the \texttt{+=} to a
 {./snippets/combinatorics/fsc.cpp}
 
 \subsection{Stable Marriage Algorithm}
-Given $n$ men and $n$ women, with each man ranking each woman by preference
-(and vice versa) (i.e. these are permutations),
-we can find a stable marriage by applying the following
-procedure:
+Given $n$ men and $n$ women, with each man ranking each woman by preference,
+and vice versa, (i.e., permutations),
+we can find a stable marriage by applying this procedure:
 \begin{itemize}
 	\item Initialize all men $m$ and women $w$ to `free'.
 	\item While there is a free man $m$ for whom there is some woman $w$ he
@@ -383,11 +384,10 @@ procedure:
 			become engaged and $m'$ becomes free.
 	\end{itemize}
 \end{itemize}
-With the right bookkeeping this can be done in $O(n^2)$ time. It is guaranteed
-the resulting configuration marries everyone, and there are no unstable
-marriages (a man and a woman not engaged to each other, but both prefer each
-other over their actual partner). When the number of men and women is different
-we can add dummy people that noone prefers.
+Implement in $O(n^2)$ with the right bookkeeping. The resulting configuration
+marries everyone, with no unstable marriages (where two unmarried people prefer
+each other to their partners). When the number of men/women don't match add
+dummy people noone prefers.
 
 \entry{Bron-Kerbosch}
 {Maximal clique enumeration, runs in about $O(3^{n/3})$ time (or
@@ -411,9 +411,8 @@ $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 For $n>0$, $\phi(n)$ counts all numbers in $\{1, \dots, n-1\}$ coprime to $n$.
 Note for $n = {p_1}^{k_1}\dots p_m^{k_m}$ we have
 $$\phi(n) = \prod_i \frac{p-1}{p} = \prod_i \big(1-\frac{1}{p}\big)$$
-Also $\sum_{d\|n} \phi(d) = n$.
-
-For $a$ and $n$ relatively prime, $a^{\phi(n)} \equiv 1 \mod n$.
+Also $\sum_{d\|n} \phi(d) = n$. Finally for $a$ and $n$ relatively prime,
+$a^{\phi(n)} \equiv 1 \mod n$.
 }{snippets/math/phi.cpp}
 
 \entry{Primes}{Note that sieving into a bitset might be more space
@@ -598,10 +597,6 @@ edges.
 		a maximum matching of size $m$ the number of disjoint chains is then
 		$|S|-m$. To find the actual antichain, find the minimal vertex cover
 		and take all $x$ with neither $l_x$ nor $r_x$ in the cover.
-		
-		As for the decomposition into chains,
-		note that actually, $S$ does not have to be a partial order, but can be
-		any DAG. Then we find a decomposition of the DAG into disjoint paths.
 	\item[Mirsky's Theorem] Dual theorem to the above, for the smallest
 		decomposition into antichains and the longest chain. Easily computable
 		using dynamic programming.
