@@ -15,7 +15,7 @@ struct SkewHeap {
 		return x;
 	}
 
-	bool empty() { return r != nullptr; }
+	bool empty() { return r == nullptr; }
 	void insert(ll x, T val) { r = merge(r, new node(x, val)); }
 	T pop_min() {
 		T ret = r->val;
