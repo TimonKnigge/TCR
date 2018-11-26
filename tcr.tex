@@ -168,7 +168,7 @@ In general, one megabyte is $8\cdot10^6$ bits. A \texttt{char},
 bits. A \texttt{float}, \texttt{double}, \texttt{long double} is
 $32,64,80$ bits. Finally note $\log_2 10^{3k} \approx 10k$.
 
-\entry{C++ Header}{}{./snippets/header.h}
+%\entry{C++ Header}{}{./snippets/header.h}
 \entry{Java Header}{}{./snippets/template.java}
 
 \section{Datastructures}
@@ -492,6 +492,10 @@ a useful identity: $\bigoplus_{x=0}^{a - 1} x = \{0, a - 1, 1, a\}[a \% 4]$.
 
 \entry{Biconnected Components}{}
 {./snippets/graphs/biconnected_component.cpp}
+
+\entry{MDST}{Minimum directed spanning tree rooted at some $r$. Runs in $O(E \log V)$. About $3$s for a
+complete graph on $n=2500$ vertices on Kattis.}
+{./snippets/graphs/arborescence.cpp}
 
 \entry{Eulerian paths and tours}
 {In an \textit{undirected graph}, an \textit{Eulerian Circuit} exists iff
