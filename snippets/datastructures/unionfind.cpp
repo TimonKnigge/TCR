@@ -8,10 +8,11 @@ struct UnionFind {
 	bool same(int i, int j) { return find(i) == find(j); }
 	int get_size(int i) { return size[find(i)]; }
 	int count() { return c; }
-	void merge(int i, int j) {
+	int merge(int i, int j) {
 		if ((i = find(i)) == (j = find(j))) return; else --c;
 		if (rank[i] > rank[j]) swap(i, j);
 		par[i] = j; size[j] += size[i];
 		if (rank[i] == rank[j]) rank[j]++;
+		return j;
 	}
 };
