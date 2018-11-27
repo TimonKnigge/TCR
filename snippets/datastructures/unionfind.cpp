@@ -9,7 +9,7 @@ struct UnionFind {
 	int get_size(int i) { return size[find(i)]; }
 	int count() { return c; }
 	int merge(int i, int j) {
-		if ((i = find(i)) == (j = find(j))) return; else --c;
+		if ((i = find(i)) == (j = find(j))) return -1; else --c;
 		if (rank[i] > rank[j]) swap(i, j);
 		par[i] = j; size[j] += size[i];
 		if (rank[i] == rank[j]) rank[j]++;
