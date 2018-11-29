@@ -9,5 +9,6 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] O(n log n) Delaunay
 - [ ] https://research.engineering.wustl.edu/~pless/506/l13.html
 - [ ] Shorter convex hull
-- [ ] Convex polygon preprocessing with closest point/tangent query in O(log n)
+- [ ] Convex polygon preprocessing with closest point/tangent query in O(log n). Also Minkowski sums.
 - [ ] Dominator tree
+- [ ] Add `project selection' of Tardos/Kleinberg (7.11) to the flows section (non-trivial flow formulation)
