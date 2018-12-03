@@ -12,3 +12,5 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] Convex polygon preprocessing with closest point/tangent query in O(log n). Also Minkowski sums.
 - [ ] Dominator tree
 - [ ] Add `project selection' of Tardos/Kleinberg (7.11) to the flows section (non-trivial flow formulation)
+- [ ] Link/Cut trees
+- [ ] Geometry: reuse geometry essentials, e.g. convex hull uses `point` and essentials uses `P`.
