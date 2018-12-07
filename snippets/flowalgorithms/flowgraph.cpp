@@ -8,6 +8,7 @@ struct S{
 	const W cost;	// unit cost
 	S(int v, int ri, F c, W cost = 0) :
 		v(v), r(ri), f(0), cap(c), cost(cost) {}
+	inline F res() const { return cap - f; }
 };
 struct FlowGraph : vector<vector<S>> {
 	FlowGraph(size_t n) : vector<vector<S>>(n) {}
