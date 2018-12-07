@@ -603,6 +603,12 @@ edges.
 	\item[Mirsky's Theorem] Dual theorem to the above, for the smallest
 		decomposition into antichains and the longest chain. Easily computable
 		using dynamic programming.
+	\item[Tutte matrix] For a graph $G = (V, E)$, its Tutte matrix $T$ is
+		defined as $T_{ij}$ equal to $0$ if $\{i, j\}\not\in E$, $x_{ij}$
+		if $i < j$ or $-x_{ji}$ if $i > j$. The rank of $T$ is twice the size
+		of the maximum matching in $G$. To compute: assign $x_{ij}$ randomly
+		in $\mathbb{F}_p$ and compute the rank for some number of iterations $k$.
+		Take the maximum over all runs.
 \end{description}
 
 \subsection{Karger's Algorithm}
