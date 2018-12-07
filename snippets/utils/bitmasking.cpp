@@ -12,3 +12,6 @@ void iterate_mask_subset(ll set, F f){ ll mask = set;
 	do  f(mask), mask = (mask-1) & set;
 	while (mask != set);
 }
+int logfloor(unsigned long long a) {
+	return __builtin_clzll(1) - __builtin_clzll(a);
+}
