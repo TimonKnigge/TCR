@@ -14,3 +14,8 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] Add `project selection' of Tardos/Kleinberg (7.11) to the flows section (non-trivial flow formulation)
 - [ ] Link/Cut trees
 - [ ] Geometry: reuse geometry essentials, e.g. convex hull uses `point` and essentials uses `P`.
+- [ ] Facts about the Tutte matrix and Edmonds algorithm
+- [ ] https://github.com/koosaga/DeobureoMinkyuParty/blob/master/teamnote.pdf
+- [ ] Add: Max divisors under some powers of 10.
+- [ ] More about the Tutte matrix, and some applications like the Chinese postman problem.
+- [ ] Unify Treap and Sequence.
