@@ -14,7 +14,12 @@ struct FlowGraph : vector<vector<S>> {
 	FlowGraph(size_t n) : vector<vector<S>>(n) {}
 	void add_edge(int u, int v, F c, W cost = 0){ auto &t = *this;
 		t[u].emplace_back(v, t[v].size(), c, cost);
+		t[v].emplace_back(u, t[u].size()-1, c, -cost);
+	}
+	void add_arc(int u, int v, F c, W cost = 0){ auto &t = *this;
+		t[u].emplace_back(v, t[v].size(), c, cost);
 		t[v].emplace_back(u, t[u].size()-1, 0, -cost);
 	}
+	void clear() { for (auto &E : *this) for (auto &e : E) e.f = 0LL; }
 };
 
