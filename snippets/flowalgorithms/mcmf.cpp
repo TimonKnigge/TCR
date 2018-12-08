@@ -11,7 +11,7 @@ struct MinCostCirculation {
 	inline ll eps() { return 1LL<<log_eps; }
 	pair<ll, ll> run(int s = -1, int t = -1) {
 		if (s >= 0 && t >= 0) {
-			if (Dinic(fg, s, t).run() > 0LL)
+			if (Dinic(fg, s, t).run())
 				for (const auto &e : fg[s])
 					flow += e.f;
 				for (const auto &E : fg)
@@ -22,7 +22,7 @@ struct MinCostCirculation {
 		for (const auto &E : fg) for (const auto &s : E)
 			log_eps = max(log_eps, 1+logfloor(abs(V*s.cost)));
 		log_eps = (dt*log_eps + dt - 1) / dt;
-		stack<int> q;
+		stack<int> q; // or queue<int> q;
 		for (; log_eps >= 0; log_eps -= dt) {
 			std::fill(e.begin(), e.end(), 0);
 			for (int u = 0; u < V; ++u)
@@ -34,7 +34,7 @@ struct MinCostCirculation {
 				int u = q.top(); q.pop(); a[u] = 0;
 				while (x[u] > 0) {
 					if (e[u] == fg[u].size()) relabel(u);
-					for (size_t &i = e[u]; i < fg[u].size() && x[u] != 0; ++i) {
+					for (size_t &i = e[u]; i < fg[u].size() && x[u]; ++i) {
 						auto &e = fg[u][i];
 						if (e.cost*V + p[u] - p[e.v] < 0LL && fg[u][i].res()) {
 							push(u, i, min(e.res(), x[u]));
