@@ -1,5 +1,5 @@
 #include "../header.h"
-struct dominator_set {
+struct pareto_front {
 	map<ll, ll> m;
 	void insert(ll a, ll b) {
 		auto it = m.lower_bound(a);
