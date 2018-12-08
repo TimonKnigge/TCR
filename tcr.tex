@@ -568,17 +568,27 @@ or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$
 {./snippets/flowalgorithms/mincostflow.cpp}
 
 \entry{Minimum Cost Circulation}
-{Fast in practice, can do min cost matching upto $n=1000$.}
-{snippets/flowalgorithms/mcmf-circulation.cpp}
+{Fast in practice, can easily do min cost matching upto $n=1000$.}
+{snippets/flowalgorithms/mcmf.cpp}
 
-\subsection{Cirulations}
-Add a supersource S and supersink T. For an arc $(x, y)$ with lowerbound $l$
-and upperbound $u$, set its new capacity to $u-l$, and add arcs $(S, y)$ and
-$(x, T)$ with capacity $l$. Then find a flow from $S$ to $T$. This corresponds
-to a circulation if the flow equals $\sum_{(x, y)} l$.
-
-Note: This approach can often be speed up significantly by merging double
-edges.
+\subsection{Relevant Constructions}
+\begin{description}
+	\item[Circulation] Add a supersource S and supersink T. For an arc
+		$(x, y)$ with lowerbound $l$ and upperbound $u$, set its new
+		capacity to $u-l$, and add arcs $(S, y)$ and $(x, T)$ with capacity
+		$l$. Then find a flow from $S$ to $T$. This corresponds to a
+		circulation if the flow equals $\sum_{(x, y)} l$. Note: This approach
+		can often be sped up significantly by merging double edges.
+	\item[Tutte matrix] For a graph $G = (V, E)$, its Tutte matrix $T$ is
+		defined as $T_{ij}$ equal to $0$ if $\{i, j\}\not\in E$, $x_{ij}$
+		if $i < j$ or $-x_{ji}$ if $i > j$. The rank of $T$ is twice the size
+		of the maximum matching in $G$. To compute: assign $x_{ij}$ randomly
+		in $\mathbb{F}_p$ and compute the rank for some number of iterations $k$.
+		Take the maximum over all runs, for a total runtime of $O(kn^3)$. Also
+		relevant for reconstruction is the Rabin-Vazirani lemma: if $G$ has a
+		perfect matching then $G - \{v_i, v_j\}$ has a perfect matching if
+		$(T^{-1})_{ij} \neq 0$ where $T$ is the Tutte matrix of $G$.
+\end{description}
 
 \subsection{Relevant Theorems}
 \begin{description}
@@ -603,12 +613,6 @@ edges.
 	\item[Mirsky's Theorem] Dual theorem to the above, for the smallest
 		decomposition into antichains and the longest chain. Easily computable
 		using dynamic programming.
-	\item[Tutte matrix] For a graph $G = (V, E)$, its Tutte matrix $T$ is
-		defined as $T_{ij}$ equal to $0$ if $\{i, j\}\not\in E$, $x_{ij}$
-		if $i < j$ or $-x_{ji}$ if $i > j$. The rank of $T$ is twice the size
-		of the maximum matching in $G$. To compute: assign $x_{ij}$ randomly
-		in $\mathbb{F}_p$ and compute the rank for some number of iterations $k$.
-		Take the maximum over all runs.
 \end{description}
 
 \subsection{Karger's Algorithm}
@@ -619,22 +623,9 @@ components are left. To find the cut with high probability, repeat the algorithm
 $\binom{n}{2}\log{n}$ times for a failure probability of $\frac{1}{n}$. The
 total running time is then $O(n^2 m \log{n})$.
 
-\subsection{Gomory-Hu tree}
-Given a capacitated graph $(V, E, c)$, find a tree on the same vertex set such
-that all pairwise minimum cuts are the same. Takes $n-1$ runs of a minimum cut
-algorithm.
-
-Initially, start with $P = \{V\}$. Repeatedly, take some $X \in P$ with $|X|>1$,
-and take $u, v \in X$ distinct. Root the tree (found so far) at $X$ and
-contract all subtrees into single vertices. Now find a minimum cut between $u$
-and $v$, and split $X$ into the two sides of the cut, with the weight of the
-edge connecting them equal to the size of the cut. Subtrees move with
-whichever side of the cut they are in.
-
-Now pairwise minimum cuts can be found by path-minimum queries in the tree.
-Using e.g. Dinic give $O(V^3E)$ runtime (worst-case). This tree can be used
-to approximate the minimum $k$-cut problem: just remove the $k-1$ lightest
-edges from the tree. This is guaranteed to give a $2-2/k$ approximation.
+\entry{Gomory-Hu Tree}{Does $V-1$ minimum cut computations. Useful: taking the
+	$k-1$ lightest edges in the tree gives a $2-2/k$ approximation to the
+	minimum $k$-cut problem}{./snippets/flowalgorithms/gomory-hu-tree.cpp}
 
 \section{Dynamic Programming}
 
