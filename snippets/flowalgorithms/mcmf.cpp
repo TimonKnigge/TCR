@@ -1,7 +1,9 @@
 #include "../header.h"
 #include "./flowgraph.cpp"
 #include "./dinic.cpp"
-int logfloor(unsigned long long a) { return __builtin_clzll(1) - __builtin_clzll(a); }
+int logfloor(unsigned long long a) {
+	return __builtin_clzll(1) - __builtin_clzll(a);
+}
 struct MinCostCirculation {
 	FlowGraph &fg; int V, log_eps = 0, dt = 1;
 	ll flow = 0LL, cost = 0LL;
@@ -21,9 +23,8 @@ struct MinCostCirculation {
 		} else assert(s < 0 && t < 0);
 		for (const auto &E : fg) for (const auto &s : E)
 			log_eps = max(log_eps, 1+logfloor(abs(V*s.cost)));
-		log_eps = (dt*log_eps + dt - 1) / dt;
 		stack<int> q; // or queue<int> q;
-		for (; log_eps >= 0; log_eps -= dt) {
+		for (log_eps = (dt*log_eps+dt-1)/dt; log_eps >= 0; log_eps -= dt) {
 			std::fill(e.begin(), e.end(), 0);
 			for (int u = 0; u < V; ++u)
 				for (size_t i = 0; i < fg[u].size(); ++i)
