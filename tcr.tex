@@ -456,7 +456,8 @@ The convergents of a continued fraction $r \leftrightarrow [a_0; a_1, a_2, \dots
 		c_n = \tfrac{D-b_n^2}{c_{n-1}}$$
 	Here $b_n$ and $c_n$ remain bounded by $2\sqrt{D}$.
 	Maintain a cache to find the eventual period. The length of the period is bounded by $pq$, though
-	usually it is much smaller. In fact, for $D \in \mathbb{Z}$ the period is $O(\sqrt{D}\log D)$.
+	usually it is much smaller. In fact, for $D \in \mathbb{Z}$ the period is $O(\sqrt{D}\log D)$. Additionally, the period will repeat from the second term,
+	simplifying caching.
 }{snippets/math/continued-fraction.py}
 
 \entry{Primes}{Note that sieving into a bitset might be more space
