@@ -1,62 +1,40 @@
 #include "../header.h"
-struct point { ll x, y; };
-bool operator==(const point &l, const point &r) {
-	return l.x == r.x && l.y == r.y; }
-ll dsq(const point &p1, const point &p2) {
-	return (p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y); }
-ll det(ll x1, ll y1, ll x2, ll y2) {
-	return x1 * y2 - x2 * y1; }
-ll det(const point &p1, const point &p2, const point &d) {
-	return det(p1.x - d.x, p1.y - d.y, p2.x - d.x, p2.y - d.y); }
-bool comp_lexo(const point &l, const point &r) {
-	return l.y != r.y ? l.y < r.y : l.x < r.x; }
-bool comp_angl(const point &l, const point &r, const point &c) {
-	ll d = det(l, r, c);
-	if (d != 0) return d > 0;
-	else return dsq(c, l) < dsq(c, r);
-}
-struct ConvexHull {
-	vector<point> &p;
-	vi h;	// incides of the hull in p, ccw
-	ConvexHull(vector<point> &_p) : p(_p) { compute_hull(); }
-	void compute_hull() {
-		int pivot = 0, n = p.size();
-		vi ps(n + 1, 0);
-		for (int i = 1; i < n; ++i) {
-			ps[i] = i;
-			if (comp_lexo(p[i], p[pivot])) pivot = i;
-		}
-		ps[0] = ps[n] = pivot; ps[pivot] = 0;
-		sort(ps.begin()+1, ps.end()-1, [this, &pivot](int l, int r) {
-			return comp_angl(p[l], p[r], p[pivot]); });
-		h.push_back(ps[0]);
-		size_t i = 1; ll d;
-		while (i < ps.size()) {
-			if (p[ps[i]] == p[h.back()]) { i++; continue; }
-			if (h.size() < 2 || ((d = det(p[h.end()[-2]],
-				p[h.back()], p[ps[i]])) > 0)) { // >= for col.
-				h.push_back(ps[i]);
-				i++; continue;
+#include "essentials.cpp"
+struct ConvexHull {			// O(n lg n) monotone chain.
+	size_t n;
+	vector<size_t> h, c;	// Indices of the hull are in `h`, ccw.
+	const vector<P> &p;
+	ConvexHull(const vector<P> &_p) : n(_p.size()), c(n), p(_p) {
+		std::iota(c.begin(), c.end(), 0);
+		std::sort(c.begin(), c.end(), [this](size_t l, size_t r) -> bool {
+			return p[l].x != p[r].x ? p[l].x < p[r].x : p[l].y < p[r].y; });
+		c.erase(std::unique(c.begin(), c.end(), [this](size_t l, size_t r) {
+			return p[l] == p[r]; }), c.end());
+		for (size_t s = 1, r = 0; r < 2; ++r, s = h.size()) {
+			for (size_t i : c) {
+				while (h.size() > s
+						&& ccw(p[h.end()[-2]], p[h.end()[-1]], p[i]) <= 0)
+					h.pop_back();
+				h.push_back(i);
 			}
-			if (p[h.end()[-2]] == p[ps[i]]) { i++; continue; }
-			h.pop_back();
-			if (d == 0) h.push_back(ps[i]);
+			reverse(c.begin(), c.end());
 		}
-		if (h.size() > 1 && h.back() == pivot) h.pop_back();
+		if (h.size() > 1) h.pop_back();
+	}
+	size_t size() const { return h.size(); }
+	template <class T, void U(const P&, const P&, const P&, T&)>
+	void rotating_calipers(T &ans) {
+		if (size() <= 2) U(p[h[0]], p[h.back()], p[h.back()], ans); else
+		for (size_t i = 0, j = 1, s = size(); i < 2*s; ++i) {
+			while (det(p[h[(i+1)%s]]-p[h[i%s]], p[h[(j+1)%s]]-p[h[j]]) >= 0)
+				j = (j+1)%s;
+			U(p[h[i%s]], p[h[(i+1)%s]], p[h[j]], ans);
+		}
 	}
 };
-// Note: bruteforce for h.size()<5 to avoid usual nasty edge cases.
-void rotating_calipers(vector<point> &p, vi &h) {
-	int n = h.size(), i = 0, j = 1, a = 1, b = 2;
-	while (i < n) {
-		if (det(p[h[j]].x - p[h[i]].x, p[h[j]].y - p[h[i]].y,
-			p[h[b]].x - p[h[a]].x, p[h[b]].y - p[h[a]].y) >= 0) {
-			a = (a + 1) % n;
-			b = (b + 1) % n;
-		} else {
-			// Make computations on the pairs: h[i%n], h[a] and h[j], h[a]
-			++i; // NOT %n!!
-			j = (j + 1) % n;
-		}
-	}
+// Example: furthest pair of points. Now set ans = 0LL and call
+// ConvexHull(pts).rotating_calipers<ll, update>(ans);
+void update(const P &p1, const P &p2, const P &o, ll &ans) {
+	ans = max(ans, max((p1-o).lensq(), (p2-o).lensq()));
 }
+
