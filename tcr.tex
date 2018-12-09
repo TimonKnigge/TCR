@@ -126,6 +126,11 @@ Team RaclETH}
 	#2
 	\ifthenelse{\equal{#3}{}}{}{\lstinputlisting[firstline=2]{#3}}
 }
+\newcommand{\pyentry}[3]{
+	\subsection{#1}
+	#2
+	\ifthenelse{\equal{#3}{}}{}{\lstinputlisting[firstline=2,language=python]{#3}}
+}
 \newcommand{\otherentry}[3]{
 	\subsection{#1}
 	#2
@@ -417,6 +422,42 @@ $$\phi(n) = \prod_i \frac{p-1}{p} = \prod_i \big(1-\frac{1}{p}\big)$$
 Also $\sum_{d\|n} \phi(d) = n$. Finally for $a$ and $n$ relatively prime,
 $a^{\phi(n)} \equiv 1 \mod n$.
 }{snippets/math/phi.cpp}
+
+\pyentry{Continued Fractions}{
+Continued fractions are typically written as:
+$$
+	[a_0; a_1, a_2, \dots] \leftrightarrow a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \tfrac{1}{\dots}}}
+$$
+Particularly well-known is $e \leftrightarrow [2;1,2,1,1,4,1,1,6,1,1,8,\dots]$ and $\phi \leftrightarrow
+	[1;1,1,\dots]$. The continued fraction representation of a number $r \in \mathbb{R}$ is finite if
+	and only if $r \in \mathbb{Q}$. Real numbers with a periodic continued fraction are exactly the
+	quadratic irrationals (roots of irreducible quadratics in $\mathbb{Q}[X]$, i.e. $\tfrac{a+b\sqrt{c}}{d}$
+	with $c$ square free).
+
+The convergents of a continued fraction $r \leftrightarrow [a_0; a_1, a_2, \dots]$ are given as
+	$\tfrac{h_0}{k_0} = \tfrac{a_0}{1}$, $\tfrac{h_1}{k_1} = \tfrac{a_1 a_0 + 1}{a_1}$
+	and $\tfrac{h_n}{k_n} = \tfrac{a_n h_{n-1} + h_{n-2}}{a_n k_{n-1} + k_{n-2}}$. This sequences has the
+	following useful properties:
+
+	$$[a_0; a_1, \dots, a_{n-1}, z] = \frac{z h_{n-1} + h_{n-2}}{z k_{n-1} + k_{n-2}}$$
+	$$\gcd(h_n, k_n) = 1$$
+	
+	Also, the even convergents continually increase, whereas the odd convergents always decrease. Most
+	importantly, these convergents give, in some sense, an `optimal' approximation to $r$, that is,
+	for any $\tfrac{h_n}{k_n}$ there exists no closer rational to $r$ with smaller numerator
+	or denominator.
+
+	Finally (Pell's equation), for positive integers $p, q$ and non-square $n$, it holds that
+	$p^2 - nq^2 = \pm 1$ if and only if $\tfrac{p}{q}$ is a convergent of $\sqrt{n}$. Here, the
+	following relation is useful for computing convergents of $\sqrt{D}$ where $D = \tfrac{p}{q}$:
+	take $a_0 = \lfloor D \rfloor, b_1 = a_0, c_1 = D - a_0^2$, and follow
+
+	$$a_{n-1} = \lfloor \tfrac{a_0 + b_{n-1}}{c_{n-1}}\rfloor, b_n = a_{n-1}c_{n-1} - b_{n-1},
+		c_n = \tfrac{D-b_n^2}{c_{n-1}}$$
+	Here $b_n$ and $c_n$ remain bounded by $2\sqrt{D}$.
+	Maintain a cache to find the eventual period. The length of the period is bounded by $pq$, though
+	usually it is much smaller. In fact, for $D \in \mathbb{Z}$ the period is $O(\sqrt{D}\log D)$.
+}{snippets/math/continued-fraction.py}
 
 \entry{Primes}{Note that sieving into a bitset might be more space
 efficient.}{snippets/math/primes.cpp}
