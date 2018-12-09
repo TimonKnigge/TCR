@@ -37,4 +37,3 @@ struct ConvexHull {			// O(n lg n) monotone chain.
 void update(const P &p1, const P &p2, const P &o, ll &ans) {
 	ans = max(ans, max((p1-o).lensq(), (p2-o).lensq()));
 }
-
