@@ -1,5 +1,5 @@
 #include "../header.h"
-void Z_algorithm(string &s, vi &Z) {
+void Z_algorithm(const string &s, vi &Z) {
 	Z.assign(s.length(), -1);
 	int L = 0, R = 0, n = s.length();
 	for (int i = 1; i < n; ++i) {
@@ -13,5 +13,4 @@ void Z_algorithm(string &s, vi &Z) {
 			Z[i] = R - L; R--;
 		} else Z[i] = Z[i - L];
 	}
-	Z[0] = n;
 }
