@@ -9,11 +9,11 @@ struct Dinic{
 		if (u == t) return c; ll r = 0LL;
 		for(auto &i = its[u]; i != edges[u].end(); i++){
 			auto &e = *i;
-			if (e.cap > e.f && l[u] < l[e.v]) {
-				auto d = augment(e.v, min(c, e.cap - e.f));
+			if (e.res() && l[u] < l[e.v]) {
+				auto d = augment(e.v, min(c, e.res()));
 				if (d > 0) { e.f += d; edges[e.v][e.r].f -= d; c -= d;
 					r += d; if (!c) break; }
-		}	}	}
+		}	}
 		return r;
 	}
 	ll run() {
@@ -23,7 +23,7 @@ struct Dinic{
 			queue<int> q; q.push(s);
 			while(!q.empty()){
 				auto u = q.front(); q.pop(); its[u] = edges[u].begin();
-				for(auto &&e : edges[u]) if(e.cap > e.f && l[e.v]<0)
+				for(auto &&e : edges[u]) if(e.res() && l[e.v]<0)
 					l[e.v] = l[u]+1, q.push(e.v);
 			}
 			if (l[t] < 0) return flow;
