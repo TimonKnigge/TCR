@@ -12,11 +12,11 @@ struct MinCostCirculation {
 		: fg(fg), V(fg.size()), x(V), p(V), a(V), its(V) { }
 	inline ll eps() { return 1LL<<log_eps; }
 	pair<ll, ll> run(int s = -1, int t = -1) {
-		if (s >= 0 && t >= 0) Dinic(fg, s, t).run(); else assert(s<0 && t<0);
+		if (s>=0 && t>=0) Dinic(fg, s, t).run(); else assert(s<0 && t<0);
 		for (const auto &E : fg) for (const auto &s : E)
 			log_eps = max(log_eps, 1+logfloor(abs(V*s.cost)));
 		stack<int> q; // or queue<int> q;
-		for (log_eps = ((log_eps+dt-1)/dt)*dt; log_eps >= 0; log_eps -= dt) {
+		for (log_eps = ((log_eps+dt-1)/dt)*dt; log_eps>=0; log_eps-=dt) {
 			for (int u = 0; u < V; ++u) {
 				its[u] = fg[u].begin();
 				for (auto &e : fg[u])
@@ -32,10 +32,10 @@ struct MinCostCirculation {
 						auto &e = *i;
 						if (e.res() && e.cost*V + p[u] < p[e.v]) {
 							push(u, e, min(e.res(), x[u]));
-							if (x[e.v] > 0 && !a[e.v]) q.push(e.v), a[e.v] = 1;
+							if (x[e.v]>0 && !a[e.v]) q.push(e.v), a[e.v]=1;
 		}	}	}	}	}
 		for (const auto &e : fg[s]) flow += e.f;
- 		for (const auto &E : fg) for (const auto &e : E) cost += e.f * e.cost;
+ 		for (const auto &E : fg) for (const auto &e : E) cost += e.f*e.cost;
 		return {flow, cost /= 2LL};
 	}
 	void push(int u, S &e, ll d) {
