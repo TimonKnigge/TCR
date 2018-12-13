@@ -1,5 +1,5 @@
 #include "../header.h"
-#include "elementary-nt.h"
+#include "elementary-nt.cpp"
 ll legendre(ll a, ll p) {
 	return powmod(a, (p-1)/2, p) == 1 ? 1 : -1;
 }
