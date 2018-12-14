@@ -1,7 +1,7 @@
 #include "../header.h"
 #include "elementary-nt.cpp"
 ll legendre(ll a, ll p) {
-	return powmod(a, (p-1)/2, p) == 1 ? 1 : -1;
+	return (powmod(a, (p-1)/2, p)+1) % p - 1;
 }
 // Returns a root of `a` modulo p, or -1 on failure. Note that if x>0
 // is one root, n-x is the other. Exactly half of all values in
@@ -29,4 +29,11 @@ ll sqrtp(ll a, ll p) {
 		x = (x*b)%p, c = (b*b)%p, t = (t*c)%p, s = i;
 	}
 	return x;
+}
+// Root modulo a prime power. Must have q = p^k for some k>1
+ll sqrtp(ll a, ll p, ll q) {
+	ll x = sqrtp(a, p);
+	if (x < 0) return -1;
+	ll r = q / p, e = (q - 2*r + 1)/2;
+	return mulmod(powmod(x, r, q), powmod(a, e, q), q);
 }
