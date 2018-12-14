@@ -20,3 +20,4 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] More about the Tutte matrix, and some applications like the Chinese postman problem.
 - [ ] Unify Treap and Sequence.
 - [ ] Brief write-up on continued fractions. Also Farey sequence / Stern Brocot Tree.
+- [ ] Test CHT on https://codeforces.com/contest/1083/problem/E
