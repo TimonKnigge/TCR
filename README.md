@@ -22,3 +22,5 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] Brief write-up on continued fractions. Also Farey sequence / Stern Brocot Tree.
 - [ ] Test CHT on https://codeforces.com/contest/1083/problem/E
 - [ ] Useful probability stuff, martingales, gamblers ruin etc
+- [ ] Totient summatory function and other mobius stuff
+- [ ] FFT -> Fast Walsh Hadamard transform / xor-convolution.
