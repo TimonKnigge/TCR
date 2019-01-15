@@ -1,18 +1,21 @@
 #include "../header.h"
 #include "numbertheory.cpp"
 ll SIZE;
-vector<ll> primes, spf;
-
-void sieve(ll size=1e6) {	// Initialize once in main.
-	spf.assign((SIZE = size) + 1, -1);
+vector<ll> primes;
+vector<int> spf;
+void sieve(ll size=1e6) {   // Initialize once in main.
+	spf.assign((SIZE = size) + 1, 0);
 	spf[0] = spf[1] = 1;
-	for (ll i = 2; i <= SIZE; i++)
-		if (spf[i] < 0) {
-			spf[i] = i, primes.push_back(i);
-			for (ll j = i * i; j <= SIZE; j += i)
-				if (spf[j] < 0) spf[j] = i;
+	for (ll i = 2; i <= SIZE; i++) {
+		if (!spf[i]) primes.push_back(spf[i] = i);
+		for (ll p : primes) {
+			if (i*p > SIZE) break;
+			spf[i*p] = p;
+			if (spf[i] == p) break;
 		}
+	}
 }
+
 bool is_prime(ll n) {
 	assert(n <= SIZE*SIZE);
 	if (n <= SIZE) return spf[n] == n;
