@@ -418,7 +418,7 @@ $A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
 \entry{Euler-Phi function}{
 For $n>0$, $\phi(n)$ counts all numbers in $\{1, \dots, n-1\}$ coprime to $n$.
 Note for $n = {p_1}^{k_1}\dots p_m^{k_m}$ we have
-$$\phi(n) = \prod_i \frac{p-1}{p} = \prod_i \big(1-\frac{1}{p}\big)$$
+$$\phi(n) = n \prod_i \frac{p_i-1}{p_i} = n\prod_i \big(1-\frac{1}{p_i}\big)$$
 Also $\sum_{d\|n} \phi(d) = n$. Finally for $a$ and $n$ relatively prime,
 $a^{\phi(n)} \equiv 1 \mod n$.
 }{snippets/math/phi.cpp}
