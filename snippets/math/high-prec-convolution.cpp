@@ -15,9 +15,9 @@ void convolution_mod(const vi &A, const vi &B, ll MOD, vi &C) {
 		R1[i] = as*bs + al*bl*T{0,1}, R2[i] = as*bl + al*bs;
 	}
 	fft(R1, q, true); fft(R2, q, true);
-	C.resize(s);
+	ll p15 = (1LL<<15)%MOD, p30 = (1LL<<30)%MOD; C.resize(s);
 	for (int i = 0; i < s; ++i) {
 		ll l = llround(R1[i].u), m = llround(R2[i].u), h = llround(R1[i].v);
-		C[i] = (l + (m%MOD<<15) + (h%MOD<<30)) % MOD;
+		C[i] = (l + m*p15 + h*p30) % MOD;
 	}
 }
