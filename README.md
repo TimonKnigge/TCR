@@ -11,7 +11,7 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [X] Shorter convex hull
 - [X] Convex polygon preprocessing with closest point/tangent query in O(log n). Also Minkowski sums. (TODO: shorter)
 - [ ] Dominator tree
-- [ ] Add `project selection' of Tardos/Kleinberg (7.11) to the flows section (non-trivial flow formulation)
+- [X] Add `project selection' of Tardos/Kleinberg (7.11) to the flows section (non-trivial flow formulation)
 - [ ] Link/Cut trees
 - [X] Geometry: reuse geometry essentials, e.g. convex hull uses `point` and essentials uses `P`.
 - [X] Facts about the Tutte matrix and Edmonds algorithm. Also https://www.mimuw.edu.pl/~mucha/pub/mucha_sankowski_focs04.pdf
@@ -19,8 +19,8 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [X] Add: Max divisors under some powers of 10.
 - [ ] More about the Tutte matrix, and some applications like the Chinese postman problem.
 - [ ] Unify Treap and Sequence.
-- [ ] Brief write-up on continued fractions. Also Farey sequence / Stern Brocot Tree.
+- [X] Brief write-up on continued fractions. Also Farey sequence / Stern Brocot Tree.
 - [ ] Test CHT on https://codeforces.com/contest/1083/problem/E
 - [ ] Useful probability stuff, martingales, gamblers ruin etc
 - [ ] Totient summatory function and other mobius stuff
-- [ ] FFT -> Fast Walsh Hadamard transform / xor-convolution.
+- [X] FFT -> Fast Walsh Hadamard transform / xor-convolution.

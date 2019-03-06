@@ -461,6 +461,27 @@ The convergents of a continued fraction $r \leftrightarrow [a_0; a_1, a_2, \dots
 	simplifying caching.
 }{snippets/math/continued-fraction.py}
 
+\subsection{Enumerating $\mathbb{Q}$}
+For the \textbf{Stern-Brocot tree}, initially take the two `fractions'
+$\tfrac{0}{1}$ and $\tfrac{1}{0}$. For any two fractions $\tfrac{a}{b}$ and
+$\tfrac{c}{d}$ define their mediant as $\tfrac{a+c}{b+d}$. We can iterate this
+process on every new layer of the tree, so the first value (the root) will be
+$\tfrac{0+1}{1+0} = \tfrac{1}{1}$, then $\tfrac{0+1}{1+1} = \tfrac{1}{2}$ and
+$\tfrac{1+1}{1+0} = \tfrac{2}{1}$, etc. This tree satisfies:
+\begin{enumerate}
+	\item All rationals are enumerated in their lowest terms, exactly once.
+	\item If $\tfrac{a}{b}$ is a direct ancestor of $\tfrac{c}{d}$ then
+		$ad - bc = \pm 1$.
+\end{enumerate}
+
+The \textbf{Farey sequence} of order $n$ is the sorted sequence of rationals in
+$[0, 1]$ in lowest terms whose denominators do not exceed $n$, e.g.
+$F_4 = \{0/1, 1/4, 1/3, 1/2, 2/3, 3/4, 1/1\}$. Note that
+$|F_n| = |F_{n-1}| + \phi(n) = 1 + \sum_{k=1}^n \phi(k)$.
+We can generate the Farey sequence in a manner
+similar to the Stern-Brocot tree, inserting $\tfrac{a+c}{b+d}$ between
+$\tfrac{a}{b}$ and $\tfrac{c}{d}$ when $c+d \leq n$.
+
 \entry{Primes}{Note that sieving into a bitset might be more space
 efficient.
 \begin{table}[h]
@@ -492,6 +513,14 @@ of squares.}{snippets/math/lucy.cpp}
 \texttt{double} is noticably faster ($>2$x) than \texttt{long double}. Use
 high precision FFT when worried about precision.}
 {snippets/math/fft.cpp}
+
+\subsection{Fast Walsh-Hadamard Tr.}
+To compute the xor convolution of $(a_i)_{i=0}^{2^k-1}$ and
+	$(b_j)_{j=0}^{2^k-1}$, given as $c_k = \sum_{i \otimes j = k} a_i b_j$, use
+the Hadamard matrix $[[1,1], [1,-1]]$ inside of the inner loop of the FFT. In
+practice, this just means using $\omega = 1$. In particular, there is no need
+to compute roots and this transform works in any finite field
+$\mathbb{Z} /p\mathbb{Z}$.
 
 \entry{High-Precision Convolution}{A \texttt{double} is precise for all integers
 upto $2^{53}\approx 9e15$. This version breaks up the FFT in lower and upper
@@ -645,6 +674,22 @@ or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$
 		relevant for reconstruction is the Rabin-Vazirani lemma: if $G$ has a
 		perfect matching then $G - \{v_i, v_j\}$ has a perfect matching if
 		$(T^{-1})_{ij} \neq 0$ where $T$ is the Tutte matrix of $G$.
+	\item[Project selection] A very non-trivial application of flow is the
+		project selection problem, where we have a set of projects $P$, and
+		each project $i\in P$ has an associated revenue $p_i$ (which can be
+		positive or negative). There are dependencies between the projects,
+		given by some acylic graph $G=(P, A)$ (cyclic dependencies can just
+		be collapsed into a single vertex). The goal is of course to select 
+		some set of projects $S \subseteq P$ so as to maximize
+		profit while satisfying the dependencies.
+
+		To solve, build a flow graph $G'$ with $(s, i)$ with capacity $p_i$
+		if $p_i > 0$, or $(i, t)$ with capacity $-p_i$ if $p_i<0$. Furthermore
+		add infinite capacity edges to $G'$ for the edges of $G$. Let
+		$C = \sum_{p_i > 0} p_i$, then we claim that for any cut $(A', B')$,
+		the set $A = A\setminus\{s\}$ is a set of projects that satisfies
+		$c(A', B') = C - \sum_{i\in A} p_i$. Therefore the minimum $(s, t)$-cut
+		in $G'$ solves the problem.
 \end{description}
 
 \subsection{Relevant Theorems}
