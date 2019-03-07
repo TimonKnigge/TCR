@@ -712,7 +712,7 @@ or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$
 		a partial ordering $S$ can be decomposed equals the length of
 		the longest antichain of
 		$S$. Compute by defining a bipartite graph with $l_x$ and $r_x$ for
-		each $x \in S$, and add $(l_x, r_y)$ if $l_x \leq r_y, y \neq x$. For
+		each $x \in S$, and add $(l_x, r_y)$ if $x < y$. For
 		a maximum matching of size $m$ the number of disjoint chains is then
 		$|S|-m$. To find the actual antichain, find the minimal vertex cover
 		and take all $x$ with neither $l_x$ nor $r_x$ in the cover.
