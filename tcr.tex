@@ -59,7 +59,7 @@
 % all the \vspace are for reducing the vertical spacing
 \title{
 	\vspace{-4em}
-	\includegraphics[scale=0.7]{./eth-logo.eps}\\
+	\includegraphics[scale=0.6]{./eth-logo.eps}\\
 	\vspace{-1em}
 	Team Code Reference
 	\vspace{-0.7em}
@@ -181,7 +181,7 @@ $32,64,80$ bits. Finally note $\log_2 10^{3k} \approx 10k$.
 Fast IO in C++: initialize with \texttt{ios::sync\_with\_stdio(false)}
 and \texttt{cin.tie(nullptr)}. For debugging locally, it might help to
 add \texttt{\#define \_GLIBCXX\_DEBUG}.
-\entry{Java Header}{}{./snippets/template.java}
+%\entry{Java Header}{}{./snippets/template.java}
 
 \section{Datastructures}
 
@@ -200,10 +200,10 @@ add \texttt{\#define \_GLIBCXX\_DEBUG}.
 \entry{Segment Tree}{Works bottom up, so not suitable for lazy propagation.}
 {./snippets/datastructures/segmenttree.cpp}
 
-\entry{Lazy Dynamic Segment Tree}
-{Here \texttt{T} is the data type and \texttt{U} the lazy update type.
-Implement all helper functions.}
-{./snippets/datastructures/segmenttree_dynamic.cpp}
+%\entry{Lazy Dynamic Segment Tree}
+%{Here \texttt{T} is the data type and \texttt{U} the lazy update type.
+%Implement all helper functions.}
+%{./snippets/datastructures/segmenttree_dynamic.cpp}
 
 \entry{Treap}{}{snippets/datastructures/treap.cpp}
 
@@ -223,7 +223,7 @@ Implement all helper functions.}
 	necessary.}
 {./snippets/datastructures/suffixarray.cpp}
 
-\entry{Suffix Tree}{}{snippets/datastructures/suffix_tree.cpp}
+%\entry{Suffix Tree}{}{snippets/datastructures/suffix_tree.cpp}
 
 \entry{Convex Hull Set}{}{./snippets/datastructures/convex-hull-set.cpp}
 
@@ -294,15 +294,16 @@ There are $n^{n-2}$ labeled unrooted (cq. $n^{n-1}$ rooted) trees on $n$
 vertices. A bijection between a tree and it's Pr\"ufer sequence
 $(a_1, a_2, \dots, a_{n-2})$is given by:
 \begin{enumerate}
-	\item[$\leftarrow$] Given the Pr\"ufer sequence, let $d_i$ be $1$ plus the
+	\item[$\leftarrow$] Given the Pr\"ufer sequence $(a_j)_{j=1}^{n-2}$,
+		let $d_i$ be $1$ plus the
 		number of occurences of $i$ in $a$. Now for each $a_j$ for $j=1\dots$,
 		find the lowest
 		numbered node $k$ with degree $1$ and add $\{a_j, k\}$, and decrement
 		the degrees $d_{a_j}, d_k$. At the end two degree $1$ nodes remain,
 		connect them.
-	\item[$\rightarrow$] Iterate, at step $i=1\dots$ pick the leaf with the
+	\item[$\rightarrow$] Iterate, at step $i=1,\dots,n-2$ remove the leaf with the
 		smallest label and set the $i^{th}$ element of $a$ to be its
-		neighbour.
+		neighbour. 
 \end{enumerate}
 
 \subsection{Burnside's lemma}
@@ -423,6 +424,8 @@ Also $\sum_{d\|n} \phi(d) = n$. Finally for $a$ and $n$ relatively prime,
 $a^{\phi(n)} \equiv 1 \mod n$.
 }{snippets/math/phi.cpp}
 
+\entry{Floor sums}{All in $O(\log n)$ time.}{snippets/math/floor-sums.cpp}
+
 \pyentry{Continued Fractions}{
 Continued fractions are typically written as:
 $$
@@ -450,7 +453,7 @@ The convergents of a continued fraction $r \leftrightarrow [a_0; a_1, a_2, \dots
 	Finally (Pell's equation), for positive integers $p, q$ and non-square $n$, it holds that
 	$p^2 - nq^2 = \pm 1$ if and only if $\tfrac{p}{q}$ is a convergent of $\sqrt{n}$. Here, the
 	following relation is useful for computing convergents of $\sqrt{D}$ where $D = \tfrac{p}{q}$:
-	take $a_0 = \lfloor D \rfloor, b_1 = a_0, c_1 = D - a_0^2$, and follow
+	take $a_0 = \lfloor \sqrt{D} \rfloor, b_1 = a_0, c_1 = D - a_0^2$, and follow
 
 	$$a_{n-1} = \lfloor \tfrac{a_0 + b_{n-1}}{c_{n-1}}\rfloor, b_n = a_{n-1}c_{n-1} - b_{n-1},
 		c_n = \tfrac{D-b_n^2}{c_{n-1}}$$
@@ -597,7 +600,7 @@ vertices of nonzero degree belong to a single strongly connected component.
 In a \textit{directed graph}, an \textit{Eulerian Trail} exists iff
 at most one vertex has $d_{out} - d_{in} = 1$, at most one vertex has
 $d_{in} - d_{out} = 1$, every other vertex has equal indegree and
-outdegree, and all vertices of nonzero degree belong to a singl
+outdegree, and all vertices of nonzero degree belong to a single
 connected component \textit{in the underlying undirected graph}.}
 {./snippets/graphs/euleriancircuits.cpp}
 
@@ -646,8 +649,8 @@ where every vertex has either a single incoming edge that also has unit capacity
 or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$.}
 {./snippets/flowalgorithms/dinic.cpp}
 
-\entry{Minimum Cut Inference}{}
-{./snippets/flowalgorithms/infermincut.cpp}
+%\entry{Minimum Cut Inference}{}
+%{./snippets/flowalgorithms/infermincut.cpp}
 
 \entry{Minimum Cost Flow}
 {Cannot handle negative cycles}
@@ -670,7 +673,8 @@ or a single outgoing edge that also has unit capacity, it runs in $O(E\sqrt{V})$
 		if $i < j$ or $-x_{ji}$ if $i > j$. The rank of $T$ is twice the size
 		of the maximum matching in $G$. To compute: assign $x_{ij}$ randomly
 		in $\mathbb{F}_p$ and compute the rank for some number of iterations $k$.
-		Take the maximum over all runs, for a total runtime of $O(kn^3)$. Also
+		Take the maximum over all runs, for a total runtime of $O(kn^3)$. Each
+		iteration has a failure probability of at most $n / p$. Also
 		relevant for reconstruction is the Rabin-Vazirani lemma: if $G$ has a
 		perfect matching then $G - \{v_i, v_j\}$ has a perfect matching if
 		$(T^{-1})_{ij} \neq 0$ where $T$ is the Tutte matrix of $G$.

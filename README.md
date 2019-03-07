@@ -24,3 +24,5 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] Useful probability stuff, martingales, gamblers ruin etc
 - [ ] Totient summatory function and other mobius stuff
 - [X] FFT -> Fast Walsh Hadamard transform / xor-convolution.
+- [ ] Berlekamp Massey
+- [ ] Floor sum
