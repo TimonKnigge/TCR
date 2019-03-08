@@ -519,7 +519,7 @@ high precision FFT when worried about precision.}
 
 \subsection{Fast Walsh-Hadamard Tr.}
 To compute the xor convolution of $(a_i)_{i=0}^{2^k-1}$ and
-	$(b_j)_{j=0}^{2^k-1}$, given as $c_k = \sum_{i \otimes j = k} a_i b_j$, use
+	$(b_j)_{j=0}^{2^k-1}$, given as $c_k = \sum_{i \oplus j = k} a_i b_j$, use
 the Hadamard matrix $[[1,1], [1,-1]]$ inside of the inner loop of the FFT. In
 practice, this just means using $\omega = 1$. In particular, there is no need
 to compute roots and this transform works in any finite field
