@@ -408,7 +408,9 @@ dummy people noone prefers.
 
 \entry{Simplex Algorithm}
 {Maximize $c^tx$ subject to $Ax\leq b$ and $x\geq 0$. With
-$A[m\times n], b[m], c[n], x[n]$. Solution in $x$.}
+$A[m\times n], b[m], c[n], x[n]$. Solution in $x$.
+The dual problem is to maximize $b^tx$ subject to $A^tx\geq c$.
+Strong duality says the optima coincide.}
 {./snippets/combinatorics/simplex.cpp}
 
 \section{Mathematics}
