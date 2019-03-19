@@ -25,4 +25,4 @@ A more recent version for the 2018/2019 season is [here](http://www.timonknigge.
 - [ ] Totient summatory function and other mobius stuff
 - [X] FFT -> Fast Walsh Hadamard transform / xor-convolution.
 - [ ] Berlekamp Massey
-- [ ] Floor sum
+- [X] Floor sum
