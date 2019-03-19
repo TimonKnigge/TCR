@@ -305,6 +305,8 @@ $(a_1, a_2, \dots, a_{n-2})$is given by:
 		smallest label and set the $i^{th}$ element of $a$ to be its
 		neighbour. 
 \end{enumerate}
+A useful generalization: the number of labelled $k$-forests on $n$ vertices
+with roots $1, 2, \dots, k$ is $k n^{n-k-1}$ (careful with $k=n$).
 
 \subsection{Burnside's lemma}
 Given a group $G$ acting on a set $X$, the number of elements in $X$ up to
@@ -398,10 +400,10 @@ marries everyone, with no unstable marriages (where two unmarried people prefer
 each other to their partners). When the number of men/women don't match add
 dummy people noone prefers.
 
-\entry{Bron-Kerbosch}
-{Maximal clique enumeration, runs in about $O(3^{n/3})$ time (or
-	$O(\#cliques)$).}
-{./snippets/graphs/bronkerbosch.cpp}
+%\entry{Bron-Kerbosch}
+%{Maximal clique enumeration, runs in about $O(3^{n/3})$ time (or
+%	$O(\#cliques)$).}
+%{./snippets/graphs/bronkerbosch.cpp}
 
 \entry{$2$-SAT}{}
 {./snippets/combinatorics/2-sat.cpp}
