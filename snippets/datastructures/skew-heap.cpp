@@ -20,7 +20,7 @@ struct SkewHeap {
 		swap(x->lc, x->rc);
 		return x;
 	}
-	bool empty() { return r != nullptr; }
+	bool empty() { return r == nullptr; }
 	void insert(ll x, T val) { r = merge(r, new node(x, val)); }
 	void adjust(ll c) { if (r) r->lazy += c; }
 	pair<ll, T> pop_min() {
