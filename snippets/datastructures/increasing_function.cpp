@@ -7,9 +7,9 @@ struct increasing_function {
 
 	void set(T x, T y) {
 		auto next = m.upper_bound(x);
-		if(next == m.begin() || prev(next)->second < x) {
+		if(next == m.begin() || prev(next)->second < y) {
 			while(next != m.end() && next->second <= y) next = m.erase(next);
-			m.insert(next, {x, y});
+			m.insert_or_assign(next, x, y);
 		}
 	}
 	std::optional<T> get(T x) {
