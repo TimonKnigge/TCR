@@ -17,4 +17,5 @@ struct UnionFind {
 		size[j] += size[i];
 		if(rank[i] == rank[j]) rank[j]++;
 		return j;
-	};
+	}
+};
